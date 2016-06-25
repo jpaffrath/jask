@@ -25,9 +25,8 @@ public class Executer {
 
 		String operator = tokens.get(2).getValue();
 
-		if (var1.getType() == VariableType.Number &&
-				var2.getType() == VariableType.Number &&
-				varD.getType() == VariableType.Number) {
+		if (var1.getType() == VariableType.Number && var2.getType() == VariableType.Number) {
+			varD.setStringValue(null);
 			if (operator.contentEquals("plus")) {
 				varD.setDoubleValue(var1.getDoubleValue() + var2.getDoubleValue());
 			}
@@ -45,10 +44,9 @@ public class Executer {
 			return;
 		}
 
-		if (var1.getType() == VariableType.String &&
-				var2.getType() == VariableType.String &&
-				varD.getType() == VariableType.String) {
+		if (var1.getType() == VariableType.String && var2.getType() == VariableType.String) {
 			if (operator.contentEquals("plus")) {
+				varD.setDoubleValue(0.0);
 				StringBuilder builder = new StringBuilder();
 				builder.append(var1.getStringValue().substring(0, var1.getStringValue().length()-1));
 				builder.append(var2.getStringValue().substring(1, var2.getStringValue().length()));

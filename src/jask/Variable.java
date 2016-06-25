@@ -27,6 +27,7 @@ public class Variable {
 
 	public void setStringValue(String stringValue) {
 		this.stringValue = stringValue;
+		this.type = VariableType.String;
 	}
 
 	public double getDoubleValue() {
@@ -35,6 +36,7 @@ public class Variable {
 
 	public void setDoubleValue(double doubleValue) {
 		this.doubleValue = doubleValue;
+		this.type = VariableType.Number;
 	}
 
 	public VariableType getType() {
