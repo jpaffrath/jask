@@ -25,6 +25,10 @@ public class Variable {
 		return stringValue;
 	}
 
+	public void setStringValue(String stringValue) {
+		this.stringValue = stringValue;
+	}
+
 	public double getDoubleValue() {
 		return doubleValue;
 	}
@@ -36,11 +40,12 @@ public class Variable {
 	public VariableType getType() {
 		return type;
 	}
-	
+
+	@Override
 	public String toString() {
 		if (type == VariableType.String) return stringValue;
 		if (type == VariableType.Number) return String.valueOf(doubleValue);
-		
+
 		return "";
 	}
 }

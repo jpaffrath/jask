@@ -45,6 +45,19 @@ public class Executer {
 			return;
 		}
 
+		if (var1.getType() == VariableType.String &&
+				var2.getType() == VariableType.String &&
+				varD.getType() == VariableType.String) {
+			if (operator.contentEquals("plus")) {
+				StringBuilder builder = new StringBuilder();
+				builder.append(var1.getStringValue().substring(0, var1.getStringValue().length()-1));
+				builder.append(var2.getStringValue().substring(1, var2.getStringValue().length()));
+				varD.setStringValue(builder.toString());
+				heap.put(tokens.get(5).getValue(), varD);
+				return;
+			}
+		}
+
 		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 	}
 
