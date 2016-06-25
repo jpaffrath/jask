@@ -1,5 +1,5 @@
 # jask
-jask is a highly readable interpreter language.
+jask is a highly readable interpreter language in early development.
 The jask interpreter is fully written in Java.
 Currently the jask interpreter is very unstable and supports only the functions shown below.
 It is just a hobby project for fun and learning.
@@ -10,6 +10,7 @@ Creating new variables
 ```C
 store 100 in z
 store 5.2 in d
+store "Hello World!" in str
 ```
 
 Assigning values
@@ -23,12 +24,14 @@ assign 10 divide 2 to z // z = 10 / 2
 Calling functions
 ```C
 print(d) // build-in function
-my(d)
+my(d:z)
 ```
 
 Creating functions
 ```C
-functions my(param)
-print(param)
+function my(z1:z2)
+  store 0 in res
+  assign z1 plus z2 to res
+  print(res)
 end
 ```
