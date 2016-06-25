@@ -63,10 +63,11 @@ public class Executer {
 		String value = tokens.get(0).getValue();
 		String functionName = value.substring(0, value.indexOf('('));
 		String param = value.substring(value.indexOf('(')+1, value.indexOf(')'));
+		String[] params = param.split(":");
 
 		// check build-in functions
 		if (functionName.contentEquals("print")) {
-			Variable var = heap.get(param);
+			Variable var = heap.get(params[0]);
 			if (var == null) {
 				Error.printErrorVariableNotDefined(param);
 			}
@@ -77,7 +78,15 @@ public class Executer {
 		}
 
 		List<Variable> functionHeap = new ArrayList<Variable>();
-		functionHeap.add(heap.get(param));
+		for (int i = 0; i < params.length; i++) {
+			Variable var = heap.get(params[i]);
+			if (var == null) {
+				Error.printErrorVariableNotDefined(params[i]);
+			}
+			else {
+				functionHeap.add(var);
+			}
+		}
 		functionExecuter.executeFunction(functionName, functionHeap);
 	}
 
