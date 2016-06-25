@@ -42,18 +42,26 @@ public class Executer {
 			}
 
 			heap.put(tokens.get(5).getValue(), varD);
+			return;
 		}
+
+		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 	}
 
 	private void executeFunction(List<Token> tokens) {
 		String value = tokens.get(0).getValue();
 		String functionName = value.substring(0, value.indexOf('('));
 		String param = value.substring(value.indexOf('(')+1, value.indexOf(')'));
-		
+
 		// check build-in functions
 		if (functionName.contentEquals("print")) {
 			Variable var = heap.get(param);
-			System.out.println(var.toString());
+			if (var == null) {
+				Error.printErrorVariableNotDefined(param);
+			}
+			else {
+				System.out.println(var.toString());
+			}
 			return;
 		}
 
@@ -67,7 +75,7 @@ public class Executer {
 		String variableName = tokens.get(3).getValue();
 
 		if (heap.containsKey(variableName)) {
-			System.out.println("Error: " + variableName + " already defined!");
+			Error.printErrorVariableAlreadyDefined(variableName);
 			return;
 		}
 
