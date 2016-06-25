@@ -10,7 +10,7 @@ public class Tokenizer {
 
 		for (String line : lines) {
 			for (String t : line.split(" ")) {
-				tokens.add(new Token(t));
+				tokens.add(new Token(t.replace("\t", "")));
 			}
 		}
 
