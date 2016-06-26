@@ -7,17 +7,38 @@ public class Variable {
 	private double doubleValue;
 	private VariableType type;
 
+	public static boolean isNumber(String value) {
+		if (Pattern.matches("([0-9]*)\\.([0-9]*)", value) ||
+				Pattern.matches("^\\d+$", value)) return true;
+		return false;
+	}
+
+	public static boolean isString(String value) {
+		if (Pattern.matches("^[\"]+([^\"]+[\"])?$", value)) return true;
+		return false;
+	}
+
 	public Variable(String genericValue) {
 		// matches integers and doubles
-		if (Pattern.matches("([0-9]*)\\.([0-9]*)", genericValue) ||
-				Pattern.matches("^\\d+$", genericValue)) {
+		if (isNumber(genericValue)) {
 			this.doubleValue = Double.parseDouble(genericValue);
 			this.type = VariableType.Number;
 		}
 		// matches strings
-		else if (Pattern.matches("^[\"]+([^\"]+[\"])?$", genericValue)) {
+		else if (isString(genericValue)) {
 			this.stringValue = genericValue;
 			this.type = VariableType.String;
+		}
+	}
+
+	public Variable(Variable var) {
+		this.type = var.type;
+
+		if (type == VariableType.Number) {
+			this.doubleValue = var.doubleValue;
+		}
+		else if (type == VariableType.String) {
+			this.stringValue = var.stringValue;
 		}
 	}
 

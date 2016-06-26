@@ -54,9 +54,15 @@ public class Interpreter {
 				i += 3;
 			}
 			// checks assign expressions
-			else if (t.contentEquals("assign") && isOperator(tokens.get(i+2)) && tokens.get(i+4).contentEquals("to")) {
-				exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+6));
-				i += 5;
+			else if (t.contentEquals("assign")) {
+				if (isOperator(tokens.get(i+2)) && tokens.get(i+4).contentEquals("to")) {
+					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+6));
+					i += 5;
+				}
+				else {
+					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+4));
+					i += 3;
+				}
 			}
 			// checks function expressions
 			else if (isFunction(t)) {

@@ -18,12 +18,43 @@ public class Executer {
 	}
 
 	private void executeAssign(List<String> tokens) {
+		// assign a to b
+		if (tokens.size() == 4) {
+			String varStr = tokens.get(1);
+			Variable var = heap.get(varStr);
+			if (var == null) {
+				heap.put(tokens.get(3), new Variable(varStr));
+			}
+			else {
+				heap.put(tokens.get(3), new Variable(var));
+			}
+			return;
+		}
+
+
 		//assign a plus b to c
-		Variable var1 = heap.get(tokens.get(1));
-		Variable var2 = heap.get(tokens.get(3));
-		Variable varD = heap.get(tokens.get(5));
+
+		String var1Str = tokens.get(1);
+		String var2Str = tokens.get(3);
+		String varDStr = tokens.get(5);
+
+		Variable var1 = heap.get(var1Str);
+		Variable var2 = heap.get(var2Str);
+		Variable varD = heap.get(varDStr);
+
+		if (varD == null) {
+			Error.printErrorVariableNotDefined(varDStr);
+			return;
+		}
 
 		String operator = tokens.get(2);
+
+		if (var1 == null) {
+			var1 = new Variable(var1Str);
+		}
+		if (var2 == null) {
+			var2 = new Variable(var2Str);
+		}
 
 		if (var1.getType() == VariableType.Number && var2.getType() == VariableType.Number) {
 			varD.setStringValue(null);
