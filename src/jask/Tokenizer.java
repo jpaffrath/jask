@@ -6,36 +6,37 @@ import java.util.List;
 public class Tokenizer {
 	List<String> parse(List<String> lines) {
 		List<String> tokens = new ArrayList<String>();
-		boolean isStringParsing = false;
-		StringBuilder builder = null;
+		String strBuffer = "";
+		int lastIndex = 0;
+		boolean strParsing = false;
 
 		for (String line : lines) {
+			if (line.equals("")) continue;
+
+			if (line.contains("\"")) {
+				lastIndex = line.lastIndexOf('"');
+				strBuffer = line.substring(line.indexOf('"'), lastIndex+1);
+			}
+
 			for (String t : line.split(" ")) {
 				if (t.equals("")) continue;
-
-				char tChar[] = t.toCharArray();
-				if (tChar[0] == '"') {
-					isStringParsing = true;
-					builder = new StringBuilder();
+				if (t.charAt(0) == '"' && !strParsing) {
+					if (t.charAt(t.length()-1) == '"' && t.length() > 1) {
+						tokens.add(t);
+						continue;
+					}
+					strParsing = true;
+					tokens.add(strBuffer);
+					continue;
 				}
-				else if (tChar[tChar.length-1] == '"') {
-					isStringParsing = false;
-					builder.append(" " + t);
-					tokens.add(builder.toString());
+				if (t.charAt(t.length()-1) == '"') {
+					strParsing = false;
 					continue;
 				}
 
-				if (isStringParsing) {
-					if (builder.length() > 0) {
-						builder.append(" " + t);
-					}
-					else {
-						builder.append(t);
-					}
-				}
-				else {
-					tokens.add(t.replace("\t", ""));
-				}
+				if (strParsing) continue;
+
+				tokens.add(t.replace("\t", ""));
 			}
 		}
 
