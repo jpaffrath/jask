@@ -91,7 +91,7 @@ public class Interpreter {
 			}
 
 			else if (t.contentEquals("else") && ifRunning) {
-				while (!(t = tokens.get(++i)).equals("end")) { }
+				while (!(t = tokens.get(++i)).equals("endif")) { }
 			}
 
 			executer.execute(exp);
