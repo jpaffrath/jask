@@ -50,4 +50,18 @@ public class Variable {
 
 		return "";
 	}
+
+	public boolean equals(Variable var) {
+		if (this.type != var.type) return false;
+
+		if (this.type == VariableType.Number) {
+			return this.doubleValue == var.doubleValue;
+		}
+
+		if (this.type == VariableType.String) {
+			return this.stringValue.contentEquals(var.stringValue);
+		}
+
+		return false;
+	}
 }
