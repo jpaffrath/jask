@@ -113,4 +113,19 @@ public class Executer {
 			break;
 		}
 	}
+
+	public boolean executeStatement(Expression exp) {
+		List<Token> tokens = exp.getTokens();
+		Variable var1 = heap.get(tokens.get(1).getValue());
+		Variable var2 = heap.get(tokens.get(3).getValue());
+		String operator = tokens.get(2).getValue();
+
+		if (operator.contentEquals("equals")) {
+			return var1.equals(var2);
+		}
+
+		Error.printErrorOperatorNotApplicable(operator, "", "");
+
+		return false;
+	}
 }

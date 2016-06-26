@@ -43,6 +43,7 @@ public class Interpreter {
 	public void interpret(List<Token> tokens) {
 		Expression exp = null;
 		Token t = null;
+		boolean ifRunning = false;
 
 		for (int i = 0; i < tokens.size(); i++) {
 			t = tokens.get(i);
@@ -74,6 +75,25 @@ public class Interpreter {
 				}
 				executer.functionExecuter.addFunction(new Function(name, functionToken));
 				continue;
+			}
+
+			// checks if statement
+			else if (t.getValue().contentEquals("if")) {
+				if (executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+4)))) {
+					i += 3;
+					ifRunning = true;
+
+				}
+				else {
+					ifRunning = false;
+					while (!(t = tokens.get(++i)).getValue().equals("else")) { }
+				}
+
+				continue;
+			}
+
+			else if (t.getValue().contentEquals("else") && ifRunning) {
+				while (!(t = tokens.get(++i)).getValue().equals("end")) { }
 			}
 
 			executer.execute(exp);
