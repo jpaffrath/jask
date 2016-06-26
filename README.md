@@ -27,12 +27,12 @@ if z equals d
   print(z)
 else
   print(d)
-end
+endif
 
 if d equals d
   print(d)
 else
-end
+endif
 ```
 
 Calling functions
