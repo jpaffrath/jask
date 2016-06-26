@@ -22,12 +22,12 @@ public class Interpreter {
 		executer = new Executer(function.getHeap());
 	}
 
-	private boolean isOperator(Token t) {
-		return operators.contains(t.getValue());
+	private boolean isOperator(String t) {
+		return operators.contains(t);
 	}
 
-	private boolean isFunction(Token t) {
-		char str[] = t.getValue().toCharArray();
+	private boolean isFunction(String t) {
+		char str[] = t.toCharArray();
 		int isFunction = 0;
 
 		for (int i = 0; i < str.length; i++) {
@@ -40,23 +40,21 @@ public class Interpreter {
 		return false;
 	}
 
-	public void interpret(List<Token> tokens) {
+	public void interpret(List<String> tokens) {
 		Expression exp = null;
-		Token t = null;
+		String t = null;
 		boolean ifRunning = false;
 
 		for (int i = 0; i < tokens.size(); i++) {
 			t = tokens.get(i);
 
 			// checks store expressions
-			if (t.getValue().contentEquals("store") &&
-					tokens.get(i+2).getValue().contentEquals("in")) {
+			if (t.contentEquals("store") && tokens.get(i+2).contentEquals("in")) {
 				exp = new Expression(ExpressionType.Store, tokens.subList(i, i+4));
 				i += 3;
 			}
 			// checks assign expressions
-			else if (t.getValue().contentEquals("assign") &&
-					isOperator(tokens.get(i+2)) && tokens.get(i+4).getValue().contentEquals("to")) {
+			else if (t.contentEquals("assign") && isOperator(tokens.get(i+2)) && tokens.get(i+4).contentEquals("to")) {
 				exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+6));
 				i += 5;
 			}
@@ -65,11 +63,11 @@ public class Interpreter {
 				exp = new Expression(ExpressionType.Function, tokens.subList(i, i+1));
 			}
 			// checks function define
-			else if (t.getValue().contentEquals("function")) {
-				String name = tokens.get(++i).getValue();
-				List<Token> functionToken = new ArrayList<Token>();
-				Token runner = tokens.get(++i);
-				for (; !runner.getValue().contentEquals("end"); i++) {
+			else if (t.contentEquals("function")) {
+				String name = tokens.get(++i);
+				List<String> functionToken = new ArrayList<String>();
+				String runner = tokens.get(++i);
+				for (; !runner.contentEquals("end"); i++) {
 					functionToken.add(runner);
 					runner = tokens.get(i+1);
 				}
@@ -78,7 +76,7 @@ public class Interpreter {
 			}
 
 			// checks if statement
-			else if (t.getValue().contentEquals("if")) {
+			else if (t.contentEquals("if")) {
 				if (executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+4)))) {
 					i += 3;
 					ifRunning = true;
@@ -86,14 +84,14 @@ public class Interpreter {
 				}
 				else {
 					ifRunning = false;
-					while (!(t = tokens.get(++i)).getValue().equals("else")) { }
+					while (!(t = tokens.get(++i)).equals("else")) { }
 				}
 
 				continue;
 			}
 
-			else if (t.getValue().contentEquals("else") && ifRunning) {
-				while (!(t = tokens.get(++i)).getValue().equals("end")) { }
+			else if (t.contentEquals("else") && ifRunning) {
+				while (!(t = tokens.get(++i)).equals("end")) { }
 			}
 
 			executer.execute(exp);

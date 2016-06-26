@@ -17,13 +17,13 @@ public class Executer {
 		this.heap = heap;
 	}
 
-	private void executeAssign(List<Token> tokens) {
+	private void executeAssign(List<String> tokens) {
 		//assign a plus b to c
-		Variable var1 = heap.get(tokens.get(1).getValue());
-		Variable var2 = heap.get(tokens.get(3).getValue());
-		Variable varD = heap.get(tokens.get(5).getValue());
+		Variable var1 = heap.get(tokens.get(1));
+		Variable var2 = heap.get(tokens.get(3));
+		Variable varD = heap.get(tokens.get(5));
 
-		String operator = tokens.get(2).getValue();
+		String operator = tokens.get(2);
 
 		if (var1.getType() == VariableType.Number && var2.getType() == VariableType.Number) {
 			varD.setStringValue(null);
@@ -40,7 +40,7 @@ public class Executer {
 				varD.setDoubleValue(var1.getDoubleValue() / var2.getDoubleValue());
 			}
 
-			heap.put(tokens.get(5).getValue(), varD);
+			heap.put(tokens.get(5), varD);
 			return;
 		}
 
@@ -51,7 +51,7 @@ public class Executer {
 				builder.append(var1.getStringValue().substring(0, var1.getStringValue().length()-1));
 				builder.append(var2.getStringValue().substring(1, var2.getStringValue().length()));
 				varD.setStringValue(builder.toString());
-				heap.put(tokens.get(5).getValue(), varD);
+				heap.put(tokens.get(5), varD);
 				return;
 			}
 		}
@@ -59,8 +59,8 @@ public class Executer {
 		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 	}
 
-	private void executeFunction(List<Token> tokens) {
-		String value = tokens.get(0).getValue();
+	private void executeFunction(List<String> tokens) {
+		String value = tokens.get(0);
 		String functionName = value.substring(0, value.indexOf('('));
 		String param = value.substring(value.indexOf('(')+1, value.indexOf(')'));
 		String[] params = param.split(":");
@@ -90,9 +90,9 @@ public class Executer {
 		functionExecuter.executeFunction(functionName, functionHeap);
 	}
 
-	private void executeStore(List<Token> tokens) {
-		String variableValue = tokens.get(1).getValue();
-		String variableName = tokens.get(3).getValue();
+	private void executeStore(List<String> tokens) {
+		String variableValue = tokens.get(1);
+		String variableName = tokens.get(3);
 
 		if (heap.containsKey(variableName)) {
 			Error.printErrorVariableAlreadyDefined(variableName);
@@ -115,10 +115,10 @@ public class Executer {
 	}
 
 	public boolean executeStatement(Expression exp) {
-		List<Token> tokens = exp.getTokens();
-		Variable var1 = heap.get(tokens.get(1).getValue());
-		Variable var2 = heap.get(tokens.get(3).getValue());
-		String operator = tokens.get(2).getValue();
+		List<String> tokens = exp.getTokens();
+		Variable var1 = heap.get(tokens.get(1));
+		Variable var2 = heap.get(tokens.get(3));
+		String operator = tokens.get(2);
 
 		if (operator.contentEquals("equals")) {
 			return var1.equals(var2);

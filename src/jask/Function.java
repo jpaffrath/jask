@@ -7,9 +7,9 @@ public class Function {
 	private String name;
 	private String params[];
 	private HashMap<String, Variable> heap;
-	private List<Token> tokens;
+	private List<String> tokens;
 
-	public Function(String initialString, List<Token> tokens) {
+	public Function(String initialString, List<String> tokens) {
 		this.name = initialString.substring(0, initialString.indexOf('('));
 		this.tokens = tokens;
 
@@ -33,7 +33,7 @@ public class Function {
 		return this.name;
 	}
 
-	public List<Token> getTokens() {
+	public List<String> getTokens() {
 		return this.tokens;
 	}
 }

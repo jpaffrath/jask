@@ -4,18 +4,18 @@ import java.util.List;
 
 public class Expression {
 	private ExpressionType type;
-	private List<Token> tokens;
-	
-	public Expression(ExpressionType type, List<Token> tokens) {
+	private List<String> tokens;
+
+	public Expression(ExpressionType type, List<String> tokens) {
 		this.type = type;
 		this.tokens = tokens;
 	}
-	
+
 	public ExpressionType getType() {
 		return type;
 	}
-	
-	public List<Token> getTokens(){
+
+	public List<String> getTokens(){
 		return tokens;
 	}
 }

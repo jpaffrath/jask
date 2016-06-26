@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tokenizer {
-	List<Token> parse(List<String> lines) {
-		List<Token> tokens = new ArrayList<Token>();
+	List<String> parse(List<String> lines) {
+		List<String> tokens = new ArrayList<String>();
 		boolean isStringParsing = false;
 		StringBuilder builder = null;
 
@@ -21,7 +21,7 @@ public class Tokenizer {
 				else if (tChar[tChar.length-1] == '"') {
 					isStringParsing = false;
 					builder.append(" " + t);
-					tokens.add(new Token(builder.toString()));
+					tokens.add(builder.toString());
 					continue;
 				}
 
@@ -34,7 +34,7 @@ public class Tokenizer {
 					}
 				}
 				else {
-					tokens.add(new Token(t.replace("\t", "")));
+					tokens.add(t.replace("\t", ""));
 				}
 			}
 		}
