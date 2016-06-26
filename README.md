@@ -21,6 +21,20 @@ assign 3 times 2 to z   // z = 3 * 2
 assign 10 divide 2 to z // z = 10 / 2
 ```
 
+Statements
+```c
+if z equals d
+  print(z)
+else
+  print(d)
+end
+
+if d equals d
+  print(d)
+else
+end
+```
+
 Calling functions
 ```C
 print(d) // build-in function
