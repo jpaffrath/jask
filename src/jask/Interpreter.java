@@ -26,7 +26,7 @@ public class Interpreter {
 		return operators.contains(t);
 	}
 
-	private boolean isFunction(String t) {
+	public static boolean isFunction(String t) {
 		char str[] = t.toCharArray();
 		int isFunction = 0;
 
@@ -40,13 +40,25 @@ public class Interpreter {
 		return false;
 	}
 
-	public void interpret(List<String> tokens) {
+	public String interpret(List<String> tokens) {
 		Expression exp = null;
 		String t = null;
 		boolean ifRunning = false;
 
 		for (int i = 0; i < tokens.size(); i++) {
 			t = tokens.get(i);
+
+			// checks return statement
+			if (t.contentEquals("return")) {
+				String str = tokens.get(i+1);
+				Variable ret = executer.getVariableFromHeap(str);
+				if (ret == null) {
+					return str;
+				}
+				else {
+					return ret.toString();
+				}
+			}
 
 			// checks store expressions
 			if (t.contentEquals("store") && tokens.get(i+2).contentEquals("in")) {
@@ -55,6 +67,7 @@ public class Interpreter {
 			}
 			// checks assign expressions
 			else if (t.contentEquals("assign")) {
+
 				if (isOperator(tokens.get(i+2)) && tokens.get(i+4).contentEquals("to")) {
 					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+6));
 					i += 5;
@@ -103,5 +116,7 @@ public class Interpreter {
 			executer.execute(exp);
 			exp = null;
 		}
+
+		return "";
 	}
 }

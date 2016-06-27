@@ -18,16 +18,26 @@ public class Executer {
 		this.heap = heap;
 	}
 
+	public Variable getVariableFromHeap(String var) {
+		return heap.get(var);
+	}
+
 	private void executeAssign(List<String> tokens) {
 		// assign a to b
 		if (tokens.size() == 4) {
 			String varStr = tokens.get(1);
-			Variable var = heap.get(varStr);
-			if (var == null) {
-				heap.put(tokens.get(3), new Variable(varStr));
+
+			if (!Interpreter.isFunction(varStr)) {
+				Variable var = heap.get(varStr);
+				if (var == null) {
+					heap.put(tokens.get(3), new Variable(varStr));
+				}
+				else {
+					heap.put(tokens.get(3), new Variable(var));
+				}
 			}
 			else {
-				heap.put(tokens.get(3), new Variable(var));
+				heap.put(tokens.get(3), new Variable(executeFunction(varStr)));
 			}
 			return;
 		}
@@ -91,10 +101,9 @@ public class Executer {
 		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 	}
 
-	private void executeFunction(List<String> tokens) {
-		String value = tokens.get(0);
-		String functionName = value.substring(0, value.indexOf('('));
-		String param = value.substring(value.indexOf('(')+1, value.indexOf(')'));
+	private String executeFunction(String token) {
+		String functionName = token.substring(0, token.indexOf('('));
+		String param = token.substring(token.indexOf('(')+1, token.indexOf(')'));
 		String[] params = param.split(":");
 
 		// check build-in functions
@@ -106,22 +115,14 @@ public class Executer {
 			else {
 				System.out.println(var.toString());
 			}
-			return;
+			return "";
 		}
 
 		if (functionName.contentEquals("read")) {
-			Variable var = heap.get(params[0]);
-			if (var == null) {
-				Error.printErrorVariableNotDefined(param);
-			}
-			else {
-				Scanner scanner = new Scanner(System.in);
-				String input =  '"' + scanner.nextLine() + '"';
-				var = new Variable(input);
-				scanner.close();
-				heap.put(params[0], var);
-			}
-			return;
+			Scanner scanner = new Scanner(System.in);
+			String input =  '"' + scanner.nextLine() + '"';
+			scanner.close();
+			return input;
 		}
 
 		List<Variable> functionHeap = new ArrayList<Variable>();
@@ -134,7 +135,7 @@ public class Executer {
 				functionHeap.add(var);
 			}
 		}
-		functionExecuter.executeFunction(functionName, functionHeap);
+		return functionExecuter.executeFunction(functionName, functionHeap);
 	}
 
 	private void executeStore(List<String> tokens) {
@@ -154,7 +155,7 @@ public class Executer {
 
 		switch (exp.getType()) {
 		case Assign: executeAssign(exp.getTokens()); break;
-		case Function: executeFunction(exp.getTokens()); break;
+		case Function: executeFunction(exp.getTokens().get(0)); break;
 		case Store: executeStore(exp.getTokens()); break;
 		default:
 			break;
