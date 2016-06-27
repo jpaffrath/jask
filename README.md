@@ -35,24 +35,22 @@ else
 endif
 ```
 
-Calling functions
-```C
-print(d) // build-in function
-my(d:z)
-```
-
 Creating functions
 ```C
-function my(z1:z2)
-  store 0 in res
-  assign z1 plus z2 to res
-  print(res)
+function myPrint(str)
+  print(str)
 end
 ```
 
-Read from standard input
+Calling functions
 ```C
-store 0 in res
-read(res)
-print(res)
+store "Hello!" in text
+myPrint(text)
+```
+
+Printing and reading data
+```C
+store 0 in res        // new variable 'res'
+assign read() to res  // assign input to variable 'res'
+print(res)            // print content of 'res' to console
 ```
