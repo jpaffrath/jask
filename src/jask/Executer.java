@@ -3,6 +3,7 @@ package jask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 public class Executer {
 	private HashMap<String, Variable> heap;
@@ -104,6 +105,21 @@ public class Executer {
 			}
 			else {
 				System.out.println(var.toString());
+			}
+			return;
+		}
+
+		if (functionName.contentEquals("read")) {
+			Variable var = heap.get(params[0]);
+			if (var == null) {
+				Error.printErrorVariableNotDefined(param);
+			}
+			else {
+				Scanner scanner = new Scanner(System.in);
+				String input =  '"' + scanner.nextLine() + '"';
+				var = new Variable(input);
+				scanner.close();
+				heap.put(params[0], var);
 			}
 			return;
 		}
