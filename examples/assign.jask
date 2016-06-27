@@ -1,0 +1,6 @@
+store 100 in z1
+
+assign z1 plus z1 to z1
+assign z1 minus z1 to z1
+assign z1 times z1 to z1
+assign z1 divide z1 to z1

@@ -1,0 +1,5 @@
+store 100 in num
+print(num)
+
+assign read() to num
+print(num)
