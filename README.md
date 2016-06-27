@@ -49,3 +49,10 @@ function my(z1:z2)
   print(res)
 end
 ```
+
+Read from standard input
+```C
+store 0 in res
+read(res)
+print(res)
+```
