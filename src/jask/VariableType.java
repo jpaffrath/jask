@@ -2,5 +2,6 @@ package jask;
 
 public enum VariableType {
 	String,
-	Number
+	Number,
+	NoType
 }

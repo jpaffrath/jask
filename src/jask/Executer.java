@@ -125,6 +125,20 @@ public class Executer {
 			return input;
 		}
 
+		if (functionName.contentEquals("list")) {
+			return param;
+		}
+
+		if (functionName.contentEquals("listGet")) {
+			Variable var = heap.get(params[0]);
+			if (var == null || !(var instanceof VariableList)) {
+				Error.printErrorVariableIsNotAList(params[0]);
+				return "";
+			}
+
+			return ((VariableList)var).getElementAtIndex(Integer.parseInt(params[1]));
+		}
+
 		List<Variable> functionHeap = new ArrayList<Variable>();
 		if (!param.contentEquals("")) {
 			for (int i = 0; i < params.length; i++) {
@@ -150,7 +164,17 @@ public class Executer {
 		}
 
 		if (Interpreter.isFunction(variableValue)) {
+			Variable var = null;
 			variableValue = executeFunction(variableValue);
+			if (variableValue.contains(":")) {
+				var = new VariableList(variableValue);
+			}
+			else {
+				var = new Variable(variableValue);
+			}
+
+			heap.put(variableName, var);
+			return;
 		}
 
 		heap.put(variableName, new Variable(variableValue));

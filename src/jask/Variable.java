@@ -18,6 +18,10 @@ public class Variable {
 		return false;
 	}
 
+	public Variable() {
+		this.type = VariableType.NoType;
+	}
+
 	public Variable(String genericValue) {
 		// matches integers and doubles
 		if (isNumber(genericValue)) {
@@ -62,6 +66,10 @@ public class Variable {
 
 	public VariableType getType() {
 		return type;
+	}
+
+	protected void setType(VariableType type) {
+		this.type = type;
 	}
 
 	@Override
