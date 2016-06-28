@@ -19,6 +19,7 @@ public class Function {
 
 	public void setHeap(List<Variable> _heap) {
 		heap = new HashMap<>();
+		if (_heap.isEmpty()) return;
 
 		for (int i = 0; i < params.length; i++) {
 			heap.put(params[i], _heap.get(i));

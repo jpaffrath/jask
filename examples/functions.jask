@@ -4,6 +4,12 @@ function strCat(str1:str2)
 	return str
 end
 
-store "Hello " in str1
+function getString()
+	return "Hello "
+end
+
+store getString() in str1
 store "World!" in str2
 assign strCat(str1:str2) to str1
+
+print(str1)
