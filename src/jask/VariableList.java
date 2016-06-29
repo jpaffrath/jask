@@ -37,6 +37,21 @@ public class VariableList extends Variable {
 
 	@Override
 	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		for (int i = 0; i < values.size(); i++) {
+			if (i == values.size()-1) {
+				builder.append(values.get(i));
+			}
+			else {
+				builder.append(values.get(i) + ":");
+			}
+		}
+
+		return builder.toString();
+	}
+
+	public String getPrintString() {
 		StringBuilder builder = new StringBuilder("[");
 
 		for (int i = 0; i < values.size(); i++) {

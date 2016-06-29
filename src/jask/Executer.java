@@ -32,12 +32,21 @@ public class Executer {
 				if (var == null) {
 					heap.put(tokens.get(3), new Variable(varStr));
 				}
+				else if (var instanceof VariableList){
+					heap.put(tokens.get(3), new VariableList(var.toString()));
+				}
 				else {
 					heap.put(tokens.get(3), new Variable(var));
 				}
 			}
 			else {
-				heap.put(tokens.get(3), new Variable(executeFunction(varStr)));
+				String res = executeFunction(varStr);
+				if (res.contains(":") && !Variable.isString(res)) {
+					heap.put(tokens.get(3), new VariableList(res));
+				}
+				else {
+					heap.put(tokens.get(3), new Variable(res));
+				}
 			}
 			return;
 		}
@@ -113,7 +122,12 @@ public class Executer {
 				Error.printErrorVariableNotDefined(param);
 			}
 			else {
-				System.out.println(var.toString());
+				if (var instanceof VariableList) {
+					System.out.println(((VariableList) var).getPrintString());
+				}
+				else {
+					System.out.println(var.toString());
+				}
 			}
 			return "";
 		}
@@ -166,7 +180,7 @@ public class Executer {
 		if (Interpreter.isFunction(variableValue)) {
 			Variable var = null;
 			variableValue = executeFunction(variableValue);
-			if (variableValue.contains(":")) {
+			if (variableValue.contains(":") && !Variable.isString(variableValue)) {
 				var = new VariableList(variableValue);
 			}
 			else {
