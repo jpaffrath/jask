@@ -21,6 +21,21 @@ assign 3 times 2 to z   // z = 3 * 2
 assign 10 divide 2 to z // z = 10 / 2
 ```
 
+Work with List variables
+```c
+store list(1:2:3) in myList
+print(myList)
+
+store listGet(myList:0) in item1
+print(item1)
+
+store list("e1":"e2":"e3") in myStrList
+print(myStrList)
+
+store listGet(myStrList:1) in item2
+print(item2)
+````
+
 Statements
 ```c
 if z equals d
