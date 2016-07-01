@@ -1,11 +1,11 @@
-store list(1:2:3) in l
-print(l)
+store list(1:2:3) in myList
+print(myList)
 
-store list("Str1":"Str2") in l2
-print(l2)
+store list("Str1":"Str2") in myStrList
+print(myStrList)
 
-store listGet(l:1) in ele1
+store listGet(myList:1) in ele1
 print(ele1)
 
-assign listGet(l2:0) to ele1
+assign listGet(myList:0) to ele1
 print(ele1)
