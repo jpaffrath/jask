@@ -117,6 +117,10 @@ public class Executer {
 
 		// check build-in functions
 		if (functionName.contentEquals("print")) {
+			if (Variable.isString(params[0]) || Variable.isNumber(params[0])) {
+				System.out.println(params[0]);
+				return "";
+			}
 			Variable var = heap.get(params[0]);
 			if (var == null) {
 				Error.printErrorVariableNotDefined(param);
