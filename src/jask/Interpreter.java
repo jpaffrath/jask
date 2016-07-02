@@ -22,6 +22,11 @@ public class Interpreter {
 		executer = new Executer(function.getHeap());
 	}
 
+	public Interpreter(Executer executer) {
+		this();
+		this.executer = executer;
+	}
+
 	private boolean isOperator(String t) {
 		return operators.contains(t);
 	}
@@ -111,6 +116,13 @@ public class Interpreter {
 
 			else if (t.contentEquals("else") && ifRunning) {
 				while (!(t = tokens.get(++i)).equals("endif")) { }
+			}
+
+			// check run statement
+			else if (t.contentEquals("run")) {
+				int runner = i + 1;
+				while (!(t = tokens.get(runner)).contentEquals("endrun")) runner++;
+				exp = new Expression(ExpressionType.Runner, tokens.subList(i+1, ++runner));
 			}
 
 			executer.execute(exp);

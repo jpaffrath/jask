@@ -1,0 +1,6 @@
+store 1 in i
+store 10 in max
+
+run i to max with i plus 1
+	print(i)
+endrun

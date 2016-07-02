@@ -198,6 +198,27 @@ public class Executer {
 		heap.put(variableName, new Variable(variableValue));
 	}
 
+	private void executeRun(List<String> tokens) {
+		Variable runner = heap.get(tokens.get(0));
+		Variable maxVal = heap.get(tokens.get(2));
+
+		List<String> assignTokens = new ArrayList<String>();
+		assignTokens.add("assign");
+		assignTokens.add(tokens.get(0));
+		assignTokens.add(tokens.get(5));
+		assignTokens.add(tokens.get(6));
+		assignTokens.add("to");
+		assignTokens.add(tokens.get(0));
+
+		Interpreter interpreter = new Interpreter(this);
+
+		for (int i = (int)runner.getDoubleValue(); i < maxVal.getDoubleValue();) {
+			interpreter.interpret(tokens.subList(7, tokens.size() - 1));
+			executeAssign(assignTokens);
+			i = (int)heap.get(tokens.get(0)).getDoubleValue();
+		}
+	}
+
 	public void execute(Expression exp) {
 		if (exp == null) return;
 
@@ -205,6 +226,7 @@ public class Executer {
 		case Assign: executeAssign(exp.getTokens()); break;
 		case Function: executeFunction(exp.getTokens().get(0)); break;
 		case Store: executeStore(exp.getTokens()); break;
+		case Runner: executeRun(exp.getTokens()); break;
 		default:
 			break;
 		}

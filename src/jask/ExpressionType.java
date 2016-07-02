@@ -4,5 +4,6 @@ public enum ExpressionType {
 	Store,
 	Assign,
 	Function,
-	Statement
+	Statement,
+	Runner
 }
