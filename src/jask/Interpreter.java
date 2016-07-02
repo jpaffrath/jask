@@ -107,8 +107,19 @@ public class Interpreter {
 
 				}
 				else {
-					ifRunning = false;
-					while (!(t = tokens.get(++i)).equals("else")) { }
+					ifRunning = true;
+
+					int ifCount = 1;
+					int elCount = 0;
+
+					while (true) {
+						t = tokens.get(++i);
+
+						if (t.contentEquals("if")) ifCount++;
+						else if (t.contentEquals("else")) elCount++;
+
+						if (ifCount == elCount) break;
+					}
 				}
 
 				continue;
