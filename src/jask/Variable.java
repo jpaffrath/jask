@@ -8,7 +8,7 @@ public class Variable {
 	private VariableType type;
 
 	public static boolean isNumber(String value) {
-		if (Pattern.matches("^\\-?[1-9]\\d{0,2}(\\.\\d*)?$", value)) return true;
+		if (value.contentEquals("0") || Pattern.matches("^\\-?[1-9]\\d{0,2}(\\.\\d*)?$", value)) return true;
 		return false;
 	}
 
