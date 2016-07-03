@@ -117,11 +117,34 @@ public class Executer {
 
 		// check build-in functions
 		if (functionName.contentEquals("print")) {
-			if (Variable.isString(params[0]) || Variable.isNumber(params[0])) {
-				System.out.println(params[0]);
+			String temp = params[0];
+			if (Variable.isString(temp) || Variable.isNumber(temp)) {
+				System.out.print(temp.substring(1, temp.length()-1));
 				return "";
 			}
-			Variable var = heap.get(params[0]);
+			Variable var = heap.get(temp);
+			if (var == null) {
+				Error.printErrorVariableNotDefined(param);
+			}
+			else {
+				if (var instanceof VariableList) {
+					System.out.print(((VariableList) var).getPrintString());
+				}
+				else {
+					temp = var.toString();
+					System.out.println(temp.substring(1, temp.length()-1));
+				}
+			}
+			return "";
+		}
+
+		if (functionName.contentEquals("printLine")) {
+			String temp = params[0];
+			if (Variable.isString(temp) || Variable.isNumber(temp)) {
+				System.out.println(temp.substring(1, temp.length()-1));
+				return "";
+			}
+			Variable var = heap.get(temp);
 			if (var == null) {
 				Error.printErrorVariableNotDefined(param);
 			}
@@ -130,7 +153,8 @@ public class Executer {
 					System.out.println(((VariableList) var).getPrintString());
 				}
 				else {
-					System.out.println(var.toString());
+					temp = var.toString();
+					System.out.println(temp.substring(1, temp.length()-1));
 				}
 			}
 			return "";
