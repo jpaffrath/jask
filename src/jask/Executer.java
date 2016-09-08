@@ -132,7 +132,12 @@ public class Executer {
 				}
 				else {
 					temp = var.toString();
-					System.out.println(temp.substring(1, temp.length()-1));
+					if (var.getType() == VariableType.Number) {
+						System.out.print(temp);
+					}
+					else {
+						System.out.print(temp.substring(1, temp.length()-1));
+					}
 				}
 			}
 			return "";
@@ -154,7 +159,12 @@ public class Executer {
 				}
 				else {
 					temp = var.toString();
-					System.out.println(temp.substring(1, temp.length()-1));
+					if (var.getType() == VariableType.Number) {
+						System.out.println(temp);
+					}
+					else {
+						System.out.println(temp.substring(1, temp.length()-1));
+					}
 				}
 			}
 			return "";
