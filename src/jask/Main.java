@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-	
+
 	private static List<String> readFile(String name) {
 		FileReader fileReader = null;
 		try {
@@ -17,30 +17,37 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        List<String> lines = new ArrayList<String>();
-        String line = null;
-        try {
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		List<String> lines = new ArrayList<String>();
+		String line = null;
+		try {
 			while ((line = bufferedReader.readLine()) != null) {
-			    lines.add(line);
+				lines.add(line);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        try {
+		try {
 			bufferedReader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-        return lines;
+
+		return lines;
 	}
 
 	public static void main(String[] args) throws IOException {
-		Tokenizer tokenizer = new Tokenizer();
-		Interpreter interpreter = new Interpreter();
-		interpreter.interpret(tokenizer.parse(readFile(args[0])));
+		if (args.length == 0) {
+			System.out.println("This is the jask interpreter. No input files!");
+			return;
+		}
+
+		for (int i = 0; i < args.length; i++) {
+			Tokenizer tokenizer = new Tokenizer();
+			Interpreter interpreter = new Interpreter();
+			interpreter.interpret(tokenizer.parse(readFile(args[i])));
+		}
 	}
 }
