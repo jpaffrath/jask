@@ -5,6 +5,12 @@ Currently the jask interpreter is very unstable and supports only the functions 
 It is just a hobby project for fun and learning.
 Contributions are always welcome!
 
+# Use
+Pass .jask files as console arguments:
+```
+jask FILE1 FILE2 ...
+```
+
 # Examples
 Creating new variables
 ```C
