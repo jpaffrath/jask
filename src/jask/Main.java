@@ -1,44 +1,36 @@
 package jask;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-	private static List<String> readFile(String name) {
-		FileReader fileReader = null;
-		try {
-			fileReader = new FileReader(name);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-		List<String> lines = new ArrayList<String>();
-		String line = null;
-		try {
-			while ((line = bufferedReader.readLine()) != null) {
-				lines.add(line);
+	/**
+	 * Searchs for "use" statements and imports the files
+	 *
+	 * @param content content from main file
+	 * @return tokens from main file with imported tokens
+	 */
+	private static List<String> preload(List<String> content) {
+		for (int i = 0; i < content.size(); i++) {
+			String c = content.get(i);
+			if (c.length() < 3) continue;
+
+			String part = c.substring(0, 3);
+			if (part.contentEquals("use")) {
+				String fileName = c.substring(4, c.length());
+				List<String> importContent = Helpers.readFile(fileName);
+				// removes the "use class.jask" statement
+				content.remove(i);
+				importContent = preload(importContent);
+				importContent.addAll(content);
+				content = importContent;
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			bufferedReader.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
-		return lines;
+		return content;
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		if (args.length == 0) {
 			System.out.println("This is the jask interpreter. No input files!");
 			return;
@@ -47,7 +39,11 @@ public class Main {
 		for (int i = 0; i < args.length; i++) {
 			Tokenizer tokenizer = new Tokenizer();
 			Interpreter interpreter = new Interpreter();
-			interpreter.interpret(tokenizer.parse(readFile(args[i])));
+
+			List<String> content = Helpers.readFile(args[i]);
+			content = preload(content);
+
+			interpreter.interpret(tokenizer.parse(content));
 		}
 	}
 }
