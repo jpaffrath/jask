@@ -194,12 +194,19 @@ public class Executer {
 		List<Variable> functionHeap = new ArrayList<Variable>();
 		if (!param.contentEquals("")) {
 			for (int i = 0; i < params.length; i++) {
-				Variable var = heap.get(params[i]);
-				if (var == null) {
-					Error.printErrorVariableNotDefined(params[i]);
+				String temp = params[i];
+
+				if (Variable.isString(temp) || Variable.isNumber(temp)) {
+					functionHeap.add(new Variable(temp));
 				}
 				else {
-					functionHeap.add(var);
+					Variable var = heap.get(params[i]);
+					if (var == null) {
+						Error.printErrorVariableNotDefined(params[i]);
+					}
+					else {
+						functionHeap.add(var);
+					}
 				}
 			}
 		}
