@@ -4,3 +4,15 @@ store 10 in max
 run i to max with i plus 1
 	print(i)
 endrun
+
+assign 1 to i
+
+store 1 in j
+store 10 in jmax
+
+run i to max with i plus 1
+	run j to jmax with j plus 1
+		print(j)
+	endrun
+	assign 1 to j
+endrun
