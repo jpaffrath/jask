@@ -12,14 +12,14 @@ jask FILE1 FILE2 ...
 ```
 
 # Examples
-Creating new variables
+### Creating new variables
 ```C
 store 100 in z
 store 5.2 in d
 store "Hello World!" in str
 ```
 
-Assigning values
+### Assigning values
 ```C
 assign 1 plus 2 to z    // z = 1 + 2
 assign d minus 3 to z   // z = 5.2 - 3
@@ -27,7 +27,7 @@ assign 3 times 2 to z   // z = 3 * 2
 assign 10 divide 2 to z // z = 10 / 2
 ```
 
-Work with List variables
+### Work with List variables
 ```c
 store list(1:2:3) in myList
 print(myList)
@@ -42,7 +42,7 @@ store listGet(myStrList:1) in item2
 print(item2)
 ````
 
-Statements
+### Statements
 ```c
 if z equals d
   print(z)
@@ -56,22 +56,41 @@ else
 endif
 ```
 
-Creating functions
+### Creating functions
 ```C
 function myPrint(str)
   print(str)
 end
+
+function func(param1:param2)
+  print(param1)
+end
 ```
 
-Calling functions
+### Calling functions
 ```C
 store "Hello!" in text
 myPrint(text)
 ```
 
-Printing and reading data
+### Printing and reading data
 ```C
 store 0 in res        // new variable 'res'
 assign read() to res  // assign input to variable 'res'
 print(res)            // print content of 'res' to console
+```
+
+### Importing other files
+File test.jask:
+```
+function test()
+  print("Hello!")
+end
+```
+Your file:
+```
+use test.jask
+
+store test() in str
+print(str)
 ```
