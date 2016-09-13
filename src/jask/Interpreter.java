@@ -131,8 +131,19 @@ public class Interpreter {
 
 			// check run statement
 			else if (t.contentEquals("run")) {
-				int runner = i + 1;
-				while (!(t = tokens.get(runner)).contentEquals("endrun")) runner++;
+				int runCount = 1;
+				int endCount = 0;
+				int runner = i;
+
+				while (true) {
+					t = tokens.get(++runner);
+
+					if (t.contentEquals("run")) runCount++;
+					else if (t.contentEquals("endrun")) endCount++;
+
+					if (runCount == endCount) break;
+				}
+
 				exp = new Expression(ExpressionType.Runner, tokens.subList(i+1, ++runner));
 			}
 
