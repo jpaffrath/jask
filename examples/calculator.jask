@@ -1,0 +1,35 @@
+store 0 in num1
+store 0 in num2
+store 0 in opr
+
+printLine("Enter your first number ")
+assign read() to num1
+
+printLine("Enter your second number ")
+assign read() to num2
+
+printLine("Enter your operator ")
+assign read() to opr
+
+convert num1 to number
+convert num2 to number
+
+if opr equals "+"
+	assign num1 plus num2 to num1
+else
+	if opr equals "-"
+		assign num1 minus num2 to num1
+	else
+		if opr equals "*"
+			assign num1 times num2 to num1
+		else
+			if opr equals "/"
+				assign num1 divide num2 to num1
+			else
+			endif
+		endif
+	endif
+endif
+
+print("Result is ")
+printLine(num1)
