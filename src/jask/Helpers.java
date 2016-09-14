@@ -1,6 +1,7 @@
 package jask;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -35,5 +36,10 @@ public class Helpers {
 		}
 
 		return lines;
+	}
+
+	public static boolean checkFile(String name) {
+		File f = new File(name);
+		return (f.exists() && !f.isDirectory());
 	}
 }
