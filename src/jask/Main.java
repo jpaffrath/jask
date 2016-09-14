@@ -68,8 +68,6 @@ public class Main {
 			List<String> content = Helpers.readFile(file);
 			content = preload(content);
 
-			System.out.println(content);
-
 			interpreter.interpret(tokenizer.parse(content));
 		}
 	}
