@@ -101,8 +101,12 @@ public class Interpreter {
 
 			// checks if statement
 			else if (t.contentEquals("if")) {
-				if (executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+4)))) {
-					i += 3;
+				int ifType = 3;
+				if (tokens.get(i+2).contentEquals("mod")) {
+					ifType += 2;
+				}
+				if (executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+ifType+1)))) {
+					i += ifType;
 					ifRunning = true;
 
 				}
@@ -145,6 +149,12 @@ public class Interpreter {
 				}
 
 				exp = new Expression(ExpressionType.Runner, tokens.subList(i+1, ++runner));
+			}
+
+			// check convert statement
+			else if (t.contentEquals("convert")) {
+				exp = new Expression(ExpressionType.Convert, tokens.subList(i, i+4));
+				i += 3;
 			}
 
 			executer.execute(exp);

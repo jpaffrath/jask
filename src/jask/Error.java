@@ -26,4 +26,8 @@ public class Error {
 	public static void printErrorVariableIsNotAList(String var) {
 		System.out.println(prefix + "variable '" + var + "' is not a list!");
 	}
+
+	public static void printErrorConvertNotApplicable(String operator, String var) {
+		System.out.println(prefix + "operator '" + operator + "' not applicable for variable '" + var + "'");
+	}
 }

@@ -171,10 +171,9 @@ public class Executer {
 		}
 
 		if (functionName.contentEquals("read")) {
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
-			String input =  '"' + scanner.nextLine() + '"';
-			scanner.close();
-			return input;
+			return '"' + scanner.nextLine() + '"';
 		}
 
 		if (functionName.contentEquals("list")) {
@@ -260,16 +259,26 @@ public class Executer {
 		}
 	}
 
-	public void execute(Expression exp) {
-		if (exp == null) return;
+	private void executeConvert(List<String> tokens) {
+		String variableName = tokens.get(1);
+		String convert = tokens.get(3);
 
-		switch (exp.getType()) {
-		case Assign: executeAssign(exp.getTokens()); break;
-		case Function: executeFunction(exp.getTokens().get(0)); break;
-		case Store: executeStore(exp.getTokens()); break;
-		case Runner: executeRun(exp.getTokens()); break;
-		default:
-			break;
+		Variable var = heap.get(variableName);
+		if (var == null) {
+			Error.printErrorVariableNotDefined(variableName);
+		}
+		else {
+			if (convert.contentEquals("string") && var.getType() == VariableType.Number) {
+				String temp = "\"" + var.toString() + "\"";
+				heap.put(variableName, new Variable(temp));
+			}
+			else if (convert.contentEquals("number") && var.getType() == VariableType.String) {
+				var.setDoubleValue(Double.parseDouble(var.getStringValue().replace("\"", "")));
+				heap.put(variableName, var);
+			}
+			else {
+				Error.printErrorConvertNotApplicable(convert, variableName);
+			}
 		}
 	}
 
@@ -279,12 +288,47 @@ public class Executer {
 		Variable var2 = heap.get(tokens.get(3));
 		String operator = tokens.get(2);
 
+		if (var1 == null) {
+			var1 = new Variable(tokens.get(1));
+		}
+		if (var2 == null) {
+			var2 = new Variable(tokens.get(3));
+		}
+
 		if (operator.contentEquals("equals")) {
 			return var1.equals(var2);
+		}
+
+		if (operator.contentEquals("mod") &&
+				var1.getType() == VariableType.Number &&
+				var2.getType() == VariableType.Number) {
+
+			Variable var3 = heap.get(tokens.get(5));
+			if (var3 == null) {
+				var3 = new Variable(tokens.get(5));
+			}
+
+			if (var3.getType() == VariableType.Number) {
+				return (var1.getDoubleValue() % var2.getDoubleValue() == var3.getDoubleValue());
+			}
 		}
 
 		Error.printErrorOperatorNotApplicable(operator, "", "");
 
 		return false;
+	}
+
+	public void execute(Expression exp) {
+		if (exp == null) return;
+
+		switch (exp.getType()) {
+		case Assign: executeAssign(exp.getTokens()); break;
+		case Function: executeFunction(exp.getTokens().get(0)); break;
+		case Store: executeStore(exp.getTokens()); break;
+		case Runner: executeRun(exp.getTokens()); break;
+		case Convert: executeConvert(exp.getTokens()); break;
+		default:
+			break;
+		}
 	}
 }

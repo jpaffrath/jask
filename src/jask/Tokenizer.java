@@ -22,7 +22,7 @@ public class Tokenizer {
 					else {
 						strParsing = false;
 						strBuffer += t;
-						tokens.add(strBuffer);
+						tokens.add(strBuffer.replace("\t", ""));
 						strBuffer = null;
 						continue;
 					}
