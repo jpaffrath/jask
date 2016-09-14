@@ -225,7 +225,23 @@ public class Executer {
 			Variable var = null;
 			variableValue = executeFunction(variableValue);
 			if (variableValue.contains(":") && !Variable.isString(variableValue)) {
-				var = new VariableList(variableValue);
+				String[] params = variableValue.split(":");
+				String newParams = "";
+
+				for (String param : params) {
+					Variable tempVar = heap.get(param);
+					if (tempVar != null) {
+						newParams += tempVar.toString() + ":";
+					}
+					else {
+						newParams += param + ":";
+					}
+				}
+
+				// remove last ':' sign from parameter list
+				newParams = newParams.substring(0, newParams.length()-1);
+
+				var = new VariableList(newParams);
 			}
 			else {
 				var = new Variable(variableValue);
