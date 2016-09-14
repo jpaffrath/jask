@@ -7,8 +7,12 @@ Contributions are always welcome!
 
 # Use
 Pass .jask files as console arguments:
-```
+```C
 jask FILE1 FILE2 ...
+```
+To define the standard libary path, use option -l
+```C
+jask FILE1 -l path/to/lib
 ```
 
 # Examples
@@ -89,6 +93,7 @@ convert num to string
 ```
 
 ### Importing other files
+The jask interpreter searches for files in the current directory.
 File test.jask:
 ```C
 function test()
@@ -97,8 +102,12 @@ end
 ```
 Your file:
 ```C
-use test.jask
+use test
 
 store test() in str
 print(str)
+```
+You can define a path in the use statement:
+```C
+use my/local/path/test
 ```
