@@ -20,7 +20,7 @@ public class Main {
 
 			String part = c.substring(0, 3);
 			if (part.contentEquals("use")) {
-				String fileName = c.substring(4, c.length());
+				String fileName = c.substring(4, c.length()) + ".jask";
 
 				if (!Helpers.checkFile(fileName)) {
 					if (Helpers.checkFile(libraryPath + "/" + fileName)) {
