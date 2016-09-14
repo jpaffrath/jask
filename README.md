@@ -80,15 +80,23 @@ assign read() to res  // assign input to variable 'res'
 print(res)            // print content of 'res' to console
 ```
 
+### Convert variables
+```C
+store "100" in num
+
+convert num to number
+convert num to string
+```
+
 ### Importing other files
 File test.jask:
-```
+```C
 function test()
   print("Hello!")
 end
 ```
 Your file:
-```
+```C
 use test.jask
 
 store test() in str
