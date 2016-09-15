@@ -99,7 +99,7 @@ convert num to string
 
 ### Importing other files
 The jask interpreter searches for files in the current directory.
-File test.jask:
+File myFunctions.jask:
 ```C
 function test()
   print("Hello!")
@@ -107,7 +107,7 @@ end
 ```
 Your file:
 ```C
-use test
+use myFunctions
 
 store test() in str
 print(str)
