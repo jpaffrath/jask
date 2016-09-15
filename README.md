@@ -54,8 +54,13 @@ else
   print(d)
 endif
 
-if d equals d
-  print(d)
+if a not equals b
+  print(b)
+else
+endif
+
+if x mod y equals z
+  print(x)
 else
 endif
 ```
