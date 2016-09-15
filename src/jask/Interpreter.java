@@ -3,6 +3,12 @@ package jask;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interpreter class
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Interpreter {
 	private List<String> operators;
 	private Executer executer;
@@ -105,6 +111,10 @@ public class Interpreter {
 				if (tokens.get(i+2).contentEquals("mod")) {
 					ifType += 2;
 				}
+				else if (tokens.get(i+2).contentEquals("not")) {
+					ifType++;
+				}
+
 				if (executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+ifType+1)))) {
 					i += ifType;
 					ifRunning = true;
