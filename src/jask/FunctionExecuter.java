@@ -3,6 +3,12 @@ package jask;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Executer for functions
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class FunctionExecuter {
 	private HashMap<String, Function> functions;
 
@@ -10,6 +16,13 @@ public class FunctionExecuter {
 		functions = new HashMap<>();
 	}
 
+	/**
+	 * Executes a function
+	 *
+	 * @param name name of the function to be executed
+	 * @param heap local heap for the function
+	 * @return result of the function
+	 */
 	public String executeFunction(String name, List<Variable> heap) {
 		Function function = functions.get(name);
 		function.setHeap(heap);

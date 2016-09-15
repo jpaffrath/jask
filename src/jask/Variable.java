@@ -2,16 +2,34 @@ package jask;
 
 import java.util.regex.Pattern;
 
+/**
+ * Represents a jask variable
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Variable {
 	private String stringValue;
 	private double doubleValue;
 	private VariableType type;
 
+	/**
+	 * Checks if a given string is a valid jask number, e.g. 7, 242.42
+	 *
+	 * @param value string to be checked
+	 * @return true if the given string represents a valid jask number
+	 */
 	public static boolean isNumber(String value) {
 		if (Pattern.matches("^\\-?[0-9]*\\d{0,2}(\\.\\d*)?$", value)) return true;
 		return false;
 	}
 
+	/**
+	 * Checks if a given string is a valid jask string
+	 *
+	 * @param value string to be checked
+	 * @return true if the given string represents a valid jask string
+	 */
 	public static boolean isString(String value) {
 		if (Pattern.matches("^[\"]+([^\"]+[\"])?$", value)) return true;
 		return false;
@@ -21,6 +39,11 @@ public class Variable {
 		this.type = VariableType.NoType;
 	}
 
+	/**
+	 * Initializes a new variable based on a generic string
+	 *
+	 * @param genericValue
+	 */
 	public Variable(String genericValue) {
 		// matches integers and doubles
 		if (isNumber(genericValue)) {

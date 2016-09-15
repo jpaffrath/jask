@@ -3,12 +3,24 @@ package jask;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Represents a jask function
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Function {
 	private String name;
 	private String params[];
 	private HashMap<String, Variable> heap;
 	private List<String> tokens;
 
+	/**
+	 * Creates a new function
+	 *
+	 * @param initialString e.g. print(parameter)
+	 * @param tokens tokens of the function
+	 */
 	public Function(String initialString, List<String> tokens) {
 		this.name = initialString.substring(0, initialString.indexOf('('));
 		this.tokens = tokens;
@@ -17,6 +29,11 @@ public class Function {
 		this.params = param.split(":");
 	}
 
+	/**
+	 * Sets the heap of the function
+	 *
+	 * @param _heap list of variables
+	 */
 	public void setHeap(List<Variable> _heap) {
 		heap = new HashMap<>();
 		if (_heap.isEmpty()) return;

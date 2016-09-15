@@ -3,6 +3,12 @@ package jask;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a jask list variable
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class VariableList extends Variable {
 	private List<String> values;
 

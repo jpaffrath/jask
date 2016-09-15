@@ -8,7 +8,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides small helper functions
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Helpers {
+
+	/**
+	 * Reads the content of a given file
+	 *
+	 * @param name name of the file
+	 * @return list of strings containing the files content
+	 */
 	public static List<String> readFile(String name) {
 		FileReader fileReader = null;
 		try {
@@ -38,6 +51,12 @@ public class Helpers {
 		return lines;
 	}
 
+	/**
+	 * Checks if a given path points to a file
+	 *
+	 * @param name path to file
+	 * @return true if file exists, otherwise false
+	 */
 	public static boolean checkFile(String name) {
 		File f = new File(name);
 		return (f.exists() && !f.isDirectory());

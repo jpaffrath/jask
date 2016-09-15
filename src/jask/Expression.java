@@ -2,6 +2,12 @@ package jask;
 
 import java.util.List;
 
+/**
+ * Represents a jask expression
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Expression {
 	private ExpressionType type;
 	private List<String> tokens;
