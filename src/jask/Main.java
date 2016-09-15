@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Main java file
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Main {
 	private static String libraryPath = "";
 
 	/**
-	 * Searchs for "use" statements and imports the files
+	 * Searches for "use" statements and imports the files
 	 *
 	 * @param content content from main file
 	 * @return tokens from main file with imported tokens
@@ -29,8 +35,9 @@ public class Main {
 				}
 
 				List<String> importContent = Helpers.readFile(fileName);
-				// removes the "use class.jask" statement
+				// removes the "use file.jask" statement
 				content.remove(i);
+				// imports file content
 				importContent = preload(importContent);
 				importContent.addAll(content);
 				content = importContent;
@@ -40,24 +47,37 @@ public class Main {
 		return content;
 	}
 
+	/**
+	 * Main program entry
+	 *
+	 * @param args cmd parameters
+	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			System.out.println("This is the jask interpreter. No input files!");
 			return;
 		}
 
-		// convert cmd arguments to list
+		// convert cmd parameters to list
 		List<String> params = new ArrayList<String>(Arrays.asList(args));
+		// list for jask files given as cmd parameters
 		List<String> files = new ArrayList<String>();
 
-		// parse cmd arguments
+		// parse cmd parameters
 		for (int i = 0; i < params.size(); i++) {
-			if (params.get(i).contentEquals("-l")) {
+			String curParam = params.get(i);
+
+			// extract library path
+			if (curParam.contentEquals("-l")) {
 				libraryPath = params.get(i+1);
 				i++;
 			}
+			// add file to file list
+			else if (Helpers.checkFile(curParam)) {
+				files.add(curParam);
+			}
 			else {
-				files.add(params.get(i));
+				Error.printErrorNoCMDOption(curParam);
 			}
 		}
 
@@ -65,7 +85,9 @@ public class Main {
 			Tokenizer tokenizer = new Tokenizer();
 			Interpreter interpreter = new Interpreter();
 
+			// reads the file
 			List<String> content = Helpers.readFile(file);
+			// loads imported files
 			content = preload(content);
 
 			interpreter.interpret(tokenizer.parse(content));

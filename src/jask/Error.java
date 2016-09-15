@@ -1,5 +1,11 @@
 package jask;
 
+/**
+ * Error reporting class
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Error {
 	private static final String prefix = "Error: ";
 
@@ -29,5 +35,9 @@ public class Error {
 
 	public static void printErrorConvertNotApplicable(String operator, String var) {
 		System.out.println(prefix + "operator '" + operator + "' not applicable for variable '" + var + "'");
+	}
+
+	public static void printErrorNoCMDOption(String option) {
+		System.out.println(prefix + "cmd parameter '" + option + "' is no jask interpreter option!");
 	}
 }
