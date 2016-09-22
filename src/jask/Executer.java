@@ -97,11 +97,7 @@ public class Executer {
 
 		if (var1.getType() == VariableType.String && var2.getType() == VariableType.String) {
 			if (operator.contentEquals("plus")) {
-				varD.setDoubleValue(0.0);
-				StringBuilder builder = new StringBuilder();
-				builder.append(var1.getStringValue().substring(0, var1.getStringValue().length()-1));
-				builder.append(var2.getStringValue().substring(1, var2.getStringValue().length()));
-				varD.setStringValue(builder.toString());
+				varD.setStringValue(var1.getStringValue() + var2.getStringValue());
 				heap.put(tokens.get(5), varD);
 				return;
 			}
