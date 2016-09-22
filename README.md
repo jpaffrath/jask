@@ -55,7 +55,7 @@ else
 endif
 
 if a unequals b
-  printLine("a equals b")
+  printLine("a unequals b")
 else
 endif
 
