@@ -45,6 +45,8 @@ public class Variable {
 	 * @param genericValue
 	 */
 	public Variable(String genericValue) {
+		this.type = VariableType.NoType;
+
 		// matches integers and doubles
 		if (isNumber(genericValue)) {
 			this.doubleValue = Double.parseDouble(genericValue);
@@ -99,11 +101,13 @@ public class Variable {
 		if (type == VariableType.String) return stringValue;
 		if (type == VariableType.Number) return String.valueOf(doubleValue);
 
-		return "";
+		return " NULL ";
 	}
 
 	public boolean equals(Variable var) {
 		if (this.type != var.type) return false;
+
+		if (this.type == VariableType.NoType) return true;
 
 		if (this.type == VariableType.Number) {
 			return this.doubleValue == var.doubleValue;
