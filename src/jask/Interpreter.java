@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class Interpreter {
 	private List<String> operators;
+	private List<String> keywords;
 	private Executer executer;
 
 	public Interpreter() {
@@ -19,6 +20,18 @@ public class Interpreter {
 		operators.add("minus");
 		operators.add("times");
 		operators.add("divide");
+
+		keywords = new ArrayList<String>(operators);
+		keywords.add("function");
+		keywords.add("end");
+		keywords.add("if");
+		keywords.add("else");
+		keywords.add("return");
+		keywords.add("convert");
+		keywords.add("to");
+		keywords.add("number");
+		keywords.add("string");
+		keywords.add("in");
 
 		executer = new Executer();
 	}
@@ -35,6 +48,17 @@ public class Interpreter {
 
 	private boolean isOperator(String t) {
 		return operators.contains(t);
+	}
+
+	private boolean isKeyword(String t) {
+		return keywords.contains(t);
+	}
+
+	private boolean isValue(String t) {
+		if (t.contentEquals("TRUE")) return true;
+		if (t.contentEquals("FALSE")) return true;
+
+		return false;
 	}
 
 	public static boolean isFunction(String t) {
@@ -73,17 +97,45 @@ public class Interpreter {
 
 			// checks store expressions
 			if (t.contentEquals("store") && tokens.get(i+2).contentEquals("in")) {
+				// check if the variable name is a keyword
+				if (isKeyword(tokens.get(i+1))) {
+					Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
+				}
+
+				if (isKeyword(tokens.get(i+3)) || isValue(tokens.get(i+3))) {
+					Error.terminateInterpret(tokens.get(i+3) + " is a keyword!");
+				}
+
 				exp = new Expression(ExpressionType.Store, tokens.subList(i, i+4));
 				i += 3;
 			}
 			// checks assign expressions
 			else if (t.contentEquals("assign")) {
-
 				if (isOperator(tokens.get(i+2)) && tokens.get(i+4).contentEquals("to")) {
+					if (isKeyword(tokens.get(i+1))) {
+						Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
+					}
+
+					if (isKeyword(tokens.get(i+3))) {
+						Error.terminateInterpret(tokens.get(i+3) + " is a keyword!");
+					}
+
+					if (isKeyword(tokens.get(i+5)) || isValue(tokens.get(i+5))) {
+						Error.terminateInterpret(tokens.get(i+5) + " is a keyword!");
+					}
+
 					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+6));
 					i += 5;
 				}
 				else {
+					if (isKeyword(tokens.get(i+1))) {
+						Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
+					}
+
+					if (isKeyword(tokens.get(i+3)) || isValue(tokens.get(i+3))) {
+						Error.terminateInterpret(tokens.get(i+3) + " is a keyword!");
+					}
+
 					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+4));
 					i += 3;
 				}

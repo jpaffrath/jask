@@ -40,4 +40,14 @@ public class Error {
 	public static void printErrorNoCMDOption(String option) {
 		System.out.println(prefix + "cmd parameter '" + option + "' is no jask interpreter option!");
 	}
+
+	public static void printErrorIsKeyword(String var) {
+		System.out.println(prefix + "given name '" + var + "' is a keyword!");
+	}
+
+	public static void terminateInterpret(String reason) {
+		System.out.println(prefix + reason);
+		System.out.println("Due to this reason, the interpreter has been terminated!");
+		System.exit(-1);
+	}
 }
