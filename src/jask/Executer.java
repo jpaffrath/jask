@@ -289,7 +289,16 @@ public class Executer {
 				heap.put(variableName, new Variable(temp));
 			}
 			else if (convert.contentEquals("number") && var.getType() == VariableType.String) {
-				var.setDoubleValue(Double.parseDouble(var.getStringValue().replace("\"", "")));
+				String strValue = var.getStringValue().replace("\"", "");
+
+				if (Variable.isNumber(strValue)) {
+					var.setDoubleValue(Double.parseDouble(strValue));
+				}
+				else {
+					Error.printErrorConvertNotApplicable(convert, variableName);
+					var.setType(VariableType.NoType);
+				}
+
 				heap.put(variableName, var);
 			}
 			else {
