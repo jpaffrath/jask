@@ -315,6 +315,10 @@ public class Executer {
 			return var1.equals(var2);
 		}
 
+		if (operator.contentEquals("unequals")) {
+			return !var1.equals(var2);
+		}
+
 		if (operator.contentEquals("mod") &&
 				var1.getType() == VariableType.Number &&
 				var2.getType() == VariableType.Number) {
