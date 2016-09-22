@@ -3,6 +3,12 @@ package jask;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interpreter class
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Interpreter {
 	private List<String> operators;
 	private Executer executer;
