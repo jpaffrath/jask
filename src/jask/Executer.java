@@ -301,20 +301,18 @@ public class Executer {
 	public boolean executeStatement(Expression exp) {
 		List<String> tokens = exp.getTokens();
 		Variable var1 = heap.get(tokens.get(1));
-		boolean notExp = tokens.get(2).contentEquals("not");
-
-		String operator = notExp ? tokens.get(3) : tokens.get(2);
-		Variable var2 = notExp ? heap.get(tokens.get(4)) : heap.get(tokens.get(3));
+		Variable var2 = heap.get(tokens.get(3));
+		String operator = tokens.get(2);
 
 		if (var1 == null) {
 			var1 = new Variable(tokens.get(1));
 		}
 		if (var2 == null) {
-			var2 = notExp ? new Variable(tokens.get(4)) : new Variable(tokens.get(3));
+			var2 = new Variable(tokens.get(3));
 		}
 
 		if (operator.contentEquals("equals")) {
-			return (notExp ? !var1.equals(var2) : var1.equals(var2));
+			return var1.equals(var2);
 		}
 
 		if (operator.contentEquals("mod") &&
