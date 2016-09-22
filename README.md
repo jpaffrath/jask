@@ -20,15 +20,25 @@ jask FILE1 -l path/to/lib
 ```C
 store 100 in z
 store 5.2 in d
+
 store "Hello World!" in str
+
+store TRUE in bool1
+store FALSE in bool2
 ```
 
 ### Assigning values
 ```C
-assign 1 plus 2 to z    // z = 1 + 2
-assign d minus 3 to z   // z = 5.2 - 3
-assign 3 times 2 to z   // z = 3 * 2
-assign 10 divide 2 to z // z = 10 / 2
+assign 1 plus 2 to z
+assign d minus 3 to z
+assign 3 times 2 to z
+assign 10 divide 2 to z
+
+assign "A string" to str
+assign "Hello " plus "World!" to str
+
+assign TRUE to bool
+assign FALSE to bool
 ```
 
 ### Work with List variables
@@ -63,6 +73,11 @@ if x mod y equals z
   print(x)
 else
 endif
+
+if val equals TRUE
+  print("val is true")
+else
+endif
 ```
 
 ### Creating functions
@@ -73,6 +88,7 @@ end
 
 function func(param1:param2)
   print(param1)
+  return TRUE
 end
 ```
 
@@ -84,9 +100,8 @@ myPrint(text)
 
 ### Printing and reading data
 ```C
-store 0 in res        // new variable 'res'
-assign read() to res  // assign input to variable 'res'
-print(res)            // print content of 'res' to console
+store read() in res
+print(res)
 ```
 
 ### Convert variables
