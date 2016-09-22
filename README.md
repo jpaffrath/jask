@@ -49,13 +49,13 @@ print(item2)
 ### Statements
 ```c
 if z equals d
-  print(z)
+  printLine("z equals d")
 else
-  print(d)
+  printLine("z and d are different")
 endif
 
-if a not equals b
-  print(b)
+if a unequals b
+  printLine("a equals b")
 else
 endif
 
