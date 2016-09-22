@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 public class Variable {
 	private String stringValue;
 	private double doubleValue;
+	private boolean boolValue;
 	private VariableType type;
 
 	/**
@@ -54,8 +55,17 @@ public class Variable {
 		}
 		// matches strings
 		else if (isString(genericValue)) {
-			this.stringValue = genericValue;
+			this.stringValue = genericValue.substring(1, genericValue.length()-1);
 			this.type = VariableType.String;
+		}
+		// matches boolean values
+		else if (genericValue.contentEquals("TRUE")) {
+			this.boolValue = true;
+			this.type = VariableType.Bool;
+		}
+		else if (genericValue.contentEquals("FALSE")){
+			this.boolValue = false;
+			this.type = VariableType.Bool;
 		}
 	}
 
@@ -67,6 +77,9 @@ public class Variable {
 		}
 		else if (type == VariableType.String) {
 			this.stringValue = var.stringValue;
+		}
+		else if (type == VariableType.Bool) {
+			this.boolValue = var.boolValue;
 		}
 	}
 
@@ -88,6 +101,15 @@ public class Variable {
 		this.type = VariableType.Number;
 	}
 
+	public boolean getBoolValue() {
+		return boolValue;
+	}
+
+	public void setBoolValue(boolean boolValue) {
+		this.boolValue = boolValue;
+		this.type = VariableType.Bool;
+	}
+
 	public VariableType getType() {
 		return type;
 	}
@@ -98,10 +120,11 @@ public class Variable {
 
 	@Override
 	public String toString() {
-		if (type == VariableType.String) return stringValue;
+		if (type == VariableType.String) return ("\"" + stringValue + "\"");
 		if (type == VariableType.Number) return String.valueOf(doubleValue);
+		if (type == VariableType.Bool)   return this.boolValue ? "TRUE" : "FALSE";
 
-		return " NULL ";
+		return  "NULL";
 	}
 
 	public boolean equals(Variable var) {
@@ -115,6 +138,10 @@ public class Variable {
 
 		if (this.type == VariableType.String) {
 			return this.stringValue.contentEquals(var.stringValue);
+		}
+
+		if (this.type == VariableType.Bool) {
+			return this.boolValue == var.boolValue;
 		}
 
 		return false;

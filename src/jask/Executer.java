@@ -131,13 +131,7 @@ public class Executer {
 					System.out.print(((VariableList) var).getPrintString());
 				}
 				else {
-					temp = var.toString();
-					if (var.getType() == VariableType.Number) {
-						System.out.print(temp);
-					}
-					else {
-						System.out.print(temp.substring(1, temp.length()-1));
-					}
+					System.out.print(var.toString());
 				}
 			}
 			return "";
@@ -158,13 +152,7 @@ public class Executer {
 					System.out.println(((VariableList) var).getPrintString());
 				}
 				else {
-					temp = var.toString();
-					if (var.getType() == VariableType.Number) {
-						System.out.println(temp);
-					}
-					else {
-						System.out.println(temp.substring(1, temp.length()-1));
-					}
+					System.out.println(var.toString());
 				}
 			}
 			return "";

@@ -9,5 +9,6 @@ package jask;
 public enum VariableType {
 	String,
 	Number,
+	Bool,
 	NoType
 }
