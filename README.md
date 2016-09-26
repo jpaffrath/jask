@@ -6,9 +6,13 @@ It is just a hobby project for fun and learning.
 Contributions are always welcome!
 
 # Use
-Pass .jask files as console arguments:
+To use the interactive mode, invoke jask:
 ```C
-jask FILE1 FILE2 ...
+java -jar jask.jar
+```
+jask can interpret files:
+```C
+jask FILE1.jask FILE2.jask ...
 ```
 To define the standard libary path, use option -l
 ```C
@@ -25,6 +29,8 @@ store "Hello World!" in str
 
 store TRUE in bool1
 store FALSE in bool2
+
+store NULL in foo
 ```
 
 ### Assigning values
@@ -41,8 +47,8 @@ assign TRUE to bool
 assign FALSE to bool
 ```
 
-### Work with List variables
-```c
+### Work with list variables
+```C
 store list(1:2:3) in myList
 print(myList)
 
@@ -54,10 +60,10 @@ print(myStrList)
 
 store listGet(myStrList:1) in item2
 print(item2)
-````
+```
 
 ### Statements
-```c
+```C
 if z equals d
   printLine("z equals d")
 else
@@ -94,8 +100,8 @@ end
 
 ### Calling functions
 ```C
-store "Hello!" in text
-myPrint(text)
+myPrint("text")
+func(2:a)
 ```
 
 ### Printing and reading data
@@ -113,21 +119,21 @@ convert num to string
 ```
 
 ### Importing other files
-The jask interpreter searches for files in the current directory.
-File myFunctions.jask:
+If you import a file, jask searches for files in the current directory.
+You can use the option -l to define a library path, jask will search there as well.
+File myLibrary.jask:
 ```C
-function test()
-  print("Hello!")
+function myLibFunction()
+  print("This is a library!")
 end
 ```
 Your file:
 ```C
-use myFunctions
+use myLibrary
 
-store test() in str
-print(str)
+myLibFunction()
 ```
-You can define a path in the use statement:
+You can also define a path in the use statement:
 ```C
-use my/local/path/test
+use my/local/path/to/library.jask
 ```
