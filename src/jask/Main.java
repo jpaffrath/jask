@@ -3,6 +3,7 @@ package jask;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Main java file
@@ -48,13 +49,50 @@ public class Main {
 	}
 
 	/**
+	 * Performs the interactive mode
+	 */
+	private static void interactiveMode() {
+		Tokenizer tokenizer = new Tokenizer();
+		Interpreter interpreter = new Interpreter();
+
+		Scanner scanner = new Scanner(System.in);
+		List<String> tempList = new ArrayList<String>();
+		String line;
+
+		System.out.print("jask ~> ");
+
+		while (true) {
+			line = scanner.nextLine();
+
+			// stops the interactive mode
+			if (line.contentEquals("exit")) break;
+
+			// if a function is added, add lines to list until the function ends
+			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
+				tempList.add(line);
+				while (!(line = scanner.nextLine()).contentEquals("end")) {
+					tempList.add(line);
+				}
+			}
+
+			tempList.add(line);
+			System.out.print("jask ~> ");
+
+			interpreter.interpret(tokenizer.parse(tempList));
+			tempList.clear();
+		}
+
+		scanner.close();
+	}
+
+	/**
 	 * Main program entry
 	 *
 	 * @param args cmd parameters
 	 */
 	public static void main(String[] args) {
 		if (args.length == 0) {
-			System.out.println("This is the jask interpreter. No input files!");
+			interactiveMode();
 			return;
 		}
 
