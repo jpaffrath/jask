@@ -57,7 +57,7 @@ public class Main {
 
 		Scanner scanner = new Scanner(System.in);
 		List<String> tempList = new ArrayList<String>();
-		String line;
+		String line = "";
 
 		System.out.print("jask ~> ");
 
@@ -70,8 +70,56 @@ public class Main {
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
 				tempList.add(line);
-				while (!(line = scanner.nextLine()).contentEquals("end")) {
+				System.out.print("func ~> ");
+
+				while (true) {
+					line = scanner.nextLine();
+					if (line.contentEquals("end")) break;
+
 					tempList.add(line);
+					System.out.print("func ~> ");
+				}
+			}
+
+			// if a statement is added, add lines to list until the statement ends
+			if (line.length() > 1 && line.substring(0, 2).contentEquals("if")) {
+				int ifCount = 1;
+				int exCount = 0;
+
+				tempList.add(line);
+				System.out.print("if ~> ");
+
+				while (true) {
+					line = scanner.nextLine();
+
+					if (line.length() > 1 && line.substring(0, 2).contentEquals("if")) ifCount++;
+					else if (line.contentEquals("endif")) exCount++;
+
+					if (ifCount == exCount) break;
+
+					tempList.add(line);
+					System.out.print("if ~> ");
+				}
+			}
+
+			// if a run statement is added, add lines to list until the statement ends
+			if (line.length() > 2 && line.substring(0, 3).contentEquals("run")) {
+				int ruCount = 1;
+				int exCount = 0;
+
+				tempList.add(line);
+				System.out.print("run ~> ");
+
+				while (true) {
+					line = scanner.nextLine();
+
+					if (line.length() > 2 && line.substring(0, 3).contentEquals("run")) ruCount++;
+					else if (line.contentEquals("endrun")) exCount++;
+
+					if (ruCount == exCount) break;
+
+					tempList.add(line);
+					System.out.print("run ~> ");
 				}
 			}
 
