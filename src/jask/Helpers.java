@@ -61,4 +61,37 @@ public class Helpers {
 		File f = new File(name);
 		return (f.exists() && !f.isDirectory());
 	}
+
+	/**
+	 * Splits a given parameter string into a list of parameters
+	 *
+	 * @param param parameter string
+	 * @return list of strings containing parameters
+	 */
+	public static List<String> splitParams(String param) {
+		List<String> params = new ArrayList<String>();
+		String tempString = "";
+		boolean stringParsing = false;
+
+		for (char c : param.toCharArray()) {
+			if (c == '"' && !stringParsing) stringParsing = true;
+			else if (c == '"' && stringParsing) stringParsing = false;
+
+			if (c == ':' && !stringParsing) {
+				params.add(tempString);
+				tempString = "";
+				continue;
+			}
+
+			tempString += c;
+		}
+
+		// adds the temp string to the parameter list
+		// if only one parameter is present
+		if (!tempString.contentEquals("")) {
+			params.add(tempString);
+		}
+
+		return params;
+	}
 }

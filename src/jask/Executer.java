@@ -109,11 +109,11 @@ public class Executer {
 	private String executeFunction(String token) {
 		String functionName = token.substring(0, token.indexOf('('));
 		String param = token.substring(token.indexOf('(')+1, token.indexOf(')'));
-		String[] params = param.split(":");
+		List<String> params = Helpers.splitParams(param);
 
 		// check build-in functions
 		if (functionName.contentEquals("print")) {
-			String temp = params[0];
+			String temp = params.get(0);
 			if (Variable.isString(temp) || Variable.isNumber(temp)) {
 				System.out.print(temp.substring(1, temp.length()-1));
 				return "";
@@ -134,7 +134,7 @@ public class Executer {
 		}
 
 		if (functionName.contentEquals("printLine")) {
-			String temp = params[0];
+			String temp = params.get(0);
 			if (Variable.isString(temp) || Variable.isNumber(temp)) {
 				System.out.println(temp.substring(1, temp.length()-1));
 				return "";
@@ -165,27 +165,27 @@ public class Executer {
 		}
 
 		if (functionName.contentEquals("listGet")) {
-			Variable var = heap.get(params[0]);
+			Variable var = heap.get(params.get(0));
 			if (var == null || !(var instanceof VariableList)) {
-				Error.printErrorVariableIsNotAList(params[0]);
+				Error.printErrorVariableIsNotAList(params.get(0));
 				return "";
 			}
 
-			return ((VariableList)var).getElementAtIndex(Integer.parseInt(params[1]));
+			return ((VariableList)var).getElementAtIndex(Integer.parseInt(params.get(1)));
 		}
 
 		List<Variable> functionHeap = new ArrayList<Variable>();
 		if (!param.contentEquals("")) {
-			for (int i = 0; i < params.length; i++) {
-				String temp = params[i];
+			for (int i = 0; i < params.size(); i++) {
+				String temp = params.get(i);
 
 				if (Variable.isString(temp) || Variable.isNumber(temp)) {
 					functionHeap.add(new Variable(temp));
 				}
 				else {
-					Variable var = heap.get(params[i]);
+					Variable var = heap.get(params.get(i));
 					if (var == null) {
-						Error.printErrorVariableNotDefined(params[i]);
+						Error.printErrorVariableNotDefined(params.get(i));
 					}
 					else {
 						functionHeap.add(var);
