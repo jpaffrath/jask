@@ -1,0 +1,18 @@
+store 1 in n1
+store 2 in n2
+
+if n1 equals n2
+	printLine("n1 and n2 are equal!")
+else
+	printLine("n1 and n2 are unequal!")
+endif
+
+if "text" equals "Text"
+	printLine("text and Text are equal!")
+else
+endif
+
+if 4 mod 2 equals 0
+	printLine("Even!")
+else
+endif

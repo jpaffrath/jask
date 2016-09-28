@@ -1,2 +1,7 @@
-store "Text" in str1
+store "This is a string" in str
 store 100.21 in num
+
+store TRUE in b1
+store FALSE in b2
+
+store NULL in nulVal

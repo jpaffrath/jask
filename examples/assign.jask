@@ -1,6 +1,11 @@
 store 100 in z1
+store NULL in value
 
 assign z1 plus z1 to z1
 assign z1 minus z1 to z1
 assign z1 times z1 to z1
 assign z1 divide z1 to z1
+
+assign TRUE to value
+assign 2.1 to value
+assign "Hello " plus "World!" to value
