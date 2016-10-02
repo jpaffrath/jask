@@ -41,6 +41,10 @@ public class VariableList extends Variable {
 		else setType(VariableType.Number);
 	}
 
+	public int getSize() {
+		return values.size();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

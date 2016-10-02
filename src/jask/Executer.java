@@ -174,6 +174,16 @@ public class Executer {
 			return ((VariableList)var).getElementAtIndex(Integer.parseInt(params.get(1)));
 		}
 
+		if (functionName.contentEquals("listSize")) {
+			Variable var = heap.get(params.get(0));
+			if (var == null || !(var instanceof VariableList)) {
+				Error.printErrorVariableIsNotAList(params.get(0));
+				return "";
+			}
+
+			return Integer.toString(((VariableList)var).getSize());
+		}
+
 		List<Variable> functionHeap = new ArrayList<Variable>();
 		if (!param.contentEquals("")) {
 			for (int i = 0; i < params.size(); i++) {
