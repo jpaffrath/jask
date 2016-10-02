@@ -168,10 +168,25 @@ public class Executer {
 			Variable var = heap.get(params.get(0));
 			if (var == null || !(var instanceof VariableList)) {
 				Error.printErrorVariableIsNotAList(params.get(0));
-				return "";
+				return "NULL";
 			}
 
-			return ((VariableList)var).getElementAtIndex(Integer.parseInt(params.get(1)));
+			Variable index = heap.get(params.get(1));
+			if (index == null) {
+				if (!Variable.isNumber(params.get(1))) {
+					Error.printErrorValueNotApplicable(params.get(1));
+					return "NULL";
+				}
+
+				return ((VariableList)var).getElementAtIndex(Integer.parseInt(params.get(1)));
+			}
+
+			if (index.getType() != VariableType.Number) {
+				Error.printErrorVariableIsNotANumber(params.get(1));
+				return "NULL";
+			}
+
+			return ((VariableList)var).getElementAtIndex((int)index.getDoubleValue());
 		}
 
 		if (functionName.contentEquals("listSize")) {
