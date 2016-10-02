@@ -33,6 +33,18 @@ public class Error {
 		System.out.println(prefix + "variable '" + var + "' is not a list!");
 	}
 
+	public static void printErrorVariableIsNotANumber(String var) {
+		System.out.println(prefix + "variable '" + var + "' is not a number!");
+	}
+
+	public static void printErrorVariableIsNotAString(String var) {
+		System.out.println(prefix + "variable '" + var + "' is not a string!");
+	}
+
+	public static void printErrorValueNotApplicable(String value) {
+		System.out.println(prefix + "value '" + value + "' is not applicable!");
+	}
+
 	public static void printErrorConvertNotApplicable(String operator, String var) {
 		System.out.println(prefix + "operator '" + operator + "' not applicable for variable '" + var + "'");
 	}
@@ -43,6 +55,10 @@ public class Error {
 
 	public static void printErrorIsKeyword(String var) {
 		System.out.println(prefix + "given name '" + var + "' is a keyword!");
+	}
+
+	public static void printErrorFileNotFound(String file) {
+		System.out.println(prefix + "the file '" + file + ".jask' was not found!");
 	}
 
 	public static void terminateInterpret(String reason) {
