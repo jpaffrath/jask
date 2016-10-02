@@ -3,8 +3,13 @@ package jask;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
+/**
+ * Executes jask code
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class Executer {
 	private HashMap<String, Variable> heap;
 	public FunctionExecuter functionExecuter;
@@ -53,7 +58,6 @@ public class Executer {
 
 
 		//assign a plus b to c
-
 		String var1Str = tokens.get(1);
 		String var2Str = tokens.get(3);
 		String varDStr = tokens.get(5);
@@ -112,91 +116,8 @@ public class Executer {
 		List<String> params = Helpers.splitParams(param);
 
 		// check build-in functions
-		if (functionName.contentEquals("print")) {
-			String temp = params.get(0);
-			if (Variable.isString(temp) || Variable.isNumber(temp)) {
-				System.out.print(temp.substring(1, temp.length()-1));
-				return "";
-			}
-			Variable var = heap.get(temp);
-			if (var == null) {
-				Error.printErrorVariableNotDefined(param);
-			}
-			else {
-				if (var instanceof VariableList) {
-					System.out.print(((VariableList) var).getPrintString());
-				}
-				else {
-					System.out.print(var.toString());
-				}
-			}
-			return "";
-		}
-
-		if (functionName.contentEquals("printLine")) {
-			String temp = params.get(0);
-			if (Variable.isString(temp) || Variable.isNumber(temp)) {
-				System.out.println(temp.substring(1, temp.length()-1));
-				return "";
-			}
-			Variable var = heap.get(temp);
-			if (var == null) {
-				Error.printErrorVariableNotDefined(param);
-			}
-			else {
-				if (var instanceof VariableList) {
-					System.out.println(((VariableList) var).getPrintString());
-				}
-				else {
-					System.out.println(var.toString());
-				}
-			}
-			return "";
-		}
-
-		if (functionName.contentEquals("read")) {
-			@SuppressWarnings("resource")
-			Scanner scanner = new Scanner(System.in);
-			return '"' + scanner.nextLine() + '"';
-		}
-
-		if (functionName.contentEquals("list")) {
-			return param;
-		}
-
-		if (functionName.contentEquals("listGet")) {
-			Variable var = heap.get(params.get(0));
-			if (var == null || !(var instanceof VariableList)) {
-				Error.printErrorVariableIsNotAList(params.get(0));
-				return "NULL";
-			}
-
-			Variable index = heap.get(params.get(1));
-			if (index == null) {
-				if (!Variable.isNumber(params.get(1))) {
-					Error.printErrorValueNotApplicable(params.get(1));
-					return "NULL";
-				}
-
-				return ((VariableList)var).getElementAtIndex(Integer.parseInt(params.get(1)));
-			}
-
-			if (index.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params.get(1));
-				return "NULL";
-			}
-
-			return ((VariableList)var).getElementAtIndex((int)index.getDoubleValue());
-		}
-
-		if (functionName.contentEquals("listSize")) {
-			Variable var = heap.get(params.get(0));
-			if (var == null || !(var instanceof VariableList)) {
-				Error.printErrorVariableIsNotAList(params.get(0));
-				return "";
-			}
-
-			return Integer.toString(((VariableList)var).getSize());
+		if (InternalFunctions.isInternalFunction(functionName)) {
+			return new InternalFunctions(heap, token).executeFunction();
 		}
 
 		List<Variable> functionHeap = new ArrayList<Variable>();
@@ -218,6 +139,7 @@ public class Executer {
 				}
 			}
 		}
+
 		return functionExecuter.executeFunction(functionName, functionHeap);
 	}
 
