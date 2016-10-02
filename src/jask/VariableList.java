@@ -41,6 +41,30 @@ public class VariableList extends Variable {
 		else setType(VariableType.Number);
 	}
 
+	public boolean addElement(String genericValue) {
+		Variable toAdd = new Variable(genericValue);
+
+		if (getType() != toAdd.getType()) {
+			Error.printErrorListMultipleTypes();
+			return false;
+		}
+
+		values.add(genericValue);
+
+		return true;
+	}
+
+	public boolean addElement(Variable toAdd) {
+		if (getType() != toAdd.getType()) {
+			Error.printErrorListMultipleTypes();
+			return false;
+		}
+
+		values.add(toAdd.toString());
+
+		return true;
+	}
+
 	public int getSize() {
 		return values.size();
 	}

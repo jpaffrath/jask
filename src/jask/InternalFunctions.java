@@ -33,6 +33,7 @@ public class InternalFunctions {
 		internals.add("list");
 		internals.add("listGet");
 		internals.add("listSize");
+		internals.add("listAdd");
 		return internals.contains(functionName);
 	}
 
@@ -44,6 +45,7 @@ public class InternalFunctions {
 		case "list":      return list();
 		case "listGet":   return listGet();
 		case "listSize":  return listSize();
+		case "listAdd":   return listAdd();
 		}
 
 		return "";
@@ -140,5 +142,29 @@ public class InternalFunctions {
 		}
 
 		return Integer.toString(((VariableList)var).getSize());
+	}
+
+	private String listAdd() {
+		Variable var = heap.get(params.get(0));
+		if (var == null || !(var instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params.get(0));
+			return "NULL";
+		}
+
+		Variable toAdd = heap.get(params.get(1));
+		if (toAdd == null) {
+			if (((VariableList)var).addElement(params.get(1))) {
+				return "TRUE";
+			}
+
+			return "FALSE";
+		}
+		else {
+			if (((VariableList)var).addElement(toAdd)) {
+				return "TRUE";
+			}
+
+			return "FALSE";
+		}
 	}
 }
