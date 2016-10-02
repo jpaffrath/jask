@@ -1,18 +1,10 @@
 store list(1:2:3) in myList
-printLine(myList)
 
 store list("Str1":"Str2") in myStrList
-printLine(myStrList)
 
-store listGet(myList:1) in ele1
-printLine(ele1)
-
-assign listGet(myList:0) to ele1
-printLine(ele1)
+store listGet(myList:1) in ele
+assign listGet(myList:0) to ele
 
 store listSize(myList) in size
-printLine(size)
 
-store 1 in index
-assign listGet(myList:index) to ele1
-printLine(ele1)
+listRemove(myList:2)
