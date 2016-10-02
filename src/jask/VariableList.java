@@ -65,6 +65,15 @@ public class VariableList extends Variable {
 		return true;
 	}
 
+	public boolean removeElement(int index) {
+		if (index >= values.size()) {
+			Error.printErrorNoValueAtIndex(index);
+			return false;
+		}
+		values.remove(index);
+		return true;
+	}
+
 	public int getSize() {
 		return values.size();
 	}

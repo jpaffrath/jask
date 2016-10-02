@@ -34,18 +34,20 @@ public class InternalFunctions {
 		internals.add("listGet");
 		internals.add("listSize");
 		internals.add("listAdd");
+		internals.add("listRemove");
 		return internals.contains(functionName);
 	}
 
 	public String executeFunction() {
 		switch (functionName) {
-		case "print":     return print();
-		case "printLine": return printLine();
-		case "read":      return read();
-		case "list":      return list();
-		case "listGet":   return listGet();
-		case "listSize":  return listSize();
-		case "listAdd":   return listAdd();
+		case "print":      return print();
+		case "printLine":  return printLine();
+		case "read":       return read();
+		case "list":       return list();
+		case "listGet":    return listGet();
+		case "listSize":   return listSize();
+		case "listAdd":    return listAdd();
+		case "listRemove": return listRemove();
 		}
 
 		return "";
@@ -106,6 +108,10 @@ public class InternalFunctions {
 	}
 
 	private String list() {
+		if (!param.contains(":")) {
+			return param + ":";
+		}
+
 		return param;
 	}
 
@@ -165,6 +171,33 @@ public class InternalFunctions {
 			}
 
 			return "FALSE";
+		}
+	}
+
+	private String listRemove() {
+		Variable var = heap.get(params.get(0));
+		if (var == null || !(var instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params.get(0));
+			return "NULL";
+		}
+
+		Variable index = heap.get(params.get(1));
+		if (index == null) {
+			if (Variable.isNumber(params.get(1))) {
+				((VariableList)var).removeElement(Integer.parseInt(params.get(1)));
+				return "TRUE";
+			}
+
+			return "FALSE";
+		}
+		else {
+			if (index.getType() != VariableType.Number) {
+				Error.printErrorVariableIsNotANumber(params.get(1));
+				return "FALSE";
+			}
+
+			((VariableList)var).removeElement((int)index.getDoubleValue());
+			return "TRUE";
 		}
 	}
 }
