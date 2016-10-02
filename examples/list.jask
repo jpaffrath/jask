@@ -1,11 +1,14 @@
 store list(1:2:3) in myList
-print(myList)
+printLine(myList)
 
 store list("Str1":"Str2") in myStrList
-print(myStrList)
+printLine(myStrList)
 
 store listGet(myList:1) in ele1
-print(ele1)
+printLine(ele1)
 
 assign listGet(myList:0) to ele1
-print(ele1)
+printLine(ele1)
+
+store listSize(myList) in size
+printLine(size)
