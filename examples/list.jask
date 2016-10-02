@@ -12,3 +12,7 @@ printLine(ele1)
 
 store listSize(myList) in size
 printLine(size)
+
+store 1 in index
+assign listGet(myList:index) to ele1
+printLine(ele1)
