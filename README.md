@@ -12,15 +12,13 @@ java -jar jask.jar
 ```
 jask can interpret files:
 ```C
-jask FILE1.jask FILE2.jask ...
+jask file.jask arg1 arg2 ...
 ```
-To define the standard libary path, use option -l
-```C
-jask FILE1 -l path/to/lib
-```
+The arguments are stored in a global list variable called _ENV.
 
 # Examples
 ### Creating new variables
+Jask can store three types of data: numbers, strings, and boolean values.
 ```C
 store 100 in z
 store 5.2 in d
@@ -34,6 +32,7 @@ store NULL in foo
 ```
 
 ### Assigning values
+In order to assign values to variables, they need to be stored first.
 ```C
 assign 1 plus 2 to z
 assign d minus 3 to z
@@ -48,18 +47,19 @@ assign FALSE to bool
 ```
 
 ### Work with list variables
+A list in jask can either store numbers or strings.
 ```C
-store list(1:2:3) in myList
-print(myList)
+store list(1:2:3) in numbers
+print(numbers)
 
-store listGet(myList:0) in item1
+store listGet(numbers:0) in item1
 print(item1)
 
-store list("e1":"e2":"e3") in myStrList
-print(myStrList)
+// add value 4
+listAdd(numbers:4)
 
-store listGet(myStrList:1) in item2
-print(item2)
+// remove value at index 2
+listRemove(numbers:2)
 ```
 
 ### Statements
@@ -87,6 +87,7 @@ endif
 ```
 
 ### Creating functions
+Functions in jask can return nothing or any type of data.
 ```C
 function myPrint(str)
   print(str)
@@ -119,9 +120,9 @@ convert num to string
 ```
 
 ### Importing other files
-If you import a file, jask searches for files in the current directory.
-You can use the option -l to define a library path, jask will search there as well.
-File myLibrary.jask:
+You can import other jask files with the keyword 'use'.
+If you import a file, jask searches for files in the directory where jask has been executed.
+See the following example how to import files:
 ```C
 function myLibFunction()
   print("This is a library!")
@@ -135,5 +136,7 @@ myLibFunction()
 ```
 You can also define a path in the use statement:
 ```C
-use my/local/path/to/library.jask
+use my/local/path/to/library/myLibrary
+
+myLibFunction()
 ```
