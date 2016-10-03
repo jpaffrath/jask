@@ -12,6 +12,17 @@ import java.util.Scanner;
  */
 public class Main {
 
+	private static List<String> setUpEnv(String[] args) {
+		List<String> env = new ArrayList<String>(args.length);
+		env.add("store list(\"" + args[0] + "\") in _ENV");
+
+		for (int i = 1; i < args.length; i++) {
+			env.add("listAdd(_ENV:\"" + args[i] + "\")");
+		}
+
+		return env;
+	}
+
 	/**
 	 * Searches for "use" statements and imports the files
 	 *
@@ -140,11 +151,10 @@ public class Main {
 			return;
 		}
 
-		String file = args[0];
-		// reads the file
-		List<String> content = Helpers.readFile(file);
-		// loads imported files
+		List<String> content = setUpEnv(args);
+		content.addAll(Helpers.readFile(args[0]));
 		content = preload(content);
+
 		new Interpreter().interpret(new Tokenizer().parse(content));
 	}
 }
