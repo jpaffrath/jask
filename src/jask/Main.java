@@ -151,8 +151,14 @@ public class Main {
 			return;
 		}
 
+		String file = args[0];
+
+		if (!Helpers.checkFile(file)) {
+			Error.terminateInterpret("The file '" + file + "' can not be found!");
+		}
+
 		List<String> content = setUpEnv(args);
-		content.addAll(Helpers.readFile(args[0]));
+		content.addAll(Helpers.readFile(file));
 		content = preload(content);
 
 		new Interpreter().interpret(new Tokenizer().parse(content));
