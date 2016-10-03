@@ -12,6 +12,9 @@ import java.util.Scanner;
  */
 public class Main {
 
+	/**
+	 * Creates jask code for the global argument list
+	 */
 	private static List<String> setUpEnv(String[] args) {
 		List<String> env = new ArrayList<String>(args.length);
 		env.add("store list(\"" + args[0] + "\") in _ENV");
