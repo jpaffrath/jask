@@ -109,6 +109,8 @@ func(2:a)
 ```C
 store read() in res
 print(res)
+
+print("I am a concatenated ":"string!")
 ```
 
 ### Convert variables
