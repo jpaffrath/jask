@@ -40,8 +40,8 @@ public class InternalFunctions {
 
 	public String executeFunction() {
 		switch (functionName) {
-		case "print":      return print();
-		case "printLine":  return printLine();
+		case "print":      return print(false);
+		case "printLine":  return print(true);
 		case "read":       return read();
 		case "list":       return list();
 		case "listGet":    return listGet();
@@ -53,52 +53,38 @@ public class InternalFunctions {
 		return "";
 	}
 
-	private String print() {
-		String temp = params.get(0);
+	private String print(boolean newLine) {
+		String output = "";
 
-		if (Variable.isString(temp) || Variable.isNumber(temp)) {
-			System.out.print(temp);
-			return "";
-		}
+		for (String out : params) {
+			if (Variable.isString(out) || Variable.isNumber(out)) {
+				output += out;
+				continue;
+			}
 
-		Variable var = heap.get(temp);
-		if (var == null) {
-			Error.printErrorVariableNotDefined(temp);
-		}
-		else {
-			if (var instanceof VariableList) {
-				System.out.print(((VariableList)var).getPrintString());
+			Variable var = heap.get(out);
+			if (var == null) {
+				Error.printErrorVariableNotDefined(out);
+				return "FALSE";
 			}
 			else {
-				System.out.print(var.toString());
+				if (var instanceof VariableList) {
+					output += (((VariableList)var).getPrintString());
+				}
+				else {
+					output += (var.toString());
+				}
 			}
 		}
 
-		return "";
-	}
-
-	private String printLine() {
-		String temp = params.get(0);
-
-		if (Variable.isString(temp) || Variable.isNumber(temp)) {
-			System.out.println(temp);
-			return "";
-		}
-
-		Variable var = heap.get(temp);
-		if (var == null) {
-			Error.printErrorVariableNotDefined(param);
+		if (newLine) {
+			System.out.println(output);
 		}
 		else {
-			if (var instanceof VariableList) {
-				System.out.println(((VariableList)var).getPrintString());
-			}
-			else {
-				System.out.println(var.toString());
-			}
+			System.out.print(output);
 		}
 
-		return "";
+		return "TRUE";
 	}
 
 	private String read() {
