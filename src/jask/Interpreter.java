@@ -20,6 +20,7 @@ public class Interpreter {
 		operators.add("minus");
 		operators.add("times");
 		operators.add("divide");
+		operators.add("mod");
 
 		keywords = new ArrayList<String>(operators);
 		keywords.add("function");
