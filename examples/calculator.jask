@@ -14,22 +14,24 @@ assign read() to opr
 convert num1 to number
 convert num2 to number
 
+store 0 in res
+
 if opr equals "+"
-	assign num1 plus num2 to num1
+	assign num1 plus num2 to res
 else
 	if opr equals "-"
-		assign num1 minus num2 to num1
+		assign num1 minus num2 to res
 	else
 		if opr equals "*"
-			assign num1 times num2 to num1
+			assign num1 times num2 to res
 		else
 			if opr equals "/"
-				assign num1 divide num2 to num1
+				assign num1 divide num2 to res
 			else
+				printLine(opr:" is no operator!")
 			endif
 		endif
 	endif
 endif
 
-print("Result is ")
-printLine(num1)
+printLine(num1:" ":opr:" ":num2:" is ":res)
