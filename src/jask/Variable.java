@@ -120,7 +120,7 @@ public class Variable {
 
 	@Override
 	public String toString() {
-		if (type == VariableType.String) return ("\"" + stringValue + "\"");
+		if (type == VariableType.String) return stringValue;
 		if (type == VariableType.Number) return String.valueOf(doubleValue);
 		if (type == VariableType.Bool)   return this.boolValue ? "TRUE" : "FALSE";
 

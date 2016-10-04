@@ -57,7 +57,12 @@ public class InternalFunctions {
 		String output = "";
 
 		for (String out : params) {
-			if (Variable.isString(out) || Variable.isNumber(out)) {
+			if (Variable.isString(out)) {
+				output += out.substring(1, out.length()-1);
+				continue;
+			}
+
+			if (Variable.isNumber(out)) {
 				output += out;
 				continue;
 			}
