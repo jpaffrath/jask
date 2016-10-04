@@ -19,8 +19,20 @@ else
 	printLine("a greater b")
 endif
 
+if a smallerequal b
+	printLine("a is smaller or equal b")
+else
+	printLine("a greater b")
+endif
+
 if a greater b
 	printLine("a greater b")
+else
+	printLine("a smaller b")
+endif
+
+if a greaterequal b
+	printLine("a is greater or equal b")
 else
 	printLine("a smaller b")
 endif

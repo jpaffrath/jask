@@ -85,6 +85,16 @@ if a smaller b
 else
 endif
 
+if a smallerequal b
+  printLine("a smaller or equal b")
+else
+endif
+
+if a greaterequal b
+  printLine("a greater or equal b")
+else
+endif
+
 if x mod y equals z
   print(x)
 else

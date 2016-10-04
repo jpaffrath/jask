@@ -279,6 +279,26 @@ public class Executer {
 			return var1.getDoubleValue() < var2.getDoubleValue();
 		}
 
+		if (operator.contentEquals("greaterequal")) {
+			if (var1.getType() != VariableType.Number ||
+					var2.getType() != VariableType.Number) {
+				Error.printErrorOperatorNotApplicable("greater", tokens.get(1), tokens.get(3));
+				return false;
+			}
+
+			return var1.getDoubleValue() >= var2.getDoubleValue();
+		}
+
+		if (operator.contentEquals("smallerequal")) {
+			if (var1.getType() != VariableType.Number ||
+					var2.getType() != VariableType.Number) {
+				Error.printErrorOperatorNotApplicable("smaller", tokens.get(1), tokens.get(3));
+				return false;
+			}
+
+			return var1.getDoubleValue() <= var2.getDoubleValue();
+		}
+
 		if (operator.contentEquals("mod") &&
 				var1.getType() == VariableType.Number &&
 				var2.getType() == VariableType.Number) {

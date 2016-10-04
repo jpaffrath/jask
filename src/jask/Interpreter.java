@@ -23,6 +23,8 @@ public class Interpreter {
 		operators.add("mod");
 		operators.add("greater");
 		operators.add("smaller");
+		operators.add("greaterequal");
+		operators.add("smallerequal");
 
 		keywords = new ArrayList<String>(operators);
 		keywords.add("function");
