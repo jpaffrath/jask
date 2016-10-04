@@ -1,0 +1,32 @@
+store 1 in a
+store 2 in b
+
+if a equals b
+	printLine("a equals b")
+else
+	printLine("a unequals b")
+endif
+
+if a unequals b
+	printLine("a unequals b")
+else
+	printLine("a equals b")
+endif
+
+if a smaller b
+	printLine("a smaller b")
+else
+	printLine("a greater b")
+endif
+
+if a greater b
+	printLine("a greater b")
+else
+	printLine("a smaller b")
+endif
+
+if a mod 2 equals 0
+	printLine("a is even")
+else
+	printLine("a is odd")
+endif

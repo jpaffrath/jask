@@ -21,6 +21,8 @@ public class Interpreter {
 		operators.add("times");
 		operators.add("divide");
 		operators.add("mod");
+		operators.add("greater");
+		operators.add("smaller");
 
 		keywords = new ArrayList<String>(operators);
 		keywords.add("function");
