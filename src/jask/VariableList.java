@@ -33,7 +33,7 @@ public class VariableList extends Variable {
 	}
 
 	public boolean addElement(Variable toAdd) {
-		values.add(toAdd);
+		values.add(new Variable(toAdd));
 		return true;
 	}
 
