@@ -25,10 +25,6 @@ public class Error {
 		System.out.println(prefix + "no value at index " + index);
 	}
 
-	public static void printErrorListMultipleTypes() {
-		System.out.println(prefix + "multiple types given for list!");
-	}
-
 	public static void printErrorVariableIsNotAList(String var) {
 		System.out.println(prefix + "variable '" + var + "' is not a list!");
 	}
