@@ -152,6 +152,7 @@ function myLibFunction()
   print("This is a library!")
 end
 ```
+If the imported file has jask code outside a function, it will be interpreted by importing the file.
 Your file:
 ```C
 use myLibrary
