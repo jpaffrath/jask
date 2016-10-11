@@ -20,7 +20,11 @@ public class Interpreter {
 		operators.add("minus");
 		operators.add("times");
 		operators.add("divide");
+		operators.add("store");
+		operators.add("assign");
 		operators.add("mod");
+		operators.add("equals");
+		operators.add("unequals");
 		operators.add("greater");
 		operators.add("smaller");
 		operators.add("greaterequal");
@@ -37,6 +41,8 @@ public class Interpreter {
 		keywords.add("number");
 		keywords.add("string");
 		keywords.add("in");
+		keywords.add("run");
+		keywords.add("with");
 
 		executer = new Executer();
 	}
