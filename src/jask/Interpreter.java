@@ -43,6 +43,10 @@ public class Interpreter {
 		keywords.add("in");
 		keywords.add("run");
 		keywords.add("with");
+		keywords.add("TRUE");
+		keywords.add("FALSE");
+		keywords.add("NULL");
+
 
 		executer = new Executer();
 	}
