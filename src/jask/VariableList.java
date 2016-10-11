@@ -10,58 +10,30 @@ import java.util.List;
  *
  */
 public class VariableList extends Variable {
-	private List<String> values;
+	private List<Variable> values;
 
 	public VariableList(String genericValue) {
 		super();
+		values = new ArrayList<Variable>();
 
-		String[] e = genericValue.split(":");
-		values = new ArrayList<String>();
-
-		boolean isString = isString(e[0]);
-		values.add(e[0]);
-
-		for (int i = 1; i < e.length; i++) {
-			if (isString) {
-				if (!isString(e[i])) {
-					Error.printErrorListMultipleTypes();
-					return;
-				}
-			}
-			else {
-				if (!isNumber(e[i])) {
-					Error.printErrorListMultipleTypes();
-					return;
-				}
-			}
-			values.add(e[i]);
+		for (String curVal : genericValue.split(":")) {
+			values.add(new Variable(curVal));
 		}
+	}
 
-		if (isString) setType(VariableType.String);
-		else setType(VariableType.Number);
+	public VariableList(VariableList list) {
+		super();
+		values = new ArrayList<Variable>();
+		values.add(list);
 	}
 
 	public boolean addElement(String genericValue) {
-		Variable toAdd = new Variable(genericValue);
-
-		if (getType() != toAdd.getType()) {
-			Error.printErrorListMultipleTypes();
-			return false;
-		}
-
-		values.add(genericValue);
-
+		values.add(new Variable(genericValue));
 		return true;
 	}
 
 	public boolean addElement(Variable toAdd) {
-		if (getType() != toAdd.getType()) {
-			Error.printErrorListMultipleTypes();
-			return false;
-		}
-
-		values.add(toAdd.toString());
-
+		values.add(toAdd);
 		return true;
 	}
 
@@ -84,10 +56,10 @@ public class VariableList extends Variable {
 
 		for (int i = 0; i < values.size(); i++) {
 			if (i == values.size()-1) {
-				builder.append(values.get(i));
+				builder.append(values.get(i).toString());
 			}
 			else {
-				builder.append(values.get(i) + ":");
+				builder.append(values.get(i).toString() + ":");
 			}
 		}
 
@@ -99,10 +71,10 @@ public class VariableList extends Variable {
 
 		for (int i = 0; i < values.size(); i++) {
 			if (i == values.size()-1) {
-				builder.append(values.get(i));
+				builder.append(values.get(i).toString());
 			}
 			else {
-				builder.append(values.get(i) + ", ");
+				builder.append(values.get(i).toString() + ", ");
 			}
 		}
 
@@ -117,6 +89,6 @@ public class VariableList extends Variable {
 			return "";
 		}
 
-		return values.get(i);
+		return values.get(i).toString();
 	}
 }

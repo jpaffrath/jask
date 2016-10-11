@@ -3,8 +3,11 @@ store list(1:2:3) in myList
 store list("Str1":"Str2") in myStrList
 
 store listGet(myList:1) in ele
+
 assign listGet(myList:0) to ele
 
 store listSize(myList) in size
 
 listRemove(myList:2)
+
+store list(1:"Test":myList) in mul
