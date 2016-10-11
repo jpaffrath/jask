@@ -47,7 +47,7 @@ assign FALSE to bool
 ```
 
 ### Work with list variables
-A list in jask can either store numbers or strings.
+A list in jask can store strings, numbers and boolean values.
 ```C
 store list(1:2:3) in numbers
 print(numbers)
@@ -60,6 +60,8 @@ listAdd(numbers:4)
 
 // remove value at index 2
 listRemove(numbers:2)
+
+store list(1:"String":TRUE) in myList
 ```
 
 ### Statements
