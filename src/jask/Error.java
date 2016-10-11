@@ -45,6 +45,10 @@ public class Error {
 		System.out.println(prefix + "operator '" + operator + "' not applicable for variable '" + var + "'");
 	}
 
+	public static void printErrorFunctionNotDefined(String function) {
+		System.out.println(prefix + "the function '" + function + "' is not defined!");
+	}
+
 	public static void printErrorNoCMDOption(String option) {
 		System.out.println(prefix + "cmd parameter '" + option + "' is no jask interpreter option!");
 	}

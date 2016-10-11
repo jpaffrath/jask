@@ -24,6 +24,11 @@ public class FunctionExecuter {
 	 * @return result of the function
 	 */
 	public String executeFunction(String name, List<Variable> heap) {
+		if (!functions.containsKey(name)) {
+			Error.printErrorFunctionNotDefined(name);
+			return "NULL";
+		}
+
 		Function function = functions.get(name);
 		function.setHeap(heap);
 		Interpreter interpreter = new Interpreter(function);
