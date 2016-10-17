@@ -34,6 +34,10 @@ public class InternalFunctions {
 		internals.add("listSize");
 		internals.add("listAdd");
 		internals.add("listRemove");
+		internals.add("isString");
+		internals.add("isNumber");
+		internals.add("isBool");
+		internals.add("isList");
 		return internals.contains(functionName);
 	}
 
@@ -55,6 +59,10 @@ public class InternalFunctions {
 		case "listAdd":        return listAdd();
 		case "listRemove":     return listRemove();
 		case "listFromString": return listFromString();
+		case "isString":       return isString();
+		case "isNumber":       return isNumber();
+		case "isBool":         return isBool();
+		case "isList":         return isList();
 		}
 
 		return "";
@@ -233,5 +241,44 @@ public class InternalFunctions {
 		}
 
 		return retVal;
+	}
+
+	private String isString() {
+		Variable var = heap.get(params.get(0));
+		if (var == null) {
+			if (Variable.isString(params.get(0))) return "TRUE";
+			return "FALSE";
+		}
+
+		if (var.getType() == VariableType.String) return "TRUE";
+		return "FALSE";
+	}
+
+	private String isNumber() {
+		Variable var = heap.get(params.get(0));
+		if (var == null) {
+			if (Variable.isNumber(params.get(0))) return "TRUE";
+			return "FALSE";
+		}
+
+		if (var.getType() == VariableType.Number) return "TRUE";
+		return "FALSE";
+	}
+
+	private String isBool() {
+		Variable var = heap.get(params.get(0));
+		if (var == null) {
+			String val = params.get(0);
+			if (val.contentEquals("TRUE") || val.contentEquals("FALSE")) return "TRUE";
+			return "FALSE";
+		}
+
+		if (var.getType() == VariableType.Bool) return "TRUE";
+		return "FALSE";
+	}
+
+	private String isList() {
+		if (heap.get(params.get(0)) instanceof VariableList) return "TRUE";
+		return "FALSE";
 	}
 }
