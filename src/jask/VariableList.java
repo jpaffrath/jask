@@ -53,13 +53,26 @@ public class VariableList extends Variable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
+		Variable curVal = null;
 
 		for (int i = 0; i < values.size(); i++) {
+			curVal = values.get(i);
+
 			if (i == values.size()-1) {
-				builder.append(values.get(i).toString());
+				if (curVal.getType() == VariableType.String) {
+					builder.append("\"" + curVal.toString() + "\"");
+				}
+				else {
+					builder.append(curVal.toString());
+				}
 			}
 			else {
-				builder.append(values.get(i).toString() + ":");
+				if (curVal.getType() == VariableType.String) {
+					builder.append("\"" + curVal.toString() + "\":");
+				}
+				else {
+					builder.append(curVal.toString() + ":");
+				}
 			}
 		}
 
@@ -88,6 +101,9 @@ public class VariableList extends Variable {
 			Error.printErrorNoValueAtIndex(i);
 			return "";
 		}
+
+		Variable retVar = values.get(i);
+		if (retVar.getType() == VariableType.String) return "\"" + retVar.toString() + "\"";
 
 		return values.get(i).toString();
 	}

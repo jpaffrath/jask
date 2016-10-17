@@ -30,16 +30,16 @@ public class InternalFunctions {
 		internals.add("print");
 		internals.add("printLine");
 		internals.add("read");
+		internals.add("listGet");
+		internals.add("listSize");
+		internals.add("listAdd");
+		internals.add("listRemove");
 		return internals.contains(functionName);
 	}
 
 	public static boolean isInternalListFunction(String functionName) {
 		List<String> internals = new ArrayList<String>();
 		internals.add("list");
-		internals.add("listGet");
-		internals.add("listSize");
-		internals.add("listAdd");
-		internals.add("listRemove");
 		internals.add("listFromString");
 		return internals.contains(functionName);
 	}
