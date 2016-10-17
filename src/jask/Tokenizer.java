@@ -24,6 +24,7 @@ public class Tokenizer {
 		boolean commentParsing = false;
 
 		for (String line : lines) {
+			line = line.replace("\t", "");
 			if (line.equals("")) continue;
 			if (line.startsWith("//")) continue;
 
@@ -51,7 +52,7 @@ public class Tokenizer {
 					else {
 						strParsing = false;
 						strBuffer += t;
-						tokens.add(strBuffer.replace("\t", ""));
+						tokens.add(strBuffer);
 						strBuffer = null;
 						continue;
 					}
