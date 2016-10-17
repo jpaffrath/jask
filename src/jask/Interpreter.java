@@ -12,6 +12,7 @@ import java.util.List;
 public class Interpreter {
 	private List<String> operators;
 	private List<String> keywords;
+	private List<String> values;
 	private Executer executer;
 
 	public Interpreter() {
@@ -43,10 +44,11 @@ public class Interpreter {
 		keywords.add("in");
 		keywords.add("run");
 		keywords.add("with");
-		keywords.add("TRUE");
-		keywords.add("FALSE");
-		keywords.add("NULL");
 
+		values = new ArrayList<String>();
+		values.add("TRUE");
+		values.add("FALSE");
+		values.add("NULL");
 
 		executer = new Executer();
 	}
@@ -70,10 +72,7 @@ public class Interpreter {
 	}
 
 	private boolean isValue(String t) {
-		if (t.contentEquals("TRUE")) return true;
-		if (t.contentEquals("FALSE")) return true;
-
-		return false;
+		return values.contains(t);
 	}
 
 	public static boolean isFunction(String t) {
