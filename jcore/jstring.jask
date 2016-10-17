@@ -1,0 +1,27 @@
+/*
+* File  : jcore/jstring
+* Author: Julius Paffrath
+*
+* Provides standard functions for string processing
+*/
+
+function SUBSTRING(str:s:e)
+	if s greater e return NULL else endif
+
+	assign listFromString(str) to str
+	
+	store listSize(str) in size
+	assign size minus 1 to size
+	if s greater size return NULL else endif
+	if e greater size return NULL else endif
+
+	store list() in sub
+	store NULL in temp
+
+	run s to e with s plus 1
+		assign listGet(str:s) to temp
+		listAdd(sub:temp)
+	endrun
+
+	return sub
+end
