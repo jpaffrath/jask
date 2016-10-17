@@ -61,6 +61,7 @@ public class Executer {
 		}
 
 		String varVal = functionExecuter.executeFunction(functionName, functionHeap);
+		if (varVal.isEmpty()) return new Variable("NULL");
 		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
 		return new Variable(varVal);
 	}
