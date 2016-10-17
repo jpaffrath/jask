@@ -27,6 +27,44 @@ public class Executer {
 		return heap.get(var);
 	}
 
+	private Variable executeFunction(String token) {
+		String functionName = token.substring(0, token.indexOf('('));
+		String param = token.substring(token.indexOf('(')+1, token.indexOf(')'));
+		List<String> params = Helpers.splitParams(param);
+
+		if (InternalFunctions.isInternalFunction(functionName)) {
+			return new Variable(new InternalFunctions(heap, token).executeFunction());
+		}
+
+		if (InternalFunctions.isInternalListFunction(functionName)) {
+			return new VariableList(new InternalFunctions(heap, token).executeFunction());
+		}
+
+		List<Variable> functionHeap = new ArrayList<Variable>();
+		if (!param.contentEquals("")) {
+			for (int i = 0; i < params.size(); i++) {
+				String temp = params.get(i);
+
+				if (Variable.isString(temp) || Variable.isNumber(temp)) {
+					functionHeap.add(new Variable(temp));
+				}
+				else {
+					Variable var = heap.get(params.get(i));
+					if (var == null) {
+						Error.printErrorVariableNotDefined(params.get(i));
+					}
+					else {
+						functionHeap.add(var);
+					}
+				}
+			}
+		}
+
+		String varVal = functionExecuter.executeFunction(functionName, functionHeap);
+		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
+		return new Variable(varVal);
+	}
+
 	private void executeAssign(List<String> tokens) {
 		// assign a to b
 		if (tokens.size() == 4) {
@@ -45,17 +83,10 @@ public class Executer {
 				}
 			}
 			else {
-				String res = executeFunction(varStr);
-				if (res.contains(":") && !Variable.isString(res)) {
-					heap.put(tokens.get(3), new VariableList(res));
-				}
-				else {
-					heap.put(tokens.get(3), new Variable(res));
-				}
+				heap.put(tokens.get(3), executeFunction(varStr));
 			}
 			return;
 		}
-
 
 		//assign a plus b to c
 		String var1Str = tokens.get(1);
@@ -110,39 +141,6 @@ public class Executer {
 		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 	}
 
-	private String executeFunction(String token) {
-		String functionName = token.substring(0, token.indexOf('('));
-		String param = token.substring(token.indexOf('(')+1, token.indexOf(')'));
-		List<String> params = Helpers.splitParams(param);
-
-		// check build-in functions
-		if (InternalFunctions.isInternalFunction(functionName)) {
-			return new InternalFunctions(heap, token).executeFunction();
-		}
-
-		List<Variable> functionHeap = new ArrayList<Variable>();
-		if (!param.contentEquals("")) {
-			for (int i = 0; i < params.size(); i++) {
-				String temp = params.get(i);
-
-				if (Variable.isString(temp) || Variable.isNumber(temp)) {
-					functionHeap.add(new Variable(temp));
-				}
-				else {
-					Variable var = heap.get(params.get(i));
-					if (var == null) {
-						Error.printErrorVariableNotDefined(params.get(i));
-					}
-					else {
-						functionHeap.add(var);
-					}
-				}
-			}
-		}
-
-		return functionExecuter.executeFunction(functionName, functionHeap);
-	}
-
 	private void executeStore(List<String> tokens) {
 		String variableValue = tokens.get(1);
 		String variableName = tokens.get(3);
@@ -153,36 +151,11 @@ public class Executer {
 		}
 
 		if (Interpreter.isFunction(variableValue)) {
-			Variable var = null;
-			variableValue = executeFunction(variableValue);
-			if (variableValue.contains(":") && !Variable.isString(variableValue)) {
-				String[] params = variableValue.split(":");
-				String newParams = "";
-
-				for (String param : params) {
-					Variable tempVar = heap.get(param);
-					if (tempVar != null) {
-						newParams += tempVar.toString() + ":";
-					}
-					else {
-						newParams += param + ":";
-					}
-				}
-
-				// remove last ':' sign from parameter list
-				newParams = newParams.substring(0, newParams.length()-1);
-
-				var = new VariableList(newParams);
-			}
-			else {
-				var = new Variable(variableValue);
-			}
-
-			heap.put(variableName, var);
-			return;
+			heap.put(variableName, executeFunction(variableValue));
 		}
-
-		heap.put(variableName, new Variable(variableValue));
+		else {
+			heap.put(variableName, new Variable(variableValue));
+		}
 	}
 
 	private void executeRun(List<String> tokens) {

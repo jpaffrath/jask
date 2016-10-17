@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Implemens internal functions
+ * Implements internal functions
  *
  * @author Julius Paffrath
  *
@@ -30,24 +30,31 @@ public class InternalFunctions {
 		internals.add("print");
 		internals.add("printLine");
 		internals.add("read");
+		return internals.contains(functionName);
+	}
+
+	public static boolean isInternalListFunction(String functionName) {
+		List<String> internals = new ArrayList<String>();
 		internals.add("list");
 		internals.add("listGet");
 		internals.add("listSize");
 		internals.add("listAdd");
 		internals.add("listRemove");
+		internals.add("listFromString");
 		return internals.contains(functionName);
 	}
 
 	public String executeFunction() {
 		switch (functionName) {
-		case "print":      return print(false);
-		case "printLine":  return print(true);
-		case "read":       return read();
-		case "list":       return list();
-		case "listGet":    return listGet();
-		case "listSize":   return listSize();
-		case "listAdd":    return listAdd();
-		case "listRemove": return listRemove();
+		case "print":          return print(false);
+		case "printLine":      return print(true);
+		case "read":           return read();
+		case "list":           return list();
+		case "listGet":        return listGet();
+		case "listSize":       return listSize();
+		case "listAdd":        return listAdd();
+		case "listRemove":     return listRemove();
+		case "listFromString": return listFromString();
 		}
 
 		return "";
@@ -190,5 +197,41 @@ public class InternalFunctions {
 			((VariableList)var).removeElement((int)index.getDoubleValue());
 			return "TRUE";
 		}
+	}
+
+	private String listFromString() {
+		String strVal = "";
+		String retVal = "";
+		Variable var = heap.get(params.get(0));
+
+		if (var == null) {
+			if (Variable.isString(params.get(0))) {
+				strVal = params.get(0);
+			}
+			else {
+				Error.printErrorVariableIsNotAString(params.get(0));
+				return "NULL";
+			}
+		}
+		else {
+			if (var.getType() == VariableType.String) {
+				strVal = var.getStringValue();
+			}
+			else {
+				Error.printErrorVariableIsNotAString(params.get(0));
+				return "NULL";
+			}
+		}
+
+		for (int i = 0; i < strVal.length(); i++) {
+			if (i == strVal.length()-1) {
+				retVal += "\"" + strVal.charAt(i) + "\"";
+			}
+			else {
+				retVal += "\"" + strVal.charAt(i) + "\"" + ":";
+			}
+		}
+
+		return retVal;
 	}
 }
