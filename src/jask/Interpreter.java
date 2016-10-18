@@ -76,16 +76,7 @@ public class Interpreter {
 	}
 
 	public static boolean isFunction(String t) {
-		char str[] = t.toCharArray();
-		int isFunction = 0;
-
-		for (int i = 0; i < str.length; i++) {
-			if (str[i] == '(') isFunction++;
-			else if (str[i] == ')') isFunction++;
-		}
-
-		if (isFunction == 2) return true;
-
+		if (t.lastIndexOf(')') == t.length() -1) return true;
 		return false;
 	}
 
