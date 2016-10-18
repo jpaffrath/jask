@@ -29,15 +29,15 @@ public class Executer {
 
 	private Variable executeFunction(String token) {
 		String functionName = token.substring(0, token.indexOf('('));
-		String param = token.substring(token.indexOf('(')+1, token.indexOf(')'));
+		String param = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
 		List<String> params = Helpers.splitParams(param);
 
 		if (InternalFunctions.isInternalFunction(functionName)) {
-			return new Variable(new InternalFunctions(heap, token).executeFunction());
+			return new Variable(new InternalFunctions(heap, functionName, param).executeFunction());
 		}
 
 		if (InternalFunctions.isInternalListFunction(functionName)) {
-			return new VariableList(new InternalFunctions(heap, token).executeFunction());
+			return new VariableList(new InternalFunctions(heap, functionName, param).executeFunction());
 		}
 
 		List<Variable> functionHeap = new ArrayList<Variable>();

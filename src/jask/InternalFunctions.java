@@ -14,15 +14,14 @@ import java.util.Scanner;
 public class InternalFunctions {
 	private HashMap<String, Variable> heap;
 	String functionName;
-	String param;
 	List<String> params;
+	String param;
 
-	public InternalFunctions(HashMap<String, Variable> heap, String token) {
+	public InternalFunctions(HashMap<String, Variable> heap, String functionName, String param) {
 		this.heap = heap;
-
-		functionName = token.substring(0, token.indexOf('('));
-		param = token.substring(token.indexOf('(')+1, token.indexOf(')'));
-		params = Helpers.splitParams(param);
+		this.functionName = functionName;
+		this.param = param;
+		this.params = Helpers.splitParams(param);
 	}
 
 	public static boolean isInternalFunction(String functionName) {
