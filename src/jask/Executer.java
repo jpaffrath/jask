@@ -32,14 +32,6 @@ public class Executer {
 		String param = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
 		List<String> params = Helpers.splitParams(param);
 
-		if (InternalFunctions.isInternalFunction(functionName)) {
-			return new Variable(new InternalFunctions(heap, functionName, param).executeFunction());
-		}
-
-		if (InternalFunctions.isInternalListFunction(functionName)) {
-			return new VariableList(new InternalFunctions(heap, functionName, param).executeFunction());
-		}
-
 		List<Variable> functionHeap = new ArrayList<Variable>();
 		if (!param.contentEquals("")) {
 			for (int i = 0; i < params.size(); i++) {
@@ -58,6 +50,14 @@ public class Executer {
 					}
 				}
 			}
+		}
+
+		if (InternalFunctions.isInternalFunction(functionName)) {
+			return new Variable(new InternalFunctions(functionHeap, functionName, param).executeFunction());
+		}
+
+		if (InternalFunctions.isInternalListFunction(functionName)) {
+			return new VariableList(new InternalFunctions(functionHeap, functionName, param).executeFunction());
 		}
 
 		String varVal = functionExecuter.executeFunction(functionName, functionHeap);
