@@ -214,8 +214,23 @@ public class Executer {
 
 	public boolean executeStatement(Expression exp) {
 		List<String> tokens = exp.getTokens();
-		Variable var1 = heap.get(tokens.get(1));
-		Variable var2 = heap.get(tokens.get(3));
+		Variable var1 = null;
+		Variable var2 = null;
+
+		if (Interpreter.isFunction(tokens.get(1))) {
+			var1 = executeFunction(tokens.get(1));
+		}
+		else {
+			var1 = heap.get(tokens.get(1));
+		}
+
+		if (Interpreter.isFunction(tokens.get(3))) {
+			var2 = executeFunction(tokens.get(3));
+		}
+		else {
+			var2 = heap.get(tokens.get(3));
+		}
+
 		String operator = tokens.get(2);
 
 		if (var1 == null) {

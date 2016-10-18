@@ -42,3 +42,13 @@ if a mod 2 equals 0
 else
 	printLine("a is odd")
 endif
+
+function getNumber()
+	return 1
+end
+
+if getNumber() equals 1
+	printLine("getNumber equals 1")
+else
+	printLine("getNumber unequals 1")
+endif
