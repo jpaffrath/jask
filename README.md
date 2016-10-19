@@ -1,3 +1,18 @@
+<p>
+    <a href="https://github.com/jpaffrath/jask/releases">
+        <img src="https://img.shields.io/badge/version-1.0.0-orange.svg"
+             alt="Version Badge">
+    </a>
+    <a href="https://github.com/jpaffrath/jask/issues">
+        <img src="https://img.shields.io/badge/issues-5-red.svg"
+             alt="Issue Badge">
+    </a>
+    <a href="https://github.com/jpaffrath/jask/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg"
+             alt="License Badge">
+    </a>
+</p>
+
 # jask
 jask is a highly readable interpreter language in early development.
 The jask interpreter is fully written in Java.
