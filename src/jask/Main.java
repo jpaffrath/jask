@@ -80,14 +80,14 @@ public class Main {
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
 				tempList.add(line);
-				System.out.print("func ~> ");
+				System.out.print("func ~>     ");
 
 				while (true) {
 					line = scanner.nextLine();
 					if (line.contentEquals("end")) break;
 
 					tempList.add(line);
-					System.out.print("func ~> ");
+					System.out.print("func ~>     ");
 				}
 			}
 
@@ -97,7 +97,7 @@ public class Main {
 				int exCount = 0;
 
 				tempList.add(line);
-				System.out.print("if ~> ");
+				System.out.print("if   ~>    ");
 
 				while (true) {
 					line = scanner.nextLine();
@@ -108,7 +108,7 @@ public class Main {
 					if (ifCount == exCount) break;
 
 					tempList.add(line);
-					System.out.print("if ~> ");
+					System.out.print("if   ~>    ");
 				}
 			}
 
@@ -118,7 +118,7 @@ public class Main {
 				int exCount = 0;
 
 				tempList.add(line);
-				System.out.print("run ~> ");
+				System.out.print("run  ~>     ");
 
 				while (true) {
 					line = scanner.nextLine();
@@ -129,7 +129,7 @@ public class Main {
 					if (ruCount == exCount) break;
 
 					tempList.add(line);
-					System.out.print("run ~> ");
+					System.out.print("run  ~>     ");
 				}
 			}
 
