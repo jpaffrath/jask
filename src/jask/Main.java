@@ -11,6 +11,7 @@ import java.util.Scanner;
  *
  */
 public class Main {
+	private static final String version = "1.0.0";
 
 	/**
 	 * Creates jask code for the global argument list
@@ -69,6 +70,7 @@ public class Main {
 		List<String> tempList = new ArrayList<String>();
 		String line = "";
 
+		System.out.println("jask interpreter version " + version);
 		System.out.print("jask ~> ");
 
 		while (true) {
