@@ -40,6 +40,9 @@ public class Executer {
 				if (Variable.isString(temp) || Variable.isNumber(temp)) {
 					functionHeap.add(new Variable(temp));
 				}
+				else if (Interpreter.isFunction(temp)) {
+					functionHeap.add(executeFunction(temp));
+				}
 				else {
 					Variable var = heap.get(params.get(i));
 					if (var == null) {
