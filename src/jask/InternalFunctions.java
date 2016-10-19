@@ -37,6 +37,7 @@ public class InternalFunctions {
 		internals.add("listSize");
 		internals.add("listAdd");
 		internals.add("listRemove");
+		internals.add("listToString");
 		internals.add("isString");
 		internals.add("isNumber");
 		internals.add("isBool");
@@ -62,6 +63,7 @@ public class InternalFunctions {
 		case "listAdd":        return listAdd();
 		case "listRemove":     return listRemove();
 		case "listFromString": return listFromString();
+		case "listToString":   return listToString();
 		case "isString":       return isString();
 		case "isNumber":       return isNumber();
 		case "isBool":         return isBool();
@@ -253,6 +255,16 @@ public class InternalFunctions {
 		}
 
 		return retVal;
+	}
+
+	private String listToString() {
+		Variable var = heap.get(params[0]);
+		if (var == null || !(var instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[0]);
+			return "NULL";
+		}
+
+		return ((VariableList)var).convertToString();
 	}
 
 	private String isString() {

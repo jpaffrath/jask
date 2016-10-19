@@ -107,4 +107,14 @@ public class VariableList extends Variable {
 
 		return values.get(i).toString();
 	}
+
+	public String convertToString() {
+		String ret = "\"";
+
+		for (Variable var : values) {
+			ret += var.toString();
+		}
+
+		return ret += "\"";
+	}
 }
