@@ -42,6 +42,7 @@ public class InternalFunctions {
 		internals.add("isNumber");
 		internals.add("isBool");
 		internals.add("isList");
+		internals.add("exit");
 		return internals.contains(functionName);
 	}
 
@@ -68,6 +69,7 @@ public class InternalFunctions {
 		case "isNumber":       return isNumber();
 		case "isBool":         return isBool();
 		case "isList":         return isList();
+		case "exit":           return exit();
 		}
 
 		return "";
@@ -304,5 +306,17 @@ public class InternalFunctions {
 	private String isList() {
 		if (heap.get(params[0]) instanceof VariableList) return "TRUE";
 		return "FALSE";
+	}
+
+	private String exit() {
+		int code = -1;
+
+		Variable var = heap.get(params[0]);
+		if (var == null) {
+			code = Integer.parseInt(params[0]);
+		}
+
+		System.exit(code);
+		return "NULL";
 	}
 }
