@@ -4,7 +4,7 @@
              alt="Version Badge">
     </a>
     <a href="https://github.com/jpaffrath/jask/issues">
-        <img src="https://img.shields.io/badge/issues-5-red.svg"
+        <img src="https://img.shields.io/badge/issues-6-red.svg"
              alt="Issue Badge">
     </a>
     <a href="https://github.com/jpaffrath/jask/blob/master/LICENSE">
