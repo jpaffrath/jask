@@ -43,7 +43,7 @@ public class Tokenizer {
 				}
 
 				// toggle string parsing
-				if (t.contains("\"") && t.indexOf('"') == t.lastIndexOf('"')) {
+				if (t.contains("\"") && (t.length() - t.replace("\"", "").length()) % 2 != 0) {
 					if (!strParsing) {
 						strParsing = true;
 						strBuffer = new String(t + " ");
