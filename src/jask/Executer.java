@@ -158,7 +158,12 @@ public class Executer {
 			heap.put(variableName, executeFunction(variableValue));
 		}
 		else {
-			heap.put(variableName, new Variable(variableValue));
+			if (heap.containsKey(variableValue)) {
+				heap.put(variableName, new Variable(heap.get(variableValue)));
+			}
+			else {
+				heap.put(variableName, new Variable(variableValue));
+				}
 		}
 	}
 
