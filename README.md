@@ -11,6 +11,10 @@
         <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg"
              alt="License Badge">
     </a>
+    <a href="https://java.com/">
+        <img src="https://img.shields.io/badge/required java version-1.7-green.svg"
+             alt="Java Badge">
+    </a>
 </p>
 
 # jask
