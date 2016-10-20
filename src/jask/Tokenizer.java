@@ -25,6 +25,7 @@ public class Tokenizer {
 
 		for (String line : lines) {
 			line = line.replace("\t", "");
+			line = line.trim();
 			if (line.equals("")) continue;
 			if (line.startsWith("//")) continue;
 
