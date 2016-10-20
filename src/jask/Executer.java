@@ -162,8 +162,14 @@ public class Executer {
 				heap.put(variableName, new Variable(heap.get(variableValue)));
 			}
 			else {
-				heap.put(variableName, new Variable(variableValue));
+				if (!Variable.isNumber(variableValue) || !Variable.isString(variableValue)) {
+					Error.printErrorValueNotApplicable(variableValue);
+					heap.put(variableName, new Variable("NULL"));
 				}
+				else {
+					heap.put(variableName, new Variable(variableValue));
+				}
+			}
 		}
 	}
 
