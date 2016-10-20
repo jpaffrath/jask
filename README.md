@@ -20,6 +20,7 @@ Currently the jask interpreter is very unstable and supports only the functions 
 It is just a hobby project for fun and learning.
 Contributions are always welcome!
 
+Seeing jask for the first time? Try the [Getting started guide](https://github.com/jpaffrath/jask/wiki/Getting-started)!
 For further information, please visit the [jask Wiki](https://github.com/jpaffrath/jask/wiki).
 
 # Use
