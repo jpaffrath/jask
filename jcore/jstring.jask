@@ -23,6 +23,5 @@ function SUBSTRING(str:s:e)
 		listAdd(sub:temp)
 	endrun
 
-	store listToString(sub) in ret
-	return ret
+	return listToString(sub)
 end
