@@ -29,18 +29,20 @@ public class Tokenizer {
 			if (line.startsWith("//")) continue;
 
 			for (String t : line.split(" ")) {
+				if (t.contentEquals("")) continue;
 				// toggle comment parsing
+
+				if (t.contentEquals("/*") && !commentParsing) {
+					commentParsing = true;
+					continue;
+				}
+
 				if (t.contentEquals("*/") && commentParsing) {
 					commentParsing = false;
 					continue;
 				}
 
 				if (commentParsing) continue;
-
-				if (t.contentEquals("/*") && !commentParsing) {
-					commentParsing = true;
-					continue;
-				}
 
 				// toggle string parsing
 				if (t.contains("\"") && (t.length() - t.replace("\"", "").length()) % 2 != 0) {
