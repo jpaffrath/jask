@@ -53,9 +53,9 @@ public class Interpreter {
 		executer = new Executer();
 	}
 
-	public Interpreter(Function function) {
+	public Interpreter(Function function, FunctionExecuter functionExecuter) {
 		this();
-		executer = new Executer(function.getHeap());
+		executer = new Executer(function.getHeap(), functionExecuter);
 	}
 
 	public Interpreter(Executer executer) {
@@ -91,7 +91,15 @@ public class Interpreter {
 			// checks return statement
 			if (t.contentEquals("return")) {
 				String str = tokens.get(i+1);
-				Variable ret = executer.getVariableFromHeap(str);
+				Variable ret = null;
+
+				if (isFunction(str)) {
+					ret = executer.executeFunction(str);
+				}
+				else {
+					ret = executer.getVariableFromHeap(str);
+				}
+
 				if (ret == null) {
 					return str;
 				}

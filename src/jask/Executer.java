@@ -19,15 +19,17 @@ public class Executer {
 		functionExecuter = new FunctionExecuter();
 	}
 
-	public Executer(HashMap<String, Variable> heap) {
+	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter) {
+		this();
 		this.heap = heap;
+		this.functionExecuter = functionExecuter;
 	}
 
 	public Variable getVariableFromHeap(String var) {
 		return heap.get(var);
 	}
 
-	private Variable executeFunction(String token) {
+	public Variable executeFunction(String token) {
 		String functionName = token.substring(0, token.indexOf('('));
 		String param = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
 		List<String> params = Helpers.splitParams(param);

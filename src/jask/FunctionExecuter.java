@@ -31,7 +31,7 @@ public class FunctionExecuter {
 
 		Function function = functions.get(name);
 		function.setHeap(heap);
-		Interpreter interpreter = new Interpreter(function);
+		Interpreter interpreter = new Interpreter(function, this);
 		return interpreter.interpret(function.getTokens());
 	}
 
