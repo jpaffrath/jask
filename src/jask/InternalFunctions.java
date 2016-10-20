@@ -37,6 +37,7 @@ public class InternalFunctions {
 		internals.add("listSize");
 		internals.add("listAdd");
 		internals.add("listRemove");
+		internals.add("listSet");
 		internals.add("listToString");
 		internals.add("isString");
 		internals.add("isNumber");
@@ -63,6 +64,7 @@ public class InternalFunctions {
 		case "listSize":       return listSize();
 		case "listAdd":        return listAdd();
 		case "listRemove":     return listRemove();
+		case "listSet":        return listSet();
 		case "listFromString": return listFromString();
 		case "listToString":   return listToString();
 		case "isString":       return isString();
@@ -221,6 +223,42 @@ public class InternalFunctions {
 			((VariableList)var).removeElement((int)index.getDoubleValue());
 			return "TRUE";
 		}
+	}
+
+	private String listSet() {
+		Variable var = heap.get(params[0]);
+		if (var == null || !(var instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[0]);
+			return "FALSE";
+		}
+
+		Variable index = heap.get(params[1]);
+		if (index == null) {
+			if (Variable.isNumber(params[1])) {
+				((VariableList)var).removeElement(Integer.parseInt(params[1]));
+				return "TRUE";
+			}
+
+			return "FALSE";
+		}
+		else {
+			if (index.getType() != VariableType.Number) {
+				Error.printErrorVariableIsNotANumber(params[1]);
+				return "FALSE";
+			}
+		}
+
+		Variable toSet = heap.get(params[2]);
+		if (toSet == null) {
+			toSet = new Variable(params[2]);
+			if (toSet.getType() == VariableType.NoType) return "FALSE";
+		}
+
+		if (((VariableList)var).setElement((int)index.getDoubleValue(), toSet)) {
+			return "TRUE";
+		}
+
+		return "FALSE";
 	}
 
 	private String listFromString() {

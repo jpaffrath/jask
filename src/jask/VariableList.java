@@ -37,6 +37,12 @@ public class VariableList extends Variable {
 		return true;
 	}
 
+	public boolean setElement(int index, Variable toSet) {
+		if (index >= values.size()) return false;
+		values.set(index, new Variable(toSet));
+		return true;
+	}
+
 	public boolean removeElement(int index) {
 		if (index >= values.size()) {
 			Error.printErrorNoValueAtIndex(index);
