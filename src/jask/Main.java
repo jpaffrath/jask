@@ -181,6 +181,7 @@ public class Main {
 
 		List<String> content = setUpEnv(args);
 		content.addAll(Helpers.readFile(file));
+		loadedUses.add(file);
 		content = preload(content);
 
 		new Interpreter().interpret(new Tokenizer().parse(content));
