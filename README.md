@@ -1,6 +1,6 @@
 <p>
     <a href="https://github.com/jpaffrath/jask/releases">
-        <img src="https://img.shields.io/badge/version-1.1.1-orange.svg"
+        <img src="https://img.shields.io/badge/version-1.1.2-orange.svg"
              alt="Version Badge">
     </a>
     <a href="https://github.com/jpaffrath/jask/issues">

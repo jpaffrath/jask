@@ -2,7 +2,6 @@ package jask;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +18,7 @@ public class Helpers {
 	/**
 	 * Reads the content of a given file
 	 *
-	 * @param name
-	 *            name of the file
+	 * @param name name of the file
 	 * @return list of strings containing the files content
 	 */
 	public static List<String> readFile(String name) {
@@ -42,8 +40,7 @@ public class Helpers {
 	/**
 	 * Checks if a given path points to a file
 	 *
-	 * @param name
-	 *            path to file
+	 * @param name path to file
 	 * @return true if file exists, otherwise false
 	 */
 	public static boolean checkFile(String name) {
@@ -54,8 +51,7 @@ public class Helpers {
 	/**
 	 * Splits a given parameter string into a list of parameters
 	 *
-	 * @param param
-	 *            parameter string
+	 * @param param parameter string
 	 * @return list of strings containing parameters
 	 */
 	public static List<String> splitParams(String param) {

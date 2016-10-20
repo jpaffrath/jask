@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  */
 public class Main {
-	private static final String version = "1.1.1";
+	private static final String version = "1.1.2";
 
 	/**
 	 * Creates jask code for the global argument list
