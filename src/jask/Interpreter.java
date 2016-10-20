@@ -96,6 +96,9 @@ public class Interpreter {
 					return str;
 				}
 				else {
+					if (ret.getType() == VariableType.String) {
+						return "\"" + ret.toString() + "\"";
+					}
 					return ret.toString();
 				}
 			}
