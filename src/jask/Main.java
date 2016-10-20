@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 public class Main {
 	private static final String version = "1.1.3";
+	private static ArrayList<String> loadedUses = new ArrayList<String>();
 
 	/**
 	 * Creates jask code for the global argument list
@@ -41,18 +42,20 @@ public class Main {
 			String part = c.substring(0, 3);
 			if (part.contentEquals("use")) {
 				String fileName = c.substring(4, c.length()) + ".jask";
+				if (!loadedUses.contains(fileName)) {
+					if (!Helpers.checkFile(fileName)) {
+						Error.terminateInterpret("The file '" + fileName + "' can not be found!");
+					}
 
-				if (!Helpers.checkFile(fileName)) {
-					Error.terminateInterpret("The file '" + fileName + "' can not be found!");
+					List<String> importContent = Helpers.readFile(fileName);
+					// removes the "use file.jask" statement
+					content.remove(i);
+					// imports file content
+					loadedUses.add(fileName);
+					importContent = preload(importContent);
+					importContent.addAll(content);
+					content = importContent;
 				}
-
-				List<String> importContent = Helpers.readFile(fileName);
-				// removes the "use file.jask" statement
-				content.remove(i);
-				// imports file content
-				importContent = preload(importContent);
-				importContent.addAll(content);
-				content = importContent;
 			}
 		}
 
@@ -104,7 +107,8 @@ public class Main {
 				while (true) {
 					line = scanner.nextLine();
 
-					if (line.length() > 1 && line.substring(0, 2).contentEquals("if")) ifCount++;
+					if (line.length() > 1 && line.substring(0, 2).contentEquals("if"))
+						ifCount++;
 					else if (line.contentEquals("endif")) exCount++;
 
 					if (ifCount == exCount) break;
@@ -125,7 +129,8 @@ public class Main {
 				while (true) {
 					line = scanner.nextLine();
 
-					if (line.length() > 2 && line.substring(0, 3).contentEquals("run")) ruCount++;
+					if (line.length() > 2 && line.substring(0, 3).contentEquals("run"))
+						ruCount++;
 					else if (line.contentEquals("endrun")) exCount++;
 
 					if (ruCount == exCount) break;
