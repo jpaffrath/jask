@@ -80,7 +80,8 @@ listRemove(numbers:2)
 store list(1:"String":TRUE) in myList
 ```
 
-### Statements
+### Control flow
+if-else conditions:
 ```C
 if z equals d
   printLine("z equals d")
@@ -88,6 +89,13 @@ else
   printLine("z and d are different")
 endif
 ```
+run-loops:
+```C
+run i to max with i plus 1
+    print("i is ":i)
+endrun
+```
+More examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/wiki/Control-flow)!
 
 ### Creating functions
 Functions in jask can return nothing or any type of data.
