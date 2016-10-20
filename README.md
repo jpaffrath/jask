@@ -43,8 +43,7 @@ store 5.2 in d
 
 store "Hello World!" in str
 
-store TRUE in bool1
-store FALSE in bool2
+store TRUE in bool
 
 store NULL in foo
 ```
@@ -60,7 +59,6 @@ assign 10 divide 2 to z
 assign "A string" to str
 assign "Hello " plus "World!" to str
 
-assign TRUE to bool
 assign FALSE to bool
 ```
 
@@ -88,41 +86,6 @@ if z equals d
   printLine("z equals d")
 else
   printLine("z and d are different")
-endif
-
-if a unequals b
-  printLine("a unequals b")
-else
-endif
-
-if a greater b
-  printLine("a greater b")
-else
-endif
-
-if a smaller b
-  printLine("a smaller b")
-else
-endif
-
-if a smallerequal b
-  printLine("a smaller or equal b")
-else
-endif
-
-if a greaterequal b
-  printLine("a greater or equal b")
-else
-endif
-
-if x mod y equals z
-  print(x)
-else
-endif
-
-if val equals TRUE
-  print("val is true")
-else
 endif
 ```
 
