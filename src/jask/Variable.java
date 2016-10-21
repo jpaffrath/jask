@@ -36,6 +36,17 @@ public class Variable {
 		return false;
 	}
 
+	/**
+	 * Checks if a given string is a valid boolen value
+	 *
+	 * @param value string to be checked
+	 * @return true if the given string is a valid boolean value
+	 */
+	public static boolean isBoolean(String value) {
+		return (value.contentEquals("TRUE") ||
+				value.contentEquals("FALSE"));
+	}
+
 	public Variable() {
 		this.type = VariableType.NoType;
 	}

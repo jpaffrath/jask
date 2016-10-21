@@ -39,7 +39,7 @@ public class Executer {
 			for (int i = 0; i < params.size(); i++) {
 				String temp = params.get(i);
 
-				if (Variable.isString(temp) || Variable.isNumber(temp)) {
+				if (Variable.isString(temp) || Variable.isNumber(temp) || Variable.isBoolean(temp)) {
 					functionHeap.add(new Variable(temp));
 				}
 				else if (Interpreter.isFunction(temp)) {
