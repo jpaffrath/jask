@@ -126,9 +126,10 @@ public class InternalFunctions {
 	}
 
 	private String read() {
-		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		return '"' + scanner.nextLine() + '"';
+		String line = scanner.nextLine();
+		scanner.close();
+		return '"' + line + '"';
 	}
 
 	private String list() {
