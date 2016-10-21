@@ -28,35 +28,33 @@ function FIBONACCI(max)
 end
 
 function POW(a:x)
+	if x equals 0 return 1 else endif
+	if x smaller 0 return NULL else endif
+
 	store 1 in res
 	store 1 in i
-	if x equals 0 return res
-	else
-	endif
-	if x smaller 0 return NULL
-	else
-	endif
+
 	run i to x with i plus 1
 		assign res times a to res
 	endrun
-	
+
 	return res
 end
 
 function ABS(x)
 	store 0 in m
 	assign x times -1 to m
-	if x smaller 0 return m
-	else return x
+
+	if x smaller 0
+		return m
+	else
+		return x
 	endif
 end
 
 function ROOT(x:n)
-	if x smaller 0 return NULL
-	else
-	endif
-	
-	
+	if x smaller 0 return NULL else endif
+
 	store n in m
 	assign m minus 1 to m
 	
@@ -77,14 +75,15 @@ function ROOT(x:n)
 	store 0 in error
 	store 0 in trash
 	store 0 in i
-	run i to 100000 with i plus 1
+
+	run i to 100 with i plus 1
 		assign ABS(xnext) to error
 		assign ABS(xn) to trash
 		assign error minus trash to error
 		assign ABS(error) to error
-		if error smaller EPSILON return xnext
-		else
-		endif	
+
+		if error smaller EPSILON return xnext else endif
+
 		assign xnext to xn
 		assign POW(xn:n) to p
 		assign m times p to xnext
@@ -93,7 +92,7 @@ function ROOT(x:n)
 		assign n times p to tmp
 		assign xnext divide tmp to xnext
 	endrun
-	
+
 	return xnext
 end
 
