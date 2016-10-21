@@ -21,8 +21,13 @@ public class Variable {
 	 * @return true if the given string represents a valid jask number
 	 */
 	public static boolean isNumber(String value) {
-		if (Pattern.matches("^\\-?[0-9]*\\d{0,2}(\\.\\d*)?$", value)) return true;
-		return false;
+		try {
+			Double.parseDouble(value);
+		}
+		catch(NumberFormatException e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
