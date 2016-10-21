@@ -58,14 +58,24 @@ public class Helpers {
 		List<String> params = new ArrayList<String>();
 		String tempString = "";
 		boolean stringParsing = false;
+		boolean insideFunction = false;
 
 		for (char c : param.toCharArray()) {
-			if (c == '"' && !stringParsing)
+			if (c == '"' && !stringParsing) {
 				stringParsing = true;
-			else if (c == '"' && stringParsing)
+			}
+			else if (c == '"' && stringParsing) {
 				stringParsing = false;
+			}
 
-			if (c == ':' && !stringParsing) {
+			if (c == '(' && !stringParsing && !insideFunction) {
+				insideFunction = true;
+			}
+			else if (c == ')' && !stringParsing && insideFunction) {
+				insideFunction = false;
+			}
+
+			if (c == ':' && !stringParsing && !insideFunction) {
 				params.add(tempString);
 				tempString = "";
 				continue;
