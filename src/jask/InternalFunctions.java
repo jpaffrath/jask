@@ -179,7 +179,7 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return "FALSE";
 		}
 
 		Variable toAdd = heap.get(params[1]);
@@ -203,7 +203,7 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return "FALSE";
 		}
 
 		Variable index = heap.get(params[1]);
