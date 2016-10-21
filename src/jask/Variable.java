@@ -121,7 +121,15 @@ public class Variable {
 	@Override
 	public String toString() {
 		if (type == VariableType.String) return stringValue;
-		if (type == VariableType.Number) return String.valueOf(doubleValue);
+		if (type == VariableType.Number) {
+			// if double has no decimal part...
+			if (doubleValue % 1 == 0) {
+				// ...trim values like 2.0 to 2
+				String temp = String.valueOf(doubleValue);
+				return temp.substring(0, temp.indexOf('.'));
+			}
+			return String.valueOf(doubleValue);
+		}
 		if (type == VariableType.Bool)   return this.boolValue ? "TRUE" : "FALSE";
 
 		return  "NULL";
