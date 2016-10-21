@@ -30,7 +30,7 @@ end
 function POW(a:x)
 	store 1 in res
 	store 1 in i
-	if x equals 0 return 0
+	if x equals 0 return res
 	else
 	endif
 	if x smaller 0 return NULL
@@ -51,21 +51,52 @@ function ABS(x)
 	endif
 end
 
-function SQRT(x)
+function ROOT(x:n)
 	if x smaller 0 return NULL
 	else
 	endif
-	store 0.00000000001 in EPSILON
-	store x divide 2 in xn
-	store xn minus POW(xn:2) divide x times xn in xnext
+	
+	
+	store n in m
+	assign m minus 1 to m
+	
+	store x in xn
+	assign xn divide 2 to xn
+	store POW(xn:n) in p
+	
+	store 0 in xnext
+	assign m times p to xnext
+	assign xnext plus x to xnext
+
+	store 0 in tmp
+	assign POW(xn:m) to p
+	assign n times p to tmp
+	assign xnext divide tmp to xnext
+	
+	store 0.0000000001 in EPSILON
+	store 0 in error
+	store 0 in trash
 	store 0 in i
 	run i to 100000 with i plus 1
-		if ABS(xnext) minus ABS(xn) smaller EPSILON return xnext
+		assign ABS(xnext) to error
+		assign ABS(xn) to trash
+		assign error minus trash to error
+		assign ABS(error) to error
+		if error smaller EPSILON return xnext
 		else
 		endif	
 		assign xnext to xn
-		assign xn minus POW(xn:2) divide x times xn to xnext
+		assign POW(xn:n) to p
+		assign m times p to xnext
+		assign xnext plus x to xnext
+		assign POW(xn:m) to p
+		assign n times p to tmp
+		assign xnext divide tmp to xnext
 	endrun
 	
 	return xnext
+end
+
+function SQRT(x)
+	return ROOT(x:2)
 end
