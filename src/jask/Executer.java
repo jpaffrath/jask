@@ -179,6 +179,20 @@ public class Executer {
 		Variable runner = heap.get(tokens.get(0));
 		Variable maxVal = heap.get(tokens.get(2));
 
+		if (maxVal == null) {
+			if (Variable.isNumber(tokens.get(2))) {
+				maxVal = new Variable(tokens.get(2));
+			}
+			else {
+				Error.printErrorVariableIsNotANumber(tokens.get(2));
+				return;
+			}
+		}
+		else if (maxVal.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(tokens.get(2));
+			return;
+		}
+
 		List<String> assignTokens = new ArrayList<String>();
 		assignTokens.add("assign");
 		assignTokens.add(tokens.get(0));
