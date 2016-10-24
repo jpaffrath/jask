@@ -32,7 +32,7 @@ function POW(a:x)
 	if x smaller 0 return NULL else endif
 
 	store 1 in res
-	store 1 in i
+	store 0 in i
 
 	run i to x with i plus 1
 		assign res times a to res
