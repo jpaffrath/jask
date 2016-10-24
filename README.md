@@ -32,7 +32,9 @@ jask can interpret files:
 ```C
 jask file.jask arg1 arg2 ...
 ```
-The arguments are stored in a global list variable called _ENV.
+The arguments are stored in a global list variable called _ENV.  
+
+To test your freshly compiled jask-version, just run the _test.jask_ file.
 
 # Examples
 ### Creating new variables
@@ -79,7 +81,7 @@ listRemove(numbers:2)
 
 store list(1:"String":TRUE) in myList
 ```
-
+Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
 ### Control flow
 if-else conditions:
 ```C
@@ -88,12 +90,6 @@ if z equals d
 else
   printLine("z and d are different")
 endif
-```
-run-loops:
-```C
-run i to max with i plus 1
-    print("i is ":i)
-endrun
 ```
 run and while loops:
 ```C
