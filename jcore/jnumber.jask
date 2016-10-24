@@ -99,3 +99,18 @@ end
 function SQRT(x)
 	return ROOT(x:2)
 end
+
+function FACTORIAL(x)
+	if x smaller 0 return NULL else endif
+
+	store 1 in fac
+	store 1 in i
+
+	while i smallerequal x
+		assign fac times i to fac
+		assign i plus 1 to i
+	endrun
+
+	return fac
+
+end

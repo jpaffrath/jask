@@ -69,6 +69,12 @@ if POW(-3:7) equals -2187 assign testPassed plus 1 to testPassed else assign 1 p
 
 //if POW(2:-2) equals 0.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+if FACTORIAL(4)  equals 24      assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if FACTORIAL(6)  equals 720     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if FACTORIAL(10) equals 3628800 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if FACTORIAL(-1) equals NULL    assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if FACTORIAL(0)  equals 1       assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
 /*
 **************************** Miscellaneous tests ****************************
 */
