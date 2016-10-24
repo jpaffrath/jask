@@ -176,37 +176,54 @@ public class Executer {
 	}
 
 	private void executeRun(List<String> tokens) {
-		Variable runner = heap.get(tokens.get(0));
-		Variable maxVal = heap.get(tokens.get(2));
+		if (tokens.get(0).contentEquals("while")) {
+			List<String> whileTokens = new ArrayList<String>();
+			whileTokens.add("if");
+			whileTokens.add(tokens.get(1));
+			whileTokens.add(tokens.get(2));
+			whileTokens.add(tokens.get(3));
+
+			Interpreter interpreter = new Interpreter(this);
+			Expression ifExp = new Expression(ExpressionType.Statement, whileTokens);
+
+			while (executeStatement(ifExp)) {
+				interpreter.interpret(tokens.subList(4, tokens.size() - 1));
+			}
+
+			return;
+		}
+
+		Variable runner = heap.get(tokens.get(1));
+		Variable maxVal = heap.get(tokens.get(3));
 
 		if (maxVal == null) {
-			if (Variable.isNumber(tokens.get(2))) {
-				maxVal = new Variable(tokens.get(2));
+			if (Variable.isNumber(tokens.get(3))) {
+				maxVal = new Variable(tokens.get(3));
 			}
 			else {
-				Error.printErrorVariableIsNotANumber(tokens.get(2));
+				Error.printErrorVariableIsNotANumber(tokens.get(3));
 				return;
 			}
 		}
 		else if (maxVal.getType() != VariableType.Number) {
-			Error.printErrorVariableIsNotANumber(tokens.get(2));
+			Error.printErrorVariableIsNotANumber(tokens.get(3));
 			return;
 		}
 
 		List<String> assignTokens = new ArrayList<String>();
 		assignTokens.add("assign");
-		assignTokens.add(tokens.get(0));
-		assignTokens.add(tokens.get(5));
+		assignTokens.add(tokens.get(1));
 		assignTokens.add(tokens.get(6));
+		assignTokens.add(tokens.get(7));
 		assignTokens.add("to");
-		assignTokens.add(tokens.get(0));
+		assignTokens.add(tokens.get(1));
 
 		Interpreter interpreter = new Interpreter(this);
 
 		for (int i = (int)runner.getDoubleValue(); i < maxVal.getDoubleValue();) {
-			interpreter.interpret(tokens.subList(7, tokens.size() - 1));
+			interpreter.interpret(tokens.subList(8, tokens.size() - 1));
 			executeAssign(assignTokens);
-			i = (int)heap.get(tokens.get(0)).getDoubleValue();
+			i = (int)heap.get(tokens.get(1)).getDoubleValue();
 		}
 	}
 

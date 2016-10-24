@@ -95,7 +95,21 @@ run i to max with i plus 1
     print("i is ":i)
 endrun
 ```
-More examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/wiki/Control-flow)!
+run and while loops:
+```C
+store 0 in i
+
+run i to 10 with i plus 1
+    print("i is ":i)
+endrun
+
+store TRUE in val
+
+while val equals TRUE
+    print("val is TRUE!")
+endrun
+```
+Want more examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/wiki/Control-flow)!
 
 ### Creating functions
 Functions in jask can return nothing or any type of data.

@@ -44,6 +44,7 @@ public class Interpreter {
 		keywords.add("in");
 		keywords.add("run");
 		keywords.add("with");
+		keywords.add("while");
 
 		values = new ArrayList<String>();
 		values.add("TRUE");
@@ -208,7 +209,7 @@ public class Interpreter {
 			}
 
 			// check run statement
-			else if (t.contentEquals("run")) {
+			else if (t.contentEquals("run") || t.contentEquals("while")) {
 				int runCount = 1;
 				int endCount = 0;
 				int runner = i;
@@ -216,13 +217,14 @@ public class Interpreter {
 				while (true) {
 					t = tokens.get(++runner);
 
-					if (t.contentEquals("run")) runCount++;
+					if (t.contentEquals("run") || t.contentEquals("while")) runCount++;
 					else if (t.contentEquals("endrun")) endCount++;
 
 					if (runCount == endCount) break;
 				}
 
-				exp = new Expression(ExpressionType.Runner, tokens.subList(i+1, ++runner));
+				exp = new Expression(ExpressionType.Runner, tokens.subList(i, runner+1));
+				i = runner;
 			}
 
 			// check convert statement
