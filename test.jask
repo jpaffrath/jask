@@ -1,0 +1,85 @@
+/*
+* This file executes several tests
+*/
+
+use jcore/jnumber
+use jcore/jstring
+
+store 0 in testPassed
+store 0 in testFailed
+
+printLine("Running jask tests...")
+
+/*
+**************************** Number storing tests ****************************
+*/
+
+store 42 in num1
+if num1 equals 42 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+assign 26.119955 to num1
+if num1 equals 26.119955 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+assign -10054 to num1
+if num1 equals -10054 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+/*
+**************************** String storing tests ****************************
+*/
+
+store "42" in str1
+if str1 equals "42" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+/*
+**************************** List tests ****************************
+*/
+
+if listSize(list()) equals 0 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+store list(1:2:3) in myList
+
+if listSize(myList)     equals 3     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listGet(myList:0)    equals 1     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listAdd(myList:5)    equals TRUE  assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listGet(myList:3)    equals 5     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listSet(myList:3:4)  equals TRUE  assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listGet(myList:3)    equals 4     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listRemove(myList:3) equals TRUE  assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listSize(myList)     equals 3     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+assign listFromString("my list") to myList
+if listToString(myList) equals "my list" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+/*
+**************************** jcore tests ****************************
+*/
+
+if SUBSTRING("my substring string":3:11) equals "substring" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+if MAX(2445.21:-7) equals 2445.21  assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if MIN(-2445.21:7) equals -2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+if ABS(3)  equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if ABS(-3) equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+if POW(2:2)  equals 4     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if POW(-2:2) equals 4     assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if POW(5:2)  equals 25    assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if POW(-3:7) equals -2187 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+//if POW(2:-2) equals 0.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+/*
+**************************** Miscellaneous tests ****************************
+*/
+
+if isString("foo bar")                    equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if isNumber(100.32214)                    equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if isBool(TRUE)                           equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if isList(list("foo bar":-1953.22:FALSE)) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+/*
+**************************** End tests ****************************
+*/
+
+printLine("Finish tests with ":testPassed:" passed and ":testFailed:" failed tests!")
