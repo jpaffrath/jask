@@ -61,6 +61,14 @@ public class VariableList extends Variable {
 		StringBuilder builder = new StringBuilder();
 		Variable curVal = null;
 
+		if (values.size() == 1) {
+			curVal = values.get(0);
+			if (curVal.getType() == VariableType.String) {
+				return "\"" + curVal.toString() +"\":";
+			}
+			return curVal.toString() + ":";
+		}
+
 		for (int i = 0; i < values.size(); i++) {
 			curVal = values.get(i);
 
