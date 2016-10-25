@@ -51,7 +51,7 @@ assign listFromString("my list") to myList
 if listToString(myList) equals "my list" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
 /*
-**************************** jcore tests ****************************
+**************************** jcore jstring tests ****************************
 */
 
 if SUBSTRING("my substring string":3:11) equals "substring" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
@@ -62,9 +62,15 @@ if LOWER("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" assig
 if listGet(SPLIT("a b c":" "):0)        equals "a" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if listGet(SPLIT("Hello,World!":","):0) equals "Hello" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+/*
+**************************** jcore jnumber tests ****************************
+*/
 
 if MAX(2445.21:-7) equals 2445.21  assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if MIN(-2445.21:7) equals -2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+if PI() equals 3.141592653589793 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if E()  equals 2.718281828459045 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
 if ABS(3)  equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if ABS(-3) equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
