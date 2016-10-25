@@ -57,6 +57,7 @@ assign 1 plus 2 to z
 assign d minus 3 to z
 assign 3 times 2 to z
 assign 10 divide 2 to z
+assign 8 mod 3 to z
 
 assign "A string" to str
 assign "Hello " plus "World!" to str

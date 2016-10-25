@@ -131,6 +131,9 @@ public class Executer {
 			else if (operator.contentEquals("divide")) {
 				varD.setDoubleValue(var1.getDoubleValue() / var2.getDoubleValue());
 			}
+			else if (operator.contentEquals("mod")) {
+				varD.setDoubleValue(var1.getDoubleValue() % var2.getDoubleValue());
+			}
 
 			heap.put(tokens.get(5), varD);
 			return;
