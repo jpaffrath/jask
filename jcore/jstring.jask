@@ -6,6 +6,10 @@
 */
 
 function SUBSTRING(str:s:e)
+	if isString(str) equals FALSE return NULL else endif
+	if isNumber(s)   equals FALSE return NULL else endif
+	if isNumber(e)   equals FALSE return NULL else endif
+
 	if s greater e return NULL else endif
 
 	assign listFromString(str) to str
@@ -29,6 +33,8 @@ function SUBSTRING(str:s:e)
 end
 
 function UPPER(str)
+	if isString(str) equals FALSE return NULL else endif
+
 	store listFromString(str) in oldList
 	store list() in newList
 
@@ -74,6 +80,8 @@ function UPPER(str)
 end
 
 function LOWER(str)
+	if isString(str) equals FALSE return NULL else endif
+
 	store listFromString(str) in oldList
 	store list() in newList
 
@@ -119,6 +127,9 @@ function LOWER(str)
 end
 
 function SPLIT(str:tok)
+	if isString(str) equals FALSE return NULL else endif
+	if isString(tok) equals FALSE return NULL else endif
+
 	store listFromString(str) in list
 	store list() in result
 	store list() in temp
