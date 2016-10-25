@@ -117,3 +117,29 @@ function LOWER(str)
 
 	return listToString(newList)
 end
+
+function SPLIT(str:tok)
+	store listFromString(str) in list
+	store list() in result
+	store list() in temp
+
+	store 0 in i
+	store listSize(list) in size
+	store "" in char
+
+	while i smaller size
+		assign listGet(list:i) to char
+
+		if char equals tok
+			listAdd(result:listToString(temp))
+			assign list() to temp
+		else
+			listAdd(temp:char)
+		endif
+
+		assign i plus 1 to i
+	endrun
+
+	listAdd(result:listToString(temp))
+	return result
+end
