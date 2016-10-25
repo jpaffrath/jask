@@ -55,6 +55,8 @@ if listToString(myList) equals "my list" assign testPassed plus 1 to testPassed 
 */
 
 if SUBSTRING("my substring string":3:11) equals "substring" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if UPPER("abcdefghijklmnopqrstuvwxyz") equals "ABCDEFGHIJKLMNOPQRSTUVWXYZ" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if LOWER("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
 if MAX(2445.21:-7) equals 2445.21  assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if MIN(-2445.21:7) equals -2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif

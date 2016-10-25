@@ -27,3 +27,93 @@ function SUBSTRING(str:s:e)
 
 	return listToString(sub)
 end
+
+function UPPER(str)
+	store listFromString(str) in oldList
+	store list() in newList
+
+	store 0 in i
+	store listSize(oldList) in size
+	store NULL in curChar
+
+	while i smaller size
+		assign listGet(oldList:i) to curChar
+
+		if curChar equals "a" assign "A" to curChar else endif
+		if curChar equals "b" assign "B" to curChar else endif
+		if curChar equals "c" assign "C" to curChar else endif
+		if curChar equals "d" assign "D" to curChar else endif
+		if curChar equals "e" assign "E" to curChar else endif
+		if curChar equals "f" assign "F" to curChar else endif
+		if curChar equals "g" assign "G" to curChar else endif
+		if curChar equals "h" assign "H" to curChar else endif
+		if curChar equals "i" assign "I" to curChar else endif
+		if curChar equals "j" assign "J" to curChar else endif
+		if curChar equals "k" assign "K" to curChar else endif
+		if curChar equals "l" assign "L" to curChar else endif
+		if curChar equals "m" assign "M" to curChar else endif
+		if curChar equals "n" assign "N" to curChar else endif
+		if curChar equals "o" assign "O" to curChar else endif
+		if curChar equals "p" assign "P" to curChar else endif
+		if curChar equals "q" assign "Q" to curChar else endif
+		if curChar equals "r" assign "R" to curChar else endif
+		if curChar equals "s" assign "S" to curChar else endif
+		if curChar equals "t" assign "T" to curChar else endif
+		if curChar equals "u" assign "U" to curChar else endif
+		if curChar equals "v" assign "V" to curChar else endif
+		if curChar equals "w" assign "W" to curChar else endif
+		if curChar equals "x" assign "X" to curChar else endif
+		if curChar equals "y" assign "Y" to curChar else endif
+		if curChar equals "z" assign "Z" to curChar else endif
+
+		listAdd(newList:curChar)
+		assign i plus 1 to i
+	endrun
+
+	return listToString(newList)
+end
+
+function LOWER(str)
+	store listFromString(str) in oldList
+	store list() in newList
+
+	store 0 in i
+	store listSize(oldList) in size
+	store NULL in curChar
+
+	while i smaller size
+		assign listGet(oldList:i) to curChar
+
+		if curChar equals "A" assign "a" to curChar else endif
+		if curChar equals "B" assign "b" to curChar else endif
+		if curChar equals "C" assign "c" to curChar else endif
+		if curChar equals "D" assign "d" to curChar else endif
+		if curChar equals "E" assign "e" to curChar else endif
+		if curChar equals "F" assign "f" to curChar else endif
+		if curChar equals "G" assign "g" to curChar else endif
+		if curChar equals "H" assign "h" to curChar else endif
+		if curChar equals "I" assign "i" to curChar else endif
+		if curChar equals "J" assign "j" to curChar else endif
+		if curChar equals "K" assign "k" to curChar else endif
+		if curChar equals "L" assign "l" to curChar else endif
+		if curChar equals "M" assign "m" to curChar else endif
+		if curChar equals "N" assign "n" to curChar else endif
+		if curChar equals "O" assign "o" to curChar else endif
+		if curChar equals "P" assign "p" to curChar else endif
+		if curChar equals "Q" assign "q" to curChar else endif
+		if curChar equals "R" assign "r" to curChar else endif
+		if curChar equals "S" assign "s" to curChar else endif
+		if curChar equals "T" assign "t" to curChar else endif
+		if curChar equals "U" assign "u" to curChar else endif
+		if curChar equals "V" assign "v" to curChar else endif
+		if curChar equals "W" assign "w" to curChar else endif
+		if curChar equals "X" assign "x" to curChar else endif
+		if curChar equals "Y" assign "y" to curChar else endif
+		if curChar equals "Z" assign "z" to curChar else endif
+
+		listAdd(newList:curChar)
+		assign i plus 1 to i
+	endrun
+
+	return listToString(newList)
+end
