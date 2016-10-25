@@ -117,3 +117,17 @@ function FACTORIAL(x)
 	return fac
 
 end
+
+function HASPLACES(n)
+	convert n to string
+	assign listFromString(n) to n
+	store 1 in i
+
+	while i smaller listSize(n)
+		if listGet(n:i) equals "."
+			return TRUE
+		else endif
+		assign i plus 1 to i
+	endrun
+	return FALSE
+end

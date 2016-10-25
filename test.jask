@@ -88,6 +88,15 @@ if FACTORIAL(10) equals 3628800 assign testPassed plus 1 to testPassed else assi
 if FACTORIAL(-1) equals NULL    assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if FACTORIAL(0)  equals 1       assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+if HASPLACES(100) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if HASPLACES(5.0) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if HASPLACES(-42) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+if HASPLACES(PI())   equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if HASPLACES(5.01)   equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if HASPLACES(-14.45) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+
 /*
 **************************** Miscellaneous tests ****************************
 */
