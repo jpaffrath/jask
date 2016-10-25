@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  */
 public class Main {
-	private static final String version = "1.1.4";
+	private static final String version = "1.1.5";
 	private static ArrayList<String> loadedUses = new ArrayList<String>();
 
 	/**

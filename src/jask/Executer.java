@@ -178,7 +178,9 @@ public class Executer {
 		}
 	}
 
-	private void executeRun(List<String> tokens) {
+	private String executeRun(List<String> tokens) {
+		String ret = "";
+
 		if (tokens.get(0).contentEquals("while")) {
 			List<String> whileTokens = new ArrayList<String>();
 			whileTokens.add("if");
@@ -190,10 +192,11 @@ public class Executer {
 			Expression ifExp = new Expression(ExpressionType.Statement, whileTokens);
 
 			while (executeStatement(ifExp)) {
-				interpreter.interpret(tokens.subList(4, tokens.size() - 1));
+				ret = interpreter.interpret(tokens.subList(4, tokens.size() - 1));
+				if (ret != "") break;
 			}
 
-			return;
+			return ret;
 		}
 
 		Variable runner = heap.get(tokens.get(1));
@@ -205,12 +208,12 @@ public class Executer {
 			}
 			else {
 				Error.printErrorVariableIsNotANumber(tokens.get(3));
-				return;
+				return "";
 			}
 		}
 		else if (maxVal.getType() != VariableType.Number) {
 			Error.printErrorVariableIsNotANumber(tokens.get(3));
-			return;
+			return "";
 		}
 
 		List<String> assignTokens = new ArrayList<String>();
@@ -224,10 +227,13 @@ public class Executer {
 		Interpreter interpreter = new Interpreter(this);
 
 		for (int i = (int)runner.getDoubleValue(); i < maxVal.getDoubleValue();) {
-			interpreter.interpret(tokens.subList(8, tokens.size() - 1));
+			ret = interpreter.interpret(tokens.subList(8, tokens.size() - 1));
+			if (ret != "") break;
 			executeAssign(assignTokens);
 			i = (int)heap.get(tokens.get(1)).getDoubleValue();
 		}
+
+		return ret;
 	}
 
 	private void executeConvert(List<String> tokens) {
@@ -357,17 +363,20 @@ public class Executer {
 		return false;
 	}
 
-	public void execute(Expression exp) {
-		if (exp == null) return;
+	public String execute(Expression exp) {
+		if (exp == null) return "";
+		String ret = "";
 
 		switch (exp.getType()) {
 		case Assign: executeAssign(exp.getTokens()); break;
 		case Function: executeFunction(exp.getTokens().get(0)); break;
 		case Store: executeStore(exp.getTokens()); break;
-		case Runner: executeRun(exp.getTokens()); break;
+		case Runner: ret = executeRun(exp.getTokens()); break;
 		case Convert: executeConvert(exp.getTokens()); break;
 		default:
 			break;
 		}
+
+		return ret;
 	}
 }

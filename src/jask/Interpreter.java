@@ -84,6 +84,7 @@ public class Interpreter {
 	public String interpret(List<String> tokens) {
 		Expression exp = null;
 		String t = null;
+		String retVal = "";
 		boolean ifRunning = false;
 
 		for (int i = 0; i < tokens.size(); i++) {
@@ -233,8 +234,10 @@ public class Interpreter {
 				i += 3;
 			}
 
-			executer.execute(exp);
+			retVal = executer.execute(exp);
 			exp = null;
+
+			if (retVal != "") return retVal;
 		}
 
 		return "";
