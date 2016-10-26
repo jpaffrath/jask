@@ -119,7 +119,8 @@ public class Main {
 			}
 
 			// if a run statement is added, add lines to list until the statement ends
-			if (line.length() > 2 && (line.substring(0, 3).contentEquals("run") || line.substring(0, 5).contentEquals("while"))) {
+			if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
+				(line.length() > 4 && line.substring(0, 5).contentEquals("while"))) {
 				int ruCount = 1;
 				int exCount = 0;
 
@@ -129,7 +130,8 @@ public class Main {
 				while (true) {
 					line = scanner.nextLine();
 
-					if (line.length() > 2 && (line.substring(0, 3).contentEquals("run") || line.substring(0, 5).contentEquals("while")))
+					if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
+						(line.length() > 4 && line.substring(0, 5).contentEquals("while")))
 						ruCount++;
 					else if (line.contentEquals("endrun")) exCount++;
 
