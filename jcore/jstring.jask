@@ -177,3 +177,19 @@ function STRSIZE(str)
 	assign listFromString(str) to str
 	return listSize(str)
 end
+
+function STRREPEAT(str:num)
+	if isString(str) equals FALSE return NULL else endif
+	if isNumber(num) equals FALSE return NULL else endif
+	if num smallerequal 0 return NULL else endif
+
+	assign str to s
+
+	store 1 in i
+	while i smaller num
+		assign str plus s to str
+		assign i plus 1 to i
+	endrun
+
+	return str
+end
