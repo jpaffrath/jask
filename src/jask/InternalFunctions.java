@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class InternalFunctions {
 	private HashMap<String, Variable> heap;
+	private Scanner scanner;
 	String functionName;
 	private String params[];
 	String param;
@@ -25,6 +26,7 @@ public class InternalFunctions {
 		this.params = new String[temp.size()];
 		temp.toArray(params);
 
+		this.scanner = new Scanner(System.in);
 		this.setHeap(_heap);
 	}
 
@@ -126,10 +128,7 @@ public class InternalFunctions {
 	}
 
 	private String read() {
-		Scanner scanner = new Scanner(System.in);
-		String line = scanner.nextLine();
-		scanner.close();
-		return '"' + line + '"';
+		return '"' + scanner.nextLine() + '"';
 	}
 
 	private String list() {
