@@ -171,3 +171,9 @@ function REVERSE(str)
 
 	return listToString(list)
 end
+
+function STRSIZE(str)
+	if isString(str) equals FALSE return NULL else endif
+	assign listFromString(str) to str
+	return listSize(str)
+end
