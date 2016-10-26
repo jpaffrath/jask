@@ -1,0 +1,28 @@
+/*
+* File  : jcore/jread
+* Author: Julius Paffrath
+*
+* Provides standard functions for reading and processing input
+*/
+
+function READNUMBER()
+	store read() in input
+	convert input to number
+	if input equals NULL return NULL else endif
+	return input
+end
+
+function READLIST(number)
+	if number smallerequal 0 return NULL else endif
+	if isNumber(number) equals FALSE return NULL else endif
+
+	store list() in list
+
+	store 0 in i
+	while i smaller number
+		listAdd(list:read())
+		assign i plus 1 to i
+	endrun
+
+	return list
+end
