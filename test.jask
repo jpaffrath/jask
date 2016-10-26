@@ -62,6 +62,9 @@ if LOWER("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" assig
 if listGet(SPLIT("a b c":" "):0)        equals "a" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if listGet(SPLIT("Hello,World!":","):0) equals "Hello" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+if REVERSE("12345") equals "54321" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if REVERSE(129) equals NULL assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
 /*
 **************************** jcore jnumber tests ****************************
 */

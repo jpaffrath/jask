@@ -154,3 +154,20 @@ function SPLIT(str:tok)
 	listAdd(result:listToString(temp))
 	return result
 end
+
+function REVERSE(str)
+	if isString(str) equals FALSE return NULL else endif
+
+	assign listFromString(str) to str
+	store list() in list
+	store listSize(str) in i
+
+	assign i minus 1 to i
+
+	while i greaterequal 0
+		listAdd(list:listGet(str:i))
+		assign i minus 1 to i
+	endrun
+
+	return listToString(list)
+end
