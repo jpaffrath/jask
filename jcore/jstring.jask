@@ -193,3 +193,38 @@ function STRREPEAT(str:num)
 
 	return str
 end
+
+function TRIM(str)
+	if isString(str) equals FALSE return NULL else endif
+
+	store 0 in lastChar
+	assign listFromString(str) to str
+	store listSize(str) in size
+	store 0 in i
+
+	while i smaller size
+		if listGet(str:i) unequals " "
+			assign i to lastChar
+		else endif
+		assign i plus 1 to i
+	endrun
+
+	store -1 in firstChar
+	assign 0 to i
+	while i smaller size
+		if listGet(str:i) unequals " "
+			if firstChar equals -1
+				assign i to firstChar
+			else
+			endif
+		else
+		endif
+		assign i plus 1 to i
+	endrun
+
+	if firstChar equals -1
+		assign 0 to firstChar
+	else endif
+
+	return SUBSTRING(listToString(str):firstChar:lastChar)
+end
