@@ -31,17 +31,10 @@ function FIBONACCI(max)
 end
 
 function POW(a:x)
-	if x equals 0 return 1 else endif
-	if x smaller 0 return NULL else endif
+	if isNumber(a) equals FALSE return NULL else endif
+	if isNumber(x) equals FALSE return NULL else endif
 
-	store 1 in res
-	store 0 in i
-
-	run i to x with i plus 1
-		assign res times a to res
-	endrun
-
-	return res
+	return _pow(a:x)
 end
 
 function ABS(x)

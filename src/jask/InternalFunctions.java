@@ -46,6 +46,7 @@ public class InternalFunctions {
 		internals.add("isBool");
 		internals.add("isList");
 		internals.add("exit");
+		internals.add("_pow");
 		return internals.contains(functionName);
 	}
 
@@ -74,6 +75,7 @@ public class InternalFunctions {
 		case "isBool":         return isBool();
 		case "isList":         return isList();
 		case "exit":           return exit();
+		case "_pow":          return _pow();
 		}
 
 		return "";
@@ -356,5 +358,11 @@ public class InternalFunctions {
 
 		System.exit(code);
 		return "NULL";
+	}
+
+	private String _pow() {
+		Variable var = heap.get(params[0]);
+		Variable exp = heap.get(params[1]);
+		return String.valueOf(Math.pow(var.getDoubleValue(), exp.getDoubleValue()));
 	}
 }
