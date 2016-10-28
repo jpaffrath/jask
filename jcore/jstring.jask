@@ -7,8 +7,8 @@
 
 function SUBSTRING(str:s:e)
 	if isString(str) equals FALSE return NULL else endif
-	if isNumber(s)   equals FALSE return NULL else endif
-	if isNumber(e)   equals FALSE return NULL else endif
+	if isNumber(s) equals FALSE return NULL else endif
+	if isNumber(e) equals FALSE return NULL else endif
 
 	if s greater e return NULL else endif
 
