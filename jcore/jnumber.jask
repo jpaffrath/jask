@@ -9,7 +9,7 @@ function MAX(n1:n2) if n1 greater n2 return n1 else return n2 endif end
 function MIN(n1:n2) if n1 smaller n2 return n1 else return n2 endif end
 
 function PI() return 3.141592653589793 end
-function E() return  2.718281828459045 end
+function E() return 2.718281828459045 end
 
 function FIBONACCI(max)
 	store 0 in first
