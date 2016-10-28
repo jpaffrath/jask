@@ -88,8 +88,9 @@ if POW(2:2) equals 4 assign testPassed plus 1 to testPassed else assign 1 plus t
 if POW(-2:2) equals 4 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if POW(5:2) equals 25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if POW(-3:7) equals -2187 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-
-//if POW(2:-2) equals 0.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if POW(2:-2) equals 0.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if POW(2:1.5) equals 2.8284271247461903 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if POW(1.5:2) equals 2.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
 if FACTORIAL(4) equals 24 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if FACTORIAL(6) equals 720 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
