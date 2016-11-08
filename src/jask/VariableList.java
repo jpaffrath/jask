@@ -131,4 +131,12 @@ public class VariableList extends Variable {
 
 		return ret += "\"";
 	}
+
+	public boolean contains(Variable var) {
+		for (Variable v : values) {
+			if (v.equals(var)) return true;
+		}
+
+		return false;
+	}
 }

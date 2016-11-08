@@ -41,6 +41,7 @@ public class InternalFunctions {
 		internals.add("listRemove");
 		internals.add("listSet");
 		internals.add("listToString");
+		internals.add("listContains");
 		internals.add("isString");
 		internals.add("isNumber");
 		internals.add("isBool");
@@ -70,6 +71,7 @@ public class InternalFunctions {
 		case "listSet":        return listSet();
 		case "listFromString": return listFromString();
 		case "listToString":   return listToString();
+		case "listContains":   return listContains();
 		case "isString":       return isString();
 		case "isNumber":       return isNumber();
 		case "isBool":         return isBool();
@@ -307,6 +309,21 @@ public class InternalFunctions {
 		}
 
 		return ((VariableList)var).convertToString();
+	}
+
+	private String listContains() {
+		Variable var = heap.get(params[0]);
+		if (var == null || !(var instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[0]);
+			return "NULL";
+		}
+
+		Variable element = heap.get(params[1]);
+		if (element == null) {
+			element = new Variable(params[1]);
+		}
+
+		return ((VariableList)var).contains(element) ? "TRUE" : "FALSE";
 	}
 
 	private String isString() {
