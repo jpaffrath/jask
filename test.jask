@@ -50,6 +50,16 @@ if listSize(myList) equals 3 assign testPassed plus 1 to testPassed else assign 
 assign listFromString("my list") to myList
 if listToString(myList) equals "my list" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+assign list(1:2:3) to myList
+
+if listContains(myList:1) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listContains(myList:4) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+listAdd(myList:"a string")
+
+if listContains(myList:"a string") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listContains(myList:"A String") equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
 /*
 **************************** jcore jstring tests ****************************
 */
@@ -83,7 +93,7 @@ if TRIM("   jask   ") equals "jask" assign testPassed plus 1 to testPassed else 
 
 if MAX(2445.21:-7) equals 2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if MIN(-2445.21:7) equals -2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-printLine("Here")
+
 if PI() equals 3.141592653589793 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if E() equals 2.718281828459045 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
