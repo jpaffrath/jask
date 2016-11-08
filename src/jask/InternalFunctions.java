@@ -18,6 +18,9 @@ public class InternalFunctions {
 	private String params[];
 	String param;
 
+	private final String TRUE = "TRUE";
+	private final String FALSE = "FALSE";
+
 	public InternalFunctions(List<Variable> _heap, String functionName, String param) {
 		this.functionName = functionName;
 		this.param = param;
@@ -109,7 +112,7 @@ public class InternalFunctions {
 			Variable var = heap.get(out);
 			if (var == null) {
 				Error.printErrorVariableNotDefined(out);
-				return "FALSE";
+				return FALSE;
 			}
 			else {
 				if (var instanceof VariableList) {
@@ -128,7 +131,7 @@ public class InternalFunctions {
 			System.out.print(output);
 		}
 
-		return "TRUE";
+		return TRUE;
 	}
 
 	private String read() {
@@ -182,23 +185,23 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "FALSE";
+			return FALSE;
 		}
 
 		Variable toAdd = heap.get(params[1]);
 		if (toAdd == null) {
 			if (((VariableList)var).addElement(params[1])) {
-				return "TRUE";
+				return TRUE;
 			}
 
-			return "FALSE";
+			return FALSE;
 		}
 		else {
 			if (((VariableList)var).addElement(toAdd)) {
-				return "TRUE";
+				return TRUE;
 			}
 
-			return "FALSE";
+			return FALSE;
 		}
 	}
 
@@ -206,26 +209,26 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "FALSE";
+			return FALSE;
 		}
 
 		Variable index = heap.get(params[1]);
 		if (index == null) {
 			if (Variable.isNumber(params[1])) {
 				((VariableList)var).removeElement(Integer.parseInt(params[1]));
-				return "TRUE";
+				return TRUE;
 			}
 
-			return "FALSE";
+			return FALSE;
 		}
 		else {
 			if (index.getType() != VariableType.Number) {
 				Error.printErrorVariableIsNotANumber(params[1]);
-				return "FALSE";
+				return FALSE;
 			}
 
 			((VariableList)var).removeElement((int)index.getDoubleValue());
-			return "TRUE";
+			return TRUE;
 		}
 	}
 
@@ -233,36 +236,36 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "FALSE";
+			return FALSE;
 		}
 
 		Variable index = heap.get(params[1]);
 		if (index == null) {
 			if (Variable.isNumber(params[1])) {
 				((VariableList)var).removeElement(Integer.parseInt(params[1]));
-				return "TRUE";
+				return TRUE;
 			}
 
-			return "FALSE";
+			return FALSE;
 		}
 		else {
 			if (index.getType() != VariableType.Number) {
 				Error.printErrorVariableIsNotANumber(params[1]);
-				return "FALSE";
+				return FALSE;
 			}
 		}
 
 		Variable toSet = heap.get(params[2]);
 		if (toSet == null) {
 			toSet = new Variable(params[2]);
-			if (toSet.getType() == VariableType.NoType) return "FALSE";
+			if (toSet.getType() == VariableType.NoType) return FALSE;
 		}
 
 		if (((VariableList)var).setElement((int)index.getDoubleValue(), toSet)) {
-			return "TRUE";
+			return TRUE;
 		}
 
-		return "FALSE";
+		return FALSE;
 	}
 
 	private String listFromString() {
@@ -323,46 +326,46 @@ public class InternalFunctions {
 			element = new Variable(params[1]);
 		}
 
-		return ((VariableList)var).contains(element) ? "TRUE" : "FALSE";
+		return ((VariableList)var).contains(element) ? TRUE : FALSE;
 	}
 
 	private String isString() {
 		Variable var = heap.get(params[0]);
 		if (var == null) {
-			if (Variable.isString(params[0])) return "TRUE";
-			return "FALSE";
+			if (Variable.isString(params[0])) return TRUE;
+			return FALSE;
 		}
 
-		if (var.getType() == VariableType.String) return "TRUE";
-		return "FALSE";
+		if (var.getType() == VariableType.String) return TRUE;
+		return FALSE;
 	}
 
 	private String isNumber() {
 		Variable var = heap.get(params[0]);
 		if (var == null) {
-			if (Variable.isNumber(params[0])) return "TRUE";
-			return "FALSE";
+			if (Variable.isNumber(params[0])) return TRUE;
+			return FALSE;
 		}
 
-		if (var.getType() == VariableType.Number) return "TRUE";
-		return "FALSE";
+		if (var.getType() == VariableType.Number) return TRUE;
+		return FALSE;
 	}
 
 	private String isBool() {
 		Variable var = heap.get(params[0]);
 		if (var == null) {
 			String val = params[0];
-			if (val.contentEquals("TRUE") || val.contentEquals("FALSE")) return "TRUE";
-			return "FALSE";
+			if (val.contentEquals(TRUE) || val.contentEquals(FALSE)) return TRUE;
+			return FALSE;
 		}
 
-		if (var.getType() == VariableType.Bool) return "TRUE";
-		return "FALSE";
+		if (var.getType() == VariableType.Bool) return TRUE;
+		return FALSE;
 	}
 
 	private String isList() {
-		if (heap.get(params[0]) instanceof VariableList) return "TRUE";
-		return "FALSE";
+		if (heap.get(params[0]) instanceof VariableList) return TRUE;
+		return FALSE;
 	}
 
 	private String exit() {
