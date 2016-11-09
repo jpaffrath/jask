@@ -13,10 +13,12 @@ import java.util.List;
 public class Executer {
 	private HashMap<String, Variable> heap;
 	public FunctionExecuter functionExecuter;
+	private InternalFunctions internalFunctions;
 
 	public Executer() {
 		heap = new HashMap<>();
 		functionExecuter = new FunctionExecuter();
+		internalFunctions = new InternalFunctions();
 	}
 
 	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter) {
@@ -57,12 +59,12 @@ public class Executer {
 			}
 		}
 
-		if (InternalFunctions.isInternalFunction(functionName)) {
-			return new Variable(new InternalFunctions(functionHeap, functionName, param).executeFunction());
+		if (internalFunctions.isInternalFunction(functionName)) {
+			return new Variable(internalFunctions.executeFunction(functionHeap, functionName, param));
 		}
 
-		if (InternalFunctions.isInternalListFunction(functionName)) {
-			return new VariableList(new InternalFunctions(functionHeap, functionName, param).executeFunction());
+		if (internalFunctions.isInternalListFunction(functionName)) {
+			return new VariableList(internalFunctions.executeFunction(functionHeap, functionName, param));
 		}
 
 		String varVal = functionExecuter.executeFunction(functionName, functionHeap);

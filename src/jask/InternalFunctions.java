@@ -1,6 +1,5 @@
 package jask;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -12,90 +11,158 @@ import java.util.Scanner;
  *
  */
 public class InternalFunctions {
-	private HashMap<String, Variable> heap;
+	private HashMap<String, InteralFunction> functions;
 	private Scanner scanner;
-	String functionName;
-	private String params[];
-	String param;
 
 	private final String TRUE = "TRUE";
 	private final String FALSE = "FALSE";
 
-	public InternalFunctions(List<Variable> _heap, String functionName, String param) {
-		this.functionName = functionName;
-		this.param = param;
-
-		List<String> temp = Helpers.splitParams(param);
-		this.params = new String[temp.size()];
-		temp.toArray(params);
-
+	public InternalFunctions() {
+		this.functions = new HashMap<String, InteralFunction>();
 		this.scanner = new Scanner(System.in);
-		this.setHeap(_heap);
+		this.setUpFunctions();
 	}
 
-	public static boolean isInternalFunction(String functionName) {
-		List<String> internals = new ArrayList<String>();
-		internals.add("print");
-		internals.add("printLine");
-		internals.add("read");
-		internals.add("listGet");
-		internals.add("listSize");
-		internals.add("listAdd");
-		internals.add("listRemove");
-		internals.add("listSet");
-		internals.add("listToString");
-		internals.add("listContains");
-		internals.add("isString");
-		internals.add("isNumber");
-		internals.add("isBool");
-		internals.add("isList");
-		internals.add("exit");
-		internals.add("_pow");
-		return internals.contains(functionName);
+	private void setUpFunctions() {
+		functions.put("print", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return print(heap, params, false);
+			}
+		});
+		functions.put("printLine", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return print(heap, params, true);
+			}
+		});
+		functions.put("read", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return read();
+			}
+		});
+		functions.put("list", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return list(param);
+			}
+		});
+		functions.put("listGet", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listGet(heap, params);
+			}
+		});
+		functions.put("listSize", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listSize(heap, params);
+			}
+		});
+		functions.put("listAdd", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listAdd(heap, params);
+			}
+		});
+		functions.put("listRemove", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listRemove(heap, params);
+			}
+		});
+		functions.put("listSet", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listSet(heap, params);
+			}
+		});
+		functions.put("listFromString", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listFromString(heap, params);
+			}
+		});
+		functions.put("listToString", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listToString(heap, params);
+			}
+		});
+		functions.put("listContains", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listContains(heap, params);
+			}
+		});
+		functions.put("isString", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return isString(heap, params);
+			}
+		});
+		functions.put("isNumber", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return isNumber(heap, params);
+			}
+		});
+		functions.put("isBool", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return isBool(heap, params);
+			}
+		});
+		functions.put("isList", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return isList(heap, params);
+			}
+		});
+		functions.put("exit", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return exit(heap, params);
+			}
+		});
+		functions.put("_pow", new InteralFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return _pow(heap, params);
+			}
+		});
 	}
 
-	public static boolean isInternalListFunction(String functionName) {
-		List<String> internals = new ArrayList<String>();
-		internals.add("list");
-		internals.add("listFromString");
-		return internals.contains(functionName);
+	public String executeFunction(List<Variable> _heap, String functionName, String param) {
+		List<String> temp = Helpers.splitParams(param);
+		String params[] = new String[temp.size()];
+		params = temp.toArray(params);
+
+		return this.functions.get(functionName).execute(convertHeap(_heap, params), functionName, param, params);
 	}
 
-	public String executeFunction() {
-		switch (functionName) {
-		case "print":          return print(false);
-		case "printLine":      return print(true);
-		case "read":           return read();
-		case "list":           return list();
-		case "listGet":        return listGet();
-		case "listSize":       return listSize();
-		case "listAdd":        return listAdd();
-		case "listRemove":     return listRemove();
-		case "listSet":        return listSet();
-		case "listFromString": return listFromString();
-		case "listToString":   return listToString();
-		case "listContains":   return listContains();
-		case "isString":       return isString();
-		case "isNumber":       return isNumber();
-		case "isBool":         return isBool();
-		case "isList":         return isList();
-		case "exit":           return exit();
-		case "_pow":          return _pow();
-		}
-
-		return "";
+	public boolean isInternalFunction(String functionName) {
+		if (isInternalListFunction(functionName)) return false;
+		return this.functions.containsKey(functionName);
 	}
 
-	public void setHeap(List<Variable> _heap) {
-		heap = new HashMap<>();
-		if (_heap.isEmpty()) return;
+	public boolean isInternalListFunction(String functionName) {
+		return (functionName.contentEquals("list") ||
+				functionName.contentEquals("listFromString"));
+	}
+
+	public HashMap<String, Variable> convertHeap(List<Variable> _heap, String[] params) {
+		HashMap<String, Variable> heap = new HashMap<String, Variable>();
 
 		for (int i = 0; i < params.length; i++) {
 			heap.put(params[i], _heap.get(i));
 		}
+
+		return heap;
 	}
 
-	private String print(boolean newLine) {
+	private String print(HashMap<String, Variable> heap, String[] params, boolean newLine) {
 		String output = "";
 
 		for (String out : params) {
@@ -138,7 +205,7 @@ public class InternalFunctions {
 		return '"' + scanner.nextLine() + '"';
 	}
 
-	private String list() {
+	private String list(String param) {
 		if (!param.contains(":")) {
 			return param + ":";
 		}
@@ -146,7 +213,7 @@ public class InternalFunctions {
 		return param;
 	}
 
-	private String listGet() {
+	private String listGet(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -171,7 +238,7 @@ public class InternalFunctions {
 		return ((VariableList)var).getElementAtIndex((int)index.getDoubleValue());
 	}
 
-	private String listSize() {
+	private String listSize(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -181,7 +248,7 @@ public class InternalFunctions {
 		return Integer.toString(((VariableList)var).getSize());
 	}
 
-	private String listAdd() {
+	private String listAdd(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -205,7 +272,7 @@ public class InternalFunctions {
 		}
 	}
 
-	private String listRemove() {
+	private String listRemove(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -232,7 +299,7 @@ public class InternalFunctions {
 		}
 	}
 
-	private String listSet() {
+	private String listSet(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -268,7 +335,7 @@ public class InternalFunctions {
 		return FALSE;
 	}
 
-	private String listFromString() {
+	private String listFromString(HashMap<String, Variable> heap, String[] params) {
 		String strVal = "";
 		String retVal = "";
 		Variable var = heap.get(params[0]);
@@ -304,7 +371,7 @@ public class InternalFunctions {
 		return retVal;
 	}
 
-	private String listToString() {
+	private String listToString(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -314,7 +381,7 @@ public class InternalFunctions {
 		return ((VariableList)var).convertToString();
 	}
 
-	private String listContains() {
+	private String listContains(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -329,7 +396,7 @@ public class InternalFunctions {
 		return ((VariableList)var).contains(element) ? TRUE : FALSE;
 	}
 
-	private String isString() {
+	private String isString(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null) {
 			if (Variable.isString(params[0])) return TRUE;
@@ -340,7 +407,7 @@ public class InternalFunctions {
 		return FALSE;
 	}
 
-	private String isNumber() {
+	private String isNumber(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null) {
 			if (Variable.isNumber(params[0])) return TRUE;
@@ -351,7 +418,7 @@ public class InternalFunctions {
 		return FALSE;
 	}
 
-	private String isBool() {
+	private String isBool(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		if (var == null) {
 			String val = params[0];
@@ -363,12 +430,12 @@ public class InternalFunctions {
 		return FALSE;
 	}
 
-	private String isList() {
+	private String isList(HashMap<String, Variable> heap, String[] params) {
 		if (heap.get(params[0]) instanceof VariableList) return TRUE;
 		return FALSE;
 	}
 
-	private String exit() {
+	private String exit(HashMap<String, Variable> heap, String[] params) {
 		int code = -1;
 
 		Variable var = heap.get(params[0]);
@@ -380,7 +447,7 @@ public class InternalFunctions {
 		return "NULL";
 	}
 
-	private String _pow() {
+	private String _pow(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
 		Variable exp = heap.get(params[1]);
 		return String.valueOf(Math.pow(var.getDoubleValue(), exp.getDoubleValue()));
