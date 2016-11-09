@@ -39,13 +39,17 @@ public class InternalFunctions {
 		functions.put("read", new InteralFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return read();
+				return '"' + scanner.nextLine() + '"';
 			}
 		});
 		functions.put("list", new InteralFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return list(param);
+				if (!param.contains(":")) {
+					return param + ":";
+				}
+
+				return param;
 			}
 		});
 		functions.put("listGet", new InteralFunction() {
@@ -129,7 +133,7 @@ public class InternalFunctions {
 		functions.put("_pow", new InteralFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return _pow(heap, params);
+				return String.valueOf(Math.pow(heap.get(params[0]).getDoubleValue(), heap.get(params[1]).getDoubleValue()));
 			}
 		});
 	}
@@ -199,18 +203,6 @@ public class InternalFunctions {
 		}
 
 		return TRUE;
-	}
-
-	private String read() {
-		return '"' + scanner.nextLine() + '"';
-	}
-
-	private String list(String param) {
-		if (!param.contains(":")) {
-			return param + ":";
-		}
-
-		return param;
 	}
 
 	private String listGet(HashMap<String, Variable> heap, String[] params) {
@@ -445,11 +437,5 @@ public class InternalFunctions {
 
 		System.exit(code);
 		return "NULL";
-	}
-
-	private String _pow(HashMap<String, Variable> heap, String[] params) {
-		Variable var = heap.get(params[0]);
-		Variable exp = heap.get(params[1]);
-		return String.valueOf(Math.pow(var.getDoubleValue(), exp.getDoubleValue()));
 	}
 }
