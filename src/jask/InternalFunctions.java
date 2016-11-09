@@ -12,14 +12,12 @@ import java.util.Scanner;
  */
 public class InternalFunctions {
 	private HashMap<String, InteralFunction> functions;
-	private Scanner scanner;
 
 	private final String TRUE = "TRUE";
 	private final String FALSE = "FALSE";
 
 	public InternalFunctions() {
 		this.functions = new HashMap<String, InteralFunction>();
-		this.scanner = new Scanner(System.in);
 		this.setUpFunctions();
 	}
 
@@ -39,7 +37,13 @@ public class InternalFunctions {
 		functions.put("read", new InteralFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return '"' + scanner.nextLine() + '"';
+				if (params.length == 0) {
+					Scanner scanner = new Scanner(System.in);
+					String line = '"' + scanner.nextLine() + '"';
+					scanner.close();
+					return line;
+				}
+				return "";
 			}
 		});
 		functions.put("list", new InteralFunction() {
