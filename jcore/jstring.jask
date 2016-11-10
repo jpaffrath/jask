@@ -5,7 +5,7 @@
 * Provides standard functions for string processing
 */
 
-function SUBSTRING(str:s:e)
+function substring(str:s:e)
 	if isString(str) equals FALSE return NULL else endif
 	if isNumber(s) equals FALSE return NULL else endif
 	if isNumber(e) equals FALSE return NULL else endif
@@ -32,7 +32,7 @@ function SUBSTRING(str:s:e)
 	return listToString(sub)
 end
 
-function UPPER(str)
+function upper(str)
 	if isString(str) equals FALSE return NULL else endif
 
 	store listFromString(str) in oldList
@@ -79,7 +79,7 @@ function UPPER(str)
 	return listToString(newList)
 end
 
-function LOWER(str)
+function lower(str)
 	if isString(str) equals FALSE return NULL else endif
 
 	store listFromString(str) in oldList
@@ -126,7 +126,7 @@ function LOWER(str)
 	return listToString(newList)
 end
 
-function SPLIT(str:tok)
+function split(str:tok)
 	if isString(str) equals FALSE return NULL else endif
 	if isString(tok) equals FALSE return NULL else endif
 
@@ -155,7 +155,7 @@ function SPLIT(str:tok)
 	return result
 end
 
-function REVERSE(str)
+function reverse(str)
 	if isString(str) equals FALSE return NULL else endif
 
 	assign listFromString(str) to str
@@ -172,13 +172,13 @@ function REVERSE(str)
 	return listToString(list)
 end
 
-function STRSIZE(str)
+function strsize(str)
 	if isString(str) equals FALSE return NULL else endif
 	assign listFromString(str) to str
 	return listSize(str)
 end
 
-function STRREPEAT(str:num)
+function strrepeat(str:num)
 	if isString(str) equals FALSE return NULL else endif
 	if isNumber(num) equals FALSE return NULL else endif
 	if num smallerequal 0 return NULL else endif
@@ -194,7 +194,7 @@ function STRREPEAT(str:num)
 	return str
 end
 
-function TRIM(str)
+function trim(str)
 	if isString(str) equals FALSE return NULL else endif
 
 	store 0 in lastChar
@@ -226,5 +226,5 @@ function TRIM(str)
 		assign 0 to firstChar
 	else endif
 
-	return SUBSTRING(listToString(str):firstChar:lastChar)
+	return substring(listToString(str):firstChar:lastChar)
 end

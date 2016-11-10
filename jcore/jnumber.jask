@@ -1,17 +1,17 @@
 /*
 * File  : jcore/jnumber
-* Author: Julius Paffrath
+* Author: Julius Paffrath, Gregor Plebanek
 *
 * Provides standard functions for number processing
 */
 
-function MAX(n1:n2) if n1 greater n2 return n1 else return n2 endif end
-function MIN(n1:n2) if n1 smaller n2 return n1 else return n2 endif end
+function max(n1:n2) if n1 greater n2 return n1 else return n2 endif end
+function min(n1:n2) if n1 smaller n2 return n1 else return n2 endif end
 
 function PI() return 3.141592653589793 end
 function E() return 2.718281828459045 end
 
-function FIBONACCI(max)
+function fibonacci(max)
 	store 0 in first
 	store 1 in second
 	store 0 in next
@@ -30,14 +30,14 @@ function FIBONACCI(max)
 	return numbers
 end
 
-function POW(a:x)
+function pow(a:x)
 	if isNumber(a) equals FALSE return NULL else endif
 	if isNumber(x) equals FALSE return NULL else endif
 
 	return _pow(a:x)
 end
 
-function ABS(x)
+function abs(x)
 	store 0 in m
 	assign x times -1 to m
 
@@ -48,7 +48,7 @@ function ABS(x)
 	endif
 end
 
-function ROOT(x:n)
+function root(x:n)
 	if x smaller 0 return NULL else endif
 
 	store n in m
@@ -56,14 +56,14 @@ function ROOT(x:n)
 	
 	store x in xn
 	assign xn divide 2 to xn
-	store POW(xn:n) in p
+	store pow(xn:n) in p
 	
 	store 0 in xnext
 	assign m times p to xnext
 	assign xnext plus x to xnext
 
 	store 0 in tmp
-	assign POW(xn:m) to p
+	assign pow(xn:m) to p
 	assign n times p to tmp
 	assign xnext divide tmp to xnext
 	
@@ -73,18 +73,18 @@ function ROOT(x:n)
 	store 0 in i
 
 	run i to 100 with i plus 1
-		assign ABS(xnext) to error
-		assign ABS(xn) to trash
+		assign abs(xnext) to error
+		assign abs(xn) to trash
 		assign error minus trash to error
-		assign ABS(error) to error
+		assign abs(error) to error
 
 		if error smaller EPSILON return xnext else endif
 
 		assign xnext to xn
-		assign POW(xn:n) to p
+		assign pow(xn:n) to p
 		assign m times p to xnext
 		assign xnext plus x to xnext
-		assign POW(xn:m) to p
+		assign pow(xn:m) to p
 		assign n times p to tmp
 		assign xnext divide tmp to xnext
 	endrun
@@ -92,11 +92,11 @@ function ROOT(x:n)
 	return xnext
 end
 
-function SQRT(x)
-	return ROOT(x:2)
+function sqrt(x)
+	return root(x:2)
 end
 
-function FACTORIAL(x)
+function factorial(x)
 	if x smaller 0 return NULL else endif
 
 	store 1 in fac
@@ -108,10 +108,9 @@ function FACTORIAL(x)
 	endrun
 
 	return fac
-
 end
 
-function HASPLACES(n)
+function hasPlaces(n)
 	convert n to string
 	assign listFromString(n) to n
 	store 1 in i

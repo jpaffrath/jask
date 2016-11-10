@@ -5,14 +5,14 @@
 * Provides standard functions for reading and processing input
 */
 
-function READNUMBER()
+function readNumber()
 	store read() in input
 	convert input to number
 	if input equals NULL return NULL else endif
 	return input
 end
 
-function READLIST(number)
+function readList(number)
 	if number smallerequal 0 return NULL else endif
 	if isNumber(number) equals FALSE return NULL else endif
 
