@@ -38,4 +38,8 @@ public class FunctionExecuter {
 	public void addFunction(Function function) {
 		functions.put(function.getName(), function);
 	}
+
+	public boolean hasFunction(String name) {
+		return this.functions.keySet().contains(name);
+	}
 }
