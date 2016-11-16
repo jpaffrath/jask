@@ -39,6 +39,14 @@ public class FunctionExecuter {
 		functions.put(function.getName(), function);
 	}
 
+	public Function getFunction(String name) {
+		if (this.hasFunction(name)) {
+			return this.functions.get(name);
+		}
+
+		return null;
+	}
+
 	public boolean hasFunction(String name) {
 		return this.functions.keySet().contains(name);
 	}
