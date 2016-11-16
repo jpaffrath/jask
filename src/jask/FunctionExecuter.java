@@ -24,7 +24,7 @@ public class FunctionExecuter {
 	 * @return result of the function
 	 */
 	public String executeFunction(String name, List<Variable> heap) {
-		if (!functions.containsKey(name)) {
+		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
 			return "NULL";
 		}
@@ -48,6 +48,6 @@ public class FunctionExecuter {
 	}
 
 	public boolean hasFunction(String name) {
-		return this.functions.keySet().contains(name);
+		return this.functions.containsKey(name);
 	}
 }
