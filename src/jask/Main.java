@@ -175,10 +175,38 @@ public class Main {
 			return;
 		}
 
-		String file = args[0];
+		String file = "";
 
-		if (!Helpers.checkFile(file)) {
-			Error.terminateInterpret("The file '" + file + "' can not be found!");
+		boolean flagHelp = false;
+		boolean flagVersion = false;
+
+		for (int i = 0; i < args.length; i++) {
+			String arg = args[i];
+
+			if (arg.contentEquals("-h") || arg.contentEquals("--help")) {
+				flagHelp = true;
+			}
+			if (arg.contentEquals("-v") || arg.contentEquals("--version")) {
+				flagVersion = true;
+			}
+			if (Helpers.checkFile(arg)) {
+				file = arg;
+			}
+		}
+
+		if (flagHelp) {
+			System.out.println("jask interpreter version " + version);
+			System.out.println("Need help? Visit the jask project on GitHub: github.com/jpaffrath/jask");
+			return;
+		}
+
+		if (flagVersion) {
+			System.out.println("jask interpreter version " + version);
+			return;
+		}
+
+		if (file == "") {
+			Error.terminateInterpret("Input file can not be found!");
 		}
 
 		List<String> content = setUpEnv(args);
