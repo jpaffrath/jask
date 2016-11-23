@@ -48,7 +48,7 @@ public class Executer {
 					functionHeap.add(executeFunction(temp));
 				}
 				else {
-					Variable var = heap.get(params.get(i));
+					Variable var = getVariableFromHeap(params.get(i));
 					if (var == null) {
 						Error.printErrorVariableNotDefined(params.get(i));
 					}
@@ -79,7 +79,7 @@ public class Executer {
 			String varStr = tokens.get(1);
 
 			if (!Interpreter.isFunction(varStr)) {
-				Variable var = heap.get(varStr);
+				Variable var = getVariableFromHeap(varStr);
 				if (var == null) {
 					heap.put(tokens.get(3), new Variable(varStr));
 				}
@@ -101,9 +101,9 @@ public class Executer {
 		String var2Str = tokens.get(3);
 		String varDStr = tokens.get(5);
 
-		Variable var1 = heap.get(var1Str);
-		Variable var2 = heap.get(var2Str);
-		Variable varD = heap.get(varDStr);
+		Variable var1 = getVariableFromHeap(var1Str);
+		Variable var2 = getVariableFromHeap(var2Str);
+		Variable varD = getVariableFromHeap(varDStr);
 
 		if (varD == null) {
 			Error.printErrorVariableNotDefined(varDStr);
@@ -166,7 +166,7 @@ public class Executer {
 		}
 		else {
 			if (heap.containsKey(variableValue)) {
-				heap.put(variableName, new Variable(heap.get(variableValue)));
+				heap.put(variableName, new Variable(getVariableFromHeap(variableValue)));
 			}
 			else {
 				Variable var = new Variable(variableValue);
@@ -201,8 +201,8 @@ public class Executer {
 			return ret;
 		}
 
-		Variable runner = heap.get(tokens.get(1));
-		Variable maxVal = heap.get(tokens.get(3));
+		Variable runner = getVariableFromHeap(tokens.get(1));
+		Variable maxVal = getVariableFromHeap(tokens.get(3));
 
 		if (maxVal == null) {
 			if (Variable.isNumber(tokens.get(3))) {
@@ -232,7 +232,7 @@ public class Executer {
 			ret = interpreter.interpret(tokens.subList(8, tokens.size() - 1));
 			if (ret != "") break;
 			executeAssign(assignTokens);
-			i = (int)heap.get(tokens.get(1)).getDoubleValue();
+			i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
 		}
 
 		return ret;
@@ -242,7 +242,7 @@ public class Executer {
 		String variableName = tokens.get(1);
 		String convert = tokens.get(3);
 
-		Variable var = heap.get(variableName);
+		Variable var = getVariableFromHeap(variableName);
 		if (var == null) {
 			Error.printErrorVariableNotDefined(variableName);
 		}
@@ -279,14 +279,14 @@ public class Executer {
 			var1 = executeFunction(tokens.get(1));
 		}
 		else {
-			var1 = heap.get(tokens.get(1));
+			var1 = getVariableFromHeap(tokens.get(1));
 		}
 
 		if (Interpreter.isFunction(tokens.get(3))) {
 			var2 = executeFunction(tokens.get(3));
 		}
 		else {
-			var2 = heap.get(tokens.get(3));
+			var2 = getVariableFromHeap(tokens.get(3));
 		}
 
 		String operator = tokens.get(2);
@@ -350,7 +350,7 @@ public class Executer {
 				var1.getType() == VariableType.Number &&
 				var2.getType() == VariableType.Number) {
 
-			Variable var3 = heap.get(tokens.get(5));
+			Variable var3 = getVariableFromHeap(tokens.get(5));
 			if (var3 == null) {
 				var3 = new Variable(tokens.get(5));
 			}
