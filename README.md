@@ -153,7 +153,7 @@ function myModuleFunction()
   print("Hello! I am a module!")
 end
 ```
-Let's say this is saved in a file called _myModule.jask'_.
+Let's say this is saved in a file called _myModule.jask_.
 Now you can import the module, called _myModule_ (without the extension '.jask'):
 ```C
 use myModule
@@ -161,7 +161,7 @@ myModuleFunction()
 ```
 You can also define a path in the use statement:
 ```C
-use my/local/path/to/library/myLibrary
+use my/local/path/to/library/myModule
 myModuleFunction()
 ```
 Want more examples? Visit [Modules wiki](https://github.com/jpaffrath/jask/wiki/Modules)!
