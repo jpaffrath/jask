@@ -143,25 +143,25 @@ convert num to number
 convert num to string
 ```
 
-### Importing other files
+### Modules
 You can import other jask files with the keyword 'use'.
-If you import a file, jask searches for files in the directory where jask has been executed.
-See the following example how to import files:
+An imported file is called a _module_.
+If you import a module, jask searches for files in the directory where it has been executed.
+See the following example how to import a module:
 ```C
-function myLibFunction()
-  print("This is a library!")
+function myModuleFunction()
+  print("Hello! I am a module!")
 end
 ```
-If the imported file has jask code outside a function, it will be interpreted by importing the file.
-Your file:
+Let's say this is saved in a file called _myModule.jask'_.
+Now you can import the module, called _myModule_ (without the extension '.jask'):
 ```C
-use myLibrary
-
-myLibFunction()
+use myModule
+myModuleFunction()
 ```
 You can also define a path in the use statement:
 ```C
 use my/local/path/to/library/myLibrary
-
-myLibFunction()
+myModuleFunction()
 ```
+Want more examples? Visit [Modules wiki](https://github.com/jpaffrath/jask/wiki/Modules)!
