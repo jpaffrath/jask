@@ -234,6 +234,18 @@ public class Interpreter {
 				i += 3;
 			}
 
+			// check use statement
+			else if (t.startsWith("use")) {
+				String module = tokens.get(++i) + ".jask";
+
+				if (!Helpers.checkFile(module)) {
+					Error.terminateInterpret("Can't find module named '" + module + "'");
+				}
+
+				List<String> moduleContent = Helpers.readFile(module);
+				new Interpreter().interpret(new Tokenizer().parse(moduleContent));
+			}
+
 			retVal = executer.execute(exp);
 			exp = null;
 

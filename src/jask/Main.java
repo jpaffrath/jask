@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class Main {
 	private static final String version = "0.0.1";
-	private static ArrayList<String> loadedUses = new ArrayList<String>();
 
 	/**
 	 * Creates jask code for the global argument list
@@ -26,40 +25,6 @@ public class Main {
 		}
 
 		return env;
-	}
-
-	/**
-	 * Searches for "use" statements and imports the files
-	 *
-	 * @param content content from main file
-	 * @return tokens from main file with imported tokens
-	 */
-	private static List<String> preload(List<String> content) {
-		for (int i = 0; i < content.size(); i++) {
-			String c = content.get(i);
-			if (c.length() < 3) continue;
-
-			String part = c.substring(0, 3);
-			if (part.contentEquals("use")) {
-				String fileName = c.substring(4, c.length()) + ".jask";
-				if (!loadedUses.contains(fileName)) {
-					if (!Helpers.checkFile(fileName)) {
-						Error.terminateInterpret("The file '" + fileName + "' can not be found!");
-					}
-
-					List<String> importContent = Helpers.readFile(fileName);
-					// removes the "use file.jask" statement
-					content.remove(i);
-					// imports file content
-					loadedUses.add(fileName);
-					importContent = preload(importContent);
-					importContent.addAll(content);
-					content = importContent;
-				}
-			}
-		}
-
-		return content;
 	}
 
 	/**
@@ -211,9 +176,6 @@ public class Main {
 
 		List<String> content = setUpEnv(args);
 		content.addAll(Helpers.readFile(file));
-		loadedUses.add(file);
-		content = preload(content);
-
 		new Interpreter().interpret(new Tokenizer().parse(content));
 	}
 }
