@@ -243,7 +243,10 @@ public class Interpreter {
 				}
 
 				List<String> moduleContent = Helpers.readFile(module);
-				new Interpreter().interpret(new Tokenizer().parse(moduleContent));
+				Interpreter moduleInterpreter = new Interpreter();
+
+				moduleInterpreter.interpret(new Tokenizer().parse(moduleContent));
+				this.executer.addModule(moduleInterpreter.executer);
 			}
 
 			retVal = executer.execute(exp);

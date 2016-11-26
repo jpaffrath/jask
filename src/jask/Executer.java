@@ -14,11 +14,13 @@ public class Executer {
 	private HashMap<String, Variable> heap;
 	public FunctionExecuter functionExecuter;
 	private InternalFunctions internalFunctions;
+	private List<Executer> modules;
 
 	public Executer() {
 		heap = new HashMap<>();
 		functionExecuter = new FunctionExecuter();
 		internalFunctions = new InternalFunctions();
+		modules = new ArrayList<Executer>();
 	}
 
 	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter) {
@@ -71,6 +73,10 @@ public class Executer {
 		if (varVal.isEmpty()) return new Variable("NULL");
 		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
 		return new Variable(varVal);
+	}
+
+	public void addModule(Executer module) {
+		this.modules.add(module);
 	}
 
 	private void executeAssign(List<String> tokens) {
