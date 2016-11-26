@@ -69,7 +69,27 @@ public class Executer {
 			return new VariableList(internalFunctions.executeFunction(functionHeap, functionName, param));
 		}
 
-		String varVal = functionExecuter.executeFunction(functionName, functionHeap);
+		String varVal = "";
+
+		if (functionExecuter.hasFunction(functionName)) {
+			varVal = functionExecuter.executeFunction(functionName, functionHeap);
+		}
+		else {
+			boolean functionFound = false;
+
+			for (Executer module : this.modules) {
+				if (module.functionExecuter.hasFunction(functionName)) {
+					varVal = module.functionExecuter.executeFunction(functionName, functionHeap);
+					functionFound = true;
+					break;
+				}
+			}
+
+			if (!functionFound) {
+				Error.terminateInterpret("The function '" + functionName + "' is not defined!");
+			}
+		}
+
 		if (varVal.isEmpty()) return new Variable("NULL");
 		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
 		return new Variable(varVal);
