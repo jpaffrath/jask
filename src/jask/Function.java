@@ -32,14 +32,14 @@ public class Function {
 	/**
 	 * Sets the heap of the function
 	 *
-	 * @param _heap list of variables
+	 * @param heap list of variables
 	 */
-	public void setHeap(List<Variable> _heap) {
-		heap = new HashMap<>();
-		if (_heap.isEmpty()) return;
+	public void setHeap(List<Variable> heap) {
+		this.heap = new HashMap<>();
+		if (heap.isEmpty()) return;
 
 		for (int i = 0; i < params.length; i++) {
-			heap.put(params[i], _heap.get(i));
+			this.heap.put(params[i], heap.get(i));
 		}
 	}
 

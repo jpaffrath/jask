@@ -100,7 +100,7 @@ public class Variable {
 	}
 
 	public String getStringValue() {
-		return stringValue;
+		return this.stringValue;
 	}
 
 	public void setStringValue(String stringValue) {
@@ -109,7 +109,7 @@ public class Variable {
 	}
 
 	public double getDoubleValue() {
-		return doubleValue;
+		return this.doubleValue;
 	}
 
 	public void setDoubleValue(double doubleValue) {
@@ -118,7 +118,7 @@ public class Variable {
 	}
 
 	public boolean getBoolValue() {
-		return boolValue;
+		return this.boolValue;
 	}
 
 	public void setBoolValue(boolean boolValue) {
@@ -127,7 +127,7 @@ public class Variable {
 	}
 
 	public VariableType getType() {
-		return type;
+		return this.type;
 	}
 
 	protected void setType(VariableType type) {
@@ -136,19 +136,19 @@ public class Variable {
 
 	@Override
 	public String toString() {
-		if (type == VariableType.String) return stringValue;
-		if (type == VariableType.Number) {
+		if (this.type == VariableType.String) return this.stringValue;
+		if (this.type == VariableType.Number) {
 			// if double has no decimal part...
-			if (doubleValue % 1 == 0) {
+			if (this.doubleValue % 1 == 0) {
 				// ...trim values like 2.0 to 2
-				String temp = String.valueOf(doubleValue);
+				String temp = String.valueOf(this.doubleValue);
 				return temp.substring(0, temp.indexOf('.'));
 			}
-			return String.valueOf(doubleValue);
+			return String.valueOf(this.doubleValue);
 		}
-		if (type == VariableType.Bool)   return this.boolValue ? "TRUE" : "FALSE";
+		if (this.type == VariableType.Bool)   return this.boolValue ? "TRUE" : "FALSE";
 
-		return  "NULL";
+		return "NULL";
 	}
 
 	public boolean equals(Variable var) {

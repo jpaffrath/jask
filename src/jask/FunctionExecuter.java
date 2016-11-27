@@ -13,7 +13,7 @@ public class FunctionExecuter {
 	private HashMap<String, Function> functions;
 
 	public FunctionExecuter() {
-		functions = new HashMap<>();
+		this.functions = new HashMap<>();
 	}
 
 	/**
@@ -29,14 +29,14 @@ public class FunctionExecuter {
 			return "NULL";
 		}
 
-		Function function = functions.get(name);
+		Function function = this.functions.get(name);
 		function.setHeap(heap);
 		Interpreter interpreter = new Interpreter(function, this);
 		return interpreter.interpret(function.getTokens());
 	}
 
 	public void addFunction(Function function) {
-		functions.put(function.getName(), function);
+		this.functions.put(function.getName(), function);
 	}
 
 	public Function getFunction(String name) {

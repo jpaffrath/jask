@@ -17,10 +17,10 @@ public class Executer {
 	private List<Executer> modules;
 
 	public Executer() {
-		heap = new HashMap<>();
-		functionExecuter = new FunctionExecuter();
-		internalFunctions = new InternalFunctions();
-		modules = new ArrayList<Executer>();
+		this.heap = new HashMap<>();
+		this.functionExecuter = new FunctionExecuter();
+		this.internalFunctions = new InternalFunctions();
+		this.modules = new ArrayList<Executer>();
 	}
 
 	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter) {
@@ -30,7 +30,7 @@ public class Executer {
 	}
 
 	public Variable getVariableFromHeap(String var) {
-		return heap.get(var);
+		return this.heap.get(var);
 	}
 
 	public Variable executeFunction(String token) {
@@ -61,18 +61,18 @@ public class Executer {
 			}
 		}
 
-		if (internalFunctions.isInternalFunction(functionName)) {
-			return new Variable(internalFunctions.executeFunction(functionHeap, functionName, param));
+		if (this.internalFunctions.isInternalFunction(functionName)) {
+			return new Variable(this.internalFunctions.executeFunction(functionHeap, functionName, param));
 		}
 
-		if (internalFunctions.isInternalListFunction(functionName)) {
-			return new VariableList(internalFunctions.executeFunction(functionHeap, functionName, param));
+		if (this.internalFunctions.isInternalListFunction(functionName)) {
+			return new VariableList(this.internalFunctions.executeFunction(functionHeap, functionName, param));
 		}
 
 		String varVal = "";
 
-		if (functionExecuter.hasFunction(functionName)) {
-			varVal = functionExecuter.executeFunction(functionName, functionHeap);
+		if (this.functionExecuter.hasFunction(functionName)) {
+			varVal = this.functionExecuter.executeFunction(functionName, functionHeap);
 		}
 		else {
 			boolean functionFound = false;
@@ -107,17 +107,17 @@ public class Executer {
 			if (!Interpreter.isFunction(varStr)) {
 				Variable var = getVariableFromHeap(varStr);
 				if (var == null) {
-					heap.put(tokens.get(3), new Variable(varStr));
+					this.heap.put(tokens.get(3), new Variable(varStr));
 				}
 				else if (var instanceof VariableList){
-					heap.put(tokens.get(3), new VariableList(var.toString()));
+					this.heap.put(tokens.get(3), new VariableList(var.toString()));
 				}
 				else {
-					heap.put(tokens.get(3), new Variable(var));
+					this.heap.put(tokens.get(3), new Variable(var));
 				}
 			}
 			else {
-				heap.put(tokens.get(3), executeFunction(varStr));
+				this.heap.put(tokens.get(3), executeFunction(varStr));
 			}
 			return;
 		}
@@ -163,14 +163,14 @@ public class Executer {
 				varD.setDoubleValue(var1.getDoubleValue() % var2.getDoubleValue());
 			}
 
-			heap.put(tokens.get(5), varD);
+			this.heap.put(tokens.get(5), varD);
 			return;
 		}
 
 		if (var1.getType() == VariableType.String && var2.getType() == VariableType.String) {
 			if (operator.contentEquals("plus")) {
 				varD.setStringValue(var1.getStringValue() + var2.getStringValue());
-				heap.put(tokens.get(5), varD);
+				this.heap.put(tokens.get(5), varD);
 				return;
 			}
 		}
@@ -182,17 +182,17 @@ public class Executer {
 		String variableValue = tokens.get(1);
 		String variableName = tokens.get(3);
 
-		if (heap.containsKey(variableName)) {
+		if (this.heap.containsKey(variableName)) {
 			Error.printErrorVariableAlreadyDefined(variableName);
 			return;
 		}
 
 		if (Interpreter.isFunction(variableValue)) {
-			heap.put(variableName, executeFunction(variableValue));
+			this.heap.put(variableName, executeFunction(variableValue));
 		}
 		else {
-			if (heap.containsKey(variableValue)) {
-				heap.put(variableName, new Variable(getVariableFromHeap(variableValue)));
+			if (this.heap.containsKey(variableValue)) {
+				this.heap.put(variableName, new Variable(getVariableFromHeap(variableValue)));
 			}
 			else {
 				Variable var = new Variable(variableValue);
@@ -201,7 +201,7 @@ public class Executer {
 					return;
 				}
 
-				heap.put(variableName, var);
+				this.heap.put(variableName, var);
 			}
 		}
 	}
@@ -275,7 +275,7 @@ public class Executer {
 		else {
 			if (convert.contentEquals("string") && var.getType() == VariableType.Number) {
 				String temp = "\"" + var.toString() + "\"";
-				heap.put(variableName, new Variable(temp));
+				this.heap.put(variableName, new Variable(temp));
 			}
 			else if (convert.contentEquals("number") && var.getType() == VariableType.String) {
 				String strValue = var.getStringValue().replace("\"", "");
@@ -288,7 +288,7 @@ public class Executer {
 					var.setType(VariableType.NoType);
 				}
 
-				heap.put(variableName, var);
+				this.heap.put(variableName, var);
 			}
 			else {
 				Error.printErrorConvertNotApplicable(convert, variableName);

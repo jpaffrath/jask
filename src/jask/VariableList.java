@@ -14,46 +14,46 @@ public class VariableList extends Variable {
 
 	public VariableList(String genericValue) {
 		super();
-		values = new ArrayList<Variable>();
+		this.values = new ArrayList<Variable>();
 
 		for (String curVal : genericValue.split(":")) {
-			values.add(new Variable(curVal));
+			this.values.add(new Variable(curVal));
 		}
 	}
 
 	public VariableList(VariableList list) {
 		super();
-		values = new ArrayList<Variable>();
-		values.add(list);
+		this.values = new ArrayList<Variable>();
+		this.values.add(list);
 	}
 
 	public boolean addElement(String genericValue) {
-		values.add(new Variable(genericValue));
+		this.values.add(new Variable(genericValue));
 		return true;
 	}
 
 	public boolean addElement(Variable toAdd) {
-		values.add(new Variable(toAdd));
+		this.values.add(new Variable(toAdd));
 		return true;
 	}
 
 	public boolean setElement(int index, Variable toSet) {
-		if (index >= values.size()) return false;
-		values.set(index, new Variable(toSet));
+		if (index >= this.values.size()) return false;
+		this.values.set(index, new Variable(toSet));
 		return true;
 	}
 
 	public boolean removeElement(int index) {
-		if (index >= values.size()) {
+		if (index >= this.values.size()) {
 			Error.printErrorNoValueAtIndex(index);
 			return false;
 		}
-		values.remove(index);
+		this.values.remove(index);
 		return true;
 	}
 
 	public int getSize() {
-		return values.size();
+		return this.values.size();
 	}
 
 	@Override
@@ -61,18 +61,18 @@ public class VariableList extends Variable {
 		StringBuilder builder = new StringBuilder();
 		Variable curVal = null;
 
-		if (values.size() == 1) {
-			curVal = values.get(0);
+		if (this.values.size() == 1) {
+			curVal = this.values.get(0);
 			if (curVal.getType() == VariableType.String) {
 				return "\"" + curVal.toString() +"\":";
 			}
 			return curVal.toString() + ":";
 		}
 
-		for (int i = 0; i < values.size(); i++) {
-			curVal = values.get(i);
+		for (int i = 0; i < this.values.size(); i++) {
+			curVal = this.values.get(i);
 
-			if (i == values.size()-1) {
+			if (i == this.values.size()-1) {
 				if (curVal.getType() == VariableType.String) {
 					builder.append("\"" + curVal.toString() + "\"");
 				}
@@ -96,12 +96,12 @@ public class VariableList extends Variable {
 	public String getPrintString() {
 		StringBuilder builder = new StringBuilder("[");
 
-		for (int i = 0; i < values.size(); i++) {
-			if (i == values.size()-1) {
-				builder.append(values.get(i).toString());
+		for (int i = 0; i < this.values.size(); i++) {
+			if (i == this.values.size()-1) {
+				builder.append(this.values.get(i).toString());
 			}
 			else {
-				builder.append(values.get(i).toString() + ", ");
+				builder.append(this.values.get(i).toString() + ", ");
 			}
 		}
 
@@ -111,21 +111,21 @@ public class VariableList extends Variable {
 	}
 
 	public String getElementAtIndex(int i) {
-		if (i > values.size()-1) {
+		if (i > this.values.size()-1) {
 			Error.printErrorNoValueAtIndex(i);
 			return "";
 		}
 
-		Variable retVar = values.get(i);
+		Variable retVar = this.values.get(i);
 		if (retVar.getType() == VariableType.String) return "\"" + retVar.toString() + "\"";
 
-		return values.get(i).toString();
+		return this.values.get(i).toString();
 	}
 
 	public String convertToString() {
 		String ret = "\"";
 
-		for (Variable var : values) {
+		for (Variable var : this.values) {
 			ret += var.toString();
 		}
 
@@ -133,7 +133,7 @@ public class VariableList extends Variable {
 	}
 
 	public boolean contains(Variable var) {
-		for (Variable v : values) {
+		for (Variable v : this.values) {
 			if (v.equals(var)) return true;
 		}
 

@@ -18,10 +18,10 @@ public class Expression {
 	}
 
 	public ExpressionType getType() {
-		return type;
+		return this.type;
 	}
 
 	public List<String> getTokens(){
-		return tokens;
+		return this.tokens;
 	}
 }

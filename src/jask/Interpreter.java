@@ -16,47 +16,47 @@ public class Interpreter {
 	private Executer executer;
 
 	public Interpreter() {
-		operators = new ArrayList<String>();
-		operators.add("plus");
-		operators.add("minus");
-		operators.add("times");
-		operators.add("divide");
-		operators.add("store");
-		operators.add("assign");
-		operators.add("mod");
-		operators.add("equals");
-		operators.add("unequals");
-		operators.add("greater");
-		operators.add("smaller");
-		operators.add("greaterequal");
-		operators.add("smallerequal");
+		this.operators = new ArrayList<String>();
+		this.operators.add("plus");
+		this.operators.add("minus");
+		this.operators.add("times");
+		this.operators.add("divide");
+		this.operators.add("store");
+		this.operators.add("assign");
+		this.operators.add("mod");
+		this.operators.add("equals");
+		this.operators.add("unequals");
+		this.operators.add("greater");
+		this.operators.add("smaller");
+		this.operators.add("greaterequal");
+		this.operators.add("smallerequal");
 
-		keywords = new ArrayList<String>(operators);
-		keywords.add("function");
-		keywords.add("end");
-		keywords.add("if");
-		keywords.add("else");
-		keywords.add("return");
-		keywords.add("convert");
-		keywords.add("to");
-		keywords.add("number");
-		keywords.add("string");
-		keywords.add("in");
-		keywords.add("run");
-		keywords.add("with");
-		keywords.add("while");
+		this.keywords = new ArrayList<String>(this.operators);
+		this.keywords.add("function");
+		this.keywords.add("end");
+		this.keywords.add("if");
+		this.keywords.add("else");
+		this.keywords.add("return");
+		this.keywords.add("convert");
+		this.keywords.add("to");
+		this.keywords.add("number");
+		this.keywords.add("string");
+		this.keywords.add("in");
+		this.keywords.add("run");
+		this.keywords.add("with");
+		this.keywords.add("while");
 
-		values = new ArrayList<String>();
-		values.add("TRUE");
-		values.add("FALSE");
-		values.add("NULL");
+		this.values = new ArrayList<String>();
+		this.values.add("TRUE");
+		this.values.add("FALSE");
+		this.values.add("NULL");
 
-		executer = new Executer();
+		this.executer = new Executer();
 	}
 
 	public Interpreter(Function function, FunctionExecuter functionExecuter) {
 		this();
-		executer = new Executer(function.getHeap(), functionExecuter);
+		this.executer = new Executer(function.getHeap(), functionExecuter);
 	}
 
 	public Interpreter(Executer executer) {
@@ -65,15 +65,15 @@ public class Interpreter {
 	}
 
 	private boolean isOperator(String t) {
-		return operators.contains(t);
+		return this.operators.contains(t);
 	}
 
 	private boolean isKeyword(String t) {
-		return keywords.contains(t);
+		return this.keywords.contains(t);
 	}
 
 	private boolean isValue(String t) {
-		return values.contains(t);
+		return this.values.contains(t);
 	}
 
 	public static boolean isFunction(String t) {
@@ -96,10 +96,10 @@ public class Interpreter {
 				Variable ret = null;
 
 				if (isFunction(str)) {
-					ret = executer.executeFunction(str);
+					ret = this.executer.executeFunction(str);
 				}
 				else {
-					ret = executer.getVariableFromHeap(str);
+					ret = this.executer.getVariableFromHeap(str);
 				}
 
 				if (ret == null) {
@@ -171,7 +171,7 @@ public class Interpreter {
 					functionToken.add(runner);
 					runner = tokens.get(i+1);
 				}
-				executer.functionExecuter.addFunction(new Function(name, functionToken));
+				this.executer.functionExecuter.addFunction(new Function(name, functionToken));
 				continue;
 			}
 
@@ -181,7 +181,7 @@ public class Interpreter {
 				if (tokens.get(i+2).contentEquals("mod")) {
 					ifType += 2;
 				}
-				if (executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+ifType+1)))) {
+				if (this.executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+ifType+1)))) {
 					i += ifType;
 					ifRunning = true;
 
@@ -249,7 +249,7 @@ public class Interpreter {
 				this.executer.addModule(moduleInterpreter.executer);
 			}
 
-			retVal = executer.execute(exp);
+			retVal = this.executer.execute(exp);
 			exp = null;
 
 			if (retVal != "") return retVal;
