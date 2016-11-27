@@ -30,9 +30,11 @@ public class FunctionExecuter {
 		}
 
 		Function function = this.functions.get(name);
-		function.setHeap(heap);
+		function.setParameterHeap(heap);
 		Interpreter interpreter = new Interpreter(function, this);
-		return interpreter.interpret(function.getTokens());
+		String res = interpreter.interpret(function.getTokens());
+		function.destroyHeap();
+		return res;
 	}
 
 	public void addFunction(Function function) {

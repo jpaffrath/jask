@@ -24,23 +24,27 @@ public class Function {
 	public Function(String initialString, List<String> tokens) {
 		this.name = initialString.substring(0, initialString.indexOf('('));
 		this.tokens = tokens;
+		this.heap = new HashMap<>();
 
 		String param = initialString.substring(initialString.indexOf('(')+1, initialString.indexOf(')'));
 		this.params = param.split(":");
 	}
 
 	/**
-	 * Sets the heap of the function
+	 * Sets the parameter heap of the function
 	 *
-	 * @param heap list of variables
+	 * @param parameterHeap list of variables
 	 */
-	public void setHeap(List<Variable> heap) {
-		this.heap = new HashMap<>();
-		if (heap.isEmpty()) return;
+	public void setParameterHeap(List<Variable> parameterHeap) {
+		if (parameterHeap.isEmpty()) return;
 
 		for (int i = 0; i < params.length; i++) {
-			this.heap.put(params[i], heap.get(i));
+			this.heap.put(params[i], parameterHeap.get(i));
 		}
+	}
+
+	public void setHeap(HashMap<String, Variable> heap) {
+		this.heap = heap;
 	}
 
 	public HashMap<String, Variable> getHeap() {
@@ -53,5 +57,14 @@ public class Function {
 
 	public List<String> getTokens() {
 		return this.tokens;
+	}
+
+	/**
+	 * Destroys the heap of the function
+	 *
+	 * Must be called after the function has been executed!
+	 */
+	public void destroyHeap() {
+		this.heap.clear();
 	}
 }
