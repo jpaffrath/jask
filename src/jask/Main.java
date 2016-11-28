@@ -107,18 +107,6 @@ public class Main {
 				}
 			}
 
-			// if a file should be imported, try to read the file and import the content
-			if (line.length() > 2 && line.substring(0, 3).contentEquals("use")) {
-				String file = line.substring(4, line.length()) + ".jask";
-				if (Helpers.checkFile(file)) {
-					tempList.addAll(Helpers.readFile(file));
-				}
-				else {
-					Error.printErrorFileNotFound(file);
-					continue;
-				}
-			}
-
 			tempList.add(line);
 			System.out.print("jask ~> ");
 
