@@ -8,39 +8,11 @@ public class InteractiveMode {
 	private static final int historyMax = 99;
 
 	private String version;
-	private String history[];
-	private int historyIndex;
+	private History history;
 
 	public InteractiveMode(String version) {
 		this.version = version;
-		this.history = new String[historyMax];
-		this.historyIndex = 0;
-	}
-
-	/**
-	 * Adds a line to the history
-	 *
-	 * @param line line of jask code
-	 */
-	private void addToHistory(String line) {
-		if (line.isEmpty()) return;
-
-		// if the history is full, clear it
-		if (historyIndex + 1 > historyMax) {
-			history = new String[historyMax];
-			historyIndex = 0;
-		}
-
-		history[historyIndex++] = line;
-	}
-
-	/**
-	 * Prints the history to the standard out
-	 */
-	private void printHistory() {
-		for (int i = 0; i < historyIndex; i++) {
-			System.out.println("[" + (i + 1) +"]" + " " + history[i]);
-		}
+		this.history = new History(historyMax);
 	}
 
 	/**
@@ -65,7 +37,7 @@ public class InteractiveMode {
 
 			// prints the history
 			if (line.contentEquals("history")) {
-				this.printHistory();
+				this.history.printHistory();
 				System.out.print("jask ~> ");
 				continue;
 			}
@@ -131,7 +103,7 @@ public class InteractiveMode {
 			}
 
 			tempList.add(line);
-			this.addToHistory(line);
+			this.history.addToHistory(line);
 			System.out.print("jask ~> ");
 
 			interpreter.interpret(tokenizer.parse(tempList));
