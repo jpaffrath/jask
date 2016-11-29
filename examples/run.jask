@@ -1,3 +1,7 @@
+/*
+* run loops
+*/
+
 store 1 in i
 store 10 in max
 
@@ -15,4 +19,14 @@ run i to max with i plus 1
 		print(j)
 	endrun
 	assign 1 to j
+endrun
+
+/*
+* while loops
+*/
+
+store TRUE in val
+
+while val equals TRUE
+    print("val is TRUE!")
 endrun
