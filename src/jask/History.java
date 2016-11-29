@@ -37,6 +37,9 @@ public class History {
 		}
 	}
 
+	/**
+	 * Prints the history descending
+	 */
 	public void printHistoryDESC() {
 		for (int i = this.historyIndex-1; i >= 0; i--) {
 			System.out.println("[" + (i + 1) +"]" + " " + this.history[i]);
