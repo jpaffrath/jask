@@ -5,14 +5,46 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InteractiveMode {
+	private static final int historyMax = 99;
+
 	private String version;
+	private String history[];
+	private int historyIndex;
 
 	public InteractiveMode(String version) {
 		this.version = version;
+		this.history = new String[historyMax];
+		this.historyIndex = 0;
 	}
 
 	/**
-	 * Performs the interactive mode
+	 * Adds a line to the history
+	 *
+	 * @param line line of jask code
+	 */
+	private void addToHistory(String line) {
+		if (line.isEmpty()) return;
+
+		// if the history is full, clear it
+		if (historyIndex + 1 > historyMax) {
+			history = new String[historyMax];
+			historyIndex = 0;
+		}
+
+		history[historyIndex++] = line;
+	}
+
+	/**
+	 * Prints the history to the standard out
+	 */
+	private void printHistory() {
+		for (int i = 0; i < historyIndex; i++) {
+			System.out.println("[" + (i + 1) +"]" + " " + history[i]);
+		}
+	}
+
+	/**
+	 * Executes the interactive mode
 	 */
 	public void execute() {
 		Tokenizer tokenizer = new Tokenizer();
@@ -30,6 +62,13 @@ public class InteractiveMode {
 
 			// stops the interactive mode
 			if (line.contentEquals("exit")) break;
+
+			// prints the history
+			if (line.contentEquals("history")) {
+				this.printHistory();
+				System.out.print("jask ~> ");
+				continue;
+			}
 
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
@@ -92,6 +131,7 @@ public class InteractiveMode {
 			}
 
 			tempList.add(line);
+			this.addToHistory(line);
 			System.out.print("jask ~> ");
 
 			interpreter.interpret(tokenizer.parse(tempList));
