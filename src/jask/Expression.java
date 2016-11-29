@@ -24,4 +24,15 @@ public class Expression {
 	public List<String> getTokens(){
 		return this.tokens;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+
+		for (String token : this.tokens) {
+			builder.append(token + " ");
+		}
+
+		return builder.toString().trim();
+	}
 }
