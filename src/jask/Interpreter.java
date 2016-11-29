@@ -10,12 +10,17 @@ import java.util.List;
  *
  */
 public class Interpreter {
+	private static final int historyMax = 10;
+	private History history;
+
 	private List<String> operators;
 	private List<String> keywords;
 	private List<String> values;
 	private Executer executer;
 
 	public Interpreter() {
+		this.history = new History(historyMax);
+
 		this.operators = new ArrayList<String>();
 		this.operators.add("plus");
 		this.operators.add("minus");
@@ -249,9 +254,16 @@ public class Interpreter {
 				this.executer.addModule(moduleInterpreter.executer);
 			}
 
-			retVal = this.executer.execute(exp);
-			exp = null;
+			// try-catch is a little bit bumpy
+			try {
+				this.history.addToHistory(exp.toString());
+				retVal = this.executer.execute(exp);
+			}
+			catch (Exception e) {
+				this.history.printHistoryDESC();
+			}
 
+			exp = null;
 			if (retVal != "") return retVal;
 		}
 
