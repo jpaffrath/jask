@@ -36,4 +36,10 @@ public class History {
 			System.out.println("[" + (i + 1) +"]" + " " + this.history[i]);
 		}
 	}
+
+	public void printHistoryDESC() {
+		for (int i = this.historyIndex-1; i >= 0; i--) {
+			System.out.println("[" + (i + 1) +"]" + " " + this.history[i]);
+		}
+	}
 }
