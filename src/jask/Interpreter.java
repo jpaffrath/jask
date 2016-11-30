@@ -176,7 +176,7 @@ public class Interpreter {
 					functionToken.add(runner);
 					runner = tokens.get(i+1);
 				}
-				this.executer.functionExecuter.addFunction(new Function(name, functionToken));
+				this.executer.addFunction(new Function(name, functionToken));
 				continue;
 			}
 

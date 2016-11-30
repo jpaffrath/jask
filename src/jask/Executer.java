@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Executer {
 	private HashMap<String, Variable> heap;
-	public FunctionExecuter functionExecuter;
+	private FunctionExecuter functionExecuter;
 	private InternalFunctions internalFunctions;
 	private List<Executer> modules;
 
@@ -389,6 +389,18 @@ public class Executer {
 		Error.printErrorOperatorNotApplicable(operator, "", "");
 
 		return false;
+	}
+
+	public void addFunction(Function function) {
+		HashMap<String, Variable> functionHeap = new HashMap<>(this.heap.size());
+
+		// copy local heap and add access operator to keys
+		for (String key : this.heap.keySet()) {
+			functionHeap.put('!' + key, this.heap.get(key));
+		}
+
+		function.setHeap(functionHeap);
+		this.functionExecuter.addFunction(function);
 	}
 
 	public String execute(Expression exp) {
