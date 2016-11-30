@@ -120,6 +120,25 @@ function func(param1:param2)
   return TRUE
 end
 ```
+To access a variable which is stored outside a function, use the access operator _!_:
+```C
+store "Outside" in var
+
+function myFunc()
+    printLine(!var)
+end
+```
+This allows you to define variables with the same name:
+```C
+store "Outside" in var
+
+function myFunc()
+    store "Inside" in var
+
+    printLine(!var) // prints "Outside"
+    printLine(var)  // prints "Inside"
+end
+```
 
 ### Calling functions
 ```C
