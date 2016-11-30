@@ -39,7 +39,7 @@ public class Function {
 		if (parameterHeap.isEmpty()) return;
 
 		for (int i = 0; i < params.length; i++) {
-			this.heap.put(params[i], parameterHeap.get(i));
+			this.heap.put(params[i], new Variable(parameterHeap.get(i)));
 		}
 	}
 
