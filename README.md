@@ -16,7 +16,6 @@
 # jask
 jask is a highly readable interpreter language in early development.
 The jask interpreter is fully written in Java.
-Currently the jask interpreter is very unstable and supports only the functions shown below.
 It is just a hobby project for fun and learning.
 Contributions are always welcome!
 
@@ -146,6 +145,7 @@ function myFunc()
 end
 ```
 You find more information about the access operator in the [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
+Want to know more about functions in jask? Look at [Functions inside functions](https://github.com/jpaffrath/jask/wiki/Functions-inside-functions!) or [Modules inside functions](https://github.com/jpaffrath/jask/wiki/Modules-inside-functions!).
 
 ### Printing and reading data
 ```C
