@@ -170,13 +170,20 @@ public class Interpreter {
 			// checks function define
 			else if (t.contentEquals("function")) {
 				String name = tokens.get(++i);
-				List<String> functionToken = new ArrayList<String>();
-				String runner = tokens.get(++i);
-				for (; !runner.contentEquals("end"); i++) {
-					functionToken.add(runner);
-					runner = tokens.get(i+1);
+				int start = i+1;
+				int funcCount = 1;
+				int endCount = 0;
+				
+				while (true) {
+					t = tokens.get(i++);
+					
+					if (t.contentEquals("function")) funcCount++;
+					else if (t.contentEquals("end")) endCount++;
+					
+					if (funcCount == endCount) break;
 				}
-				this.executer.addFunction(new Function(name, functionToken));
+				
+				this.executer.addFunction(new Function(name, tokens.subList(start, --i)));
 				continue;
 			}
 
