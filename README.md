@@ -65,6 +65,12 @@ assign "Hello " plus "World!" to str
 assign FALSE to bool
 ```
 
+### Calling functions
+```C
+myPrint("text")
+func(2:a)
+```
+
 ### Work with list variables
 A list in jask can store strings, numbers and boolean values.
 ```C
@@ -120,7 +126,7 @@ function func(param1:param2)
   return TRUE
 end
 ```
-To access a variable which is stored outside a function, use the access operator _!_:
+To access a variable which is stored outside a function, use the access operator "!":
 ```C
 store "Outside" in var
 
@@ -139,12 +145,7 @@ function myFunc()
     printLine(var)  // prints "Inside"
 end
 ```
-
-### Calling functions
-```C
-myPrint("text")
-func(2:a)
-```
+You find more information about the access operator in the [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
 
 ### Printing and reading data
 ```C
