@@ -127,8 +127,23 @@ public class Executer {
 		String var2Str = tokens.get(3);
 		String varDStr = tokens.get(5);
 
-		Variable var1 = getVariableFromHeap(var1Str);
-		Variable var2 = getVariableFromHeap(var2Str);
+		Variable var1 = null;
+		Variable var2 = null;
+
+		if (Interpreter.isFunction(var1Str)) {
+			var1 = executeFunction(var1Str);
+		}
+		else {
+			var1 = getVariableFromHeap(var1Str);
+		}
+
+		if (Interpreter.isFunction(var2Str)) {
+			var2 = executeFunction(var2Str);
+		}
+		else {
+			var2 = getVariableFromHeap(var2Str);
+		}
+
 		Variable varD = getVariableFromHeap(varDStr);
 
 		if (varD == null) {
