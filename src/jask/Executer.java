@@ -192,7 +192,13 @@ public class Executer {
 		}
 		else {
 			if (this.heap.containsKey(variableValue)) {
-				this.heap.put(variableName, new Variable(getVariableFromHeap(variableValue)));
+				Variable varOld = this.getVariableFromHeap(variableValue);
+				if (varOld instanceof VariableList) {
+					this.heap.put(variableName, new VariableList(varOld.toString()));
+				}
+				else {
+					this.heap.put(variableName, new Variable(varOld));
+				}
 			}
 			else {
 				Variable var = new Variable(variableValue);

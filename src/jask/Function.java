@@ -39,7 +39,16 @@ public class Function {
 		if (parameterHeap.isEmpty()) return;
 
 		for (int i = 0; i < params.length; i++) {
-			this.heap.put(params[i], new Variable(parameterHeap.get(i)));
+			Variable varOld = parameterHeap.get(i);
+			Variable varNew = null;
+
+			if (varOld instanceof VariableList) {
+				varNew = new VariableList(varOld.toString());
+			}
+			else {
+				varNew = new Variable(varOld);
+			}
+			this.heap.put(params[i], varNew);
 		}
 	}
 
