@@ -73,7 +73,7 @@ function upper(str)
 		if curChar equals "z" assign "Z" to curChar else endif
 
 		listAdd(newList:curChar)
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	return listToString(newList)
@@ -120,7 +120,7 @@ function lower(str)
 		if curChar equals "Z" assign "z" to curChar else endif
 
 		listAdd(newList:curChar)
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	return listToString(newList)
@@ -148,7 +148,7 @@ function split(str:tok)
 			listAdd(temp:char)
 		endif
 
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	listAdd(result:listToString(temp))
@@ -166,7 +166,7 @@ function reverse(str)
 
 	while i greaterequal 0
 		listAdd(list:listGet(str:i))
-		assign i minus 1 to i
+		decrement i
 	endrun
 
 	return listToString(list)
@@ -188,7 +188,7 @@ function strrepeat(str:num)
 	store 1 in i
 	while i smaller num
 		assign str plus s to str
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	return str
@@ -206,7 +206,7 @@ function trim(str)
 		if listGet(str:i) unequals " "
 			assign i to lastChar
 		else endif
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	store -1 in firstChar
@@ -219,7 +219,7 @@ function trim(str)
 			endif
 		else
 		endif
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	if firstChar equals -1

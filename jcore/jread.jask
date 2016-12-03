@@ -21,7 +21,7 @@ function readList(number)
 	store 0 in i
 	while i smaller number
 		listAdd(list:read())
-		assign i plus 1 to i
+		increment i
 	endrun
 
 	return list
