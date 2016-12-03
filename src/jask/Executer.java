@@ -73,6 +73,8 @@ public class Executer {
 
 		if (this.functionExecuter.hasFunction(functionName)) {
 			varVal = this.functionExecuter.executeFunction(functionName, functionHeap);
+			this.setLocalHeapFromFunction(this.functionExecuter.getFunction(functionName).getHeap());
+			this.functionExecuter.destroyFunctionHeap(functionName);
 		}
 		else {
 			boolean functionFound = false;
@@ -80,6 +82,7 @@ public class Executer {
 			for (Executer module : this.modules) {
 				if (module.functionExecuter.hasFunction(functionName)) {
 					varVal = module.functionExecuter.executeFunction(functionName, functionHeap);
+					module.functionExecuter.destroyFunctionHeap(functionName);
 					functionFound = true;
 					break;
 				}
@@ -422,6 +425,14 @@ public class Executer {
 
 		function.setHeap(functionHeap);
 		this.functionExecuter.addFunction(function);
+	}
+
+	private void setLocalHeapFromFunction(HashMap<String, Variable> functionHeap) {
+		for (String key : functionHeap.keySet()) {
+			if (key.charAt(0) == '!') {
+				this.heap.put(key.substring(1), functionHeap.get(key));
+			}
+		}
 	}
 
 	public String execute(Expression exp) {

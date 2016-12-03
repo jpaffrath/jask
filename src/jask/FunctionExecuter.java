@@ -32,9 +32,16 @@ public class FunctionExecuter {
 		Function function = this.functions.get(name);
 		function.setParameterHeap(heap);
 		Interpreter interpreter = new Interpreter(function, this);
-		String res = interpreter.interpret(function.getTokens());
+		return interpreter.interpret(function.getTokens());
+	}
+
+	public void destroyFunctionHeap(String name) {
+		if (!this.hasFunction(name)) {
+			Error.printErrorFunctionNotDefined(name);
+		}
+
+		Function function = this.functions.get(name);
 		function.destroyHeap();
-		return res;
 	}
 
 	public void addFunction(Function function) {
