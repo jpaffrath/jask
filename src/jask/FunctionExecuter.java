@@ -23,7 +23,7 @@ public class FunctionExecuter {
 	 * @param heap local heap for the function
 	 * @return result of the function
 	 */
-	public String executeFunction(String name, List<Variable> heap) {
+	public String executeFunction(String name, List<Variable> heap, List<Executer> modules) {
 		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
 			return "NULL";
@@ -31,7 +31,7 @@ public class FunctionExecuter {
 
 		Function function = this.functions.get(name);
 		function.setParameterHeap(heap);
-		Interpreter interpreter = new Interpreter(function, this);
+		Interpreter interpreter = new Interpreter(function, this, modules);
 		return interpreter.interpret(function.getTokens());
 	}
 

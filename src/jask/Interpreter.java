@@ -59,9 +59,9 @@ public class Interpreter {
 		this.executer = new Executer();
 	}
 
-	public Interpreter(Function function, FunctionExecuter functionExecuter) {
+	public Interpreter(Function function, FunctionExecuter functionExecuter, List<Executer> modules) {
 		this();
-		this.executer = new Executer(function.getHeap(), functionExecuter);
+		this.executer = new Executer(function.getHeap(), functionExecuter, modules);
 	}
 
 	public Interpreter(Executer executer) {

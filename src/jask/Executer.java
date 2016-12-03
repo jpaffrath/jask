@@ -23,10 +23,11 @@ public class Executer {
 		this.modules = new ArrayList<Executer>();
 	}
 
-	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter) {
+	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules) {
 		this();
 		this.heap = heap;
 		this.functionExecuter = functionExecuter;
+		this.modules = modules;
 	}
 
 	public Variable getVariableFromHeap(String var) {
@@ -72,7 +73,7 @@ public class Executer {
 		String varVal = "";
 
 		if (this.functionExecuter.hasFunction(functionName)) {
-			varVal = this.functionExecuter.executeFunction(functionName, functionHeap);
+			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, this.modules);
 			this.setLocalHeapFromFunction(this.functionExecuter.getFunction(functionName).getHeap());
 			this.functionExecuter.destroyFunctionHeap(functionName);
 		}
@@ -81,7 +82,7 @@ public class Executer {
 
 			for (Executer module : this.modules) {
 				if (module.functionExecuter.hasFunction(functionName)) {
-					varVal = module.functionExecuter.executeFunction(functionName, functionHeap);
+					varVal = module.functionExecuter.executeFunction(functionName, functionHeap, this.modules);
 					module.functionExecuter.destroyFunctionHeap(functionName);
 					functionFound = true;
 					break;
