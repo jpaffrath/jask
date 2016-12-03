@@ -213,6 +213,22 @@ public class Executer {
 		var.setDoubleValue(var.getDoubleValue()+1);
 	}
 
+	private void executeDecrement(String decrement) {
+		Variable var = this.getVariableFromHeap(decrement);
+
+		if (var == null) {
+			Error.printErrorVariableNotDefined(decrement);
+			return;
+		}
+
+		if (var.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(decrement);
+			return;
+		}
+
+		var.setDoubleValue(var.getDoubleValue()-1);
+	}
+
 	private void executeStore(List<String> tokens) {
 		String variableValue = tokens.get(1);
 		String variableName = tokens.get(3);
@@ -463,6 +479,7 @@ public class Executer {
 		case Runner: ret = executeRun(exp.getTokens()); break;
 		case Convert: executeConvert(exp.getTokens()); break;
 		case Increment: executeIncrement(exp.getTokens().get(0)); break;
+		case Decrement: executeDecrement(exp.getTokens().get(0)); break;
 		default:
 			break;
 		}

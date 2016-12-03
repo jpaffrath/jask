@@ -36,6 +36,7 @@ public class Interpreter {
 		this.operators.add("greaterequal");
 		this.operators.add("smallerequal");
 		this.operators.add("increment");
+		this.operators.add("decrement");
 
 		this.keywords = new ArrayList<String>(this.operators);
 		this.keywords.add("function");
@@ -250,6 +251,11 @@ public class Interpreter {
 			// check increment statement
 			else if (t.contentEquals("increment")) {
 				exp = new Expression(ExpressionType.Increment, tokens.subList(++i, i+1));
+			}
+
+			// check decrement statement
+			else if (t.contentEquals("decrement")) {
+				exp = new Expression(ExpressionType.Decrement, tokens.subList(++i, i+1));
 			}
 
 			// check use statement

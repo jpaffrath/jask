@@ -13,5 +13,6 @@ public enum ExpressionType {
 	Statement,
 	Runner,
 	Convert,
-	Increment
+	Increment,
+	Decrement
 }
