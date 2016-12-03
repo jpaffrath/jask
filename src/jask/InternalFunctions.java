@@ -11,30 +11,30 @@ import java.util.Scanner;
  *
  */
 public class InternalFunctions {
-	private HashMap<String, InteralFunction> functions;
+	private HashMap<String, InternalFunction> functions;
 
 	private final String TRUE = "TRUE";
 	private final String FALSE = "FALSE";
 
 	public InternalFunctions() {
-		this.functions = new HashMap<String, InteralFunction>();
+		this.functions = new HashMap<String, InternalFunction>();
 		this.setUpFunctions();
 	}
 
 	private void setUpFunctions() {
-		this.functions.put("print", new InteralFunction() {
+		this.functions.put("print", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return print(heap, params, false);
 			}
 		});
-		this.functions.put("printLine", new InteralFunction() {
+		this.functions.put("printLine", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return print(heap, params, true);
 			}
 		});
-		this.functions.put("read", new InteralFunction() {
+		this.functions.put("read", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				if (params.length == 0) {
@@ -46,7 +46,7 @@ public class InternalFunctions {
 				return "";
 			}
 		});
-		this.functions.put("list", new InteralFunction() {
+		this.functions.put("list", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				if (!param.contains(":")) {
@@ -56,85 +56,85 @@ public class InternalFunctions {
 				return param;
 			}
 		});
-		this.functions.put("listGet", new InteralFunction() {
+		this.functions.put("listGet", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listGet(heap, params);
 			}
 		});
-		this.functions.put("listSize", new InteralFunction() {
+		this.functions.put("listSize", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listSize(heap, params);
 			}
 		});
-		this.functions.put("listAdd", new InteralFunction() {
+		this.functions.put("listAdd", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listAdd(heap, params);
 			}
 		});
-		this.functions.put("listRemove", new InteralFunction() {
+		this.functions.put("listRemove", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listRemove(heap, params);
 			}
 		});
-		this.functions.put("listSet", new InteralFunction() {
+		this.functions.put("listSet", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listSet(heap, params);
 			}
 		});
-		this.functions.put("listFromString", new InteralFunction() {
+		this.functions.put("listFromString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listFromString(heap, params);
 			}
 		});
-		this.functions.put("listToString", new InteralFunction() {
+		this.functions.put("listToString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listToString(heap, params);
 			}
 		});
-		this.functions.put("listContains", new InteralFunction() {
+		this.functions.put("listContains", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listContains(heap, params);
 			}
 		});
-		this.functions.put("isString", new InteralFunction() {
+		this.functions.put("isString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return isString(heap, params);
 			}
 		});
-		this.functions.put("isNumber", new InteralFunction() {
+		this.functions.put("isNumber", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return isNumber(heap, params);
 			}
 		});
-		this.functions.put("isBool", new InteralFunction() {
+		this.functions.put("isBool", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return isBool(heap, params);
 			}
 		});
-		this.functions.put("isList", new InteralFunction() {
+		this.functions.put("isList", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return isList(heap, params);
 			}
 		});
-		this.functions.put("exit", new InteralFunction() {
+		this.functions.put("exit", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return exit(heap, params);
 			}
 		});
-		this.functions.put("_pow", new InteralFunction() {
+		this.functions.put("_pow", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return String.valueOf(Math.pow(heap.get(params[0]).getDoubleValue(), heap.get(params[1]).getDoubleValue()));

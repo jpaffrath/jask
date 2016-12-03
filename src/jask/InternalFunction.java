@@ -8,6 +8,6 @@ import java.util.HashMap;
  * @author Julius Paffrath
  *
  */
-public interface InteralFunction {
+public interface InternalFunction {
 	String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params);
 }
