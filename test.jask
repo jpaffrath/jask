@@ -23,6 +23,13 @@ if num1 equals 26.119955 assign testPassed plus 1 to testPassed else assign 1 pl
 assign -10054 to num1
 if num1 equals -10054 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+assign 0 to num1
+increment num1
+if num1 equals 1 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+decrement num1
+if num1 equals 0 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
 /*
 **************************** String storing tests ****************************
 */
