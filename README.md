@@ -36,6 +36,7 @@ The arguments are stored in a global list variable called _ENV.
 To test your freshly compiled jask-version, just run the _test.jask_ file.
 
 # Examples
+
 ### Creating new variables
 Jask can store three types of data: numbers, strings, and boolean values.
 ```C
@@ -63,11 +64,19 @@ assign "Hello " plus "World!" to str
 
 assign FALSE to bool
 ```
+You can increment and decrement numbers very quickly:
+```C
+increment myNum // same as assign myNum plus 1 to myNum
+decrement myNum // same as assign myNum minus 1 to myNum
+```
 
 ### Calling functions
 ```C
-myPrint("text")
-func(2:a)
+myFunc(parameter)
+```
+Multiple parameters are separated by colons:
+```C
+myFunc(firstParameter:secondParameter)
 ```
 
 ### Work with list variables
@@ -88,6 +97,7 @@ listRemove(numbers:2)
 store list(1:"String":TRUE) in myList
 ```
 Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
+
 ### Control flow
 if-else conditions:
 ```C
