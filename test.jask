@@ -122,6 +122,26 @@ if hasPlaces(PI()) equals TRUE assign testPassed plus 1 to testPassed else assig
 if hasPlaces(5.01) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if hasPlaces(-14.45) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+/*
+**************************** Function tests ****************************
+*/
+
+store FALSE in testOutside
+
+function testAccess()
+	assign TRUE to !testOutside
+end
+
+testAccess()
+
+if testOutside equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
+function testModule()
+	use jcore/jnumber
+	return PI()
+end
+
+if testModule() equals PI() assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
 /*
 **************************** Miscellaneous tests ****************************
