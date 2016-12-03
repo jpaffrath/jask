@@ -35,6 +35,7 @@ public class Interpreter {
 		this.operators.add("smaller");
 		this.operators.add("greaterequal");
 		this.operators.add("smallerequal");
+		this.operators.add("increment");
 
 		this.keywords = new ArrayList<String>(this.operators);
 		this.keywords.add("function");
@@ -244,6 +245,11 @@ public class Interpreter {
 			else if (t.contentEquals("convert")) {
 				exp = new Expression(ExpressionType.Convert, tokens.subList(i, i+4));
 				i += 3;
+			}
+
+			// check increment statement
+			else if (t.contentEquals("increment")) {
+				exp = new Expression(ExpressionType.Increment, tokens.subList(++i, i+1));
 			}
 
 			// check use statement

@@ -12,5 +12,6 @@ public enum ExpressionType {
 	Function,
 	Statement,
 	Runner,
-	Convert
+	Convert,
+	Increment
 }

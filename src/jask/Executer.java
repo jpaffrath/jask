@@ -197,6 +197,22 @@ public class Executer {
 		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 	}
 
+	private void executeIncrement(String increment) {
+		Variable var = this.getVariableFromHeap(increment);
+
+		if (var == null) {
+			Error.printErrorVariableNotDefined(increment);
+			return;
+		}
+
+		if (var.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(increment);
+			return;
+		}
+
+		var.setDoubleValue(var.getDoubleValue()+1);
+	}
+
 	private void executeStore(List<String> tokens) {
 		String variableValue = tokens.get(1);
 		String variableName = tokens.get(3);
@@ -446,6 +462,7 @@ public class Executer {
 		case Store: executeStore(exp.getTokens()); break;
 		case Runner: ret = executeRun(exp.getTokens()); break;
 		case Convert: executeConvert(exp.getTokens()); break;
+		case Increment: executeIncrement(exp.getTokens().get(0)); break;
 		default:
 			break;
 		}
