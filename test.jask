@@ -15,124 +15,124 @@ printLine("Running jask tests...")
 */
 
 store 42 in num1
-if num1 equals 42 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if num1 equals 42 increment testPassed else increment testFailed endif
 
 assign 26.119955 to num1
-if num1 equals 26.119955 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if num1 equals 26.119955 increment testPassed else increment testFailed endif
 
 assign -10054 to num1
-if num1 equals -10054 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if num1 equals -10054 increment testPassed else increment testFailed endif
 
 assign 0 to num1
 increment num1
-if num1 equals 1 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if num1 equals 1 increment testPassed else increment testFailed endif
 
 decrement num1
-if num1 equals 0 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if num1 equals 0 increment testPassed else increment testFailed endif
 
 /*
 **************************** String storing tests ****************************
 */
 
 store "42" in str1
-if str1 equals "42" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if str1 equals "42" increment testPassed else increment testFailed endif
 
 /*
 **************************** List tests ****************************
 */
 
-if listSize(list()) equals 0 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listSize(list()) equals 0 increment testPassed else increment testFailed endif
 
 store list(1:2:3) in myList
 
-if listSize(myList) equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listGet(myList:0) equals 1 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listAdd(myList:5) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listGet(myList:3) equals 5 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listSet(myList:3:4) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listGet(myList:3) equals 4 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listRemove(myList:3) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listSize(myList) equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listSize(myList) equals 3 increment testPassed else increment testFailed endif
+if listGet(myList:0) equals 1 increment testPassed else increment testFailed endif
+if listAdd(myList:5) equals TRUE increment testPassed else increment testFailed endif
+if listGet(myList:3) equals 5 increment testPassed else increment testFailed endif
+if listSet(myList:3:4) equals TRUE increment testPassed else increment testFailed endif
+if listGet(myList:3) equals 4 increment testPassed else increment testFailed endif
+if listRemove(myList:3) equals TRUE increment testPassed else increment testFailed endif
+if listSize(myList) equals 3 increment testPassed else increment testFailed endif
 
 assign listFromString("my list") to myList
-if listToString(myList) equals "my list" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listToString(myList) equals "my list" increment testPassed else increment testFailed endif
 
 assign list(1:2:3) to myList
 
-if listContains(myList:1) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listContains(myList:4) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listContains(myList:1) equals TRUE increment testPassed else increment testFailed endif
+if listContains(myList:4) equals FALSE increment testPassed else increment testFailed endif
 
 listAdd(myList:"a string")
 
-if listContains(myList:"a string") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listContains(myList:"A String") equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listContains(myList:"a string") equals TRUE increment testPassed else increment testFailed endif
+if listContains(myList:"A String") equals FALSE increment testPassed else increment testFailed endif
 
 /*
 **************************** jcore jstring tests ****************************
 */
 
-if substring("my substring string":3:11) equals "substring" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if substring("my substring string":3:11) equals "substring" increment testPassed else increment testFailed endif
 
-if upper("abcdefghijklmnopqrstuvwxyz") equals "ABCDEFGHIJKLMNOPQRSTUVWXYZ" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if lower("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if upper("abcdefghijklmnopqrstuvwxyz") equals "ABCDEFGHIJKLMNOPQRSTUVWXYZ" increment testPassed else increment testFailed endif
+if lower("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" increment testPassed else increment testFailed endif
 
-if listGet(split("a b c":" "):0) equals "a" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if listGet(split("Hello,World!":","):0) equals "Hello" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if listGet(split("a b c":" "):0) equals "a" increment testPassed else increment testFailed endif
+if listGet(split("Hello,World!":","):0) equals "Hello" increment testPassed else increment testFailed endif
 
-if reverse("12345") equals "54321" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if reverse(129) equals NULL assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if reverse("12345") equals "54321" increment testPassed else increment testFailed endif
+if reverse(129) equals NULL increment testPassed else increment testFailed endif
 
-if strsize("12345") equals 5 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if strsize(100) equals NULL assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if strsize("12345") equals 5 increment testPassed else increment testFailed endif
+if strsize(100) equals NULL increment testPassed else increment testFailed endif
 
-if strrepeat("jask":2) equals "jaskjask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if strrepeat("jask":0) equals NULL assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if strrepeat("jask":2) equals "jaskjask" increment testPassed else increment testFailed endif
+if strrepeat("jask":0) equals NULL increment testPassed else increment testFailed endif
 
-if trim("jask") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if trim(" jask") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if trim("jask ") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if trim(" jask ") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if trim("   jask   ") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if trim("jask") equals "jask" increment testPassed else increment testFailed endif
+if trim(" jask") equals "jask" increment testPassed else increment testFailed endif
+if trim("jask ") equals "jask" increment testPassed else increment testFailed endif
+if trim(" jask ") equals "jask" increment testPassed else increment testFailed endif
+if trim("   jask   ") equals "jask" increment testPassed else increment testFailed endif
 
-if strContains("Hello, World!":"Hello,") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if strContains("Hello, World!":"ld!") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if strContains("":"") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if strContains("This is a string":"jask is great!") equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if strContains("Hello, World!":"Hello,") equals TRUE increment testPassed else increment testFailed endif
+if strContains("Hello, World!":"ld!") equals TRUE increment testPassed else increment testFailed endif
+if strContains("":"") equals TRUE increment testPassed else increment testFailed endif
+if strContains("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
 
 /*
 **************************** jcore jnumber tests ****************************
 */
 
-if max(2445.21:-7) equals 2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if min(-2445.21:7) equals -2445.21 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if max(2445.21:-7) equals 2445.21 increment testPassed else increment testFailed endif
+if min(-2445.21:7) equals -2445.21 increment testPassed else increment testFailed endif
 
-if PI() equals 3.141592653589793 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if E() equals 2.718281828459045 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if PI() equals 3.141592653589793 increment testPassed else increment testFailed endif
+if E() equals 2.718281828459045 increment testPassed else increment testFailed endif
 
-if abs(3) equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if abs(-3) equals 3 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if abs(3) equals 3 increment testPassed else increment testFailed endif
+if abs(-3) equals 3 increment testPassed else increment testFailed endif
 
-if pow(2:2) equals 4 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if pow(-2:2) equals 4 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if pow(5:2) equals 25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if pow(-3:7) equals -2187 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if pow(2:-2) equals 0.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if pow(2:1.5) equals 2.8284271247461903 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if pow(1.5:2) equals 2.25 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if pow(2:2) equals 4 increment testPassed else increment testFailed endif
+if pow(-2:2) equals 4 increment testPassed else increment testFailed endif
+if pow(5:2) equals 25 increment testPassed else increment testFailed endif
+if pow(-3:7) equals -2187 increment testPassed else increment testFailed endif
+if pow(2:-2) equals 0.25 increment testPassed else increment testFailed endif
+if pow(2:1.5) equals 2.8284271247461903 increment testPassed else increment testFailed endif
+if pow(1.5:2) equals 2.25 increment testPassed else increment testFailed endif
 
-if factorial(4) equals 24 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if factorial(6) equals 720 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if factorial(10) equals 3628800 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if factorial(-1) equals NULL assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if factorial(0) equals 1 assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if factorial(4) equals 24 increment testPassed else increment testFailed endif
+if factorial(6) equals 720 increment testPassed else increment testFailed endif
+if factorial(10) equals 3628800 increment testPassed else increment testFailed endif
+if factorial(-1) equals NULL increment testPassed else increment testFailed endif
+if factorial(0) equals 1 increment testPassed else increment testFailed endif
 
-if hasPlaces(100) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if hasPlaces(5.0) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if hasPlaces(-42) equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if hasPlaces(100) equals FALSE increment testPassed else increment testFailed endif
+if hasPlaces(5.0) equals FALSE increment testPassed else increment testFailed endif
+if hasPlaces(-42) equals FALSE increment testPassed else increment testFailed endif
 
-if hasPlaces(PI()) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if hasPlaces(5.01) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if hasPlaces(-14.45) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if hasPlaces(PI()) equals TRUE increment testPassed else increment testFailed endif
+if hasPlaces(5.01) equals TRUE increment testPassed else increment testFailed endif
+if hasPlaces(-14.45) equals TRUE increment testPassed else increment testFailed endif
 
 /*
 **************************** Function tests ****************************
@@ -146,23 +146,23 @@ end
 
 testAccess()
 
-if testOutside equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if testOutside equals TRUE increment testPassed else increment testFailed endif
 
 function testModule()
 	use jcore/jnumber
 	return PI()
 end
 
-if testModule() equals PI() assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if testModule() equals PI() increment testPassed else increment testFailed endif
 
 /*
 **************************** Miscellaneous tests ****************************
 */
 
-if isString("foo bar") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if isNumber(100.32214) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if isBool(TRUE) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
-if isList(list("foo bar":-1953.22:FALSE)) equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if isString("foo bar") equals TRUE increment testPassed else increment testFailed endif
+if isNumber(100.32214) equals TRUE increment testPassed else increment testFailed endif
+if isBool(TRUE) equals TRUE increment testPassed else increment testFailed endif
+if isList(list("foo bar":-1953.22:FALSE)) equals TRUE increment testPassed else increment testFailed endif
 
 /*
 **************************** End tests ****************************
