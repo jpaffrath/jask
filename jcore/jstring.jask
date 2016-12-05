@@ -172,13 +172,13 @@ function reverse(str)
 	return listToString(list)
 end
 
-function strsize(str)
+function strSize(str)
 	if isString(str) equals FALSE return NULL else endif
 	assign listFromString(str) to str
 	return listSize(str)
 end
 
-function strrepeat(str:num)
+function strRepeat(str:num)
 	if isString(str) equals FALSE return NULL else endif
 	if isNumber(num) equals FALSE return NULL else endif
 	if num smallerequal 0 return NULL else endif

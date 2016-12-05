@@ -82,11 +82,11 @@ if listGet(split("Hello,World!":","):0) equals "Hello" increment testPassed else
 if reverse("12345") equals "54321" increment testPassed else increment testFailed endif
 if reverse(129) equals NULL increment testPassed else increment testFailed endif
 
-if strsize("12345") equals 5 increment testPassed else increment testFailed endif
-if strsize(100) equals NULL increment testPassed else increment testFailed endif
+if strSize("12345") equals 5 increment testPassed else increment testFailed endif
+if strSize(100) equals NULL increment testPassed else increment testFailed endif
 
-if strrepeat("jask":2) equals "jaskjask" increment testPassed else increment testFailed endif
-if strrepeat("jask":0) equals NULL increment testPassed else increment testFailed endif
+if strRepeat("jask":2) equals "jaskjask" increment testPassed else increment testFailed endif
+if strRepeat("jask":0) equals NULL increment testPassed else increment testFailed endif
 
 if trim("jask") equals "jask" increment testPassed else increment testFailed endif
 if trim(" jask") equals "jask" increment testPassed else increment testFailed endif
