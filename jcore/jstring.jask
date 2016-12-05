@@ -228,3 +228,31 @@ function trim(str)
 
 	return substring(listToString(str):firstChar:lastChar)
 end
+
+function strContains(str:content)
+	if isString(str) equals FALSE return NULL else endif
+	if isString(content) equals FALSE return NULL else endif
+
+	store listFromString(str) in bufferStr
+	store listFromString(content) in bufferContent
+
+	store listSize(bufferStr) in size
+	store listSize(bufferContent) in sizeContent
+
+	store 0 in i
+	store 0 in contentPos
+
+	while i smaller size
+		if listGet(bufferStr:i) equals listGet(bufferContent:contentPos)
+			increment contentPos
+		else endif
+
+		if contentPos equals sizeContent
+			return TRUE
+		else endif
+
+		increment i
+	endrun
+
+	return FALSE
+end

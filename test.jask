@@ -94,6 +94,11 @@ if trim("jask ") equals "jask" assign testPassed plus 1 to testPassed else assig
 if trim(" jask ") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 if trim("   jask   ") equals "jask" assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
 
+if strContains("Hello, World!":"Hello,") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if strContains("Hello, World!":"ld!") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if strContains("":"") equals TRUE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+if strContains("This is a string":"jask is great!") equals FALSE assign testPassed plus 1 to testPassed else assign 1 plus testFailed to testFailed endif
+
 /*
 **************************** jcore jnumber tests ****************************
 */
