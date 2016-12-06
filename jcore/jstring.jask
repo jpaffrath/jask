@@ -245,7 +245,9 @@ function strContains(str:content)
 	while i smaller size
 		if listGet(bufferStr:i) equals listGet(bufferContent:contentPos)
 			increment contentPos
-		else endif
+		else
+			assign 0 to contentPos
+		endif
 
 		if contentPos equals sizeContent
 			return TRUE
