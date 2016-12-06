@@ -52,6 +52,9 @@ public class Variable {
 				value.contentEquals("FALSE"));
 	}
 
+	/**
+	 * Default constructor
+	 */
 	public Variable() {
 		this.type = VariableType.NoType;
 	}
@@ -59,7 +62,7 @@ public class Variable {
 	/**
 	 * Initializes a new variable based on a generic string
 	 *
-	 * @param genericValue
+	 * @param genericValue generic string value
 	 */
 	public Variable(String genericValue) {
 		this.type = VariableType.NoType;
@@ -85,6 +88,11 @@ public class Variable {
 		}
 	}
 
+	/**
+	 * Initializes a new variable based on a given variable
+	 *
+	 * @param var variable to initialize the new object
+	 */
 	public Variable(Variable var) {
 		this.type = var.type;
 
@@ -99,41 +107,89 @@ public class Variable {
 		}
 	}
 
+	/**
+	 * Returns the string value
+	 * @return the current variables string value
+	 */
 	public String getStringValue() {
 		return this.stringValue;
 	}
 
+	/**
+	 * Sets the variable to a string variable
+	 *
+	 * Using this method will change the variables type to string
+	 *
+	 * @param stringValue new string value
+	 */
 	public void setStringValue(String stringValue) {
 		this.stringValue = stringValue;
 		this.type = VariableType.String;
 	}
 
+	/**
+	 * Returns the double value
+	 *
+	 * @return the current variables double value
+	 */
 	public double getDoubleValue() {
 		return this.doubleValue;
 	}
 
+	/**
+	 * Sets the variable to a number variable
+	 *
+	 * Using this method will change the variables type to number
+	 *
+	 * @param doubleValue new double value
+	 */
 	public void setDoubleValue(double doubleValue) {
 		this.doubleValue = doubleValue;
 		this.type = VariableType.Number;
 	}
 
+	/**
+	 * Returns the boolean value
+	 *
+	 * @return the current variables boolean value
+	 */
 	public boolean getBoolValue() {
 		return this.boolValue;
 	}
 
+	/**
+	 * Sets the variable to a boolean variable
+	 *
+	 * Using this method will change the variables type to boolean
+	 *
+	 * @param boolValue new boolean value
+	 */
 	public void setBoolValue(boolean boolValue) {
 		this.boolValue = boolValue;
 		this.type = VariableType.Bool;
 	}
 
+	/**
+	 * Returns the type
+	 *
+	 * @return the current variables type
+	 */
 	public VariableType getType() {
 		return this.type;
 	}
 
+	/**
+	 * Sets the variables type
+	 *
+	 * @param type new type
+	 */
 	protected void setType(VariableType type) {
 		this.type = type;
 	}
 
+	/**
+	 * Returns a string representation based on the variables content
+	 */
 	@Override
 	public String toString() {
 		if (this.type == VariableType.String) return this.stringValue;
@@ -151,6 +207,12 @@ public class Variable {
 		return "NULL";
 	}
 
+	/**
+	 * Compares the current object with a given variable
+	 *
+	 * @param var variable to compare
+	 * @return true if the given variable equals the current object. False otherwise
+	 */
 	public boolean equals(Variable var) {
 		if (this.type != var.type) return false;
 
