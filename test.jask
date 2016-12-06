@@ -99,6 +99,11 @@ if strContains("Hello, World!":"ld!") equals TRUE increment testPassed else incr
 if strContains("":"") equals TRUE increment testPassed else increment testFailed endif
 if strContains("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
 
+if strStartsWith("Hello, World!":"Hello,") equals TRUE increment testPassed else increment testFailed endif
+if strStartsWith("Hello, World!":"ld!") equals FALSE increment testPassed else increment testFailed endif
+if strStartsWith("":"") equals TRUE increment testPassed else increment testFailed endif
+if strStartsWith("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
+
 /*
 **************************** jcore jnumber tests ****************************
 */

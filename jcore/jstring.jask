@@ -258,3 +258,28 @@ function strContains(str:content)
 
 	return FALSE
 end
+
+function strStartsWith(str:content)
+	if isString(str) equals FALSE return NULL else endif
+	if isString(content) equals FALSE return NULL else endif
+
+	store listFromString(content) in bufferContent
+	store listSize(bufferContent) in sizeContent
+
+	store listFromString(str) in bufferStr
+	store listSize(bufferStr) in sizeStr
+
+	if sizeContent greater sizeStr return FALSE else endif
+
+	store 0 in i
+
+	while i smaller sizeContent
+		if listGet(bufferStr:i) unequals listGet(bufferContent:i)
+			return FALSE
+		else endif
+
+		increment i
+	endrun
+
+	return TRUE
+end
