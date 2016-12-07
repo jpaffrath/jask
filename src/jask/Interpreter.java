@@ -284,6 +284,12 @@ public class Interpreter {
 				this.executer.addModule(moduleInterpreter.executer);
 			}
 
+			// check module remove statement
+			else if (t.startsWith("remove")) {
+				String moduleName = tokens.get(++i);
+				this.executer.removeModule(moduleName);
+			}
+
 			// try-catch is a little bit bumpy
 			try {
 				this.history.addToHistory(exp.toString());

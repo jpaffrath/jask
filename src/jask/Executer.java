@@ -127,6 +127,25 @@ public class Executer {
 	}
 
 	/**
+	 * Removes a loaded module from the current context
+	 *
+	 * @param module name of the module to remove
+	 */
+	public void removeModule(String module) {
+		if (!this.hasModule(module)) {
+			Error.printErrorModuleNotLoaded(module);
+			return;
+		}
+
+		for (Executer curModule : this.modules) {
+			if (curModule.getName().contentEquals(module)) {
+				this.modules.remove(curModule);
+				return;
+			}
+		}
+	}
+
+	/**
 	 * Returns a list of the loaded module names in the current context
 	 *
 	 * @return list of strings containing the names of the loaded modules

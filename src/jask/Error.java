@@ -65,6 +65,10 @@ public class Error {
 		System.out.println(prefix + "the module '" + module + "' is already loaded in this context!");
 	}
 
+	public static void printErrorModuleNotLoaded(String module) {
+		System.out.println(prefix + "the module '" + module + "' is not loaded!");
+	}
+
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
 		System.out.println("Due to this reason, the interpreter has been terminated!");
