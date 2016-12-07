@@ -42,6 +42,31 @@ public class InteractiveMode {
 				continue;
 			}
 
+			// prints the loaded modules
+			if (line.contentEquals("modules")) {
+				List<String> names = interpreter.getExecuter().getModuleNames();
+
+				if (names.isEmpty()) {
+					System.out.println("No loaded modules in context");
+					System.out.print("jask ~> ");
+					continue;
+				}
+
+				System.out.print("Loaded modules: [");
+				for (int i = 0; i < names.size(); i++) {
+					if (i == names.size()-1) {
+						System.out.print(names.get(i));
+					}
+					else {
+						System.out.print(names.get(i) + ", ");
+					}
+				}
+				System.out.println("]");
+
+				System.out.print("jask ~> ");
+				continue;
+			}
+
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
 				tempList.add(line);
