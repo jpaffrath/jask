@@ -153,13 +153,6 @@ testAccess()
 
 if testOutside equals TRUE increment testPassed else increment testFailed endif
 
-function testModule()
-	use jcore/jnumber
-	return PI()
-end
-
-if testModule() equals PI() increment testPassed else increment testFailed endif
-
 /*
 **************************** Miscellaneous tests ****************************
 */
