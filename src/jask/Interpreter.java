@@ -88,6 +88,10 @@ public class Interpreter {
 		return false;
 	}
 
+	public Executer getExecuter() {
+		return this.executer;
+	}
+
 	public String interpret(List<String> tokens) {
 		Expression exp = null;
 		String t = null;
@@ -260,16 +264,23 @@ public class Interpreter {
 
 			// check use statement
 			else if (t.startsWith("use")) {
-				String module = tokens.get(++i) + ".jask";
+				String moduleName = tokens.get(++i);
+				String module = moduleName + ".jask";
 
 				if (!Helpers.checkFile(module)) {
 					Error.terminateInterpret("Can't find module named '" + module + "'");
+				}
+
+				if (this.executer.hasModule(moduleName)) {
+					Error.printErrorModuleAlreadyLoaded(moduleName);
+					continue;
 				}
 
 				List<String> moduleContent = Helpers.readFile(module);
 				Interpreter moduleInterpreter = new Interpreter();
 
 				moduleInterpreter.interpret(new Tokenizer().parse(moduleContent));
+				moduleInterpreter.executer.setName(moduleName);
 				this.executer.addModule(moduleInterpreter.executer);
 			}
 
