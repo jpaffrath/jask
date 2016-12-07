@@ -15,12 +15,14 @@ public class Executer {
 	private FunctionExecuter functionExecuter;
 	private InternalFunctions internalFunctions;
 	private List<Executer> modules;
+	private String name;
 
 	public Executer() {
 		this.heap = new HashMap<>();
 		this.functionExecuter = new FunctionExecuter();
 		this.internalFunctions = new InternalFunctions();
 		this.modules = new ArrayList<Executer>();
+		this.name = "Main";
 	}
 
 	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules) {
@@ -28,6 +30,14 @@ public class Executer {
 		this.heap = heap;
 		this.functionExecuter = functionExecuter;
 		this.modules = modules;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public Variable getVariableFromHeap(String var) {
@@ -99,8 +109,46 @@ public class Executer {
 		return new Variable(varVal);
 	}
 
+	/**
+	 * Adds a new module to the current context
+	 *
+	 * This method checks if the given module is already
+	 * loaded in the current context
+	 *
+	 * @param module new module for contexts
+	 */
 	public void addModule(Executer module) {
+		if (this.hasModule(module.getName())) {
+			Error.printErrorModuleAlreadyLoaded(module.getName());
+			return;
+		}
+
 		this.modules.add(module);
+	}
+
+	/**
+	 * Returns a list of the loaded module names in the current context
+	 *
+	 * @return list of strings containing the names of the loaded modules
+	 */
+	public List<String> getModuleNames() {
+		List<String> moduleNames = new ArrayList<String>(this.modules.size());
+
+		for (Executer module : this.modules) {
+			moduleNames.add(module.getName());
+		}
+
+		return moduleNames;
+	}
+
+	/**
+	 * Checks if a given module name is already loaded in the current context
+	 *
+	 * @param moduleName name of the module
+	 * @return true if the given module name is already loaded, false otherwise
+	 */
+	public boolean hasModule(String moduleName) {
+		return this.getModuleNames().contains(moduleName);
 	}
 
 	private void executeAssign(List<String> tokens) {

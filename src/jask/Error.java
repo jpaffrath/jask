@@ -61,6 +61,10 @@ public class Error {
 		System.out.println(prefix + "the file '" + file + ".jask' was not found!");
 	}
 
+	public static void printErrorModuleAlreadyLoaded(String module) {
+		System.out.println(prefix + "the module '" + module + "' is already loaded in this context!");
+	}
+
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
 		System.out.println("Due to this reason, the interpreter has been terminated!");
