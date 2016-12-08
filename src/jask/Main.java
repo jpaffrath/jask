@@ -1,5 +1,6 @@
 package jask;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Main {
 	 * @param args cmd parameters
 	 * @throws IOException
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		if (args.length == 0) {
 			InteractiveMode interactiveMode = new InteractiveMode(version);
 			interactiveMode.execute();
@@ -42,12 +43,18 @@ public class Main {
 
 		String file = args[0];
 
-		if (!Helpers.checkFile(file)) {
+		if (!Helpers.checkFilename(file)) {
 			Error.terminateInterpret("The file '" + file + "' can not be found!");
 		}
 
-		List<String> content = setUpEnv(args);
-		content.addAll(Helpers.readFile(file));
-		new Interpreter().interpret(new Tokenizer().parse(file));
+		Tokenizer tokenizer = new Tokenizer();
+
+		// add args to new jask context
+		List<String> tokens = tokenizer.parse(setUpEnv(args));
+
+		// parse input file
+		tokens.addAll(tokenizer.parse(new File(file)));
+
+		new Interpreter().interpret(tokens);
 	}
 }
