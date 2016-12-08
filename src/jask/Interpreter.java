@@ -1,5 +1,6 @@
 package jask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -267,7 +268,7 @@ public class Interpreter {
 				String moduleName = tokens.get(++i);
 				String module = moduleName + ".jask";
 
-				if (!Helpers.checkFile(module)) {
+				if (!Helpers.checkFilename(module)) {
 					Error.terminateInterpret("Can't find module named '" + module + "'");
 				}
 
@@ -276,10 +277,8 @@ public class Interpreter {
 					continue;
 				}
 
-				List<String> moduleContent = Helpers.readFile(module);
 				Interpreter moduleInterpreter = new Interpreter();
-
-				moduleInterpreter.interpret(new Tokenizer().parse(moduleContent));
+				moduleInterpreter.interpret(new Tokenizer().parse(new File(module)));
 				moduleInterpreter.executer.setName(moduleName);
 				this.executer.addModule(moduleInterpreter.executer);
 			}
