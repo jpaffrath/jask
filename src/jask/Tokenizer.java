@@ -1,5 +1,15 @@
 package jask;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,60 +22,111 @@ import java.util.List;
 public class Tokenizer {
 
 	/**
-	 * Splits the given input lines into tokens
+	 * Parses input from given Reader to list of string tokens
 	 *
-	 * @param lines content of file as lines
-	 * @return parsed list of tokens
+	 * @param reader input
+	 * @return list of string tokens
 	 */
-	List<String> parse(List<String> lines) {
+	private List<String> parseInput(Reader reader) {
 		List<String> tokens = new ArrayList<String>();
-		String strBuffer = null;
-		boolean strParsing = false;
-		boolean commentParsing = false;
+		StringBuilder tokenBuffer = new StringBuilder();
 
-		for (String line : lines) {
-			line = line.replace("\t", "");
-			line = line.trim();
-			if (line.equals("")) continue;
-			if (line.startsWith("//")) continue;
+		Reader buffer = new BufferedReader(reader);
 
-			for (String t : line.split(" ")) {
+		boolean insideString = false;
+		boolean insideComment = false;
+
+		int val;
+		char curChar;
+
+		try {
+			while ((val = buffer.read()) != -1) {
+				curChar = (char)val;
+
+				// skip special characters
+				switch (curChar) {
+				case 0x0D:
+				case 0x9:
+					continue;
+				}
+
 				// toggle comment parsing
-				if (t.contentEquals("/*") && !commentParsing) {
-					commentParsing = true;
-					continue;
+				if (curChar == ';' && !insideComment && !insideString) {
+					insideComment = true;
 				}
 
-				if (t.contentEquals("*/") && commentParsing) {
-					commentParsing = false;
-					continue;
+				// turn newline to space and stop comment parsing
+				if (curChar == '\n') {
+					curChar = ' ';
+					insideComment = false;
 				}
 
-				if (commentParsing) continue;
+				if (insideComment) continue;
 
 				// toggle string parsing
-				if (t.contains("\"") && (t.length() - t.replace("\"", "").length()) % 2 != 0) {
-					if (!strParsing) {
-						strParsing = true;
-						strBuffer = new String(t + " ");
-						continue;
-					}
-					else {
-						strParsing = false;
-						strBuffer += t;
-						tokens.add(strBuffer);
-						strBuffer = null;
-						continue;
-					}
+				if (curChar == '"') {
+					insideString = !insideString;
 				}
 
-				if (strParsing) {
-					strBuffer += (t + " ");
+				// split sequence to token
+				if (curChar == ' ' && !insideString) {
+					tokens.add(tokenBuffer.toString());
+					tokenBuffer = new StringBuilder();
 					continue;
 				}
 
-				tokens.add(t.replace("\t", ""));
+				tokenBuffer.append(curChar);
 			}
+		} catch (IOException e) { e.printStackTrace(); }
+
+		tokens.add(tokenBuffer.toString());
+
+		try { buffer.close(); } catch (IOException e) { e.printStackTrace(); }
+		return tokens;
+	}
+
+	/**
+	 * Splits the given input file into tokens
+	 *
+	 * @param file a jask file as input
+	 * @return parsed list of tokens
+	 */
+	List<String> parse(File file) {
+		if (!Helpers.checkFile(file)) return null;
+
+		InputStream inputStream = null;
+
+		try {
+			inputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			Error.printErrorFileNotFound(file.getName());
+			return null;
+		}
+
+		return this.parseInput(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+	}
+
+	/**
+	 * Splits the given input line into tokens
+	 *
+	 * @param input a line of jask code
+	 * @return parsed list of tokens
+	 */
+	List<String> parse(String input) {
+		return this.parseInput(new StringReader(input));
+	}
+
+	/**
+	 * Splits the given input list into tokens
+	 *
+	 * @param inputList list of jask code
+	 * @return parsed list of tokens
+	 */
+	List<String> parse(List<String> inputList) {
+		List<String> tokens = new ArrayList<String>();
+
+		for (String line : inputList) {
+			tokens.addAll(this.parse(line));
 		}
 
 		return tokens;

@@ -1,9 +1,6 @@
 package jask;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,36 +13,24 @@ import java.util.List;
 public class Helpers {
 
 	/**
-	 * Reads the content of a given file
-	 *
-	 * @param name name of the file
-	 * @return list of strings containing the files content
-	 */
-	public static List<String> readFile(String name) {
-		List<String> lines = new ArrayList<String>();
-		String line = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(name))) {
-			while ((line = br.readLine()) != null) {
-				lines.add(line);
-			}
-			br.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return lines;
-	}
-
-	/**
 	 * Checks if a given path points to a file
 	 *
 	 * @param name path to file
 	 * @return true if file exists, otherwise false
 	 */
-	public static boolean checkFile(String name) {
+	public static boolean checkFilename(String name) {
 		File f = new File(name);
 		return (f.exists() && !f.isDirectory());
+	}
+
+	/**
+	 * Checks if a given file exists
+	 *
+	 * @param file file to check
+	 * @return true if file exists, otherwise false
+	 */
+	public static boolean checkFile(File file) {
+		return (file.exists() && !file.isDirectory());
 	}
 
 	/**
