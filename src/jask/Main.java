@@ -1,5 +1,6 @@
 package jask;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,9 @@ public class Main {
 	 * Main program entry
 	 *
 	 * @param args cmd parameters
+	 * @throws IOException
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		if (args.length == 0) {
 			InteractiveMode interactiveMode = new InteractiveMode(version);
 			interactiveMode.execute();
@@ -46,6 +48,6 @@ public class Main {
 
 		List<String> content = setUpEnv(args);
 		content.addAll(Helpers.readFile(file));
-		new Interpreter().interpret(new Tokenizer().parse(content));
+		new Interpreter().interpret(new Tokenizer().parse(file));
 	}
 }
