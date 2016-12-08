@@ -24,11 +24,11 @@ For further information, please visit the [jask Wiki](https://github.com/jpaffra
 
 # Use
 To use the interactive mode, invoke jask:
-```C
+```Assembly
 java -jar jask.jar
 ```
 jask can interpret files:
-```C
+```Assembly
 jask file.jask arg1 arg2 ...
 ```
 The arguments are stored in a global list variable called _ENV.  
@@ -39,7 +39,7 @@ To test your freshly compiled jask-version, just run the _test.jask_ file.
 
 ### Creating new variables
 Jask can store three types of data: numbers, strings, and boolean values.
-```C
+```Assembly
 store 100 in z
 store 5.2 in d
 
@@ -52,7 +52,7 @@ store NULL in foo
 
 ### Assigning values
 In order to assign values to variables, they need to be stored first.
-```C
+```Assembly
 assign 1 plus 2 to z
 assign d minus 3 to z
 assign 3 times 2 to z
@@ -65,33 +65,33 @@ assign "Hello " plus "World!" to str
 assign FALSE to bool
 ```
 You can increment and decrement numbers very quickly:
-```C
-increment myNum // same as assign myNum plus 1 to myNum
-decrement myNum // same as assign myNum minus 1 to myNum
+```Assembly
+increment myNum ; same as assign myNum plus 1 to myNum
+decrement myNum ; same as assign myNum minus 1 to myNum
 ```
 
 ### Calling functions
-```C
+```Assembly
 myFunc(parameter)
 ```
 Multiple parameters are separated by colons:
-```C
+```Assembly
 myFunc(firstParameter:secondParameter)
 ```
 
 ### Work with list variables
 A list in jask can store strings, numbers and boolean values.
-```C
+```Assembly
 store list(1:2:3) in numbers
 print(numbers)
 
 store listGet(numbers:0) in item1
 print(item1)
 
-// add value 4
+; add value 4
 listAdd(numbers:4)
 
-// remove value at index 2
+; remove value at index 2
 listRemove(numbers:2)
 
 store list(1:"String":TRUE) in myList
@@ -100,7 +100,7 @@ Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jas
 
 ### Control flow
 if-else conditions:
-```C
+```Assembly
 if z equals d
   printLine("z equals d")
 else
@@ -108,7 +108,7 @@ else
 endif
 ```
 run and while loops:
-```C
+```Assembly
 store 0 in i
 
 run i to 10 with i plus 1
@@ -125,7 +125,7 @@ Want more examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/
 
 ### Creating functions
 Functions in jask can return nothing or any type of data.
-```C
+```Assembly
 function myPrint(str)
   print(str)
 end
@@ -136,7 +136,7 @@ function func(param1:param2)
 end
 ```
 To access a variable which is stored outside a function, use the access operator "!":
-```C
+```Assembly
 store "Outside" in var
 
 function myFunc()
@@ -144,21 +144,21 @@ function myFunc()
 end
 ```
 This allows you to define variables with the same name:
-```C
+```Assembly
 store "Outside" in var
 
 function myFunc()
     store "Inside" in var
 
-    printLine(!var) // prints "Outside"
-    printLine(var)  // prints "Inside"
+    printLine(!var) ; prints "Outside"
+    printLine(var)  ; prints "Inside"
 end
 ```
 You find more information about the access operator in the [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
 Want to know more about functions in jask? Look at [Functions inside functions](https://github.com/jpaffrath/jask/wiki/Functions-inside-functions!) or [Modules inside functions](https://github.com/jpaffrath/jask/wiki/Modules-inside-functions!).
 
 ### Printing and reading data
-```C
+```Assembly
 store read() in res
 print(res)
 
@@ -166,7 +166,7 @@ print("I am a concatenated ":"string!")
 ```
 
 ### Convert variables
-```C
+```Assembly
 store "100" in num
 
 convert num to number
@@ -178,19 +178,19 @@ You can import other jask files with the keyword 'use'.
 An imported file is called a _module_.
 If you import a module, jask searches for files in the directory where it has been executed.
 See the following example how to import a module:
-```C
+```Assembly
 function myModuleFunction()
   print("Hello! I am a module!")
 end
 ```
 Let's say this is saved in a file called _myModule.jask_.
 Now you can import the module, called _myModule_ (without the extension '.jask'):
-```C
+```Assembly
 use myModule
 myModuleFunction()
 ```
 You can also define a path in the use statement:
-```C
+```Assembly
 use my/local/path/to/library/myModule
 myModuleFunction()
 ```
