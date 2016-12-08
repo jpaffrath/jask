@@ -28,15 +28,23 @@ public class Tokenizer {
 
 		StringBuilder tokenBuffer = new StringBuilder();
 		boolean insideString = false;
+		boolean insideComment = false;
 
 		int val;
 		char curChar;
 		while ((val = buffer.read()) != -1) {
 			curChar = (char)val;
 
+			if (curChar == ';' && !insideComment && !insideString) {
+				insideComment = true;
+			}
+
 			if (curChar == '\n') {
 				curChar = ' ';
+				insideComment = false;
 			}
+
+			if (insideComment) continue;
 
 			if (curChar == '"') {
 				insideString = !insideString;
