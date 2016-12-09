@@ -139,6 +139,17 @@ testAccess()
 
 if testOutside equals TRUE increment testPassed else increment testFailed endif
 
+; module tests
+
+remove jcore/jnumber
+
+function testModule()
+	use jcore/jnumber
+	return PI()
+end
+
+if testModule() equals 3.141592653589793 increment testPassed else increment testFailed endif
+
 ; miscellaneous tests
 
 if isString("foo bar") 						equals TRUE increment testPassed else increment testFailed endif
