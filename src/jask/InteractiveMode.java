@@ -69,6 +69,13 @@ public class InteractiveMode {
 
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
+				if (line.contains("end")) {
+					this.history.addToHistory(line);
+					interpreter.interpret(tokenizer.parse(line));
+					System.out.print("jask ~> ");
+					continue;
+				}
+
 				tempList.add(line);
 				System.out.print("func ~>     ");
 
@@ -83,6 +90,13 @@ public class InteractiveMode {
 
 			// if a statement is added, add lines to list until the statement ends
 			if (line.length() > 1 && line.substring(0, 2).contentEquals("if")) {
+				if (line.contains("endif")) {
+					this.history.addToHistory(line);
+					interpreter.interpret(tokenizer.parse(line));
+					System.out.print("jask ~> ");
+					continue;
+				}
+
 				int ifCount = 1;
 				int exCount = 0;
 
@@ -106,6 +120,13 @@ public class InteractiveMode {
 			// if a run statement is added, add lines to list until the statement ends
 			if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
 					(line.length() > 4 && line.substring(0, 5).contentEquals("while"))) {
+				if (line.contains("endrun")) {
+					this.history.addToHistory(line);
+					interpreter.interpret(tokenizer.parse(line));
+					System.out.print("jask ~> ");
+					continue;
+				}
+
 				int ruCount = 1;
 				int exCount = 0;
 
