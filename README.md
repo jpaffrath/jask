@@ -78,6 +78,7 @@ Multiple parameters are separated by colons:
 ```Assembly
 myFunc(firstParameter:secondParameter)
 ```
+Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
 
 ### Work with list variables
 A list in jask can store strings, numbers and boolean values.
