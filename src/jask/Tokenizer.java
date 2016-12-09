@@ -22,6 +22,22 @@ import java.util.List;
 public class Tokenizer {
 
 	/**
+	 * Checks if a given character is a valid split character
+	 *
+	 * @param character character to check
+	 * @return true if the given character is a valid split character, otherwise false
+	 */
+	private boolean isSplitCharacter(char character) {
+		switch (character) {
+		case 0x20: // whitespace
+		case 0x9:  // tab
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Parses input from given Reader to list of string tokens
 	 *
 	 * @param reader input
@@ -35,6 +51,7 @@ public class Tokenizer {
 
 		boolean insideString = false;
 		boolean insideComment = false;
+		boolean lastWasSplit =  false;
 
 		int val;
 		char curChar;
@@ -46,7 +63,11 @@ public class Tokenizer {
 				// skip special characters
 				switch (curChar) {
 				case 0x0D:
-				case 0x9:
+					continue;
+				}
+
+				// continue if multiple separator characters are detected
+				if (this.isSplitCharacter(curChar) && lastWasSplit && !insideString) {
 					continue;
 				}
 
@@ -69,13 +90,15 @@ public class Tokenizer {
 				}
 
 				// split sequence to token
-				if (curChar == ' ' && !insideString) {
+				if (this.isSplitCharacter(curChar) && !insideString) {
 					tokens.add(tokenBuffer.toString());
 					tokenBuffer = new StringBuilder();
+					lastWasSplit = true;
 					continue;
 				}
 
 				tokenBuffer.append(curChar);
+				lastWasSplit = false;
 			}
 		} catch (IOException e) { e.printStackTrace(); }
 
