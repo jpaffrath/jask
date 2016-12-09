@@ -37,14 +37,14 @@ if listSize(list()) equals 0 increment testPassed else increment testFailed endi
 
 store list(1:2:3) in myList
 
-if listSize(myList) equals 3 increment testPassed else increment testFailed endif
-if listGet(myList:0) equals 1 increment testPassed else increment testFailed endif
-if listAdd(myList:5) equals TRUE increment testPassed else increment testFailed endif
-if listGet(myList:3) equals 5 increment testPassed else increment testFailed endif
-if listSet(myList:3:4) equals TRUE increment testPassed else increment testFailed endif
-if listGet(myList:3) equals 4 increment testPassed else increment testFailed endif
-if listRemove(myList:3) equals TRUE increment testPassed else increment testFailed endif
-if listSize(myList) equals 3 increment testPassed else increment testFailed endif
+if listSize(myList)		equals 3	increment testPassed else increment testFailed endif
+if listGet(myList:0)	equals 1	increment testPassed else increment testFailed endif
+if listAdd(myList:5)	equals TRUE	increment testPassed else increment testFailed endif
+if listGet(myList:3)	equals 5	increment testPassed else increment testFailed endif
+if listSet(myList:3:4)	equals TRUE	increment testPassed else increment testFailed endif
+if listGet(myList:3)	equals 4	increment testPassed else increment testFailed endif
+if listRemove(myList:3)	equals TRUE	increment testPassed else increment testFailed endif
+if listSize(myList)		equals 3	increment testPassed else increment testFailed endif
 
 assign listFromString("my list") to myList
 if listToString(myList) equals "my list" increment testPassed else increment testFailed endif
@@ -66,65 +66,65 @@ if substring("my substring string":3:11) equals "substring" increment testPassed
 if upper("abcdefghijklmnopqrstuvwxyz") equals "ABCDEFGHIJKLMNOPQRSTUVWXYZ" increment testPassed else increment testFailed endif
 if lower("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" increment testPassed else increment testFailed endif
 
-if listGet(split("a b c":" "):0) equals "a" increment testPassed else increment testFailed endif
-if listGet(split("Hello,World!":","):0) equals "Hello" increment testPassed else increment testFailed endif
+if listGet(split("a b c":" "):0)		equals "a" 		increment testPassed else increment testFailed endif
+if listGet(split("Hello,World!":","):0) equals "Hello"	increment testPassed else increment testFailed endif
 
-if reverse("12345") equals "54321" increment testPassed else increment testFailed endif
-if reverse(129) equals NULL increment testPassed else increment testFailed endif
+if reverse("12345")	equals "54321"	increment testPassed else increment testFailed endif
+if reverse(129)		equals NULL		increment testPassed else increment testFailed endif
 
-if strSize("12345") equals 5 increment testPassed else increment testFailed endif
-if strSize(100) equals NULL increment testPassed else increment testFailed endif
+if strSize("12345") equals 5 	increment testPassed else increment testFailed endif
+if strSize(100) 	equals NULL increment testPassed else increment testFailed endif
 
 if strRepeat("jask":2) equals "jaskjask" increment testPassed else increment testFailed endif
-if strRepeat("jask":0) equals NULL increment testPassed else increment testFailed endif
+if strRepeat("jask":0) equals NULL		 increment testPassed else increment testFailed endif
 
-if trim("jask") equals "jask" increment testPassed else increment testFailed endif
-if trim(" jask") equals "jask" increment testPassed else increment testFailed endif
-if trim("jask ") equals "jask" increment testPassed else increment testFailed endif
-if trim(" jask ") equals "jask" increment testPassed else increment testFailed endif
+if trim("jask")		  equals "jask" increment testPassed else increment testFailed endif
+if trim(" jask")	  equals "jask" increment testPassed else increment testFailed endif
+if trim("jask ")	  equals "jask" increment testPassed else increment testFailed endif
+if trim(" jask ")	  equals "jask" increment testPassed else increment testFailed endif
 if trim("   jask   ") equals "jask" increment testPassed else increment testFailed endif
 
-if strContains("Hello, World!":"Hello,") equals TRUE increment testPassed else increment testFailed endif
-if strContains("Hello, World!":"ld!") equals TRUE increment testPassed else increment testFailed endif
-if strContains("":"") equals TRUE increment testPassed else increment testFailed endif
+if strContains("Hello, World!":"Hello,") 			equals TRUE  increment testPassed else increment testFailed endif
+if strContains("Hello, World!":"ld!") 				equals TRUE  increment testPassed else increment testFailed endif
+if strContains("":"")								equals TRUE  increment testPassed else increment testFailed endif
 if strContains("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
 
-if strStartsWith("Hello, World!":"Hello,") equals TRUE increment testPassed else increment testFailed endif
-if strStartsWith("Hello, World!":"ld!") equals FALSE increment testPassed else increment testFailed endif
-if strStartsWith("":"") equals TRUE increment testPassed else increment testFailed endif
-if strStartsWith("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
+if strStartsWith("Hello, World!":"Hello,") 			  equals TRUE  increment testPassed else 	increment testFailed endif
+if strStartsWith("Hello, World!":"ld!") 			  equals FALSE increment testPassed else 	increment testFailed endif
+if strStartsWith("":"") 							  equals TRUE  increment testPassed else 	increment testFailed endif
+if strStartsWith("This is a string":"jask is great!") equals FALSE increment testPassed else 	increment testFailed endif
 
 ; jcore jnumber tests
 
-if max(2445.21:-7) equals 2445.21 increment testPassed else increment testFailed endif
+if max(2445.21:-7) equals 2445.21  increment testPassed else increment testFailed endif
 if min(-2445.21:7) equals -2445.21 increment testPassed else increment testFailed endif
 
 if PI() equals 3.141592653589793 increment testPassed else increment testFailed endif
-if E() equals 2.718281828459045 increment testPassed else increment testFailed endif
+if E()  equals 2.718281828459045 increment testPassed else increment testFailed endif
 
-if abs(3) equals 3 increment testPassed else increment testFailed endif
+if abs(3)  equals 3 increment testPassed else increment testFailed endif
 if abs(-3) equals 3 increment testPassed else increment testFailed endif
 
-if pow(2:2) equals 4 increment testPassed else increment testFailed endif
-if pow(-2:2) equals 4 increment testPassed else increment testFailed endif
-if pow(5:2) equals 25 increment testPassed else increment testFailed endif
-if pow(-3:7) equals -2187 increment testPassed else increment testFailed endif
-if pow(2:-2) equals 0.25 increment testPassed else increment testFailed endif
+if pow(2:2)   equals 4					increment testPassed else increment testFailed endif
+if pow(-2:2)  equals 4					increment testPassed else increment testFailed endif
+if pow(5:2)   equals 25					increment testPassed else increment testFailed endif
+if pow(-3:7)  equals -2187				increment testPassed else increment testFailed endif
+if pow(2:-2)  equals 0.25				increment testPassed else increment testFailed endif
 if pow(2:1.5) equals 2.8284271247461903 increment testPassed else increment testFailed endif
-if pow(1.5:2) equals 2.25 increment testPassed else increment testFailed endif
+if pow(1.5:2) equals 2.25 				increment testPassed else increment testFailed endif
 
-if factorial(4) equals 24 increment testPassed else increment testFailed endif
-if factorial(6) equals 720 increment testPassed else increment testFailed endif
+if factorial(4)  equals 24 		increment testPassed else increment testFailed endif
+if factorial(6)  equals 720 	increment testPassed else increment testFailed endif
 if factorial(10) equals 3628800 increment testPassed else increment testFailed endif
-if factorial(-1) equals NULL increment testPassed else increment testFailed endif
-if factorial(0) equals 1 increment testPassed else increment testFailed endif
+if factorial(-1) equals NULL 	increment testPassed else increment testFailed endif
+if factorial(0)  equals 1 		increment testPassed else increment testFailed endif
 
 if hasPlaces(100) equals FALSE increment testPassed else increment testFailed endif
 if hasPlaces(5.0) equals FALSE increment testPassed else increment testFailed endif
 if hasPlaces(-42) equals FALSE increment testPassed else increment testFailed endif
 
-if hasPlaces(PI()) equals TRUE increment testPassed else increment testFailed endif
-if hasPlaces(5.01) equals TRUE increment testPassed else increment testFailed endif
+if hasPlaces(PI())   equals TRUE increment testPassed else increment testFailed endif
+if hasPlaces(5.01)   equals TRUE increment testPassed else increment testFailed endif
 if hasPlaces(-14.45) equals TRUE increment testPassed else increment testFailed endif
 
 ; function tests
@@ -141,10 +141,10 @@ if testOutside equals TRUE increment testPassed else increment testFailed endif
 
 ; miscellaneous tests
 
-if isString("foo bar") equals TRUE increment testPassed else increment testFailed endif
-if isNumber(100.32214) equals TRUE increment testPassed else increment testFailed endif
-if isBool(TRUE) equals TRUE increment testPassed else increment testFailed endif
-if isList(list("foo bar":-1953.22:FALSE)) equals TRUE increment testPassed else increment testFailed endif
+if isString("foo bar") 						equals TRUE increment testPassed else increment testFailed endif
+if isNumber(100.32214) 						equals TRUE increment testPassed else increment testFailed endif
+if isBool(TRUE) 							equals TRUE increment testPassed else increment testFailed endif
+if isList(list("foo bar":-1953.22:FALSE)) 	equals TRUE increment testPassed else increment testFailed endif
 
 ; finish tests
 
