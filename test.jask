@@ -1,6 +1,4 @@
-/*
-* This file executes several tests
-*/
+; This file executes several tests
 
 use jcore/jnumber
 use jcore/jstring
@@ -10,9 +8,7 @@ store 0 in testFailed
 
 printLine("Running jask tests...")
 
-/*
-**************************** Number storing tests ****************************
-*/
+; number storing tests
 
 store 42 in num1
 if num1 equals 42 increment testPassed else increment testFailed endif
@@ -30,16 +26,12 @@ if num1 equals 1 increment testPassed else increment testFailed endif
 decrement num1
 if num1 equals 0 increment testPassed else increment testFailed endif
 
-/*
-**************************** String storing tests ****************************
-*/
+; string storing tests
 
 store "42" in str1
 if str1 equals "42" increment testPassed else increment testFailed endif
 
-/*
-**************************** List tests ****************************
-*/
+; list tests
 
 if listSize(list()) equals 0 increment testPassed else increment testFailed endif
 
@@ -67,9 +59,7 @@ listAdd(myList:"a string")
 if listContains(myList:"a string") equals TRUE increment testPassed else increment testFailed endif
 if listContains(myList:"A String") equals FALSE increment testPassed else increment testFailed endif
 
-/*
-**************************** jcore jstring tests ****************************
-*/
+; jcore jstring tests
 
 if substring("my substring string":3:11) equals "substring" increment testPassed else increment testFailed endif
 
@@ -104,9 +94,7 @@ if strStartsWith("Hello, World!":"ld!") equals FALSE increment testPassed else i
 if strStartsWith("":"") equals TRUE increment testPassed else increment testFailed endif
 if strStartsWith("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
 
-/*
-**************************** jcore jnumber tests ****************************
-*/
+; jcore jnumber tests
 
 if max(2445.21:-7) equals 2445.21 increment testPassed else increment testFailed endif
 if min(-2445.21:7) equals -2445.21 increment testPassed else increment testFailed endif
@@ -139,9 +127,7 @@ if hasPlaces(PI()) equals TRUE increment testPassed else increment testFailed en
 if hasPlaces(5.01) equals TRUE increment testPassed else increment testFailed endif
 if hasPlaces(-14.45) equals TRUE increment testPassed else increment testFailed endif
 
-/*
-**************************** Function tests ****************************
-*/
+; function tests
 
 store FALSE in testOutside
 
@@ -153,17 +139,13 @@ testAccess()
 
 if testOutside equals TRUE increment testPassed else increment testFailed endif
 
-/*
-**************************** Miscellaneous tests ****************************
-*/
+; miscellaneous tests
 
 if isString("foo bar") equals TRUE increment testPassed else increment testFailed endif
 if isNumber(100.32214) equals TRUE increment testPassed else increment testFailed endif
 if isBool(TRUE) equals TRUE increment testPassed else increment testFailed endif
 if isList(list("foo bar":-1953.22:FALSE)) equals TRUE increment testPassed else increment testFailed endif
 
-/*
-**************************** End tests ****************************
-*/
+; finish tests
 
 printLine("Finish tests with ":testPassed:" passed and ":testFailed:" failed tests!")
