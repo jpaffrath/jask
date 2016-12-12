@@ -188,7 +188,13 @@ public class Executer {
 				}
 			}
 			else {
-				this.heap.put(tokens.get(3), executeFunction(varStr));
+				Variable gen = executeFunction(varStr);
+				if (gen instanceof VariableList) {
+					this.heap.put(tokens.get(3), new VariableList((VariableList)gen));
+				}
+				else {
+					this.heap.put(tokens.get(3), gen);
+				}
 			}
 			return;
 		}

@@ -21,6 +21,11 @@ public class VariableList extends Variable {
 		}
 	}
 
+	public VariableList(VariableList var) {
+		super();
+		this.values = new ArrayList<Variable>(var.values);
+	}
+
 	public boolean addElement(String genericValue) {
 		this.values.add(new Variable(genericValue));
 		return true;
