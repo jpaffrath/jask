@@ -90,10 +90,10 @@ store listGet(numbers:0) in item1
 print(item1)
 
 ; add value 4
-listAdd(numbers:4)
+assign listAdd(numbers:4) to numbers
 
 ; remove value at index 2
-listRemove(numbers:2)
+assign listRemove(numbers:2) to numbers
 
 store list(1:"String":TRUE) in myList
 ```
