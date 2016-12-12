@@ -159,6 +159,8 @@ public class InternalFunctions {
 	public boolean isInternalListFunction(String functionName) {
 		return (functionName.contentEquals("list") ||
 				functionName.contentEquals("listFromString") ||
+				functionName.contentEquals("listAdd") ||
+				functionName.contentEquals("listRemove"));
 	}
 
 	public HashMap<String, Variable> convertHeap(List<Variable> _heap, String[] params) {
@@ -268,30 +270,30 @@ public class InternalFunctions {
 	}
 
 	private String listRemove(HashMap<String, Variable> heap, String[] params) {
-		Variable var = heap.get(params[0]);
+		Variable var = new VariableList((VariableList)heap.get(params[0]));
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return FALSE;
+			return NULL;
 		}
 
 		Variable index = heap.get(params[1]);
 		if (index == null) {
-			if (Variable.isNumber(params[1])) {
-				((VariableList)var).removeElement(Integer.parseInt(params[1]));
-				return TRUE;
+			if (!Variable.isNumber(params[1])) {
+				return NULL;
 			}
 
-			return FALSE;
+			((VariableList)var).removeElement(Integer.parseInt(params[1]));
 		}
 		else {
 			if (index.getType() != VariableType.Number) {
 				Error.printErrorVariableIsNotANumber(params[1]);
-				return FALSE;
+				return NULL;
 			}
 
 			((VariableList)var).removeElement((int)index.getDoubleValue());
-			return TRUE;
 		}
+
+		return var.toString();
 	}
 
 	private String listSet(HashMap<String, Variable> heap, String[] params) {
