@@ -160,7 +160,8 @@ public class InternalFunctions {
 		return (functionName.contentEquals("list") ||
 				functionName.contentEquals("listFromString") ||
 				functionName.contentEquals("listAdd") ||
-				functionName.contentEquals("listRemove"));
+				functionName.contentEquals("listRemove") ||
+				functionName.contentEquals("listSet"));
 	}
 
 	public HashMap<String, Variable> convertHeap(List<Variable> _heap, String[] params) {
@@ -297,39 +298,36 @@ public class InternalFunctions {
 	}
 
 	private String listSet(HashMap<String, Variable> heap, String[] params) {
-		Variable var = heap.get(params[0]);
+		Variable var = new VariableList((VariableList)heap.get(params[0]));
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return FALSE;
+			return NULL;
 		}
 
 		Variable index = heap.get(params[1]);
 		if (index == null) {
-			if (Variable.isNumber(params[1])) {
-				((VariableList)var).removeElement(Integer.parseInt(params[1]));
-				return TRUE;
+			if (!Variable.isNumber(params[1])) {
+				return NULL;
 			}
 
-			return FALSE;
+			((VariableList)var).removeElement(Integer.parseInt(params[1]));
+			return var.toString();
 		}
 		else {
 			if (index.getType() != VariableType.Number) {
 				Error.printErrorVariableIsNotANumber(params[1]);
-				return FALSE;
+				return NULL;
 			}
 		}
 
 		Variable toSet = heap.get(params[2]);
 		if (toSet == null) {
 			toSet = new Variable(params[2]);
-			if (toSet.getType() == VariableType.NoType) return FALSE;
+			if (toSet.getType() == VariableType.NoType) return NULL;
 		}
 
-		if (((VariableList)var).setElement((int)index.getDoubleValue(), toSet)) {
-			return TRUE;
-		}
-
-		return FALSE;
+		((VariableList)var).setElement((int)index.getDoubleValue(), toSet);
+		return var.toString();
 	}
 
 	private String listFromString(HashMap<String, Variable> heap, String[] params) {
