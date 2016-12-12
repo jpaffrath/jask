@@ -20,7 +20,7 @@ function readList(number)
 
 	store 0 in i
 	while i smaller number
-		listAdd(list:read())
+		assign listAdd(list:read()) to list
 		increment i
 	endrun
 

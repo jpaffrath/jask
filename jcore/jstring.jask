@@ -26,7 +26,7 @@ function substring(str:s:e)
 
 	run s to e with s plus 1
 		assign listGet(str:s) to temp
-		listAdd(sub:temp)
+		assign listAdd(sub:temp) to sub
 	endrun
 
 	return listToString(sub)
@@ -72,7 +72,7 @@ function upper(str)
 		if curChar equals "y" assign "Y" to curChar else endif
 		if curChar equals "z" assign "Z" to curChar else endif
 
-		listAdd(newList:curChar)
+		assign listAdd(newList:curChar) to newList
 		increment i
 	endrun
 
@@ -119,7 +119,7 @@ function lower(str)
 		if curChar equals "Y" assign "y" to curChar else endif
 		if curChar equals "Z" assign "z" to curChar else endif
 
-		listAdd(newList:curChar)
+		assign listAdd(newList:curChar) to newList
 		increment i
 	endrun
 
@@ -142,16 +142,16 @@ function split(str:tok)
 		assign listGet(list:i) to char
 
 		if char equals tok
-			listAdd(result:listToString(temp))
+			assign listAdd(result:listToString(temp)) to result
 			assign list() to temp
 		else
-			listAdd(temp:char)
+			assign listAdd(temp:char) to temp
 		endif
 
 		increment i
 	endrun
 
-	listAdd(result:listToString(temp))
+	assign listAdd(result:listToString(temp)) to result
 	return result
 end
 
@@ -165,7 +165,7 @@ function reverse(str)
 	assign i minus 1 to i
 
 	while i greaterequal 0
-		listAdd(list:listGet(str:i))
+		assign listAdd(list:listGet(str:i)) to list
 		decrement i
 	endrun
 
