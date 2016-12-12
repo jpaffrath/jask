@@ -15,6 +15,7 @@ public class InternalFunctions {
 
 	private final String TRUE = "TRUE";
 	private final String FALSE = "FALSE";
+	private final String NULL = "NULL";
 
 	public InternalFunctions() {
 		this.functions = new HashMap<String, InternalFunction>();
@@ -158,7 +159,6 @@ public class InternalFunctions {
 	public boolean isInternalListFunction(String functionName) {
 		return (functionName.contentEquals("list") ||
 				functionName.contentEquals("listFromString") ||
-				functionName.contentEquals("listAdd"));
 	}
 
 	public HashMap<String, Variable> convertHeap(List<Variable> _heap, String[] params) {
@@ -214,14 +214,14 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return NULL;
 		}
 
 		Variable index = heap.get(params[1]);
 		if (index == null) {
 			if (!Variable.isNumber(params[1])) {
 				Error.printErrorValueNotApplicable(params[1]);
-				return "NULL";
+				return NULL;
 			}
 
 			return ((VariableList)var).getElementAtIndex(Integer.parseInt(params[1]));
@@ -229,7 +229,7 @@ public class InternalFunctions {
 
 		if (index.getType() != VariableType.Number) {
 			Error.printErrorVariableIsNotANumber(params[1]);
-			return "NULL";
+			return NULL;
 		}
 
 		return ((VariableList)var).getElementAtIndex((int)index.getDoubleValue());
@@ -239,7 +239,7 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return NULL;
 		}
 
 		return Integer.toString(((VariableList)var).getSize());
@@ -249,18 +249,18 @@ public class InternalFunctions {
 		Variable var = new VariableList((VariableList)heap.get(params[0]));
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return NULL;
 		}
 
 		Variable toAdd = heap.get(params[1]);
 		if (toAdd == null) {
 			if (!((VariableList)var).addElement(params[1])) {
-				return "NULL";
+				return NULL;
 			}
 		}
 		else {
 			if (!((VariableList)var).addElement(toAdd)) {
-				return "NULL";
+				return NULL;
 			}
 		}
 
@@ -341,7 +341,7 @@ public class InternalFunctions {
 			}
 			else {
 				Error.printErrorVariableIsNotAString(params[0]);
-				return "NULL";
+				return NULL;
 			}
 		}
 		else {
@@ -350,7 +350,7 @@ public class InternalFunctions {
 			}
 			else {
 				Error.printErrorVariableIsNotAString(params[0]);
-				return "NULL";
+				return NULL;
 			}
 		}
 
@@ -370,7 +370,7 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return NULL;
 		}
 
 		return ((VariableList)var).convertToString();
@@ -380,7 +380,7 @@ public class InternalFunctions {
 		Variable var = heap.get(params[0]);
 		if (var == null || !(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
-			return "NULL";
+			return NULL;
 		}
 
 		Variable element = heap.get(params[1]);
@@ -439,6 +439,6 @@ public class InternalFunctions {
 		}
 
 		System.exit(code);
-		return "NULL";
+		return NULL;
 	}
 }
