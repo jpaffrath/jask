@@ -39,12 +39,15 @@ store list(1:2:3) in myList
 
 if listSize(myList)		equals 3	increment testPassed else increment testFailed endif
 if listGet(myList:0)	equals 1	increment testPassed else increment testFailed endif
-if listAdd(myList:5)	equals TRUE	increment testPassed else increment testFailed endif
-if listGet(myList:3)	equals 5	increment testPassed else increment testFailed endif
-if listSet(myList:3:4)	equals TRUE	increment testPassed else increment testFailed endif
-if listGet(myList:3)	equals 4	increment testPassed else increment testFailed endif
-if listRemove(myList:3)	equals TRUE	increment testPassed else increment testFailed endif
-if listSize(myList)		equals 3	increment testPassed else increment testFailed endif
+
+assign listAdd(myList:5) to myList
+if listGet(myList:3) equals 5 increment testPassed else increment testFailed endif
+
+assign listSet(myList:3:4) to myList
+if listGet(myList:3) equals 4 increment testPassed else increment testFailed endif
+
+assign listRemove(myList:3) to myList
+if listSize(myList) equals 3 increment testPassed else increment testFailed endif
 
 assign listFromString("my list") to myList
 if listToString(myList) equals "my list" increment testPassed else increment testFailed endif
@@ -54,7 +57,7 @@ assign list(1:2:3) to myList
 if listContains(myList:1) equals TRUE increment testPassed else increment testFailed endif
 if listContains(myList:4) equals FALSE increment testPassed else increment testFailed endif
 
-listAdd(myList:"a string")
+assign listAdd(myList:"a string") to myList
 
 if listContains(myList:"a string") equals TRUE increment testPassed else increment testFailed endif
 if listContains(myList:"A String") equals FALSE increment testPassed else increment testFailed endif
