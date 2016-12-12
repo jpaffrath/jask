@@ -1,5 +1,6 @@
 package jask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class FunctionExecuter {
 
 		Function function = this.functions.get(name);
 		function.setParameterHeap(heap);
-		Interpreter interpreter = new Interpreter(function, this, modules);
+		Interpreter interpreter = new Interpreter(function, this, new ArrayList<Executer>(modules));
 		return interpreter.interpret(function.getTokens());
 	}
 
