@@ -112,15 +112,14 @@ public class Executer {
 	/**
 	 * Adds a new module to the current context
 	 *
-	 * This method checks if the given module is already
-	 * loaded in the current context
+	 * If the module is already loaded, it will
+	 * be removed and loaded again
 	 *
 	 * @param module new module for contexts
 	 */
 	public void addModule(Executer module) {
 		if (this.hasModule(module.getName())) {
-			Error.printErrorModuleAlreadyLoaded(module.getName());
-			return;
+			this.removeModule(module.getName());
 		}
 
 		this.modules.add(module);
@@ -132,11 +131,6 @@ public class Executer {
 	 * @param module name of the module to remove
 	 */
 	public void removeModule(String module) {
-		if (!this.hasModule(module)) {
-			Error.printErrorModuleNotLoaded(module);
-			return;
-		}
-
 		for (Executer curModule : this.modules) {
 			if (curModule.getName().contentEquals(module)) {
 				this.modules.remove(curModule);

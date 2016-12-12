@@ -272,11 +272,6 @@ public class Interpreter {
 					Error.terminateInterpret("Can't find module named '" + module + "'");
 				}
 
-				if (this.executer.hasModule(moduleName)) {
-					Error.printErrorModuleAlreadyLoaded(moduleName);
-					continue;
-				}
-
 				Interpreter moduleInterpreter = new Interpreter();
 				moduleInterpreter.interpret(new Tokenizer().parse(new File(module)));
 				moduleInterpreter.executer.setName(moduleName);
