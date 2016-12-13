@@ -51,6 +51,7 @@ public class Tokenizer {
 
 		boolean insideString = false;
 		boolean insideComment = false;
+		boolean insideFunction = false;
 		boolean lastWasSplit =  false;
 
 		int val;
@@ -74,6 +75,18 @@ public class Tokenizer {
 				// toggle comment parsing
 				if (curChar == ';' && !insideComment && !insideString) {
 					insideComment = true;
+				}
+
+				// toggle function parsing
+				if (curChar == '(' && !insideComment && !insideString) {
+					insideFunction = true;
+				}
+				else if (curChar == ')' && !insideComment && !insideString) {
+					insideFunction = false;
+				}
+
+				if (this.isSplitCharacter(curChar) && insideFunction && !insideString) {
+					continue;
 				}
 
 				// turn newline to space and stop comment parsing
