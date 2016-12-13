@@ -31,6 +31,27 @@ if num1 equals 0 increment testPassed else increment testFailed endif
 store "42" in str1
 if str1 equals "42" increment testPassed else increment testFailed endif
 
+; calculation tests
+
+store 100 in opr1
+store NULL in res
+
+assign opr1 plus opr1 to res
+if res equals 200 increment testPassed else increment testFailed endif
+
+assign opr1 minus opr1 to res
+if res equals 0 increment testPassed else increment testFailed endif
+
+assign opr1 times 3 to res
+if res equals 300 increment testPassed else increment testFailed endif
+
+assign opr1 divide 20 to res
+if res equals 5 increment testPassed else increment testFailed endif
+
+assign "42" to opr1
+assign opr1 plus opr1 to res
+if res equals "4242" increment testPassed else increment testFailed endif
+
 ; list tests
 
 if listSize(list()) equals 0 increment testPassed else increment testFailed endif
