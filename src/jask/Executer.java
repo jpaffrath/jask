@@ -164,6 +164,40 @@ public class Executer {
 		return this.getModuleNames().contains(moduleName);
 	}
 
+	/**
+	 * Executes a calculation
+	 *
+	 * @param operand1 first operand
+	 * @param operand2 second operand
+	 * @param type type of the calculation
+	 * @return a new variable containing the result of the calculation
+	 */
+	private Variable executeCalculation(Variable operand1, Variable operand2, CalculationType type) {
+		// number calculations
+		if ((operand1.getType() == VariableType.Number) && (operand2.getType() == VariableType.Number)) {
+			switch (type) {
+			case Plus:   return new Variable(operand1.getDoubleValue() + operand2.getDoubleValue());
+			case Minus:  return new Variable(operand1.getDoubleValue() - operand2.getDoubleValue());
+			case Times:  return new Variable(operand1.getDoubleValue() * operand2.getDoubleValue());
+			case Divide: return new Variable(operand1.getDoubleValue() / operand2.getDoubleValue());
+			case NoType:
+			default:
+				return null;
+			}
+		}
+
+		// string concatenation
+		if ((operand1.getType() == VariableType.String) && (operand2.getType() == VariableType.String)) {
+			switch (type) {
+			case Plus: return new Variable('"' + operand1.getStringValue() + operand2.getStringValue() + '"');
+			default:
+				return null;
+			}
+		}
+
+		return null;
+	}
+
 	private void executeAssign(List<String> tokens) {
 		// assign a to b
 		if (tokens.size() == 4) {
@@ -231,37 +265,13 @@ public class Executer {
 			var2 = new Variable(var2Str);
 		}
 
-		if (var1.getType() == VariableType.Number && var2.getType() == VariableType.Number) {
-			varD.setStringValue(null);
-			if (operator.contentEquals("plus")) {
-				varD.setDoubleValue(var1.getDoubleValue() + var2.getDoubleValue());
-			}
-			else if (operator.contentEquals("minus")) {
-				varD.setDoubleValue(var1.getDoubleValue() - var2.getDoubleValue());
-			}
-			else if (operator.contentEquals("times")) {
-				varD.setDoubleValue(var1.getDoubleValue() * var2.getDoubleValue());
-			}
-			else if (operator.contentEquals("divide")) {
-				varD.setDoubleValue(var1.getDoubleValue() / var2.getDoubleValue());
-			}
-			else if (operator.contentEquals("mod")) {
-				varD.setDoubleValue(var1.getDoubleValue() % var2.getDoubleValue());
-			}
+		varD = this.executeCalculation(var1, var2, CalculationType.getType(operator));
 
-			this.heap.put(tokens.get(5), varD);
-			return;
+		if (varD == null) {
+			Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 		}
 
-		if (var1.getType() == VariableType.String && var2.getType() == VariableType.String) {
-			if (operator.contentEquals("plus")) {
-				varD.setStringValue(var1.getStringValue() + var2.getStringValue());
-				this.heap.put(tokens.get(5), varD);
-				return;
-			}
-		}
-
-		Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
+		this.heap.put(tokens.get(5), varD);
 	}
 
 	private void executeIncrement(String increment) {
