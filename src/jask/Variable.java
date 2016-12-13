@@ -108,6 +108,16 @@ public class Variable {
 	}
 
 	/**
+	 * Initializes a new variable based on a given double value
+	 *
+	 * @param value double to initialize the new object
+	 */
+	public Variable(double value) {
+		this.type = VariableType.Number;
+		this.doubleValue = value;
+	}
+
+	/**
 	 * Returns the string value
 	 * @return the current variables string value
 	 */
