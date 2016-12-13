@@ -164,7 +164,7 @@ public class InternalFunctions {
 				functionName.contentEquals("listSet"));
 	}
 
-	public HashMap<String, Variable> convertHeap(List<Variable> _heap, String[] params) {
+	private HashMap<String, Variable> convertHeap(List<Variable> _heap, String[] params) {
 		HashMap<String, Variable> heap = new HashMap<String, Variable>();
 
 		for (int i = 0; i < params.length; i++) {
