@@ -1,0 +1,17 @@
+; Provides standard function for runtime information
+
+function os.getOSArch()
+	return _runtimeProperty("os.arch")
+end
+
+function os.getUsername()
+	return _runtimeProperty("user.name")
+end
+
+function os.getUserLanguage()
+	return _runtimeProperty("user.language")
+end
+
+function os.getDirectory()
+	return _runtimeProperty("user.dir")
+end
