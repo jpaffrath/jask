@@ -1,10 +1,21 @@
 package jask;
 
+/**
+ * Manages input history
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class History {
 	private int historyMax;
 	private String history[];
 	private int historyIndex;
 
+	/**
+	 * Standard constructor
+	 *
+	 * @param historyMax maximum number of stored history lines
+	 */
 	public History(int historyMax) {
 		this.historyMax = historyMax;
 		this.history = new String[this.historyMax];

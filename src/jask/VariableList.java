@@ -12,6 +12,11 @@ import java.util.List;
 public class VariableList extends Variable {
 	private List<Variable> values;
 
+	/**
+	 * Initializes a new list variable based on a generic value
+	 *
+	 * @param genericValue value as string
+	 */
 	public VariableList(String genericValue) {
 		super();
 		this.values = new ArrayList<Variable>();
@@ -21,27 +26,57 @@ public class VariableList extends Variable {
 		}
 	}
 
+	/**
+	 * Initializes a new list variable based on a given list variable
+	 *
+	 * @param var list variable to be used
+	 */
 	public VariableList(VariableList var) {
 		super();
 		this.values = new ArrayList<Variable>(var.values);
 	}
 
+	/**
+	 * Adds an element to the list based on a generic value
+	 *
+	 * @param genericValue value to add to the list
+	 * @return true
+	 */
 	public boolean addElement(String genericValue) {
 		this.values.add(new Variable(genericValue));
 		return true;
 	}
 
+	/**
+	 * Adds a variable to the list
+	 *
+	 * @param toAdd variable to add to the list
+	 * @return true
+	 */
 	public boolean addElement(Variable toAdd) {
 		this.values.add(new Variable(toAdd));
 		return true;
 	}
 
+	/**
+	 * Sets a given variable at a given index
+	 *
+	 * @param index index to set
+	 * @param toSet variable to set
+	 * @return true if success
+	 */
 	public boolean setElement(int index, Variable toSet) {
 		if (index >= this.values.size()) return false;
 		this.values.set(index, new Variable(toSet));
 		return true;
 	}
 
+	/**
+	 * Removes an element at a given index
+	 *
+	 * @param index index to remove the element
+	 * @return true if success
+	 */
 	public boolean removeElement(int index) {
 		if (index >= this.values.size()) {
 			Error.printErrorNoValueAtIndex(index);
@@ -51,10 +86,20 @@ public class VariableList extends Variable {
 		return true;
 	}
 
+	/**
+	 * Returns the size of the list
+	 *
+	 * @return size of the list
+	 */
 	public int getSize() {
 		return this.values.size();
 	}
 
+	/**
+	 * Override of toString
+	 *
+	 * Can be used to initialize a new list variable
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -92,6 +137,11 @@ public class VariableList extends Variable {
 		return builder.toString();
 	}
 
+	/**
+	 * Returns a pretty formatted representation of the list variable
+	 *
+	 * @return a pretty formatted representation string
+	 */
 	public String getPrintString() {
 		StringBuilder builder = new StringBuilder("[");
 
@@ -109,6 +159,12 @@ public class VariableList extends Variable {
 		return builder.toString();
 	}
 
+	/**
+	 * Returns the element at a given index as a string
+	 *
+	 * @param i index
+	 * @return element at given index as string or ""
+	 */
 	public String getElementAtIndex(int i) {
 		if (i > this.values.size()-1) {
 			Error.printErrorNoValueAtIndex(i);
@@ -121,6 +177,11 @@ public class VariableList extends Variable {
 		return this.values.get(i).toString();
 	}
 
+	/**
+	 * Converts list variable to jask string
+	 *
+	 * @return jask string representing the list
+	 */
 	public String convertToString() {
 		String ret = "\"";
 
@@ -131,6 +192,12 @@ public class VariableList extends Variable {
 		return ret += "\"";
 	}
 
+	/**
+	 * Checks if the list contains a given variable
+	 *
+	 * @param var variable to check
+	 * @return true if the list contains the given variable
+	 */
 	public boolean contains(Variable var) {
 		for (Variable v : this.values) {
 			if (v.equals(var)) return true;

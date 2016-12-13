@@ -52,18 +52,38 @@ public class Function {
 		}
 	}
 
+	/**
+	 * Sets the heap of the function
+	 *
+	 * @param heap heap for the function
+	 */
 	public void setHeap(HashMap<String, Variable> heap) {
 		this.heap = heap;
 	}
 
+	/**
+	 * Returns the heap
+	 *
+	 * @return local heap
+	 */
 	public HashMap<String, Variable> getHeap() {
 		return this.heap;
 	}
 
+	/**
+	 * Returns the name
+	 *
+	 * @return local function name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Returns the tokens
+	 *
+	 * @return tokens of the function
+	 */
 	public List<String> getTokens() {
 		return this.tokens;
 	}

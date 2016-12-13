@@ -4,12 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * jask interactive mode
+ *
+ * @author Julius Paffrath
+ *
+ */
 public class InteractiveMode {
 	private static final int historyMax = 99;
 
 	private String version;
 	private History history;
 
+	/**
+	 * General constructor
+	 *
+	 * @param version jask version
+	 */
 	public InteractiveMode(String version) {
 		this.version = version;
 		this.history = new History(historyMax);

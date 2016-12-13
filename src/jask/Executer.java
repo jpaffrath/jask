@@ -17,6 +17,9 @@ public class Executer {
 	private List<Executer> modules;
 	private String name;
 
+	/**
+	 * General constructor
+	 */
 	public Executer() {
 		this.heap = new HashMap<>();
 		this.functionExecuter = new FunctionExecuter();
@@ -25,6 +28,13 @@ public class Executer {
 		this.name = "Main";
 	}
 
+	/**
+	 * Initializes a new executer for function executing
+	 *
+	 * @param heap heap of the function
+	 * @param functionExecuter functionExecuter to be used
+	 * @param modules list of modules
+	 */
 	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules) {
 		this();
 		this.heap = heap;
@@ -32,18 +42,40 @@ public class Executer {
 		this.modules = modules;
 	}
 
+	/**
+	 * Sets the name of the executer
+	 *
+	 * @param name name to be set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Returns the name
+	 *
+	 * @return local name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Returns variable from heap with given name
+	 *
+	 * @param var name of the variable
+	 * @return variable from the heap
+	 */
 	public Variable getVariableFromHeap(String var) {
 		return this.heap.get(var);
 	}
 
+	/**
+	 * Executes a function
+	 *
+	 * @param token tokens of the function
+	 * @return result of the execution
+	 */
 	public Variable executeFunction(String token) {
 		String functionName = token.substring(0, token.indexOf('('));
 		String param = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
@@ -198,6 +230,11 @@ public class Executer {
 		return null;
 	}
 
+	/**
+	 * Executes assign
+	 *
+	 * @param tokens tokens of the assign
+	 */
 	private void executeAssign(List<String> tokens) {
 		// assign a to b
 		if (tokens.size() == 4) {
@@ -274,6 +311,11 @@ public class Executer {
 		this.heap.put(tokens.get(5), varD);
 	}
 
+	/**
+	 * Executes increment
+	 *
+	 * @param increment variable to be incremented
+	 */
 	private void executeIncrement(String increment) {
 		Variable var = this.getVariableFromHeap(increment);
 
@@ -290,6 +332,11 @@ public class Executer {
 		var.setDoubleValue(var.getDoubleValue()+1);
 	}
 
+	/**
+	 * Executes decrement
+	 *
+	 * @param decrement variable to be decremented
+	 */
 	private void executeDecrement(String decrement) {
 		Variable var = this.getVariableFromHeap(decrement);
 
@@ -306,6 +353,11 @@ public class Executer {
 		var.setDoubleValue(var.getDoubleValue()-1);
 	}
 
+	/**
+	 * Executes store
+	 *
+	 * @param tokens tokens of the store
+	 */
 	private void executeStore(List<String> tokens) {
 		String variableValue = tokens.get(1);
 		String variableName = tokens.get(3);
@@ -340,6 +392,12 @@ public class Executer {
 		}
 	}
 
+	/**
+	 * Executes run statement
+	 *
+	 * @param tokens tokens of the run
+	 * @return result of the run
+	 */
 	private String executeRun(List<String> tokens) {
 		String ret = "";
 
@@ -398,6 +456,11 @@ public class Executer {
 		return ret;
 	}
 
+	/**
+	 * Executes convert
+	 *
+	 * @param tokens tokens of the convert
+	 */
 	private void executeConvert(List<String> tokens) {
 		String variableName = tokens.get(1);
 		String convert = tokens.get(3);
@@ -430,6 +493,12 @@ public class Executer {
 		}
 	}
 
+	/**
+	 * Executes if statement
+	 *
+	 * @param exp expression containing the statement
+	 * @return result of the statement
+	 */
 	public boolean executeStatement(Expression exp) {
 		List<String> tokens = exp.getTokens();
 		Variable var1 = null;
@@ -525,6 +594,11 @@ public class Executer {
 		return false;
 	}
 
+	/**
+	 * Adds a function to the functionExecuter
+	 *
+	 * @param function function to add
+	 */
 	public void addFunction(Function function) {
 		HashMap<String, Variable> functionHeap = new HashMap<>(this.heap.size());
 
@@ -537,6 +611,14 @@ public class Executer {
 		this.functionExecuter.addFunction(function);
 	}
 
+	/**
+	 * Sets the local heap based on a function result
+	 *
+	 * This is used after a function call to copy any
+	 * changes the function has made to the local heap
+	 *
+	 * @param functionHeap heap of the function
+	 */
 	private void setLocalHeapFromFunction(HashMap<String, Variable> functionHeap) {
 		for (String key : functionHeap.keySet()) {
 			if (key.charAt(0) == '!') {
@@ -545,6 +627,12 @@ public class Executer {
 		}
 	}
 
+	/**
+	 * Executes an expression
+	 *
+	 * @param exp expression to be executed
+	 * @return result of expression
+	 */
 	public String execute(Expression exp) {
 		if (exp == null) return "";
 		String ret = "";

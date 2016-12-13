@@ -19,6 +19,9 @@ public class Interpreter {
 	private List<String> values;
 	private Executer executer;
 
+	/**
+	 * General constructor
+	 */
 	public Interpreter() {
 		this.history = new History(historyMax);
 
@@ -62,37 +65,84 @@ public class Interpreter {
 		this.executer = new Executer();
 	}
 
+	/**
+	 * Initializes a new interpreter for function executing
+	 *
+	 * @param function function to be executed
+	 * @param functionExecuter the function executed to be used
+	 * @param modules list of modules
+	 */
 	public Interpreter(Function function, FunctionExecuter functionExecuter, List<Executer> modules) {
 		this();
 		this.executer = new Executer(function.getHeap(), functionExecuter, modules);
 	}
 
+	/**
+	 * Initializes a new interpreter for interpreting run statements
+	 *
+	 * @param executer executer to be used
+	 */
 	public Interpreter(Executer executer) {
 		this();
 		this.executer = executer;
 	}
 
+	/**
+	 * Checks if a given string is a jask operator
+	 *
+	 * @param t string to check
+	 * @return true if the given string is a jask operator
+	 */
 	private boolean isOperator(String t) {
 		return this.operators.contains(t);
 	}
 
+	/**
+	 * Checks if a given string is a jask keyword
+	 *
+	 * @param t string to check
+	 * @return true if the given string is a jask keyword
+	 */
 	private boolean isKeyword(String t) {
 		return this.keywords.contains(t);
 	}
 
+	/**
+	 * Checks if a given string is a jask value
+	 *
+	 * @param t string to check
+	 * @return true if the given string is a jask value
+	 */
 	private boolean isValue(String t) {
 		return this.values.contains(t);
 	}
 
+	/**
+	 * Checks if a given string is a jask function
+	 *
+	 * @param t string to check
+	 * @return true if the given string is a jask function
+	 */
 	public static boolean isFunction(String t) {
 		if (t.lastIndexOf(')') == t.length() -1) return true;
 		return false;
 	}
 
+	/**
+	 * Returns local executer
+	 *
+	 * @return executer
+	 */
 	public Executer getExecuter() {
 		return this.executer;
 	}
 
+	/**
+	 * Interprets a given list of tokens
+	 *
+	 * @param tokens list of tokens
+	 * @return result of interpreting
+	 */
 	public String interpret(List<String> tokens) {
 		Expression exp = null;
 		String t = null;
