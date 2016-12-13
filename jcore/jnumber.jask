@@ -1,9 +1,4 @@
-/*
-* File  : jcore/jnumber
-* Author: Julius Paffrath, Gregor Plebanek
-*
-* Provides standard functions for number processing
-*/
+; Provides standard functions for number processing
 
 function max(n1:n2) if n1 greater n2 return n1 else return n2 endif end
 function min(n1:n2) if n1 smaller n2 return n1 else return n2 endif end

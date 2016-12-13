@@ -1,9 +1,4 @@
-/*
-* File  : jcore/jstring
-* Author: Julius Paffrath
-*
-* Provides standard functions for string processing
-*/
+; Provides standard functions for string processing
 
 function substring(str:s:e)
 	if isString(str) equals FALSE return NULL else endif

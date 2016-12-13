@@ -1,9 +1,4 @@
-/*
-* File  : jcore/jread
-* Author: Julius Paffrath
-*
-* Provides standard functions for reading and processing input
-*/
+; Provides standard functions for reading and processing input
 
 function readNumber()
 	store read() in input
