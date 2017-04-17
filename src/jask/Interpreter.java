@@ -37,8 +37,8 @@ public class Interpreter {
 		this.operators.add("unequals");
 		this.operators.add("greater");
 		this.operators.add("smaller");
-		this.operators.add("greaterequal");
-		this.operators.add("smallerequal");
+		this.operators.add("greaterequals");
+		this.operators.add("smallerequals");
 		this.operators.add("increment");
 		this.operators.add("decrement");
 

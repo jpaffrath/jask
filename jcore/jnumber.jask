@@ -16,7 +16,7 @@ function fibonacci(max)
 	assign max minus 1 to max
 
 	run i to max with i plus 1
-		if i smallerequal 1 assign i to c
+		if i smallerequals 1 assign i to c
 		else assign first plus second to next assign second to first assign next to second
 		endif
 		assign listAdd(numbers:next) to numbers
@@ -97,7 +97,7 @@ function factorial(x)
 	store 1 in fac
 	store 1 in i
 
-	while i smallerequal x
+	while i smallerequals x
 		assign fac times i to fac
 		increment i
 	endrun

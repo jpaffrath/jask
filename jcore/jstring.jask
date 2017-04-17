@@ -159,7 +159,7 @@ function reverse(str)
 
 	assign i minus 1 to i
 
-	while i greaterequal 0
+	while i greaterequals 0
 		assign listAdd(list:listGet(str:i)) to list
 		decrement i
 	endrun
@@ -176,7 +176,7 @@ end
 function strRepeat(str:num)
 	if isString(str) equals FALSE return NULL else endif
 	if isNumber(num) equals FALSE return NULL else endif
-	if num smallerequal 0 return NULL else endif
+	if num smallerequals 0 return NULL else endif
 
 	assign str to s
 

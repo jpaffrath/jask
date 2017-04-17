@@ -8,7 +8,7 @@ function readNumber()
 end
 
 function readList(number)
-	if number smallerequal 0 return NULL else endif
+	if number smallerequals 0 return NULL else endif
 	if isNumber(number) equals FALSE return NULL else endif
 
 	store list() in list
