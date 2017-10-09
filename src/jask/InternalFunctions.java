@@ -243,17 +243,12 @@ public class InternalFunctions {
 			}
 
 			Variable var = heap.get(out);
-			if (var == null) {
-				Error.printErrorVariableNotDefined(out);
-				return FALSE;
+			
+			if (var instanceof VariableList) {
+				output += (((VariableList)var).getPrintString());
 			}
 			else {
-				if (var instanceof VariableList) {
-					output += (((VariableList)var).getPrintString());
-				}
-				else {
-					output += (var.toString());
-				}
+				output += (var.toString());
 			}
 		}
 
@@ -276,7 +271,8 @@ public class InternalFunctions {
 	 */
 	private String listGet(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
@@ -308,7 +304,8 @@ public class InternalFunctions {
 	 */
 	private String listSize(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
@@ -325,7 +322,8 @@ public class InternalFunctions {
 	 */
 	private String listAdd(HashMap<String, Variable> heap, String[] params) {
 		Variable var = new VariableList((VariableList)heap.get(params[0]));
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
@@ -354,7 +352,8 @@ public class InternalFunctions {
 	 */
 	private String listRemove(HashMap<String, Variable> heap, String[] params) {
 		Variable var = new VariableList((VariableList)heap.get(params[0]));
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
@@ -388,7 +387,8 @@ public class InternalFunctions {
 	 */
 	private String listSet(HashMap<String, Variable> heap, String[] params) {
 		Variable var = new VariableList((VariableList)heap.get(params[0]));
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
@@ -409,13 +409,7 @@ public class InternalFunctions {
 			}
 		}
 
-		Variable toSet = heap.get(params[2]);
-		if (toSet == null) {
-			toSet = new Variable(params[2]);
-			if (toSet.getType() == VariableType.NoType) return NULL;
-		}
-
-		((VariableList)var).setElement((int)index.getDoubleValue(), toSet);
+		((VariableList)var).setElement((int)index.getDoubleValue(), heap.get(params[2]));
 		return var.toString();
 	}
 
@@ -431,25 +425,14 @@ public class InternalFunctions {
 		String retVal = "";
 		Variable var = heap.get(params[0]);
 
-		if (var == null) {
-			if (Variable.isString(params[0])) {
-				strVal = params[0];
-			}
-			else {
-				Error.printErrorVariableIsNotAString(params[0]);
-				return NULL;
-			}
+		if (var.getType() == VariableType.String) {
+			strVal = var.getStringValue();
 		}
 		else {
-			if (var.getType() == VariableType.String) {
-				strVal = var.getStringValue();
-			}
-			else {
-				Error.printErrorVariableIsNotAString(params[0]);
-				return NULL;
-			}
+			Error.printErrorVariableIsNotAString(params[0]);
+			return NULL;
 		}
-
+		
 		for (int i = 0; i < strVal.length(); i++) {
 			if (i == strVal.length()-1) {
 				retVal += "\"" + strVal.charAt(i) + "\"";
@@ -471,7 +454,8 @@ public class InternalFunctions {
 	 */
 	private String listToString(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
@@ -488,17 +472,13 @@ public class InternalFunctions {
 	 */
 	private String listContains(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
-		if (var == null || !(var instanceof VariableList)) {
+
+		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
 			return NULL;
 		}
 
-		Variable element = heap.get(params[1]);
-		if (element == null) {
-			element = new Variable(params[1]);
-		}
-
-		return ((VariableList)var).contains(element) ? TRUE : FALSE;
+		return ((VariableList)var).contains(heap.get(params[1])) ? TRUE : FALSE;
 	}
 
 	/**
@@ -509,13 +489,7 @@ public class InternalFunctions {
 	 * @return TRUE or FALSE
 	 */
 	private String isString(HashMap<String, Variable> heap, String[] params) {
-		Variable var = heap.get(params[0]);
-		if (var == null) {
-			if (Variable.isString(params[0])) return TRUE;
-			return FALSE;
-		}
-
-		if (var.getType() == VariableType.String) return TRUE;
+		if (heap.get(params[0]).getType() == VariableType.String) return TRUE;
 		return FALSE;
 	}
 
@@ -527,13 +501,7 @@ public class InternalFunctions {
 	 * @return TRUE or FALSE
 	 */
 	private String isNumber(HashMap<String, Variable> heap, String[] params) {
-		Variable var = heap.get(params[0]);
-		if (var == null) {
-			if (Variable.isNumber(params[0])) return TRUE;
-			return FALSE;
-		}
-
-		if (var.getType() == VariableType.Number) return TRUE;
+		if (heap.get(params[0]).getType() == VariableType.Number) return TRUE;
 		return FALSE;
 	}
 
@@ -545,14 +513,7 @@ public class InternalFunctions {
 	 * @return TRUE or FALSE
 	 */
 	private String isBool(HashMap<String, Variable> heap, String[] params) {
-		Variable var = heap.get(params[0]);
-		if (var == null) {
-			String val = params[0];
-			if (val.contentEquals(TRUE) || val.contentEquals(FALSE)) return TRUE;
-			return FALSE;
-		}
-
-		if (var.getType() == VariableType.Bool) return TRUE;
+		if (heap.get(params[0]).getType() == VariableType.Bool) return TRUE;
 		return FALSE;
 	}
 
@@ -565,6 +526,7 @@ public class InternalFunctions {
 	 */
 	private String isList(HashMap<String, Variable> heap, String[] params) {
 		if (heap.get(params[0]) instanceof VariableList) return TRUE;
+
 		return FALSE;
 	}
 
