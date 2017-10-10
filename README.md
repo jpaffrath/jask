@@ -78,6 +78,10 @@ Multiple parameters are separated by colons:
 ```Assembly
 myFunc(firstParameter:secondParameter)
 ```
+You can easily call a function several times:
+```Assembly
+call printLine("Hello!") 10 times
+```
 Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
 
 ### Work with list variables
