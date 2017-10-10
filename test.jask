@@ -163,6 +163,22 @@ testAccess()
 
 if testOutside equals TRUE increment testPassed else increment testFailed endif
 
+assign 100 to testOutside
+
+function testIncrement()
+	increment !testOutside
+end
+
+call testIncrement() 100 times
+
+if testOutside equals 200 increment testPassed else increment testFailed endif
+
+store 10 in numberOfCalls
+
+call testIncrement() numberOfCalls times
+
+if testOutside equals 210 increment testPassed else increment testFailed endif
+
 ; module tests
 
 remove jcore/jnumber
