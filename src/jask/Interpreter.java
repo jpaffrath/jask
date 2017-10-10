@@ -41,6 +41,7 @@ public class Interpreter {
 		this.operators.add("smallerequals");
 		this.operators.add("increment");
 		this.operators.add("decrement");
+		this.operators.add("call");
 
 		this.keywords = new ArrayList<String>(this.operators);
 		this.keywords.add("function");
@@ -56,6 +57,7 @@ public class Interpreter {
 		this.keywords.add("run");
 		this.keywords.add("with");
 		this.keywords.add("while");
+		this.keywords.add("times");
 
 		this.values = new ArrayList<String>();
 		this.values.add("TRUE");
@@ -332,6 +334,12 @@ public class Interpreter {
 			else if (t.startsWith("remove")) {
 				String moduleName = tokens.get(++i);
 				this.executer.removeModule(moduleName);
+			}
+			
+			// check call statement
+			else if (t.contentEquals("call")) {
+				exp = new Expression(ExpressionType.Call, tokens.subList(++i, i+2));
+				i += 2;
 			}
 
 			// try-catch is a little bit bumpy

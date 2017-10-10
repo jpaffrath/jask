@@ -492,6 +492,29 @@ public class Executer {
 			}
 		}
 	}
+	
+	/**
+	 * Executes call statement
+	 * 
+	 * @param token tokens of the call statement
+	 */
+	private void executeCall(List<String> tokens) {
+		String function = tokens.get(0);
+		Variable count = getVariableFromHeap(tokens.get(1));
+		
+		if (count == null) {
+			count = new Variable(tokens.get(1));
+		}
+		
+		if (count.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(tokens.get(1));
+			return;
+		}
+		
+		for (int i = 0; i < (int)count.getDoubleValue(); i++) {
+			executeFunction(function);
+		}
+	}
 
 	/**
 	 * Executes if statement

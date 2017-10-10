@@ -14,5 +14,6 @@ public enum ExpressionType {
 	Runner,
 	Convert,
 	Increment,
-	Decrement
+	Decrement,
+	Call
 }
