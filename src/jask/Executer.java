@@ -115,7 +115,7 @@ public class Executer {
 		String varVal = "";
 
 		if (this.functionExecuter.hasFunction(functionName)) {
-			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, this.modules);
+			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules);
 			this.setLocalHeapFromFunction(this.functionExecuter.getFunction(functionName).getHeap());
 			this.functionExecuter.destroyFunctionHeap(functionName);
 		}
@@ -124,7 +124,7 @@ public class Executer {
 
 			for (Executer module : this.modules) {
 				if (module.functionExecuter.hasFunction(functionName)) {
-					varVal = module.functionExecuter.executeFunction(functionName, functionHeap, this.modules);
+					varVal = module.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules);
 					module.functionExecuter.destroyFunctionHeap(functionName);
 					functionFound = true;
 					break;
@@ -600,15 +600,23 @@ public class Executer {
 	 * @param function function to add
 	 */
 	public void addFunction(Function function) {
+		this.functionExecuter.addFunction(function);
+	}
+	
+	/**
+	 * Returns a copy of the local heap for a function call
+	 * 
+	 * @return a copy of the local heap with access operators
+	 */
+	private HashMap<String, Variable> getLocalHeapForFunction() {
 		HashMap<String, Variable> functionHeap = new HashMap<>(this.heap.size());
 
 		// copy local heap and add access operator to keys
 		for (String key : this.heap.keySet()) {
 			functionHeap.put('!' + key, this.heap.get(key));
 		}
-
-		function.setHeap(functionHeap);
-		this.functionExecuter.addFunction(function);
+		
+		return functionHeap;
 	}
 
 	/**
@@ -645,6 +653,7 @@ public class Executer {
 		case Convert: executeConvert(exp.getTokens()); break;
 		case Increment: executeIncrement(exp.getTokens().get(0)); break;
 		case Decrement: executeDecrement(exp.getTokens().get(0)); break;
+		case Call: executeCall(exp.getTokens()); break;
 		default:
 			break;
 		}
