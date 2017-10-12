@@ -565,6 +565,10 @@ public class Executer {
 		}
 
 		if (operator.contentEquals("greater")) {
+			if (var1 instanceof VariableList && var2 instanceof VariableList) {
+				return ((VariableList)var1).getSize() > ((VariableList)var2).getSize();
+			}
+
 			if (var1.getType() != VariableType.Number ||
 					var2.getType() != VariableType.Number) {
 				Error.printErrorOperatorNotApplicable("greater", tokens.get(1), tokens.get(3));
@@ -575,6 +579,10 @@ public class Executer {
 		}
 
 		if (operator.contentEquals("smaller")) {
+			if (var1 instanceof VariableList && var2 instanceof VariableList) {
+				return ((VariableList)var1).getSize() < ((VariableList)var2).getSize();
+			}
+
 			if (var1.getType() != VariableType.Number ||
 					var2.getType() != VariableType.Number) {
 				Error.printErrorOperatorNotApplicable("smaller", tokens.get(1), tokens.get(3));
