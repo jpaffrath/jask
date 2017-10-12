@@ -78,6 +78,32 @@ public class InteractiveMode {
 				continue;
 			}
 
+			// wraps the internal implementation of read()
+			if (line.contains("read()")) {
+				int lastIndex = 0;
+				int count = 0;
+
+				// count occurrences of read() functions
+				while (lastIndex != -1) {
+				    lastIndex = line.indexOf("read()", lastIndex);
+
+				    if (lastIndex != -1) {
+				        count ++;
+				        lastIndex += "read()".length();
+				    }
+				}
+
+				// replace read() in line with input
+				for (int i = 0; i < count; i++) {
+					System.out.print("read ~> ");
+					line = line.substring(0, line.indexOf("read()")) + '"' + scanner.nextLine() + '"' + line.substring(line.indexOf("read()") + 6, line.length());
+				}
+
+				interpreter.interpret(tokenizer.parse(line));
+				System.out.print("jask ~> ");
+				continue;
+			}
+
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
 				if (line.contains("end")) {
