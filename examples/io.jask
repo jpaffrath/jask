@@ -1,3 +1,5 @@
+; in-output example
+
 store 100 in num
 print(num)
 

@@ -1,3 +1,5 @@
+; functions example
+
 function strCat(str1:str2)
 	store 0 in str
 	assign str1 plus str2 to str

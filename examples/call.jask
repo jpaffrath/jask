@@ -1,0 +1,7 @@
+; call example
+
+call printLine("Test") 5 times
+
+store 10 in count
+
+call printLine("Test") count times

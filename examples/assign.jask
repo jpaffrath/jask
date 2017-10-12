@@ -1,3 +1,5 @@
+; assign examples
+
 store 100 in z1
 store NULL in value
 

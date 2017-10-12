@@ -1,3 +1,5 @@
+; fibonacci example
+
 store 0 in first
 store 1 in second
 store 0 in next
@@ -9,7 +11,7 @@ assign read() to max
 convert max to number
 
 run i to max with i plus 1
-	if i smallerequal 1
+	if i smallerequals 1
 		assign i to c
 	else
 		assign first plus second to next

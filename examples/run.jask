@@ -1,6 +1,4 @@
-/*
-* run loops
-*/
+; run loop example
 
 store 1 in i
 store 10 in max
@@ -21,9 +19,7 @@ run i to max with i plus 1
 	assign 1 to j
 endrun
 
-/*
-* while loops
-*/
+; while loop example
 
 store TRUE in val
 

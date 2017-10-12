@@ -1,3 +1,5 @@
+; if-else example
+
 store 1 in a
 store 2 in b
 
@@ -19,7 +21,7 @@ else
 	printLine("a greater b")
 endif
 
-if a smallerequal b
+if a smallerequals b
 	printLine("a is smaller or equal b")
 else
 	printLine("a greater b")
@@ -31,7 +33,7 @@ else
 	printLine("a smaller b")
 endif
 
-if a greaterequal b
+if a greaterequals b
 	printLine("a is greater or equal b")
 else
 	printLine("a smaller b")

@@ -1,3 +1,5 @@
+; store example
+
 store "This is a string" in str
 store 100.21 in num
 

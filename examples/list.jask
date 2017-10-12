@@ -1,3 +1,5 @@
+; list example
+
 store list(1:2:3) in myList
 
 store list("Str1":"Str2") in myStrList
