@@ -214,6 +214,20 @@ public class VariableList extends Variable {
 		return false;
 	}
 	
+	public boolean equals(VariableList var) {
+		if (this.values.size() != var.values.size()) {
+			return false;
+		}
+		
+		for (int i = 0; i < this.values.size(); i++) {
+			if (this.values.get(i).equals(var.values.get(i)) == false) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	/**
 	 * Creates a deep copy of this list and reverses it
 	 * 
