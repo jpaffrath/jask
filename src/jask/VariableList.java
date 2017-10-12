@@ -238,4 +238,16 @@ public class VariableList extends Variable {
 		Collections.reverse(newList.values);
 		return newList.toString();
 	}
+
+	/**
+	 * Creates a deep copy of this list and adds the given elements
+	 * 
+	 * @param extender list with elements
+	 * @return jask string representing the list
+	 */
+	public String extend(VariableList extender) {
+		VariableList newList = new VariableList(this);
+		newList.values.addAll(new VariableList(extender).values);
+		return newList.toString();
+	}
 }
