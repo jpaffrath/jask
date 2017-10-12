@@ -118,6 +118,12 @@ public class InternalFunctions {
 				return listReverse(heap, params);
 			}
 		});
+		this.functions.put("listExtend", new InternalFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listExtend(heap, params);
+			}
+		});
 		this.functions.put("isString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
@@ -195,7 +201,8 @@ public class InternalFunctions {
 				functionName.contentEquals("listAdd") ||
 				functionName.contentEquals("listRemove") ||
 				functionName.contentEquals("listSet") ||
-				functionName.contentEquals("listReverse"));
+				functionName.contentEquals("listReverse") ||
+				functionName.contentEquals("listExtend"));
 	}
 
 	/**
@@ -492,6 +499,31 @@ public class InternalFunctions {
 		}
 
 		return ((VariableList)var).reverseList();
+	}
+	
+	/**
+	 * Internal implementation if listExtend
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a deep copy of the original list extended
+	 */
+	private String listExtend(HashMap<String, Variable> heap, String[] params) {
+		Variable toExtend = heap.get(params[0]);
+
+		if (!(toExtend instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[0]);
+			return NULL;
+		}
+
+		Variable extender = heap.get(params[1]);
+
+		if (!(extender instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[1]);
+			return NULL;
+		}
+
+		return ((VariableList)toExtend).extend((VariableList)extender);
 	}
 
 	/**
