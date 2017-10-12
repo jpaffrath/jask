@@ -3,7 +3,7 @@
 function readNumber()
 	store read() in input
 	convert input to number
-	if input equals NULL return NULL else endif
+
 	return input
 end
 
