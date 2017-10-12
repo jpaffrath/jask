@@ -154,19 +154,6 @@ public class InternalFunctions {
 				return String.valueOf(Math.pow(heap.get(params[0]).getDoubleValue(), heap.get(params[1]).getDoubleValue()));
 			}
 		});
-		this.functions.put("_runtimeProperty", new InternalFunction() {
-			@Override
-			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				Variable var = heap.get(params[0]);
-				if (var.getType() != VariableType.String) {
-					Error.printErrorVariableIsNotAString(params[0]);
-					return NULL;
-				}
-
-				// wrap property in jask string
-				return '"' + System.getProperty(var.getStringValue()) + '"';
-			}
-		});
 	}
 
 	/**
