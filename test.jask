@@ -78,6 +78,9 @@ assign list(1:2:3) to myList
 if listContains(myList:1) equals TRUE increment testPassed else increment testFailed endif
 if listContains(myList:4) equals FALSE increment testPassed else increment testFailed endif
 
+if listReverse(myList) equals   list(3:2:1) increment testPassed else increment testFailed endif
+if listReverse(myList) unequals list(2:3:1) increment testPassed else increment testFailed endif
+
 assign listAdd(myList:"a string") to myList
 
 if listContains(myList:"a string") equals TRUE increment testPassed else increment testFailed endif
