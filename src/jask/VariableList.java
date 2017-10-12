@@ -1,6 +1,7 @@
 package jask;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -211,5 +212,16 @@ public class VariableList extends Variable {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * Creates a deep copy of this list and reverses it
+	 * 
+	 * @return jask string representing the list
+	 */
+	public String reverseList() {
+		VariableList newList = new VariableList(this);
+		Collections.reverse(newList.values);
+		return newList.toString();
 	}
 }
