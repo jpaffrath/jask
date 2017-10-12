@@ -112,6 +112,12 @@ public class InternalFunctions {
 				return listContains(heap, params);
 			}
 		});
+		this.functions.put("listReverse", new InternalFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listReverse(heap, params);
+			}
+		});
 		this.functions.put("isString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
@@ -201,7 +207,8 @@ public class InternalFunctions {
 				functionName.contentEquals("listFromString") ||
 				functionName.contentEquals("listAdd") ||
 				functionName.contentEquals("listRemove") ||
-				functionName.contentEquals("listSet"));
+				functionName.contentEquals("listSet") ||
+				functionName.contentEquals("listReverse"));
 	}
 
 	/**
@@ -480,6 +487,24 @@ public class InternalFunctions {
 		}
 
 		return ((VariableList)var).contains(heap.get(params[1])) ? TRUE : FALSE;
+	}
+	
+	/**
+	 * Internal implementation of listReverse
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a deep copy of the original list reversed
+	 */
+	private String listReverse(HashMap<String, Variable> heap, String[] params) {
+		Variable var = heap.get(params[0]);
+
+		if (!(var instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[0]);
+			return NULL;
+		}
+
+		return ((VariableList)var).reverseList();
 	}
 
 	/**
