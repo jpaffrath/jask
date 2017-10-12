@@ -45,9 +45,10 @@ public class InternalFunctions {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				if (params.length == 0) {
+					@SuppressWarnings("resource")
 					Scanner scanner = new Scanner(System.in);
 					String line = '"' + scanner.nextLine() + '"';
-					scanner.close();
+					//scanner.close();
 					return line;
 				}
 				return "";
