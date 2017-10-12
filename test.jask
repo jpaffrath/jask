@@ -86,6 +86,12 @@ assign listAdd(myList:"a string") to myList
 if listContains(myList:"a string") equals TRUE increment testPassed else increment testFailed endif
 if listContains(myList:"A String") equals FALSE increment testPassed else increment testFailed endif
 
+if list(1:2) greater list(1)   increment testPassed else increment testFailed endif
+if list(1)   smaller list(1:2) increment testPassed else increment testFailed endif
+
+if list(1:2) greaterequals list(1:2) increment testPassed else increment testFailed endif
+if list(1:2) smallerequals list(1:2) increment testPassed else increment testFailed endif
+
 ; jcore jstring tests
 
 if substring("my substring string":3:11) equals "substring" increment testPassed else increment testFailed endif
