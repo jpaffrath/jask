@@ -28,12 +28,19 @@ public class VariableList extends Variable {
 
 	/**
 	 * Initializes a new list variable based on a given list variable
+	 * 
+	 * This constructor will create a deep copy of the given list variable
 	 *
 	 * @param var list variable to be used
 	 */
 	public VariableList(VariableList var) {
 		super();
-		this.values = new ArrayList<Variable>(var.values);
+
+		this.values = new ArrayList<Variable>();
+
+		for (Variable v : var.values) {
+			this.values.add(new Variable(v));
+		}
 	}
 
 	/**
