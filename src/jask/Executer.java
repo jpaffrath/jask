@@ -551,10 +551,16 @@ public class Executer {
 		}
 
 		if (operator.contentEquals("equals")) {
+			if (var1 instanceof VariableList && var2 instanceof VariableList) {
+				return ((VariableList)var1).equals(((VariableList)var2));
+			}
 			return var1.equals(var2);
 		}
 
 		if (operator.contentEquals("unequals")) {
+			if (var1 instanceof VariableList && var2 instanceof VariableList) {
+				return !((VariableList)var1).equals(((VariableList)var2));
+			}
 			return !var1.equals(var2);
 		}
 
