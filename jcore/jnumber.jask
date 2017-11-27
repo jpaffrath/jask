@@ -13,7 +13,7 @@ function fibonacci(max)
 	store 1 in i
 	store list(0) in numbers
 
-	assign max minus 1 to max
+	decrement max
 
 	run i to max with i plus 1
 		if i smallerequals 1 assign i to c
@@ -47,7 +47,7 @@ function root(x:n)
 	if x smaller 0 return NULL else endif
 
 	store n in m
-	assign m minus 1 to m
+	decrement m
 	
 	store x in xn
 	assign xn divide 2 to xn
