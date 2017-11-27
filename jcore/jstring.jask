@@ -153,18 +153,9 @@ end
 function reverse(str)
 	if isString(str) equals FALSE return NULL else endif
 
-	assign listFromString(str) to str
-	store list() in list
-	store listSize(str) in i
+	assign listToString(listReverse(listFromString(str))) to str
 
-	assign i minus 1 to i
-
-	while i greaterequals 0
-		assign listAdd(list:listGet(str:i)) to list
-		decrement i
-	endrun
-
-	return listToString(list)
+	return str
 end
 
 function strSize(str)
