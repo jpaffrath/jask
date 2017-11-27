@@ -17,7 +17,7 @@ function substring(str:s:e)
 	store list() in sub
 	store NULL in temp
 
-	assign e plus 1 to e
+	increment e
 
 	run s to e with s plus 1
 		assign listGet(str:s) to temp
