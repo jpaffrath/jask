@@ -502,7 +502,7 @@ public class InternalFunctions {
 	}
 	
 	/**
-	 * Internal implementation if listExtend
+	 * Internal implementation of listExtend
 	 * 
 	 * @param heap function heap
 	 * @param params function parameters
