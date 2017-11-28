@@ -10,7 +10,7 @@ function substring(str:s:e)
 	assign listFromString(str) to str
 	
 	store listSize(str) in size
-	assign size minus 1 to size
+	decrement size
 	if s greater size return NULL else endif
 	if e greater size return NULL else endif
 
