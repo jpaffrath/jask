@@ -95,6 +95,10 @@ if list(1:2) smallerequals list(1:2) increment testPassed else increment testFai
 if listExtend(list(1:2:3):list(4:5:6)) equals list(1:2:3:4:5:6) increment testPassed else increment testFailed endif
 if listExtend(myList:list(1:2)) equals list(1:2:3:"a string":1:2) increment testPassed else increment testFailed endif
 
+if listGetRange(list(1:2:3):0:2) equals list(1:2:3) increment testPassed else increment testFailed endif
+if listGetRange(list(1:2:3):0:0) equals list(1) increment testPassed else increment testFailed endif
+if listGetRange(list(1:2:3):-1:5) equals NULL increment testPassed else increment testFailed endif
+
 ; jcore jstring tests
 
 if substring("my substring string":3:11) equals "substring" increment testPassed else increment testFailed endif
