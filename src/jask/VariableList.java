@@ -231,6 +231,12 @@ public class VariableList extends Variable {
 		return false;
 	}
 	
+	/**
+	 * Compares this list with a given list based on their values
+	 * 
+	 * @param var the list to compare to
+	 * @return true if both lists are equal
+	 */
 	public boolean equals(VariableList var) {
 		if (this.values.size() != var.values.size()) {
 			return false;
