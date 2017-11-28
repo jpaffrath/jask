@@ -273,4 +273,22 @@ public class VariableList extends Variable {
 		newList.values.addAll(new VariableList(extender).values);
 		return newList.toString();
 	}
+	
+	/**
+	 * Returns a new list initialized with the values in the given range
+	 * 
+	 * @param start included start index
+	 * @param end included end index
+	 * @return jask string representing the list
+	 */
+	public String getRange(int start, int end) {
+		if (start < 0 || start > this.values.size() - 1 || end < start || end > this.values.size() - 1) {
+			return "NULL";
+		}
+		
+		List<Variable> values = this.values.subList(start, end + 1);
+		VariableList ret = new VariableList(values);
+		
+		return ret.toString();
+	}
 }
