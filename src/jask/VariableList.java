@@ -43,6 +43,23 @@ public class VariableList extends Variable {
 			this.values.add(new Variable(v));
 		}
 	}
+	
+	/**
+	 * Initializes a new list variable based on a given list of values
+	 * 
+	 * This constructor deep copies the given values
+	 * 
+	 * @param values values for the new list variable
+	 */
+	public VariableList(List<Variable> values) {
+		super();
+		
+		this.values = new ArrayList<Variable>();
+		
+		for (Variable v : values) {
+			this.values.add(new Variable(v));
+		}
+	}
 
 	/**
 	 * Adds an element to the list based on a generic value
