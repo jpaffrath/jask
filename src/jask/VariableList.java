@@ -292,4 +292,26 @@ public class VariableList extends Variable {
 		
 		return ret.toString();
 	}
+	
+	/**
+	 * Returns a new list initialized with the values after removing the given range
+	 * 
+	 * @param start included start index
+	 * @param end included end index
+	 * @return jask string representing the list
+	 */
+	public String removeRange(int start, int end) {
+		if (start < 0 || start > this.values.size() - 1 || end < start || end > this.values.size() - 1) {
+			return NULL;
+		}
+		
+		List<Variable> sub = new ArrayList<Variable>(this.values.subList(start, end + 1));
+		List<Variable> ret = new ArrayList<Variable>(this.values);
+		
+		if (!ret.removeAll(sub)) {
+			return NULL;
+		}
+		
+		return new VariableList(ret).toString();
+	}
 }
