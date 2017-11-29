@@ -127,6 +127,12 @@ public class InternalFunctions {
 				return listGetRange(heap, params);
 			}
 		});
+		this.functions.put("listRemoveRange", new InternalFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return listRemoveRange(heap, params);
+			}
+		});
 		this.functions.put("isString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
@@ -206,7 +212,8 @@ public class InternalFunctions {
 				functionName.contentEquals("listSet") ||
 				functionName.contentEquals("listReverse") ||
 				functionName.contentEquals("listExtend")) ||
-				functionName.contentEquals("listGetRange");
+				functionName.contentEquals("listGetRange") ||
+				functionName.contentEquals("listRemoveRange");
 	}
 
 	/**
@@ -576,6 +583,54 @@ public class InternalFunctions {
 		}
 	
 		return ((VariableList)list).getRange(start, end);
+	}
+	
+	/**
+	 * Internal implementation of listRemoveRange
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a new list initialized with the values in the given range
+	 */
+	private String listRemoveRange(HashMap<String, Variable> heap, String[] params) {
+		Variable list = heap.get(params[0]);
+		
+		if (!(list instanceof VariableList)) {
+			Error.printErrorVariableIsNotAList(params[0]);
+			return NULL;
+		}
+		
+		Variable varStart = heap.get(params[1]);
+		Variable varEnd = heap.get(params[2]);
+		
+		int start = 0;
+		int end = 0;
+		
+		if (varStart == null) {
+			start = Integer.parseInt(params[1]);
+		}
+		else {
+			if (varStart.getType() != VariableType.Number) {
+				Error.printErrorVariableIsNotANumber(params[1]);
+				return NULL;
+			}
+			
+			start = (int)varStart.getDoubleValue();
+		}
+		
+		if (varEnd == null) {
+			end = Integer.parseInt(params[2]);
+		}
+		else {
+			if (varEnd.getType() != VariableType.Number) {
+				Error.printErrorVariableIsNotANumber(params[2]);
+				return NULL;
+			}
+			
+			end = (int)varEnd.getDoubleValue();
+		}
+	
+		return ((VariableList)list).removeRange(start, end);
 	}
 
 	/**
