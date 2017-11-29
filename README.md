@@ -70,38 +70,21 @@ increment myNum ; same as assign myNum plus 1 to myNum
 decrement myNum ; same as assign myNum minus 1 to myNum
 ```
 
-### Calling functions
+### Printing and reading data
 ```Assembly
-myFunc(parameter)
+store read() in res
+print(res)
+
+print("I am a concatenated ":"string!")
 ```
-Multiple parameters are separated by colons:
+
+### Convert variables
 ```Assembly
-myFunc(firstParameter:secondParameter)
+store "100" in num
+
+convert num to number
+convert num to string
 ```
-You can easily call a function several times:
-```Assembly
-call printLine("Hello!") 10 times
-```
-Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
-
-### Work with list variables
-A list in jask can store strings, numbers and boolean values.
-```Assembly
-store list(1:2:3) in numbers
-print(numbers)
-
-store listGet(numbers:0) in item1
-print(item1)
-
-; add value 4
-assign listAdd(numbers:4) to numbers
-
-; remove value at index 2
-assign listRemove(numbers:2) to numbers
-
-store list(1:"String":TRUE) in myList
-```
-Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
 
 ### Control flow
 if-else conditions:
@@ -127,6 +110,20 @@ while val equals TRUE
 endrun
 ```
 Want more examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/wiki/Control-flow)!
+
+### Calling functions
+```Assembly
+myFunc(parameter)
+```
+Multiple parameters are separated by colons:
+```Assembly
+myFunc(firstParameter:secondParameter)
+```
+You can easily call a function several times:
+```Assembly
+call printLine("Hello!") 10 times
+```
+Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
 
 ### Creating functions
 Functions in jask can return nothing or any type of data.
@@ -162,21 +159,24 @@ end
 You find more information about the access operator in the [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
 Want to know more about functions in jask? Look at [Functions inside functions](https://github.com/jpaffrath/jask/wiki/Functions-inside-functions!) or [Modules inside functions](https://github.com/jpaffrath/jask/wiki/Modules-inside-functions!).
 
-### Printing and reading data
+### Work with list variables
+A list in jask can store strings, numbers and boolean values.
 ```Assembly
-store read() in res
-print(res)
+store list(1:2:3) in numbers
+print(numbers)
 
-print("I am a concatenated ":"string!")
+store listGet(numbers:0) in item1
+print(item1)
+
+; add value 4
+assign listAdd(numbers:4) to numbers
+
+; remove value at index 2
+assign listRemove(numbers:2) to numbers
+
+store list(1:"String":TRUE) in myList
 ```
-
-### Convert variables
-```Assembly
-store "100" in num
-
-convert num to number
-convert num to string
-```
+Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
 
 ### Modules
 You can import other jask files with the keyword 'use'.
