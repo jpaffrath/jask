@@ -426,6 +426,9 @@ public class Executer {
 			if (Variable.isNumber(tokens.get(3))) {
 				maxVal = new Variable(tokens.get(3));
 			}
+			else if (Interpreter.isFunction(tokens.get(3))) {
+				maxVal = new Variable(executeFunction(tokens.get(3)));
+			}
 			else {
 				Error.printErrorVariableIsNotANumber(tokens.get(3));
 				return "";
