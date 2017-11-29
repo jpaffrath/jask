@@ -1,5 +1,6 @@
 package jask;
 
+import static jask.Constants.*;
 import java.util.regex.Pattern;
 
 /**
@@ -48,8 +49,8 @@ public class Variable {
 	 * @return true if the given string is a valid boolean value
 	 */
 	public static boolean isBoolean(String value) {
-		return (value.contentEquals("TRUE") ||
-				value.contentEquals("FALSE"));
+		return (value.contentEquals(TRUE) ||
+				value.contentEquals(FALSE));
 	}
 
 	/**
@@ -78,11 +79,11 @@ public class Variable {
 			this.type = VariableType.String;
 		}
 		// matches boolean values
-		else if (genericValue.contentEquals("TRUE")) {
+		else if (genericValue.contentEquals(TRUE)) {
 			this.boolValue = true;
 			this.type = VariableType.Bool;
 		}
-		else if (genericValue.contentEquals("FALSE")){
+		else if (genericValue.contentEquals(FALSE)){
 			this.boolValue = false;
 			this.type = VariableType.Bool;
 		}
@@ -212,9 +213,9 @@ public class Variable {
 			}
 			return String.valueOf(this.doubleValue);
 		}
-		if (this.type == VariableType.Bool)   return this.boolValue ? "TRUE" : "FALSE";
+		if (this.type == VariableType.Bool) return this.boolValue ? TRUE : FALSE;
 
-		return "NULL";
+		return NULL;
 	}
 
 	/**

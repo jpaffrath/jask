@@ -1,5 +1,6 @@
 package jask;
 
+import static jask.Constants.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -12,10 +13,6 @@ import java.util.Scanner;
  */
 public class InternalFunctions {
 	private HashMap<String, InternalFunction> functions;
-
-	private final String TRUE = "TRUE";
-	private final String FALSE = "FALSE";
-	private final String NULL = "NULL";
 
 	/**
 	 * General constructor

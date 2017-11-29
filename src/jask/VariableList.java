@@ -1,5 +1,6 @@
 package jask;
 
+import static jask.Constants.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -283,7 +284,7 @@ public class VariableList extends Variable {
 	 */
 	public String getRange(int start, int end) {
 		if (start < 0 || start > this.values.size() - 1 || end < start || end > this.values.size() - 1) {
-			return "NULL";
+			return NULL;
 		}
 		
 		List<Variable> values = this.values.subList(start, end + 1);

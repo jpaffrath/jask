@@ -1,5 +1,6 @@
 package jask;
 
+import static jask.Constants.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -86,7 +87,7 @@ public class Executer {
 			for (int i = 0; i < params.size(); i++) {
 				String temp = params.get(i);
 
-				if (Variable.isString(temp) || Variable.isNumber(temp) || Variable.isBoolean(temp) || temp.contentEquals("NULL")) {
+				if (Variable.isString(temp) || Variable.isNumber(temp) || Variable.isBoolean(temp) || temp.contentEquals(NULL)) {
 					functionHeap.add(new Variable(temp));
 				}
 				else if (Interpreter.isFunction(temp)) {
@@ -136,7 +137,7 @@ public class Executer {
 			}
 		}
 
-		if (varVal.isEmpty()) return new Variable("NULL");
+		if (varVal.isEmpty()) return new Variable(NULL);
 		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
 		return new Variable(varVal);
 	}
@@ -382,7 +383,7 @@ public class Executer {
 			}
 			else {
 				Variable var = new Variable(variableValue);
-				if (var.getType() == VariableType.NoType && !variableValue.contentEquals("NULL")) {
+				if (var.getType() == VariableType.NoType && !variableValue.contentEquals(NULL)) {
 					Error.printErrorValueNotApplicable(variableValue);
 					return;
 				}

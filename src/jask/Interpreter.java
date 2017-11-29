@@ -1,5 +1,6 @@
 package jask;
 
+import static jask.Constants.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +61,9 @@ public class Interpreter {
 		this.keywords.add("times");
 
 		this.values = new ArrayList<String>();
-		this.values.add("TRUE");
-		this.values.add("FALSE");
-		this.values.add("NULL");
+		this.values.add(TRUE);
+		this.values.add(FALSE);
+		this.values.add(NULL);
 
 		this.executer = new Executer();
 	}

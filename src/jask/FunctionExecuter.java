@@ -1,5 +1,6 @@
 package jask;
 
+import static jask.Constants.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ public class FunctionExecuter {
 	public String executeFunction(String name, List<Variable> heap, HashMap<String, Variable> localHeap, List<Executer> modules) {
 		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
-			return "NULL";
+			return NULL;
 		}
 
 		Function function = this.functions.get(name);
