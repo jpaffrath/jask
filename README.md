@@ -126,7 +126,7 @@ call printLine("Hello!") 10 times
 Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
 
 ### Creating functions
-Functions in jask can return nothing or any type of data.
+Functions in jask can return nothing, any type of data or calculations.
 ```Assembly
 function myPrint(str)
   print(str)
@@ -135,6 +135,10 @@ end
 function func(param1:param2)
   print(param1)
   return TRUE
+end
+
+function divide(num1:num2)
+  return num1 divide num2
 end
 ```
 To access a variable which is stored outside a function, use the access operator "!":
