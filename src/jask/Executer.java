@@ -205,7 +205,7 @@ public class Executer {
 	 * @param type type of the calculation
 	 * @return a new variable containing the result of the calculation
 	 */
-	private Variable executeCalculation(Variable operand1, Variable operand2, CalculationType type) {
+	public Variable executeCalculation(Variable operand1, Variable operand2, CalculationType type) {
 		// number calculations
 		if ((operand1.getType() == VariableType.Number) && (operand2.getType() == VariableType.Number)) {
 			switch (type) {
