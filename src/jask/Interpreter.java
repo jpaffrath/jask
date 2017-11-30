@@ -15,6 +15,7 @@ public class Interpreter {
 	private static final int historyMax = 10;
 	private History history;
 
+	private List<String> calculations;
 	private List<String> operators;
 	private List<String> keywords;
 	private List<String> values;
@@ -26,11 +27,13 @@ public class Interpreter {
 	public Interpreter() {
 		this.history = new History(historyMax);
 
-		this.operators = new ArrayList<String>();
-		this.operators.add("plus");
-		this.operators.add("minus");
-		this.operators.add("times");
-		this.operators.add("divide");
+		this.calculations = new ArrayList<String>();
+		this.calculations.add("plus");
+		this.calculations.add("minus");
+		this.calculations.add("times");
+		this.calculations.add("divide");
+
+		this.operators = new ArrayList<String>(this.calculations);
 		this.operators.add("store");
 		this.operators.add("assign");
 		this.operators.add("mod");
@@ -88,6 +91,16 @@ public class Interpreter {
 	public Interpreter(Executer executer) {
 		this();
 		this.executer = executer;
+	}
+
+	/**
+	 * Checks if a given string is a jask calculation
+	 * 
+	 * @param t string to check
+	 * @return true if the given string is a jask calculation
+	 */
+	private boolean isCalculation(String t) {
+		return this.calculations.contains(t);
 	}
 
 	/**
