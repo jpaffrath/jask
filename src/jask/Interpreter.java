@@ -173,14 +173,16 @@ public class Interpreter {
 				String str = tokens.get(i+1);
 				Variable ret = null;
 
-				// check if the return statement ist a function
+				// check if the return statement is a function
 				if (isFunction(str)) {
 					ret = this.executer.executeFunction(str);
 				}
 				else {
 					// check if the return statement is a calculation
 					if (tokens.size() > i+2 && isCalculation(tokens.get(i+2))) {
-						ret = this.executer.executeCalculation(new Variable(tokens.get(i+1)), new Variable(tokens.get(i+3)), CalculationType.getType(tokens.get(i+2)));
+						Variable operand1 = this.executer.getVariableFromHeap(tokens.get(i+1));
+						Variable operand2 = this.executer.getVariableFromHeap(tokens.get(i+3));
+						ret = this.executer.executeCalculation(operand1, operand2, CalculationType.getType(tokens.get(i+2)));
 					}
 					else {
 						ret = this.executer.getVariableFromHeap(str);
