@@ -195,6 +195,26 @@ call testIncrement() numberOfCalls times
 
 if testOutside equals 210 increment testPassed else increment testFailed endif
 
+function testCalculation(a:b:opr)
+	if isString(a) equals TRUE
+		if isString(b) equals TRUE
+			return a plus b
+		else endif
+	else endif
+
+	if opr equals "plus"   return a plus   b else endif
+	if opr equals "minus"  return a minus  b else endif
+	if opr equals "times"  return a times  b else endif
+	if opr equals "divide" return a divide b else endif
+end
+
+if testCalculation(42:8:"plus")   equals 50   increment testPassed else increment testFailed endif
+if testCalculation(42:8:"minus")  equals 34   increment testPassed else increment testFailed endif
+if testCalculation(42:8:"times")  equals 336  increment testPassed else increment testFailed endif
+if testCalculation(42:8:"divide") equals 5.25 increment testPassed else increment testFailed endif
+
+if testCalculation("Hello ":"World!":NULL) equals "Hello World!" increment testPassed else increment testFailed endif
+
 ; module tests
 
 remove jcore/jnumber
