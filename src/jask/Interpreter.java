@@ -180,8 +180,12 @@ public class Interpreter {
 				else {
 					// check if the return statement is a calculation
 					if (tokens.size() > i+2 && isCalculation(tokens.get(i+2))) {
-						Variable operand1 = this.executer.getVariableFromHeap(tokens.get(i+1));
-						Variable operand2 = this.executer.getVariableFromHeap(tokens.get(i+3));
+						final String operandName1 = tokens.get(i+1);
+						final String operandName2 = tokens.get(i+3);
+
+						Variable operand1 = this.executer.hasVariable(operandName1) ? this.executer.getVariableFromHeap(operandName1) : new Variable(operandName1);
+						Variable operand2 = this.executer.hasVariable(operandName2) ? this.executer.getVariableFromHeap(operandName2) : new Variable(operandName2);
+
 						ret = this.executer.executeCalculation(operand1, operand2, CalculationType.getType(tokens.get(i+2)));
 					}
 					else {
