@@ -70,6 +70,16 @@ public class Executer {
 	public Variable getVariableFromHeap(String var) {
 		return this.heap.get(var);
 	}
+	
+	/**
+	 * Checks if the heap contains a variable with a given name
+	 * 
+	 * @param variableName name of the variable
+	 * @return true if the heap contains a variable with the given name
+	 */
+	public boolean hasVariable(String variableName) {
+		return this.heap.containsKey(variableName);
+	}
 
 	/**
 	 * Executes a function
