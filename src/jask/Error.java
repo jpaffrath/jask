@@ -60,6 +60,13 @@ public class Error {
 	public static void printErrorFileNotFound(String file) {
 		System.out.println(prefix + "the file '" + file + "' was not found!");
 	}
+	
+	public static void printErrorFileReadError(String file) {
+		System.out.println(prefix + "reading the file '" + file + "' failed unexpectetly!");
+	}
+	
+	public static void printErrorFileWriteError(String file) {
+		System.out.println(prefix + "writing the file '" + file + "' failed unexpectetly!");
 	}
 
 	public static void terminateInterpret(String reason) {
