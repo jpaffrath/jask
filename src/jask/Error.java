@@ -58,7 +58,8 @@ public class Error {
 	}
 
 	public static void printErrorFileNotFound(String file) {
-		System.out.println(prefix + "the file '" + file + ".jask' was not found!");
+		System.out.println(prefix + "the file '" + file + "' was not found!");
+	}
 	}
 
 	public static void terminateInterpret(String reason) {
