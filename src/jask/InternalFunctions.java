@@ -1,6 +1,11 @@
 package jask;
 
 import static jask.Constants.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -131,6 +136,24 @@ public class InternalFunctions {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return listRemoveRange(heap, params);
+			}
+		});
+		this.functions.put("readFile", new InternalFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return readFile(heap, params);
+			}
+		});
+		this.functions.put("writeFile", new InternalFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return writeFile(heap, params);
+			}
+		});
+		this.functions.put("appendToFile", new InternalFunction() {
+			@Override
+			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return appendToFile(heap, params);
 			}
 		});
 		this.functions.put("isString", new InternalFunction() {
@@ -631,6 +654,116 @@ public class InternalFunctions {
 		}
 	
 		return ((VariableList)list).removeRange(start, end);
+	}
+	
+	/**
+	 * Internal implementation of readFile
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a new variable containing the content of the file
+	 */
+	private String readFile(HashMap<String, Variable> heap, String[] params) {
+		Variable var = heap.get(params[0]);
+		String fileName = "";
+		
+		if (var.getType() == VariableType.String) {
+			fileName = var.getStringValue();
+		}
+		else {
+			Error.printErrorVariableIsNotAString(params[0]);
+			return NULL;
+		}
+		
+		try {
+			byte[] content = Files.readAllBytes(Paths.get(fileName));
+			return '"' + new String(content) + '"';
+		} catch (IOException e) {
+			Error.printErrorFileReadError(fileName);
+		}
+		
+		return NULL;
+	}
+	
+	/**
+	 * Internal implementation of writeFile
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return TRUE or FALSE
+	 */
+	private String writeFile(HashMap<String, Variable> heap, String[] params) {
+		Variable varFileName = heap.get(params[0]);
+		String fileName = "";
+		
+		if (varFileName.getType() == VariableType.String) {
+			fileName = varFileName.getStringValue();
+		}
+		else {
+			Error.printErrorVariableIsNotAString(params[0]);
+			return FALSE;
+		}
+		
+		Variable varFileContent = heap.get(params[1]);
+		String fileContent = "";
+		
+		if (varFileContent.getType() == VariableType.String) {
+			fileContent = varFileContent.getStringValue();
+		}
+		else {
+			Error.printErrorVariableIsNotAString(params[1]);
+			return FALSE;
+		}
+		
+		try {
+			Files.write(Paths.get(fileName), fileContent.getBytes(), StandardOpenOption.CREATE);
+			return TRUE;
+		}
+		catch (IOException e) {
+			Error.printErrorFileWriteError(fileName);
+		}
+		
+		return FALSE;
+	}
+	
+	/**
+	 * Internal implementation of appendToFile
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return the content of the file
+	 */
+	private String appendToFile(HashMap<String, Variable> heap, String[] params) {
+		Variable varFileName = heap.get(params[0]);
+		String fileName = "";
+		
+		if (varFileName.getType() == VariableType.String) {
+			fileName = varFileName.getStringValue();
+		}
+		else {
+			Error.printErrorVariableIsNotAString(params[0]);
+			return FALSE;
+		}
+		
+		Variable varFileContent = heap.get(params[1]);
+		String fileContent = "";
+		
+		if (varFileContent.getType() == VariableType.String) {
+			fileContent = varFileContent.getStringValue();
+		}
+		else {
+			Error.printErrorVariableIsNotAString(params[1]);
+			return FALSE;
+		}
+		
+		try {
+			Files.write(Paths.get(fileName), fileContent.getBytes(), StandardOpenOption.APPEND);
+			return TRUE;
+		} catch (IOException e) {
+			Error.printErrorFileWriteError(fileName);
+		}
+		
+		return FALSE;
 	}
 
 	/**

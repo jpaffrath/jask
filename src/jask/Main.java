@@ -55,6 +55,17 @@ public class Main {
 		// parse input file
 		tokens.addAll(tokenizer.parse(new File(file)));
 
-		new Interpreter().interpret(tokens);
+		// interpret tokens and measure execution time
+		long startTime = System.currentTimeMillis();
+		String code = new Interpreter().interpret(tokens);
+		long endTime = System.currentTimeMillis();
+		
+		// print status to output
+		if (code.equals("")) {
+			System.out.println("Program exited in " + ((endTime - startTime) / 1000.0) + " seconds");
+		}
+		else {
+			System.out.println("Program exited with status code " + code + " in " + ((endTime - startTime) / 1000.0) + " seconds");
+		}
 	}
 }
