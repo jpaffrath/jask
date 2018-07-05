@@ -31,6 +31,12 @@ if num1 equals 0 increment testPassed else increment testFailed endif
 store "42" in str1
 if str1 equals "42" increment testPassed else increment testFailed endif
 
+assign "TestString" times 2 to str1
+if str1 equals "TestStringTestString" increment testPassed else increment testFailed endif
+
+assign str1 times 2 to str1
+if str1 equals "TestStringTestStringTestStringTestString" increment testPassed else increment testFailed endif
+
 ; calculation tests
 
 store 100 in opr1
