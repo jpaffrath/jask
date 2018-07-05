@@ -237,6 +237,18 @@ public class Executer {
 				return null;
 			}
 		}
+		if ((operand1.getType() == VariableType.String) && (operand2.getType() == VariableType.Number)) {
+			switch (type) {
+			case Times:
+				StringBuffer buf = new StringBuffer();
+				for (int i = 0; i < (int)operand2.getDoubleValue(); i++) {
+					buf.append(operand1.getStringValue());
+				}
+				return new Variable('"' + buf.toString() + '"');
+			default:
+				return null;
+			}
+		}
 
 		return null;
 	}
