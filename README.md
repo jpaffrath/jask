@@ -61,6 +61,7 @@ assign 8 mod 3 to z
 
 assign "A string" to str
 assign "Hello " plus "World!" to str
+assign "Repeating string" times 10 to str
 
 assign FALSE to bool
 ```
