@@ -184,6 +184,11 @@ public class InteractiveMode {
 					System.out.print("run  ~>     ");
 				}
 			}
+			
+			// if the current line is a variable, print its content
+			if (interpreter.getExecuter().hasVariable(line)) {
+				System.out.println("jask ~> " + interpreter.getExecuter().getVariableFromHeap(line).toString());
+			}
 
 			tempList.add(line);
 			this.history.addToHistory(line);
