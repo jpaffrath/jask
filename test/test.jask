@@ -37,6 +37,24 @@ if str1 equals "TestStringTestString" increment testPassed else increment testFa
 assign str1 times 2 to str1
 if str1 equals "TestStringTestStringTestStringTestString" increment testPassed else increment testFailed endif
 
+; file operation test
+
+if writeFile("test/file.txt":"This will be the content!") equals TRUE
+	increment testPassed else increment testFailed
+endif
+
+if readFile("test/file.txt") equals "This will be the content!"
+	increment testPassed else increment testFailed
+endif
+
+if appendToFile("test/file.txt":"This will be added to the file!") equals TRUE
+	increment testPassed else increment testFailed
+endif
+
+if readFile("test/file.txt") equals "This will be the content!This will be added to the file!"
+	increment testPassed else increment testFailed
+endif
+
 ; calculation tests
 
 store 100 in opr1
