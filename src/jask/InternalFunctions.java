@@ -716,7 +716,7 @@ public class InternalFunctions {
 		}
 		
 		try {
-			Files.write(Paths.get(fileName), fileContent.getBytes(), StandardOpenOption.CREATE);
+			Files.write(Paths.get(fileName), fileContent.getBytes());
 			return TRUE;
 		}
 		catch (IOException e) {
