@@ -1,6 +1,8 @@
-package jask;
+package function;
 
 import java.util.HashMap;
+
+import variable.Variable;
 
 /**
  * Interface for executing internal functions

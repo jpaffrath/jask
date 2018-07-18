@@ -1,9 +1,21 @@
 package jask;
 
 import static jask.Constants.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import expression.Expression;
+import expression.ExpressionType;
+import function.Function;
+import function.FunctionExecuter;
+import function.InternalFunctions;
+import helper.Error;
+import helper.Helpers;
+import variable.Variable;
+import variable.VariableList;
+import variable.VariableType;
 
 /**
  * Executes jask code

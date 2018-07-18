@@ -1,4 +1,4 @@
-package jask;
+package variable;
 
 /**
  * Enumeration for different types of variables

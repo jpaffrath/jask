@@ -13,6 +13,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import helper.Error;
+import helper.Helpers;
+
 /**
  * Tokenizer class
  *

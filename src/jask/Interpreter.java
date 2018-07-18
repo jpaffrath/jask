@@ -1,9 +1,20 @@
 package jask;
 
 import static jask.Constants.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import expression.Expression;
+import expression.ExpressionType;
+import function.Function;
+import function.FunctionExecuter;
+import helper.Error;
+import helper.Helpers;
+import helper.History;
+import variable.Variable;
+import variable.VariableType;
 
 /**
  * Interpreter class

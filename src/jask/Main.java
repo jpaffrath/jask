@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import helper.Error;
+import helper.Helpers;
+
 /**
  * Main java file
  *

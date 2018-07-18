@@ -1,4 +1,4 @@
-package jask;
+package function;
 
 import static jask.Constants.*;
 
@@ -9,6 +9,12 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
+import helper.Error;
+import helper.Helpers;
+import variable.Variable;
+import variable.VariableList;
+import variable.VariableType;
 
 /**
  * Implements internal functions

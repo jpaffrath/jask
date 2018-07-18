@@ -1,6 +1,7 @@
-package jask;
+package variable;
 
 import static jask.Constants.*;
+
 import java.util.regex.Pattern;
 
 /**
@@ -194,7 +195,7 @@ public class Variable {
 	 *
 	 * @param type new type
 	 */
-	protected void setType(VariableType type) {
+	public void setType(VariableType type) {
 		this.type = type;
 	}
 

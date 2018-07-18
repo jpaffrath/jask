@@ -1,4 +1,4 @@
-package jask;
+package expression;
 
 /**
  * Enumeration for different expression types

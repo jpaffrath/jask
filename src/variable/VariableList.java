@@ -1,9 +1,12 @@
-package jask;
+package variable;
 
 import static jask.Constants.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import helper.Error;
 
 /**
  * Represents a jask list variable

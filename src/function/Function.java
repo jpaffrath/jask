@@ -1,7 +1,10 @@
-package jask;
+package function;
 
 import java.util.HashMap;
 import java.util.List;
+
+import variable.Variable;
+import variable.VariableList;
 
 /**
  * Represents a jask function

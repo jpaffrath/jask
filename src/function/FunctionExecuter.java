@@ -1,9 +1,15 @@
-package jask;
+package function;
 
 import static jask.Constants.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import helper.Error;
+import jask.Executer;
+import jask.Interpreter;
+import variable.Variable;
 
 /**
  * Executer for functions

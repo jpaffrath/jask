@@ -1,4 +1,4 @@
-package jask;
+package helper;
 
 /**
  * Error reporting class
