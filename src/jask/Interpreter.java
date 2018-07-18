@@ -62,6 +62,7 @@ public class Interpreter {
 		this.keywords.add("with");
 		this.keywords.add("while");
 		this.keywords.add("times");
+		this.keywords.add("for");
 
 		this.values = new ArrayList<String>();
 		this.values.add(TRUE);
