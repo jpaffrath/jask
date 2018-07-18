@@ -19,8 +19,8 @@ function substring(str:s:e)
 
 	increment e
 
-	run s to e with s plus 1
-		assign listGet(str:s) to temp
+	run i from s to e with i plus 1
+		assign listGet(str:i) to temp
 		assign listAdd(sub:temp) to sub
 	endrun
 
