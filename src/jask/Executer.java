@@ -443,9 +443,11 @@ public class Executer {
 		}
 
 		if (tokens.get(0).contentEquals("run")) {
+			// variables containing the start and end values for the loop
 			Variable startVal = getVariableFromHeap(tokens.get(3));
 			Variable endVal = getVariableFromHeap(tokens.get(5));
 			
+			// the name of the variable containing the number at each iteration
 			String runnerName = tokens.get(1);
 			
 			// error if it already exists as a variable
@@ -454,6 +456,7 @@ public class Executer {
 				return "";
 			}
 
+			// if start variable is passed as a number, create new temporary variable
 			if (startVal == null) {
 				if (Variable.isNumber(tokens.get(3))) {
 					startVal = new Variable(tokens.get(3));
@@ -471,6 +474,7 @@ public class Executer {
 				return "";
 			}
 			
+			// if end variable is passed as a number, create new temporary variable
 			if (endVal == null) {
 				if (Variable.isNumber(tokens.get(5))) {
 					endVal = new Variable(tokens.get(5));
@@ -488,6 +492,7 @@ public class Executer {
 				return "";
 			}
 
+			// jask code for performing the assign at each iteration
 			List<String> assignTokens = new ArrayList<String>();
 			assignTokens.add("assign");
 			assignTokens.add(tokens.get(1));
@@ -497,9 +502,9 @@ public class Executer {
 			assignTokens.add(tokens.get(1));
 
 			Interpreter interpreter = new Interpreter(this);
-			
 			Variable runner = new Variable(runnerName);
 
+			// perform actual loop
 			for (int i = (int)startVal.getDoubleValue(); i < (int)endVal.getDoubleValue();) {
 				runner.setDoubleValue(i);
 				interpreter.getExecuter().heap.put(runnerName, runner);
@@ -510,6 +515,7 @@ public class Executer {
 				i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
 			}
 			
+			// remove variable from heap, because it only exists in the context of the run loop
 			interpreter.getExecuter().heap.remove(runnerName);
 
 			return ret;
