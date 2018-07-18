@@ -38,12 +38,13 @@ public class Main {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) {
+		// if no arguments are provided, enter the jask interactive mode
 		if (args.length == 0) {
-			InteractiveMode interactiveMode = new InteractiveMode(version);
-			interactiveMode.execute();
+			new InteractiveMode(version).execute();
 			return;
 		}
-
+		
+		// the first argument should hold a jask file
 		String file = args[0];
 
 		if (!Helpers.checkFilename(file)) {
@@ -52,7 +53,7 @@ public class Main {
 
 		Tokenizer tokenizer = new Tokenizer();
 
-		// add args to new jask context
+		// add provided arguments to new jask context
 		List<String> tokens = tokenizer.parse(setUpEnv(args));
 
 		// parse input file
