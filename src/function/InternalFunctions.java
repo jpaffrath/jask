@@ -165,25 +165,25 @@ public class InternalFunctions {
 		this.functions.put("isString", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return isString(heap, params);
+				return (heap.get(params[0]).getType() == VariableType.String ? TRUE : FALSE);
 			}
 		});
 		this.functions.put("isNumber", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return isNumber(heap, params);
+				return (heap.get(params[0]).getType() == VariableType.Number ? TRUE : FALSE);
 			}
 		});
 		this.functions.put("isBool", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return isBool(heap, params);
+				return (heap.get(params[0]).getType() == VariableType.Bool ? TRUE : FALSE);
 			}
 		});
 		this.functions.put("isList", new InternalFunction() {
 			@Override
 			public String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				return isList(heap, params);
+				return (heap.get(params[0]) instanceof VariableList ? TRUE : FALSE);
 			}
 		});
 		this.functions.put("exit", new InternalFunction() {
@@ -769,55 +769,6 @@ public class InternalFunctions {
 			Error.printErrorFileWriteError(fileName);
 		}
 		
-		return FALSE;
-	}
-
-	/**
-	 * Internal implementation of isString
-	 *
-	 * @param heap function heap
-	 * @param params function parameters
-	 * @return TRUE or FALSE
-	 */
-	private String isString(HashMap<String, Variable> heap, String[] params) {
-		if (heap.get(params[0]).getType() == VariableType.String) return TRUE;
-		return FALSE;
-	}
-
-	/**
-	 * Internal implementation of isNumber
-	 *
-	 * @param heap function heap
-	 * @param params function parameters
-	 * @return TRUE or FALSE
-	 */
-	private String isNumber(HashMap<String, Variable> heap, String[] params) {
-		if (heap.get(params[0]).getType() == VariableType.Number) return TRUE;
-		return FALSE;
-	}
-
-	/**
-	 * Internal implementation of isBool
-	 *
-	 * @param heap function heap
-	 * @param params function parameters
-	 * @return TRUE or FALSE
-	 */
-	private String isBool(HashMap<String, Variable> heap, String[] params) {
-		if (heap.get(params[0]).getType() == VariableType.Bool) return TRUE;
-		return FALSE;
-	}
-
-	/**
-	 * Internal implementation of isList
-	 *
-	 * @param heap function heap
-	 * @param params function parameters
-	 * @return TRUE or FALSE
-	 */
-	private String isList(HashMap<String, Variable> heap, String[] params) {
-		if (heap.get(params[0]) instanceof VariableList) return TRUE;
-
 		return FALSE;
 	}
 
