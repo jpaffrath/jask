@@ -107,6 +107,10 @@ store TRUE in val
 while val equals TRUE
     print("val is TRUE!")
 endrun
+
+for element in list(1:2:3)
+  printLine(element)
+endrun
 ```
 Want more examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/wiki/Control-flow)!
 
