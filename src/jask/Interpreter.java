@@ -312,7 +312,7 @@ public class Interpreter {
 			}
 
 			// check run statement
-			else if (t.contentEquals("run") || t.contentEquals("while")) {
+			else if (t.contentEquals("run") || t.contentEquals("while") || t.contentEquals("for")) {
 				int runCount = 1;
 				int endCount = 0;
 				int runner = i;
