@@ -483,6 +483,47 @@ public class Executer {
 			return ret;
 		}
 		
+		if (tokens.get(0).contentEquals("for")) {
+			// this variable list contains the elements
+			Variable runner = getVariableFromHeap(tokens.get(3));
+			
+			// if the list does not exists, it is probably a list() function call
+			if (runner == null) {
+				// if if is a list() call, execute it so we have a temporarily runner variable
+				if (Interpreter.isFunction(tokens.get(3))) {
+					runner =  executeFunction(tokens.get(3));
+				}
+			}
+			
+			if (runner instanceof VariableList == false) {
+				Error.printErrorVariableIsNotAList(tokens.get(3));
+				return "";
+			}
+			
+			// the name of the variable containing the elements at each iteration
+			String elementName = tokens.get(1);
+			
+			// error if it already exists as a variable
+			if (this.hasVariable(elementName)) {
+				Error.printErrorVariableAlreadyDefined(elementName);
+				return "";
+			}
+			
+			Interpreter interpreter = new Interpreter(this);
+			VariableList elements = (VariableList)runner;
+			
+			for (int i = 0; i < ((VariableList)runner).getSize(); i++) {
+				interpreter.getExecuter().heap.put(elementName, new Variable(elements.getElementAtIndex(i)));
+				ret = interpreter.interpret(tokens.subList(4, tokens.size() - 1));
+				if (ret != "") break;
+			}
+			
+			// remove variable from heap, because it only exists in the context of the for loop
+			interpreter.getExecuter().heap.remove(elementName);
+			
+			return ret;
+		}
+		
 		return NULL;
 	}
 
