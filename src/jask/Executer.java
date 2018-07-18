@@ -101,47 +101,54 @@ public class Executer {
 	 */
 	public Variable executeFunction(String token) {
 		String functionName = token.substring(0, token.indexOf('('));
-		String param = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
-		List<String> params = Helpers.splitParams(param);
-
+		String parameterList = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
+		
+		List<String> params = Helpers.splitParams(parameterList);
 		List<Variable> functionHeap = new ArrayList<Variable>();
-		if (!param.contentEquals("")) {
-			for (int i = 0; i < params.size(); i++) {
-				String temp = params.get(i);
-
-				if (Variable.isString(temp) || Variable.isNumber(temp) || Variable.isBoolean(temp) || temp.contentEquals(NULL)) {
-					functionHeap.add(new Variable(temp));
+		
+		// if the function call contains parameters, parse them and add the variables to the function heap
+		if (parameterList.isEmpty() == false) {
+			for (String var : params) {
+				
+				// if the parameter is passed as a value, create a new variable on the heap
+				if (Variable.isString(var) || Variable.isNumber(var) || Variable.isBoolean(var) || var.contentEquals(NULL)) {
+					functionHeap.add(new Variable(var));
 				}
-				else if (Interpreter.isFunction(temp)) {
-					functionHeap.add(executeFunction(temp));
+				// if the parameter is a function call, execute the function and push its return value on the heap
+				else if (Interpreter.isFunction(var)) {
+					functionHeap.add(executeFunction(var));
 				}
+				// check if the parameter is a local variable and add it to the heap
 				else {
-					Variable var = getVariableFromHeap(params.get(i));
-					if (var == null) {
-						Error.printErrorVariableNotDefined(params.get(i));
+					Variable tempvar = getVariableFromHeap(var);
+					if (tempvar == null) {
+						Error.printErrorVariableNotDefined(var);
 					}
 					else {
-						functionHeap.add(var);
+						functionHeap.add(tempvar);
 					}
 				}
 			}
 		}
 
+		// check if the call is an internal function
 		if (this.internalFunctions.isInternalFunction(functionName)) {
-			return new Variable(this.internalFunctions.executeFunction(functionHeap, functionName, param));
+			return new Variable(this.internalFunctions.executeFunction(functionHeap, functionName, parameterList));
 		}
 
 		if (this.internalFunctions.isInternalListFunction(functionName)) {
-			return new VariableList(this.internalFunctions.executeFunction(functionHeap, functionName, param));
+			return new VariableList(this.internalFunctions.executeFunction(functionHeap, functionName, parameterList));
 		}
 
 		String varVal = "";
 
+		// check if the call is a local implemented function
 		if (this.functionExecuter.hasFunction(functionName)) {
 			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules);
 			this.setLocalHeapFromFunction(this.functionExecuter.getFunction(functionName).getHeap());
 			this.functionExecuter.destroyFunctionHeap(functionName);
 		}
+		// check if the call is a module implemented function
 		else {
 			boolean functionFound = false;
 
@@ -159,6 +166,7 @@ public class Executer {
 			}
 		}
 
+		// create proper variable before returning it
 		if (varVal.isEmpty()) return new Variable(NULL);
 		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
 		return new Variable(varVal);
