@@ -108,7 +108,9 @@ public class InteractiveMode {
 
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
-				if (tokenizer.parse(line).contains("end")) {
+				List<String> tokens = tokenizer.parse(line);
+				
+				if (tokens.contains("end")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
 					this.printJaskPrompt();
@@ -124,12 +126,13 @@ public class InteractiveMode {
 
 				while (true) {
 					line = scanner.nextLine();
+					tokens = tokenizer.parse(line);
 					
-					if (tokenizer.parse(line).contains("function")) {
+					if (tokens.contains("function")) {
 						funcCount++;
 					}
 					
-					if (tokenizer.parse(line).contains("end")) {
+					if (tokens.contains("end")) {
 						endCount++;
 					}
 					
