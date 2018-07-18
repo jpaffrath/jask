@@ -442,44 +442,48 @@ public class Executer {
 			return ret;
 		}
 
-		Variable runner = getVariableFromHeap(tokens.get(1));
-		Variable maxVal = getVariableFromHeap(tokens.get(3));
+		if (tokens.get(0).contentEquals("run")) {
+			Variable runner = getVariableFromHeap(tokens.get(1));
+			Variable maxVal = getVariableFromHeap(tokens.get(3));
 
-		if (maxVal == null) {
-			if (Variable.isNumber(tokens.get(3))) {
-				maxVal = new Variable(tokens.get(3));
+			if (maxVal == null) {
+				if (Variable.isNumber(tokens.get(3))) {
+					maxVal = new Variable(tokens.get(3));
+				}
+				else if (Interpreter.isFunction(tokens.get(3))) {
+					maxVal = new Variable(executeFunction(tokens.get(3)));
+				}
+				else {
+					Error.printErrorVariableIsNotANumber(tokens.get(3));
+					return "";
+				}
 			}
-			else if (Interpreter.isFunction(tokens.get(3))) {
-				maxVal = new Variable(executeFunction(tokens.get(3)));
-			}
-			else {
+			else if (maxVal.getType() != VariableType.Number) {
 				Error.printErrorVariableIsNotANumber(tokens.get(3));
 				return "";
 			}
+
+			List<String> assignTokens = new ArrayList<String>();
+			assignTokens.add("assign");
+			assignTokens.add(tokens.get(1));
+			assignTokens.add(tokens.get(6));
+			assignTokens.add(tokens.get(7));
+			assignTokens.add("to");
+			assignTokens.add(tokens.get(1));
+
+			Interpreter interpreter = new Interpreter(this);
+
+			for (int i = (int)runner.getDoubleValue(); i < maxVal.getDoubleValue();) {
+				ret = interpreter.interpret(tokens.subList(8, tokens.size() - 1));
+				if (ret != "") break;
+				executeAssign(assignTokens);
+				i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
+			}
+
+			return ret;
 		}
-		else if (maxVal.getType() != VariableType.Number) {
-			Error.printErrorVariableIsNotANumber(tokens.get(3));
-			return "";
-		}
-
-		List<String> assignTokens = new ArrayList<String>();
-		assignTokens.add("assign");
-		assignTokens.add(tokens.get(1));
-		assignTokens.add(tokens.get(6));
-		assignTokens.add(tokens.get(7));
-		assignTokens.add("to");
-		assignTokens.add(tokens.get(1));
-
-		Interpreter interpreter = new Interpreter(this);
-
-		for (int i = (int)runner.getDoubleValue(); i < maxVal.getDoubleValue();) {
-			ret = interpreter.interpret(tokens.subList(8, tokens.size() - 1));
-			if (ret != "") break;
-			executeAssign(assignTokens);
-			i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
-		}
-
-		return ret;
+		
+		return NULL;
 	}
 
 	/**
