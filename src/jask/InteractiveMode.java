@@ -40,7 +40,7 @@ public class InteractiveMode {
 		String line = "";
 
 		System.out.println("jask interpreter version " + this.version);
-		System.out.print("jask ~> ");
+		this.printJaskPrompt();
 
 		while (true) {
 			line = scanner.nextLine();
@@ -51,7 +51,7 @@ public class InteractiveMode {
 			// prints the history
 			if (line.contentEquals("history")) {
 				this.history.printHistory();
-				System.out.print("jask ~> ");
+				this.printJaskPrompt();
 				continue;
 			}
 
@@ -61,7 +61,7 @@ public class InteractiveMode {
 
 				if (names.isEmpty()) {
 					System.out.println("No loaded modules in context");
-					System.out.print("jask ~> ");
+					this.printJaskPrompt();
 					continue;
 				}
 
@@ -76,7 +76,7 @@ public class InteractiveMode {
 				}
 				System.out.println("]");
 
-				System.out.print("jask ~> ");
+				this.printJaskPrompt();
 				continue;
 			}
 
@@ -102,7 +102,7 @@ public class InteractiveMode {
 				}
 
 				interpreter.interpret(tokenizer.parse(line));
-				System.out.print("jask ~> ");
+				this.printJaskPrompt();
 				continue;
 			}
 
@@ -111,12 +111,12 @@ public class InteractiveMode {
 				if (tokenizer.parse(line).contains("end")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
-					System.out.print("jask ~> ");
+					this.printJaskPrompt();
 					continue;
 				}
 
 				tempList.add(line);
-				System.out.print("func ~>     ");
+				this.printFuncPrompt();
 				
 				// count occurrences of "function" and "end" for nested function implementations
 				int funcCount = 1;
@@ -138,7 +138,7 @@ public class InteractiveMode {
 					}
 
 					tempList.add(line);
-					System.out.print("func ~>     ");
+					this.printFuncPrompt();
 				}
 			}
 
@@ -147,7 +147,7 @@ public class InteractiveMode {
 				if (tokenizer.parse(line).contains("endif")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
-					System.out.print("jask ~> ");
+					this.printJaskPrompt();
 					continue;
 				}
 
@@ -155,7 +155,7 @@ public class InteractiveMode {
 				int exCount = 0;
 
 				tempList.add(line);
-				System.out.print("if   ~>    ");
+				this.printIfPrompt();
 
 				while (true) {
 					line = scanner.nextLine();
@@ -167,7 +167,7 @@ public class InteractiveMode {
 					if (ifCount == exCount) break;
 
 					tempList.add(line);
-					System.out.print("if   ~>    ");
+					this.printIfPrompt();
 				}
 			}
 
@@ -177,7 +177,7 @@ public class InteractiveMode {
 				if (tokenizer.parse(line).contains("endrun")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
-					System.out.print("jask ~> ");
+					this.printJaskPrompt();
 					continue;
 				}
 
@@ -185,7 +185,7 @@ public class InteractiveMode {
 				int exCount = 0;
 
 				tempList.add(line);
-				System.out.print("run  ~>     ");
+				this.printRunPrompt();
 
 				while (true) {
 					line = scanner.nextLine();
@@ -198,7 +198,7 @@ public class InteractiveMode {
 					if (ruCount == exCount) break;
 
 					tempList.add(line);
-					System.out.print("run  ~>     ");
+					this.printRunPrompt();
 				}
 			}
 			
@@ -209,12 +209,40 @@ public class InteractiveMode {
 
 			tempList.add(line);
 			this.history.addToHistory(line);
-			System.out.print("jask ~> ");
+			this.printJaskPrompt();
 
 			interpreter.interpret(tokenizer.parse(tempList));
 			tempList.clear();
 		}
 
 		scanner.close();
+	}
+	
+	/**
+	 * Prints jask prompt
+	 */
+	private void printJaskPrompt() {
+		System.out.print("jask ~> ");
+	}
+	
+	/**
+	 * Prints run prompt
+	 */
+	private void printRunPrompt() {
+		System.out.print("run  ~>     ");
+	}
+	
+	/**
+	 * Prints if prompt
+	 */
+	private void printIfPrompt() {
+		System.out.print("if   ~>    ");
+	}
+	
+	/**
+	 * Prints func prompt
+	 */
+	private void printFuncPrompt() {
+		System.out.print("func ~>     ");
 	}
 }
