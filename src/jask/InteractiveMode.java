@@ -108,7 +108,7 @@ public class InteractiveMode {
 
 			// if a function is added, add lines to list until the function ends
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
-				if (line.contains("end")) {
+				if (tokenizer.parse(line).contains("end")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
 					System.out.print("jask ~> ");
@@ -125,11 +125,11 @@ public class InteractiveMode {
 				while (true) {
 					line = scanner.nextLine();
 					
-					if (line.contains("function")) {
+					if (tokenizer.parse(line).contains("function")) {
 						funcCount++;
 					}
 					
-					if (line.contains("end")) {
+					if (tokenizer.parse(line).contains("end")) {
 						endCount++;
 					}
 					
@@ -144,7 +144,7 @@ public class InteractiveMode {
 
 			// if a statement is added, add lines to list until the statement ends
 			if (line.length() > 1 && line.substring(0, 2).contentEquals("if")) {
-				if (line.contains("endif")) {
+				if (tokenizer.parse(line).contains("endif")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
 					System.out.print("jask ~> ");
@@ -174,7 +174,7 @@ public class InteractiveMode {
 			// if a run statement is added, add lines to list until the statement ends
 			if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
 					(line.length() > 4 && line.substring(0, 5).contentEquals("while"))) {
-				if (line.contains("endrun")) {
+				if (tokenizer.parse(line).contains("endrun")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
 					System.out.print("jask ~> ");
@@ -193,7 +193,7 @@ public class InteractiveMode {
 					if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
 							(line.length() > 4 && line.substring(0, 5).contentEquals("while")))
 						ruCount++;
-					else if (line.contentEquals("endrun")) exCount++;
+					else if (tokenizer.parse(line).contains("endrun")) exCount++;
 
 					if (ruCount == exCount) break;
 
