@@ -117,10 +117,25 @@ public class InteractiveMode {
 
 				tempList.add(line);
 				System.out.print("func ~>     ");
+				
+				// count occurrences of "function" and "end" for nested function implementations
+				int funcCount = 1;
+				int endCount = 0;
 
 				while (true) {
 					line = scanner.nextLine();
-					if (line.contentEquals("end")) break;
+					
+					if (line.contains("function")) {
+						funcCount++;
+					}
+					
+					if (line.contains("end")) {
+						endCount++;
+					}
+					
+					if (funcCount == endCount) {
+						break;
+					}
 
 					tempList.add(line);
 					System.out.print("func ~>     ");
