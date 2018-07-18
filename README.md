@@ -98,9 +98,7 @@ endif
 ```
 run and while loops:
 ```Assembly
-store 0 in i
-
-run i to 10 with i plus 1
+run i from 0 to 10 with i plus 1
     print("i is ":i)
 endrun
 
