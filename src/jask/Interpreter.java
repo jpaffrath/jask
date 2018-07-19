@@ -144,6 +144,27 @@ public class Interpreter {
 	private boolean isValue(String t) {
 		return this.values.contains(t);
 	}
+	
+	/**
+	 * Checks if a given string is a valid jask variable name
+	 * 
+	 * @param t string to check
+	 * @return true if the given string is a valid jask variable name
+	 */
+	private boolean isValidVariableName(String t) {
+		if (this.isKeyword(t) || this.isOperator(t) || this.isValue(t)) {
+			return false;
+		}
+		
+		char[] invalidChars = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '\'', ';', '/', '\\'};
+		char toCheck = t.toCharArray()[0];
+		
+		for (char c : invalidChars) {
+			if (toCheck == c) return false;
+		}
+		
+		return true;
+	}
 
 	/**
 	 * Checks if a given string is a jask function
