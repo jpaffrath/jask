@@ -246,9 +246,9 @@ public class Interpreter {
 				if (isKeyword(tokens.get(i+1))) {
 					Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
 				}
-
-				if (isKeyword(tokens.get(i+3)) || isValue(tokens.get(i+3))) {
-					Error.terminateInterpret(tokens.get(i+3) + " is a keyword!");
+				
+				if (this.isValidVariableName(tokens.get(i + 3)) == false) {
+					Error.terminateInterpret(tokens.get(i + 3) + " is not a valid variable name!");
 				}
 
 				exp = new Expression(ExpressionType.Store, tokens.subList(i, i+4));
