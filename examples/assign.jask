@@ -11,3 +11,4 @@ assign z1 divide z1 to z1
 assign TRUE to value
 assign 2.1 to value
 assign "Hello " plus "World!" to value
+assign "Hello" times 2 to value
