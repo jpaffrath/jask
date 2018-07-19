@@ -1,22 +1,13 @@
 ; run loop example
 
-store 1 in i
-store 10 in max
-
-run i to max with i plus 1
+run i from 0 to 10 with i plus 1
 	print(i)
 endrun
 
-assign 1 to i
-
-store 1 in j
-store 10 in jmax
-
-run i to max with i plus 1
-	run j to jmax with j plus 1
+run i from 0 to 10 with i plus 1
+	run j from 0 to 10 with j plus 1
 		print(j)
 	endrun
-	assign 1 to j
 endrun
 
 ; while loop example
@@ -25,4 +16,10 @@ store TRUE in val
 
 while val equals TRUE
     print("val is TRUE!")
+endrun
+
+; for loop example
+
+for e in list(1:2:3)
+	printLine("Current element is ":e)
 endrun
