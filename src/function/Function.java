@@ -81,6 +81,24 @@ public class Function {
 	public String getName() {
 		return this.name;
 	}
+	
+	/**
+	 * Sets the name of the function
+	 * 
+	 * @param name new name of the function
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Returns the parameter list of the function
+	 * 
+	 * @return an array containing the parameters of the function
+	 */
+	public String[] getParameter() {
+		return this.params;
+	}
 
 	/**
 	 * Returns the tokens
