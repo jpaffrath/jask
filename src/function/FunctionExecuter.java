@@ -56,6 +56,17 @@ public class FunctionExecuter {
 	public void addFunction(Function function) {
 		this.functions.put(function.getName(), function);
 	}
+	
+	/**
+	 * Removes a function from the executers heap
+	 * 
+	 * @param function the function to be removed
+	 */
+	public void removeFunction(Function function) {
+		if (this.hasFunction(function.getName())) {
+			this.functions.remove(function.getName());
+		}
+	}
 
 	public Function getFunction(String name) {
 		if (this.hasFunction(name)) {
