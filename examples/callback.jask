@@ -1,0 +1,14 @@
+; define the callback function with an event parameter
+function myCallback(event)
+	printLine("This is the callback with event ":event)
+end
+
+; this function will call the callback
+function myFunc(cb:nr)
+	cb(nr)
+end
+
+; loop from 1 to 3 and call the function myFunc with the passed callback and the event number
+for element in list(1:2:3)
+	myFunc(myCallback:element)
+endrun

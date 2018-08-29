@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import variable.Variable;
+import variable.VariableFunction;
 import variable.VariableList;
 
 /**
@@ -45,12 +46,25 @@ public class Function {
 			Variable varOld = parameterHeap.get(i);
 			Variable varNew = null;
 
+			// if variable is a list, add a new list variable
 			if (varOld instanceof VariableList) {
 				varNew = new VariableList(varOld.toString());
 			}
+			
+			// if the variable is a function, add a new function variable with the corresponding parameter name
+			else if (varOld instanceof VariableFunction) {
+				Function func = ((VariableFunction)varOld).getFunction();
+				func.setName(params[i]);
+				
+				varNew = new VariableFunction(func);
+			}
+			
+			// copy old variable to a new variable
 			else {
 				varNew = new Variable(varOld);
 			}
+			
+			// put the new variable with the corresponding parameter name on the heap
 			this.heap.put(params[i], varNew);
 		}
 	}
@@ -80,6 +94,24 @@ public class Function {
 	 */
 	public String getName() {
 		return this.name;
+	}
+	
+	/**
+	 * Sets the name of the function
+	 * 
+	 * @param name new name of the function
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	/**
+	 * Returns the parameter list of the function
+	 * 
+	 * @return an array containing the parameters of the function
+	 */
+	public String[] getParameter() {
+		return this.params;
 	}
 
 	/**

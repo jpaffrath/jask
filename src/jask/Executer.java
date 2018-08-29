@@ -14,6 +14,7 @@ import function.InternalFunctions;
 import helper.Error;
 import helper.Helpers;
 import variable.Variable;
+import variable.VariableFunction;
 import variable.VariableList;
 import variable.VariableType;
 
@@ -118,6 +119,11 @@ public class Executer {
 				else if (Interpreter.isFunction(var)) {
 					functionHeap.add(executeFunction(var));
 				}
+				// if parameter is a function, create a new function variable on the heap
+				else if (this.functionExecuter.hasFunction(var)) {
+					Function func = this.functionExecuter.getFunction(var);
+					functionHeap.add(new VariableFunction(func));
+				}
 				// check if the parameter is a local variable and add it to the heap
 				else {
 					Variable tempvar = getVariableFromHeap(var);
@@ -142,11 +148,19 @@ public class Executer {
 
 		String varVal = "";
 
-		// check if the call is a local implemented function
-		if (this.functionExecuter.hasFunction(functionName)) {
+		// check if the call is a local implemented function or if the call was passed as a parameter variable
+		if (this.functionExecuter.hasFunction(functionName) || this.hasVariable(functionName)) {
+			if (this.hasVariable(functionName)) {
+				this.functionExecuter.addFunction(((VariableFunction)this.getVariableFromHeap(functionName)).getFunction());
+			}
+			
 			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules);
 			this.setLocalHeapFromFunction(this.functionExecuter.getFunction(functionName).getHeap());
 			this.functionExecuter.destroyFunctionHeap(functionName);
+			
+			if (this.hasVariable(functionName)) {
+				this.functionExecuter.removeFunction(((VariableFunction)this.getVariableFromHeap(functionName)).getFunction());
+			}
 		}
 		// check if the call is a module implemented function
 		else {
