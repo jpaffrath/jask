@@ -20,6 +20,9 @@ import variable.Variable;
 public class FunctionExecuter {
 	private HashMap<String, Function> functions;
 
+	/**
+	 * Default constructor
+	 */
 	public FunctionExecuter() {
 		this.functions = new HashMap<>();
 	}
@@ -44,6 +47,11 @@ public class FunctionExecuter {
 		return interpreter.interpret(function.getTokens());
 	}
 
+	/**
+	 * Destroys the function heap from the function with the given name
+	 * 
+	 * @param name name of the function
+	 */
 	public void destroyFunctionHeap(String name) {
 		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
@@ -53,6 +61,11 @@ public class FunctionExecuter {
 		function.destroyHeap();
 	}
 
+	/**
+	 * Adds a new function to the executers heap
+	 * 
+	 * @param function the new function
+	 */
 	public void addFunction(Function function) {
 		this.functions.put(function.getName(), function);
 	}
@@ -68,6 +81,12 @@ public class FunctionExecuter {
 		}
 	}
 
+	/**
+	 * Returns the function with a given name
+	 * 
+	 * @param name name of the function
+	 * @return the function with the given name or null
+	 */
 	public Function getFunction(String name) {
 		if (this.hasFunction(name)) {
 			return this.functions.get(name);
@@ -76,6 +95,12 @@ public class FunctionExecuter {
 		return null;
 	}
 
+	/**
+	 * Returns true if the executer holds a function with a given name
+	 * 
+	 * @param name name of the function
+	 * @return true if the executer holds a function with the given name
+	 */
 	public boolean hasFunction(String name) {
 		return this.functions.containsKey(name);
 	}
