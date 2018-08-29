@@ -185,6 +185,9 @@ store list(1:"String":TRUE) in myList
 ```
 Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
 
+### Callbacks
+You can find more information in the [Callback wiki](https://github.com/jpaffrath/jask/wiki/Callbacks-in-jask)
+
 ### Modules
 You can import other jask files with the keyword 'use'.
 An imported file is called a _module_.
@@ -194,16 +197,5 @@ See the following example how to import a module:
 function myModuleFunction()
   print("Hello! I am a module!")
 end
-```
-Let's say this is saved in a file called _myModule.jask_.
-Now you can import the module, called _myModule_ (without the extension '.jask'):
-```Assembly
-use myModule
-myModuleFunction()
-```
-You can also define a path in the use statement:
-```Assembly
-use my/local/path/to/library/myModule
-myModuleFunction()
 ```
 Want more examples? Visit [Modules wiki](https://github.com/jpaffrath/jask/wiki/Modules)!
