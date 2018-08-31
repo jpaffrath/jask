@@ -194,6 +194,10 @@ public class Interpreter {
 
 		for (int i = 0; i < tokens.size(); i++) {
 			t = tokens.get(i);
+			
+			if (t.isEmpty()) {
+				continue;
+			}
 
 			// checks return statement
 			if (t.contentEquals("return")) {
