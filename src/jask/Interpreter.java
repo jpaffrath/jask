@@ -12,7 +12,6 @@ import function.Function;
 import function.FunctionExecuter;
 import helper.Error;
 import helper.Helpers;
-import helper.History;
 import variable.Variable;
 import variable.VariableType;
 
@@ -23,9 +22,6 @@ import variable.VariableType;
  *
  */
 public class Interpreter {
-	private static final int historyMax = 10;
-	private History history;
-
 	private List<String> calculations;
 	private List<String> operators;
 	private List<String> keywords;
@@ -36,8 +32,6 @@ public class Interpreter {
 	 * General constructor
 	 */
 	public Interpreter() {
-		this.history = new History(historyMax);
-
 		this.calculations = new ArrayList<String>();
 		this.calculations.add("plus");
 		this.calculations.add("minus");
@@ -407,7 +401,6 @@ public class Interpreter {
 
 			// try-catch is a little bit bumpy
 			try {
-				this.history.addToHistory(exp.toString());
 				retVal = this.executer.execute(exp);
 			}
 			catch (Exception e) {
