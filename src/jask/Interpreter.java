@@ -404,8 +404,7 @@ public class Interpreter {
 				retVal = this.executer.execute(exp);
 			}
 			catch (Exception e) {
-				// disable history for debugging
-				//this.history.printHistoryDESC();
+				
 			}
 
 			exp = null;
