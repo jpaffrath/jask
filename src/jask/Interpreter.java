@@ -243,7 +243,7 @@ public class Interpreter {
 			}
 
 			// checks store expressions
-			if (t.contentEquals("store") && (tokens.size() > i +3 && tokens.get(i+2).contentEquals("in"))) {
+			else if (t.contentEquals("store") && (tokens.size() > i +3 && tokens.get(i+2).contentEquals("in"))) {
 				// check if the variable name is a keyword
 				if (isKeyword(tokens.get(i+1))) {
 					Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
