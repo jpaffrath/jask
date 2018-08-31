@@ -389,12 +389,14 @@ public class Interpreter {
 				moduleInterpreter.interpret(new Tokenizer().parse(new File(module)));
 				moduleInterpreter.executer.setName(moduleName);
 				this.executer.addModule(moduleInterpreter.executer);
+				continue;
 			}
 
 			// check module remove statement
 			else if (t.startsWith("remove")) {
 				String moduleName = tokens.get(++i);
 				this.executer.removeModule(moduleName);
+				continue;
 			}
 			
 			// check call statement
