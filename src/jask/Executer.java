@@ -543,7 +543,7 @@ public class Executer {
 				runner.setDoubleValue(i);
 				interpreter.getExecuter().heap.put(runnerName, runner);
 				
-				ret = interpreter.interpret(tokens.subList(8, tokens.size() - 1));
+				ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
 				if (ret != "") break;
 				executeAssign(assignTokens);
 				i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();

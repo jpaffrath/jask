@@ -198,6 +198,10 @@ public class Interpreter {
 			if (t.isEmpty()) {
 				continue;
 			}
+			
+			if (ifRunning && t.contentEquals("endif")) {
+				continue;
+			}
 
 			// checks return statement
 			if (t.contentEquals("return")) {
@@ -239,7 +243,7 @@ public class Interpreter {
 			}
 
 			// checks store expressions
-			if (t.contentEquals("store") && tokens.get(i+2).contentEquals("in")) {
+			if (t.contentEquals("store") && (tokens.size() > i +3 && tokens.get(i+2).contentEquals("in"))) {
 				// check if the variable name is a keyword
 				if (isKeyword(tokens.get(i+1))) {
 					Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
@@ -339,6 +343,7 @@ public class Interpreter {
 
 			else if (t.contentEquals("else") && ifRunning) {
 				while (!(t = tokens.get(++i)).equals("endif")) { }
+				continue;
 			}
 
 			// check run statement
@@ -405,12 +410,11 @@ public class Interpreter {
 				i += 2;
 			}
 
-			// try-catch is a little bit bumpy
-			try {
+			if (exp != null) {
 				retVal = this.executer.execute(exp);
 			}
-			catch (Exception e) {
-				
+			else {
+				Error.terminateInterpret("Token " + t + " cannot be interpreted!");
 			}
 
 			exp = null;
