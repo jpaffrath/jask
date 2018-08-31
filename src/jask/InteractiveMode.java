@@ -208,6 +208,7 @@ public class InteractiveMode {
 			// if the current line is a variable, print its content
 			if (interpreter.getExecuter().hasVariable(line)) {
 				System.out.println("jask ~> " + interpreter.getExecuter().getVariableFromHeap(line).toString());
+				continue;
 			}
 
 			tempList.add(line);
