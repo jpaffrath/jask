@@ -179,6 +179,22 @@ public class Interpreter {
 	public Executer getExecuter() {
 		return this.executer;
 	}
+	
+	/**
+	 * Returns the token at the calculated index or terminates the process if an error occurred
+	 * 
+	 * @param tokens a list of strings containing tokens
+	 * @param curPos the current position in the list
+	 * @param nextPos the desired next position
+	 * @return token at the calculated index
+	 */
+	private String getTokenOrDie(List<String> tokens, int curPos, int nextPos) {
+		if (tokens.size() < curPos + nextPos) {
+			Error.terminateInterpret("");
+		}
+		
+		return tokens.get(curPos + nextPos);
+	}
 
 	/**
 	 * Interprets a given list of tokens
