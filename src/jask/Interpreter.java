@@ -209,7 +209,7 @@ public class Interpreter {
 		boolean ifRunning = false;
 
 		for (int i = 0; i < tokens.size(); i++) {
-			t = tokens.get(i);
+			t = this.getTokenOrDie(tokens, i, 0);
 			
 			if (t.isEmpty()) {
 				continue;
@@ -221,7 +221,7 @@ public class Interpreter {
 
 			// checks return statement
 			if (t.contentEquals("return")) {
-				String str = tokens.get(i+1);
+				String str = this.getTokenOrDie(tokens, i, 1);
 				Variable ret = null;
 
 				// check if the return statement is a function
@@ -230,14 +230,14 @@ public class Interpreter {
 				}
 				else {
 					// check if the return statement is a calculation
-					if (tokens.size() > i+2 && isCalculation(tokens.get(i+2))) {
-						final String operandName1 = tokens.get(i+1);
-						final String operandName2 = tokens.get(i+3);
+					if (tokens.size() > i+2 && isCalculation(this.getTokenOrDie(tokens, i, 2))) {
+						final String operandName1 = this.getTokenOrDie(tokens, i, 1);
+						final String operandName2 = this.getTokenOrDie(tokens, i, 3);
 
 						Variable operand1 = this.executer.hasVariable(operandName1) ? this.executer.getVariableFromHeap(operandName1) : new Variable(operandName1);
 						Variable operand2 = this.executer.hasVariable(operandName2) ? this.executer.getVariableFromHeap(operandName2) : new Variable(operandName2);
 
-						ret = this.executer.executeCalculation(operand1, operand2, CalculationType.getType(tokens.get(i+2)));
+						ret = this.executer.executeCalculation(operand1, operand2, CalculationType.getType(this.getTokenOrDie(tokens, i, 2)));
 					}
 					else {
 						ret = this.executer.getVariableFromHeap(str);
@@ -261,12 +261,12 @@ public class Interpreter {
 			// checks store expressions
 			else if (t.contentEquals("store") && (tokens.size() > i +3 && tokens.get(i+2).contentEquals("in"))) {
 				// check if the variable name is a keyword
-				if (isKeyword(tokens.get(i+1))) {
-					Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
+				if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
+					Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
 				}
 				
-				if (this.isValidVariableName(tokens.get(i + 3)) == false) {
-					Error.terminateInterpret(tokens.get(i + 3) + " is not a valid variable name!");
+				if (this.isValidVariableName(this.getTokenOrDie(tokens, i, 3)) == false) {
+					Error.terminateInterpret(this.getTokenOrDie(tokens, i, 3) + " is not a valid variable name!");
 				}
 
 				exp = new Expression(ExpressionType.Store, tokens.subList(i, i+4));
@@ -274,29 +274,29 @@ public class Interpreter {
 			}
 			// checks assign expressions
 			else if (t.contentEquals("assign")) {
-				if (isOperator(tokens.get(i+2)) && tokens.get(i+4).contentEquals("to")) {
-					if (isKeyword(tokens.get(i+1))) {
-						Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
+				if (isOperator(this.getTokenOrDie(tokens, i, 2)) && this.getTokenOrDie(tokens, i, 4).contentEquals("to")) {
+					if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
+						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
 					}
 
-					if (isKeyword(tokens.get(i+3))) {
-						Error.terminateInterpret(tokens.get(i+3) + " is a keyword!");
+					if (isKeyword(this.getTokenOrDie(tokens, i, 3))) {
+						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 3) + " is a keyword!");
 					}
 
-					if (isKeyword(tokens.get(i+5)) || isValue(tokens.get(i+5))) {
-						Error.terminateInterpret(tokens.get(i+5) + " is a keyword!");
+					if (isKeyword(this.getTokenOrDie(tokens, i, 5)) || isValue(this.getTokenOrDie(tokens, i, 5))) {
+						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 5) + " is a keyword!");
 					}
 
 					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+6));
 					i += 5;
 				}
 				else {
-					if (isKeyword(tokens.get(i+1))) {
-						Error.terminateInterpret(tokens.get(i+1) + " is a keyword!");
+					if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
+						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
 					}
 
-					if (isKeyword(tokens.get(i+3)) || isValue(tokens.get(i+3))) {
-						Error.terminateInterpret(tokens.get(i+3) + " is a keyword!");
+					if (isKeyword(this.getTokenOrDie(tokens, i, 3)) || isValue(this.getTokenOrDie(tokens, i, 3))) {
+						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 3) + " is a keyword!");
 					}
 
 					exp = new Expression(ExpressionType.Assign, tokens.subList(i, i+4));
@@ -330,7 +330,7 @@ public class Interpreter {
 			// checks if statement
 			else if (t.contentEquals("if")) {
 				int ifType = 3;
-				if (tokens.get(i+2).contentEquals("mod")) {
+				if (this.getTokenOrDie(tokens, i, 2).contentEquals("mod")) {
 					ifType += 2;
 				}
 				if (this.executer.executeStatement(new Expression(ExpressionType.Statement, tokens.subList(i, i+ifType+1)))) {
