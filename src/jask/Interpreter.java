@@ -308,7 +308,7 @@ public class Interpreter {
 				exp = new Expression(ExpressionType.Function, tokens.subList(i, i+1));
 			}
 			// checks function define
-			else if (t.contentEquals("function")) {
+			else if (t.contentEquals("function") && isFunction(this.getTokenOrDie(tokens, i, 1))) {
 				String name = tokens.get(++i);
 				int start = i+1;
 				int funcCount = 1;
