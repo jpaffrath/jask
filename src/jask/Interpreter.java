@@ -309,13 +309,13 @@ public class Interpreter {
 			}
 			// checks function define
 			else if (t.contentEquals("function") && isFunction(this.getTokenOrDie(tokens, i, 1))) {
-				String name = tokens.get(++i);
+				String name = this.getTokenOrDie(tokens, ++i, 0);
 				int start = i+1;
 				int funcCount = 1;
 				int endCount = 0;
 
 				while (true) {
-					t = tokens.get(i++);
+					t = this.getTokenOrDie(tokens, i++, 0);
 
 					if (t.contentEquals("function")) funcCount++;
 					else if (t.contentEquals("end")) endCount++;
@@ -345,7 +345,7 @@ public class Interpreter {
 					int elCount = 0;
 
 					while (true) {
-						t = tokens.get(++i);
+						t = this.getTokenOrDie(tokens, ++i, 0);
 
 						if (t.contentEquals("if")) ifCount++;
 						else if (t.contentEquals("else")) elCount++;
@@ -358,7 +358,7 @@ public class Interpreter {
 			}
 
 			else if (t.contentEquals("else") && ifRunning) {
-				while (!(t = tokens.get(++i)).equals("endif")) { }
+				while (!(t = this.getTokenOrDie(tokens, ++i, 0)).equals("endif")) { }
 				continue;
 			}
 
@@ -369,7 +369,7 @@ public class Interpreter {
 				int runner = i;
 
 				while (true) {
-					t = tokens.get(++runner);
+					t = this.getTokenOrDie(tokens, ++runner, 0);
 
 					if (t.contentEquals("run") || t.contentEquals("while")) runCount++;
 					else if (t.contentEquals("endrun")) endCount++;
@@ -399,7 +399,7 @@ public class Interpreter {
 
 			// check use statement
 			else if (t.startsWith("use")) {
-				String moduleName = tokens.get(++i);
+				String moduleName = this.getTokenOrDie(tokens, ++i, 0);
 				String module = moduleName + ".jask";
 
 				if (!Helpers.checkFilename(module)) {
@@ -415,7 +415,7 @@ public class Interpreter {
 
 			// check module remove statement
 			else if (t.startsWith("remove")) {
-				String moduleName = tokens.get(++i);
+				String moduleName = this.getTokenOrDie(tokens, ++i, 0);
 				this.executer.removeModule(moduleName);
 				continue;
 			}
