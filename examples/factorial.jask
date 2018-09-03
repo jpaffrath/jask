@@ -1,0 +1,5 @@
+use jcore/jnumber
+
+run i from 1 to 10 with i plus 1
+	printLine(i:"! = ":factorial(i))
+endrun
