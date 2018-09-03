@@ -189,8 +189,8 @@ public class Interpreter {
 	 * @return token at the calculated index
 	 */
 	private String getTokenOrDie(List<String> tokens, int curPos, int nextPos) {
-		if (tokens.size() < curPos + nextPos) {
-			Error.terminateInterpret("");
+		if (tokens.size() <= curPos + nextPos) {
+			Error.terminateInterpret("Can't read tokens after '" + tokens.get(curPos) + "'!");
 		}
 		
 		return tokens.get(curPos + nextPos);
