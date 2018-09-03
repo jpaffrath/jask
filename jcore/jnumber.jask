@@ -116,3 +116,15 @@ function hasPlaces(n)
 	endrun
 	return FALSE
 end
+
+function factorial(n)
+	if n smallerequals 1
+		return 1
+	else endif
+
+	store n in temp
+	decrement temp
+	assign n times factorial(temp) to n
+	
+	return n
+end
