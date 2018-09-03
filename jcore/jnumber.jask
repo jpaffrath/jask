@@ -89,20 +89,6 @@ function sqrt(x)
 	return root(x:2)
 end
 
-function factorial(x)
-	if x smaller 0 return NULL else endif
-
-	store 1 in fac
-	store 1 in i
-
-	while i smallerequals x
-		assign fac times i to fac
-		increment i
-	endrun
-
-	return fac
-end
-
 function hasPlaces(n)
 	convert n to string
 	assign listFromString(n) to n
