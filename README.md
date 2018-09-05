@@ -38,7 +38,8 @@ To test your freshly compiled jask-version, just run the _test.jask_ file.
 # Examples
 
 ### Creating new variables
-Jask can store three types of data: numbers, strings, and boolean values.
+Jask can store three types of primitive data: numbers, strings and boolean values.
+To mark a variable as empty, you can use the value NULL.
 ```Assembly
 store 100 in z
 store 5.2 in d
@@ -49,6 +50,7 @@ store TRUE in bool
 
 store NULL in foo
 ```
+There are two abstract data types, lists and dictionaries, which will be covered later.
 
 ### Assigning values
 In order to assign values to variables, they need to be stored first.
@@ -184,6 +186,14 @@ assign listRemove(numbers:2) to numbers
 store list(1:"String":TRUE) in myList
 ```
 Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
+
+### Work with dictionary variables
+A dictionary in jask stores values with associated keys.
+```Assembly
+store dictionary("myKey":"myValue") in dict
+print(dict)
+```
+Want more examples? Visit [Dictionary variables Wiki](https://github.com/jpaffrath/jask/wiki/Dictionary-variables-in-jask)!
 
 ### Callbacks
 You can find more information in the [Callback wiki](https://github.com/jpaffrath/jask/wiki/Callbacks-in-jask)
