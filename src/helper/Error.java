@@ -83,6 +83,11 @@ public class Error {
 		System.out.println(prefix + "writing the file '" + file + "' failed unexpectetly!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorNoProperParametersForDictionary() {
+		System.out.println(prefix + "given parameters not suitable for initializing a dictionary!");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
