@@ -10,7 +10,7 @@ import java.util.List;
  *
  */
 public class VariableDictionary extends Variable {
-	private HashMap<Variable, Variable> dictionary;
+	private HashMap<String, Variable> dictionary;
 	
 	/**
 	 * Default constructor
@@ -31,7 +31,7 @@ public class VariableDictionary extends Variable {
 		this.dictionary = new HashMap<>();
 		
 		for (int i = 0; i < keys.size(); i++) {
-			this.dictionary.put(new Variable(keys.get(i)), new Variable(values.get(i)));
+			this.dictionary.put(keys.get(i).toString(), new Variable(values.get(i)));
 		}
 	}
 
@@ -47,8 +47,8 @@ public class VariableDictionary extends Variable {
 		
 		this.dictionary = new HashMap<>();
 		
-		for (Variable key : dictionary.dictionary.keySet()) {
-			this.dictionary.put(new Variable(key), new Variable(dictionary.dictionary.get(key)));
+		for (String key : dictionary.dictionary.keySet()) {
+			this.dictionary.put(key, new Variable(dictionary.dictionary.get(key)));
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class VariableDictionary extends Variable {
 	 * @param value the new value
 	 */
 	public void add(Variable key, Variable value) {
-		this.dictionary.put(key, value);
+		this.dictionary.put(key.toString(), value);
 	}
 	
 	/**
@@ -69,11 +69,7 @@ public class VariableDictionary extends Variable {
 	 * @return value from the associated key
 	 */
 	public Variable get(Variable key) {
-		if (this.dictionary.containsKey(key)) {
-			return this.dictionary.get(key);
-		}
-		
-		return null;
+		return this.dictionary.get(key.toString());
 	}
 	
 	/**
@@ -83,13 +79,7 @@ public class VariableDictionary extends Variable {
 	 * @return true if the dictionary contains the given key
 	 */
 	public boolean hasKey(Variable key) {
-		for (Variable k : this.dictionary.keySet()) {
-			if (k.equals(key)) {
-				return true;
-			}
-		}
-		
-		return false;
+		return this.dictionary.containsKey(key.toString());
 	}
 	
 	/**
@@ -99,7 +89,7 @@ public class VariableDictionary extends Variable {
 	public String toString() {
 		StringBuilder builder = new StringBuilder("[");
 		
-		for (Variable key : this.dictionary.keySet()) {
+		for (String key : this.dictionary.keySet()) {
 			builder.append("(" + key + ", " + this.dictionary.get(key) + ")");
 		}
 		
