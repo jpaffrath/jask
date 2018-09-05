@@ -139,17 +139,7 @@ public class Executer {
 
 		// check if the call is an internal function
 		if (this.internalFunctions.isInternalFunction(functionName)) {
-			return new Variable(this.internalFunctions.executeFunction(functionHeap, functionName, parameterList));
-		}
-
-		if (this.internalFunctions.isInternalListFunction(functionName)) {
-			Variable value = this.internalFunctions.executeFunction(functionHeap, functionName, parameterList);
-			
-			if (value instanceof VariableList) {
-				return (VariableList)value;
-			}
-			
-			return value;
+			return this.internalFunctions.executeFunction(functionHeap, functionName, parameterList);
 		}
 
 		String varVal = "";

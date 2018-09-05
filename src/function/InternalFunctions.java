@@ -221,26 +221,7 @@ public class InternalFunctions {
 	 * @return true if the given function name is an internal function
 	 */
 	public boolean isInternalFunction(String functionName) {
-		if (isInternalListFunction(functionName)) return false;
 		return this.functions.containsKey(functionName);
-	}
-
-	/**
-	 * Checks if a given function name is an internal list function
-	 *
-	 * @param functionName name of the function
-	 * @return true if the given function name is an internal list function
-	 */
-	public boolean isInternalListFunction(String functionName) {
-		return (functionName.contentEquals("list") ||
-				functionName.contentEquals("listFromString") ||
-				functionName.contentEquals("listAdd") ||
-				functionName.contentEquals("listRemove") ||
-				functionName.contentEquals("listSet") ||
-				functionName.contentEquals("listReverse") ||
-				functionName.contentEquals("listExtend")) ||
-				functionName.contentEquals("listGetRange") ||
-				functionName.contentEquals("listRemoveRange");
 	}
 
 	/**
