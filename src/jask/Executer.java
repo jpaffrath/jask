@@ -143,7 +143,13 @@ public class Executer {
 		}
 
 		if (this.internalFunctions.isInternalListFunction(functionName)) {
-			return new VariableList(this.internalFunctions.executeFunction(functionHeap, functionName, parameterList));
+			Variable value = this.internalFunctions.executeFunction(functionHeap, functionName, parameterList);
+			
+			if (value instanceof VariableList) {
+				return (VariableList)value;
+			}
+			
+			return value;
 		}
 
 		String varVal = "";

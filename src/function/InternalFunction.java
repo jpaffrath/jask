@@ -11,5 +11,5 @@ import variable.Variable;
  *
  */
 public interface InternalFunction {
-	String execute(HashMap<String, Variable> heap, String functionName, String param, String[] params);
+	Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params);
 }
