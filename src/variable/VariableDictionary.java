@@ -77,6 +77,22 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Checks if the dictionary contains a given key
+	 * 
+	 * @param key key to be checked
+	 * @return true if the dictionary contains the given key
+	 */
+	public boolean hasKey(Variable key) {
+		for (Variable k : this.dictionary.keySet()) {
+			if (k.equals(key)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Returns a string representation based on the variables content
 	 */
 	@Override
