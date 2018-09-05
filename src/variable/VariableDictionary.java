@@ -53,6 +53,30 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Adds a new entry to the dictionary
+	 * 
+	 * @param key the new key
+	 * @param value the new value
+	 */
+	public void add(Variable key, Variable value) {
+		this.dictionary.put(key, value);
+	}
+	
+	/**
+	 * Gets the value associated to the provided key
+	 * 
+	 * @param key key in the dictionary
+	 * @return value from the associated key
+	 */
+	public Variable get(Variable key) {
+		if (this.dictionary.containsKey(key)) {
+			return this.dictionary.get(key);
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Returns a string representation based on the variables content
 	 */
 	@Override
