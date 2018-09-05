@@ -10,148 +10,429 @@ printLine("Running jask tests...")
 
 ; number storing tests
 
+printLine("Running number tests...")
+
 store 42 in num1
-if num1 equals 42 increment testPassed else increment testFailed endif
+if num1 equals 42
+	increment testPassed
+else
+	increment testFailed
+	printLine ("FAILED: store 42 in num1")
+endif
 
 assign 26.119955 to num1
-if num1 equals 26.119955 increment testPassed else increment testFailed endif
+if num1 equals 26.119955
+	increment testPassed
+else
+	increment testFailed
+	printLine ("FAILED: assign 26.119955 to num1")
+endif
 
 assign -10054 to num1
-if num1 equals -10054 increment testPassed else increment testFailed endif
+if num1 equals -10054
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: assign -10054 to num1")
+endif
 
 assign 0 to num1
 increment num1
-if num1 equals 1 increment testPassed else increment testFailed endif
+if num1 equals 1
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: num1 equals 1")
+endif
 
 decrement num1
-if num1 equals 0 increment testPassed else increment testFailed endif
+if num1 equals 0
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: num1 equals 0")
+endif
 
 ; string storing tests
 
+printLine("Running string storing tests...")
+
 store "42" in str1
-if str1 equals "42" increment testPassed else increment testFailed endif
+if str1 equals "42"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: str1 equals 42") endif
 
 assign "TestString" times 2 to str1
-if str1 equals "TestStringTestString" increment testPassed else increment testFailed endif
-
-assign str1 times 2 to str1
-if str1 equals "TestStringTestStringTestStringTestString" increment testPassed else increment testFailed endif
+if str1 equals "TestStringTestString"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: str1 equals TestStringTestString")
+endif
 
 ; file operation test
 
+printLine("Running file tests...")
+
 if writeFile("test/file.txt":"This will be the content!") equals TRUE
-	increment testPassed else increment testFailed
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: writeFile()")
 endif
 
 if readFile("test/file.txt") equals "This will be the content!"
-	increment testPassed else increment testFailed
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: readFile()")
 endif
 
 if appendToFile("test/file.txt":"This will be added to the file!") equals TRUE
-	increment testPassed else increment testFailed
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: appendToFile()")
 endif
 
 if readFile("test/file.txt") equals "This will be the content!This will be added to the file!"
-	increment testPassed else increment testFailed
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: readFile()")
 endif
 
 ; calculation tests
+
+printLine("Running calculation tests...")
 
 store 100 in opr1
 store NULL in res
 
 assign opr1 plus opr1 to res
-if res equals 200 increment testPassed else increment testFailed endif
+if res equals 200
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: res equals 200")
+endif
 
 assign opr1 minus opr1 to res
-if res equals 0 increment testPassed else increment testFailed endif
+if res equals 0
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: res equals 0")
+endif
 
 assign opr1 times 3 to res
-if res equals 300 increment testPassed else increment testFailed endif
+if res equals 300
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: res equals 300")
+endif
 
 assign opr1 divide 20 to res
-if res equals 5 increment testPassed else increment testFailed endif
+if res equals 5
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: res equals 5")
+endif
 
 assign "42" to opr1
 assign opr1 plus opr1 to res
-if res equals "4242" increment testPassed else increment testFailed endif
+if res equals "4242"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: res equals 4242")
+endif
 
 ; list tests
 
-if listSize(list()) equals 0 increment testPassed else increment testFailed endif
+printLine("Running list tests...")
+
+if listSize(list()) equals 0
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listSize(list()) equals 0")
+endif
 
 store list(1:2:3) in myList
 
-if listSize(myList)		equals 3	increment testPassed else increment testFailed endif
-if listGet(myList:0)	equals 1	increment testPassed else increment testFailed endif
+if listSize(myList)	equals 3
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listSize(myList) equals 3")
+endif
+
+if listGet(myList:0) equals 1
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGet(myList:0) equals 1")
+endif
 
 assign listAdd(myList:5) to myList
-if listGet(myList:3) equals 5 increment testPassed else increment testFailed endif
+if listGet(myList:3) equals 5
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGet(myList:3) equals 5")
+endif
 
 assign listSet(myList:3:4) to myList
-if listGet(myList:3) equals 4 increment testPassed else increment testFailed endif
+if listGet(myList:3) equals 4
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGet(myList:3) equals 4")
+endif
 
 assign listRemove(myList:3) to myList
-if listSize(myList) equals 3 increment testPassed else increment testFailed endif
+if listSize(myList) equals 3
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listSize(myList) equals 3")
+endif
 
 assign listFromString("my list") to myList
-if listToString(myList) equals "my list" increment testPassed else increment testFailed endif
+if listToString(myList) equals "my list"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listToString(myList) equals my list")
+endif
 
 assign list(1:2:3) to myList
 
-if listContains(myList:1) equals TRUE increment testPassed else increment testFailed endif
-if listContains(myList:4) equals FALSE increment testPassed else increment testFailed endif
+if listContains(myList:1) equals TRUE
+	increment testPassed
+else increment
+	testFailed
+	printLine("FAILED: listContains(myList:1) equals TRUE")
+endif
 
-if listReverse(myList) equals   list(3:2:1) increment testPassed else increment testFailed endif
-if listReverse(myList) unequals list(2:3:1) increment testPassed else increment testFailed endif
+if listContains(myList:4) equals FALSE
+	increment testPassed
+else increment
+	testFailed
+	printLine("FAILED: listContains(myList:4) equals FALSE")
+endif
+
+if listReverse(myList) equals list(3:2:1)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listReverse(myList) equals list(3:2:1)")
+endif
+
+if listReverse(myList) unequals list(2:3:1)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listReverse(myList) unequals list(2:3:1)")
+endif
 
 assign listAdd(myList:"a string") to myList
 
-if listContains(myList:"a string") equals TRUE increment testPassed else increment testFailed endif
-if listContains(myList:"A String") equals FALSE increment testPassed else increment testFailed endif
+if listContains(myList:"a string") equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listContains(myList:a string) equals TRUE")
+endif
 
-if list(1:2) greater list(1)   increment testPassed else increment testFailed endif
-if list(1)   smaller list(1:2) increment testPassed else increment testFailed endif
+if listContains(myList:"A String") equals FALSE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listContains(myList:A String) equals FALSE")
+endif
 
-if list(1:2) greaterequals list(1:2) increment testPassed else increment testFailed endif
-if list(1:2) smallerequals list(1:2) increment testPassed else increment testFailed endif
+if list(1:2) greater list(1)
+	increment testPassed
+else
+	increment testFailed
+endif
 
-if listExtend(list(1:2:3):list(4:5:6)) equals list(1:2:3:4:5:6) increment testPassed else increment testFailed endif
-if listExtend(myList:list(1:2)) equals list(1:2:3:"a string":1:2) increment testPassed else increment testFailed endif
+if list(1) smaller list(1:2)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: list(1) smaller list(1:2)")
+endif
 
-if listGetRange(list(1:2:3):0:2) equals list(1:2:3) increment testPassed else increment testFailed endif
-if listGetRange(list(1:2:3):0:0) equals list(1) increment testPassed else increment testFailed endif
-if listGetRange(list(1:2:3):-1:5) equals NULL increment testPassed else increment testFailed endif
+if list(1:2) greaterequals list(1:2)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: list(1:2) greaterequals list(1:2)")
+endif
+
+if list(1:2) smallerequals list(1:2)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: list(1:2) smallerequals list(1:2)")
+endif
+
+if listExtend(list(1:2:3):list(4:5:6)) equals list(1:2:3:4:5:6)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listExtend(list(1:2:3):list(4:5:6)) equals list(1:2:3:4:5:6)")
+endif
+
+if listExtend(myList:list(1:2)) equals list(1:2:3:"a string":1:2)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listExtend(myList:list(1:2)) equals list(1:2:3:"a string":1:2)")
+endif
+
+if listGetRange(list(1:2:3):0:2) equals list(1:2:3)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGetRange(list(1:2:3):0:2) equals list(1:2:3)")
+endif
+
+if listGetRange(list(1:2:3):0:0) equals list(1)
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGetRange(list(1:2:3):0:0) equals list(1)")
+endif
+
+if listGetRange(list(1:2:3):-1:5) equals NULL
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGetRange(list(1:2:3):-1:5) equals NULL")
+endif
 
 ; jcore jstring tests
 
-if substring("my substring string":3:11) equals "substring" increment testPassed else increment testFailed endif
+printLine("Running jcore jstring tests...")
 
-if upper("abcdefghijklmnopqrstuvwxyz") equals "ABCDEFGHIJKLMNOPQRSTUVWXYZ" increment testPassed else increment testFailed endif
-if lower("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz" increment testPassed else increment testFailed endif
+if substring("my substring string":3:11) equals "substring"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: substring(my substring string:3:11) equals substring")
+endif
 
-if listGet(split("a b c":" "):0)		equals "a" 		increment testPassed else increment testFailed endif
-if listGet(split("Hello,World!":","):0) equals "Hello"	increment testPassed else increment testFailed endif
+if upper("abcdefghijklmnopqrstuvwxyz") equals "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED upper(abcdefghijklmnopqrstuvwxyz) equals ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+endif
 
-if reverse("12345")	equals "54321"	increment testPassed else increment testFailed endif
-if reverse(129)		equals NULL		increment testPassed else increment testFailed endif
+if lower("ABCDEFGHIJKLMNOPQRSTUVWXYZ") equals "abcdefghijklmnopqrstuvwxyz"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: lower(ABCDEFGHIJKLMNOPQRSTUVWXYZ) equals abcdefghijklmnopqrstuvwxyz")
+endif
 
-if strSize("12345") equals 5 	increment testPassed else increment testFailed endif
-if strSize(100) 	equals NULL increment testPassed else increment testFailed endif
+if listGet(split("a b c":" "):0) equals "a"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGet(split(a b c: ):0) equals a")
+endif
 
-if strRepeat("jask":2) equals "jaskjask" increment testPassed else increment testFailed endif
-if strRepeat("jask":0) equals NULL		 increment testPassed else increment testFailed endif
+if listGet(split("Hello,World!":","):0) equals "Hello"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: listGet(split(Hello,World!:,):0) equals Hello")
+endif
 
-if trim("jask")		  equals "jask" increment testPassed else increment testFailed endif
-if trim(" jask")	  equals "jask" increment testPassed else increment testFailed endif
-if trim("jask ")	  equals "jask" increment testPassed else increment testFailed endif
-if trim(" jask ")	  equals "jask" increment testPassed else increment testFailed endif
-if trim("   jask   ") equals "jask" increment testPassed else increment testFailed endif
+if reverse("12345")	equals "54321"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: reverse(12345) equals 54321")
+endif
 
-if strContains("Hello, World!":"Hello,") 			equals TRUE  increment testPassed else increment testFailed endif
-if strContains("Hello, World!":"ld!") 				equals TRUE  increment testPassed else increment testFailed endif
-if strContains("":"")								equals TRUE  increment testPassed else increment testFailed endif
-if strContains("This is a string":"jask is great!") equals FALSE increment testPassed else increment testFailed endif
+if reverse(129)	equals NULL
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: reverse(129)	equals NULL")
+endif
+
+if strSize("12345") equals 5
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strSize(12345) equals 5")
+endif
+
+if strSize(100) equals NULL
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strSize(100) equals NULL")
+endif
+
+if strRepeat("jask":2) equals "jaskjask"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strRepeat(jask:2) equals jaskjask")
+endif
+
+if strRepeat("jask":0) equals NULL
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strRepeat(jask:0) equals NULL")
+endif
+
+if trim("jask")		  equals "jask" increment testPassed else increment testFailed printLine("FAILED: trim(jask)") endif
+if trim(" jask")	  equals "jask" increment testPassed else increment testFailed printLine("FAILED: trim(jask)") endif
+if trim("jask ")	  equals "jask" increment testPassed else increment testFailed printLine("FAILED: trim(jask)") endif
+if trim(" jask ")	  equals "jask" increment testPassed else increment testFailed printLine("FAILED: trim(jask)") endif
+if trim("   jask   ") equals "jask" increment testPassed else increment testFailed printLine("FAILED: trim(jask)") endif
+
+if strContains("Hello, World!":"Hello,") equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strContains(Hello, World!:Hello,) equals TRUE")
+endif
+
+if strContains("Hello, World!":"ld!") equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strContains(Hello, World!:ld!) equals TRUE")
+endif
+
+if strContains("":"") equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strContains(:) equals TRUE")
+endif
+
+if strContains("This is a string":"jask is great!") equals FALSE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: strContains(This is a string:jask is great!) equals FALSE")
+endif
 
 if strStartsWith("Hello, World!":"Hello,") 			  equals TRUE  increment testPassed else 	increment testFailed endif
 if strStartsWith("Hello, World!":"ld!") 			  equals FALSE increment testPassed else 	increment testFailed endif
@@ -160,38 +441,179 @@ if strStartsWith("This is a string":"jask is great!") equals FALSE increment tes
 
 ; jcore jnumber tests
 
-if max(2445.21:-7) equals 2445.21  increment testPassed else increment testFailed endif
-if min(-2445.21:7) equals -2445.21 increment testPassed else increment testFailed endif
+printLine("Running jcore jnumber tests...")
 
-if PI() equals 3.141592653589793 increment testPassed else increment testFailed endif
-if E()  equals 2.718281828459045 increment testPassed else increment testFailed endif
+if max(2445.21:-7) equals 2445.21
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: max(2445.21:-7) equals 2445.21")
+endif
 
-if abs(3)  equals 3 increment testPassed else increment testFailed endif
-if abs(-3) equals 3 increment testPassed else increment testFailed endif
+if min(-2445.21:7) equals -2445.21
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: min(-2445.21:7) equals -2445.21")
+endif
 
-if pow(2:2)   equals 4					increment testPassed else increment testFailed endif
-if pow(-2:2)  equals 4					increment testPassed else increment testFailed endif
-if pow(5:2)   equals 25					increment testPassed else increment testFailed endif
-if pow(-3:7)  equals -2187				increment testPassed else increment testFailed endif
-if pow(2:-2)  equals 0.25				increment testPassed else increment testFailed endif
-if pow(2:1.5) equals 2.8284271247461903 increment testPassed else increment testFailed endif
-if pow(1.5:2) equals 2.25 				increment testPassed else increment testFailed endif
+if PI() equals 3.141592653589793
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: PI() equals 3.141592653589793")
+endif
 
-if factorial(4)  equals 24 		increment testPassed else increment testFailed endif
-if factorial(6)  equals 720 	increment testPassed else increment testFailed endif
-if factorial(10) equals 3628800 increment testPassed else increment testFailed endif
-if factorial(-1) equals NULL 	increment testPassed else increment testFailed endif
-if factorial(0)  equals 1 		increment testPassed else increment testFailed endif
+if E() equals 2.718281828459045
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: E() equals 2.718281828459045")
+endif
 
-if hasPlaces(100) equals FALSE increment testPassed else increment testFailed endif
-if hasPlaces(5.0) equals FALSE increment testPassed else increment testFailed endif
-if hasPlaces(-42) equals FALSE increment testPassed else increment testFailed endif
+if abs(3) equals 3
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: abs(3) equals 3")
+endif
 
-if hasPlaces(PI())   equals TRUE increment testPassed else increment testFailed endif
-if hasPlaces(5.01)   equals TRUE increment testPassed else increment testFailed endif
-if hasPlaces(-14.45) equals TRUE increment testPassed else increment testFailed endif
+if abs(-3) equals 3
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: abs(-3) equals 3")
+endif
+
+if pow(2:2) equals 4
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(2:2) equals 4")
+endif
+
+if pow(-2:2) equals 4
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(-2:2) equals 4")
+endif
+
+if pow(5:2) equals 25
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(5:2) equals 25")
+endif
+
+if pow(-3:7) equals -2187
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(-3:7) equals -2187")
+endif
+
+if pow(2:-2) equals 0.25
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(2:-2) equals 0.25")
+endif
+
+if pow(2:1.5) equals 2.8284271247461903
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(2:1.5) equals 2.8284271247461903")
+endif
+
+if pow(1.5:2) equals 2.25
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: pow(1.5:2) equals 2.25")
+endif
+
+if factorial(4) equals 24
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: factorial(4) equals 24")
+endif
+
+if factorial(6) equals 720
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: factorial(6) equals 720")
+endif
+
+if factorial(10) equals 3628800
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: factorial(10) equals 3628800")
+endif
+
+if factorial(-1) equals 1
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: factorial(-1) equals 1")
+endif
+
+if factorial(0) equals 1
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: factorial(0) equals 1")
+endif
+
+if hasPlaces(100) equals FALSE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: hasPlaces(100) equals TRUE")
+endif
+
+if hasPlaces(5.0) equals FALSE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: hasPlaces(5.0) equals FALSE")
+endif
+
+if hasPlaces(-42) equals FALSE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: hasPlaces(-42) equals FALSE")
+endif
+
+if hasPlaces(PI()) equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: hasPlaces(PI()) equals TRUE")
+endif
+
+if hasPlaces(5.01) equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: hasPlaces(5.01) equals TRUE")
+endif
+
+if hasPlaces(-14.45) equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: hasPlaces(-14.45) equals TRUE")
+endif
 
 ; function tests
+
+printLine("Running function tests...")
 
 store FALSE in testOutside
 
@@ -201,7 +623,12 @@ end
 
 testAccess()
 
-if testOutside equals TRUE increment testPassed else increment testFailed endif
+if testOutside equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testOutside equals TRUE")
+endif
 
 assign 100 to testOutside
 
@@ -211,13 +638,23 @@ end
 
 call testIncrement() 100 times
 
-if testOutside equals 200 increment testPassed else increment testFailed endif
+if testOutside equals 200
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testOutside equals 200")
+endif
 
 store 10 in numberOfCalls
 
 call testIncrement() numberOfCalls times
 
-if testOutside equals 210 increment testPassed else increment testFailed endif
+if testOutside equals 210
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testOutside equals 210")
+endif
 
 function testCalculation(a:b:opr)
 	if isString(a) equals TRUE
@@ -232,14 +669,44 @@ function testCalculation(a:b:opr)
 	if opr equals "divide" return a divide b else endif
 end
 
-if testCalculation(42:8:"plus")   equals 50   increment testPassed else increment testFailed endif
-if testCalculation(42:8:"minus")  equals 34   increment testPassed else increment testFailed endif
-if testCalculation(42:8:"times")  equals 336  increment testPassed else increment testFailed endif
-if testCalculation(42:8:"divide") equals 5.25 increment testPassed else increment testFailed endif
+if testCalculation(42:8:"plus") equals 50
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testCalculation(42:8:plus) equals 50")
+endif
 
-if testCalculation("Hello ":"World!":NULL) equals "Hello World!" increment testPassed else increment testFailed endif
+if testCalculation(42:8:"minus") equals 34
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testCalculation(42:8:minus) equals 34")
+endif
+
+if testCalculation(42:8:"times") equals 336
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testCalculation(42:8:times) equals 336")
+endif
+
+if testCalculation(42:8:"divide") equals 5.25
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testCalculation(42:8:divide) equals 5.25")
+endif
+
+if testCalculation("Hello ":"World!":NULL) equals "Hello World!"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testCalculation(Hello :World!:NULL) equals Hello World!")
+endif
 
 ; module tests
+
+printLine("Running module tests...")
 
 remove jcore/jnumber
 
@@ -248,14 +715,44 @@ function testModule()
 	return PI()
 end
 
-if testModule() equals 3.141592653589793 increment testPassed else increment testFailed endif
+if testModule() equals 3.141592653589793
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: testModule() equals 3.141592653589793 ")
+endif
 
 ; miscellaneous tests
 
-if isString("foo bar") 						equals TRUE increment testPassed else increment testFailed endif
-if isNumber(100.32214) 						equals TRUE increment testPassed else increment testFailed endif
-if isBool(TRUE) 							equals TRUE increment testPassed else increment testFailed endif
-if isList(list("foo bar":-1953.22:FALSE)) 	equals TRUE increment testPassed else increment testFailed endif
+printLine("Running miscellaneous tests...")
+
+if isString("foo bar") equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: isString("foo bar")")
+endif
+
+if isNumber(100.32214) equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: isNumber(100.32214)")
+endif
+
+if isBool(TRUE) equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: isBool(TRUE)")
+endif
+
+if isList(list("foo bar":-1953.22:FALSE)) equals TRUE
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: isList(list("foo bar":-1953.22:FALSE))")
+endif
 
 ; finish tests
 
