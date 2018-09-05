@@ -33,6 +33,11 @@ public class Error {
 		System.out.println(prefix + "variable '" + var + "' is not a list!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorVariableIsNotADictionary(String var) {
+		System.out.println(prefix + "variable '" + var + "' is not a dictionary!");
+		System.exit(-1);
+	}
 
 	public static void printErrorVariableIsNotANumber(String var) {
 		System.out.println(prefix + "variable '" + var + "' is not a number!");
