@@ -93,6 +93,11 @@ public class Error {
 		System.out.println(prefix + "given parameters not suitable for initializing a dictionary!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorNoValueGiven() {
+		System.out.println(prefix + "no value given!");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
