@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +14,7 @@ import java.util.Scanner;
 import helper.Error;
 import helper.Helpers;
 import variable.Variable;
+import variable.VariableDictionary;
 import variable.VariableList;
 import variable.VariableType;
 
@@ -194,6 +196,12 @@ public class InternalFunctions {
 			@Override
 			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return new Variable(String.valueOf(Math.pow(heap.get(params[0]).getDoubleValue(), heap.get(params[1]).getDoubleValue())));
+			}
+		});
+		this.functions.put("dictionary", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return dictionary(heap, params);
 			}
 		});
 	}
@@ -749,6 +757,35 @@ public class InternalFunctions {
 		}
 		
 		return new Variable(FALSE);
+	}
+	
+	/**
+	 * Internal implementation of dictionary
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a new initialized dictionary
+	 */
+	private Variable dictionary(HashMap<String, Variable> heap, String[] params) {
+		if (params.length == 0) {
+			return new VariableDictionary();
+		}
+		
+		// exit when the number of parameters cannot be divided by 2
+		if (params.length % 2 != 0) {
+			Error.printErrorNoProperParametersForDictionary();
+			return new Variable(NULL);
+		}
+		
+		List<Variable> keys = new ArrayList<>();
+		List<Variable> vals = new ArrayList<>();
+		
+		for (int i = 0; i < params.length; i+=2) {
+			keys.add(heap.get(params[i]));
+			vals.add(heap.get(params[i+1]));
+		}
+		
+		return new VariableDictionary(keys, vals);
 	}
 
 	/**
