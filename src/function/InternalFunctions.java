@@ -210,6 +210,12 @@ public class InternalFunctions {
 				return dictionaryGet(heap, params);
 			}
 		});
+		this.functions.put("dictionaryPut", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return dictionaryPut(heap, params);
+			}
+		});
 	}
 
 	/**
@@ -827,6 +833,41 @@ public class InternalFunctions {
 		}
 		
 		return value;
+	}
+	
+	/**
+	 * Internal implementation of dictionaryPut
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a new dictionary
+	 */
+	private Variable dictionaryPut(HashMap<String, Variable> heap, String[] params) {
+		Variable var = heap.get(params[0]);
+		VariableDictionary dictionary = null;
+		
+		if (!(var instanceof VariableDictionary)) {
+			Error.printErrorVariableIsNotADictionary(params[0]);
+			return new Variable(NULL);
+		}
+		else {
+			dictionary = new VariableDictionary((VariableDictionary)var);
+		}
+
+		Variable key = heap.get(params[1]);
+		if (key == null) {
+			Error.printErrorNoValueGiven();
+			return new Variable(NULL);
+		}
+		
+		Variable value = heap.get(params[2]);
+		if (value == null) {
+			Error.printErrorNoValueGiven();
+			return new Variable(NULL);
+		}
+		
+		dictionary.put(key, value);
+		return dictionary;
 	}
 
 	/**

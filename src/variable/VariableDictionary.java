@@ -53,12 +53,12 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
-	 * Adds a new entry to the dictionary
+	 * Puts a new entry to the dictionary
 	 * 
 	 * @param key the new key
 	 * @param value the new value
 	 */
-	public void add(Variable key, Variable value) {
+	public void put(Variable key, Variable value) {
 		this.dictionary.put(key.toString(), value);
 	}
 	
