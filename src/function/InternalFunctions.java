@@ -186,6 +186,12 @@ public class InternalFunctions {
 				return new Variable((heap.get(params[0]) instanceof VariableList ? TRUE : FALSE));
 			}
 		});
+		this.functions.put("isDictionary", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return new Variable((heap.get(params[0]) instanceof VariableDictionary ? TRUE : FALSE));
+			}
+		});
 		this.functions.put("exit", new InternalFunction() {
 			@Override
 			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
