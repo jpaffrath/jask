@@ -83,6 +83,15 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Returns the size of the dictionary
+	 * 
+	 * @return the size of the dictionary
+	 */
+	public int getSize() {
+		return this.dictionary.size();
+	}
+	
+	/**
 	 * Returns a string representation based on the variables content
 	 */
 	@Override

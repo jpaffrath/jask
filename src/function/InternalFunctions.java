@@ -222,6 +222,12 @@ public class InternalFunctions {
 				return dictionaryPut(heap, params);
 			}
 		});
+		this.functions.put("dictionarySize", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return dictionarySize(heap, params);
+			}
+		});
 	}
 
 	/**
@@ -874,6 +880,24 @@ public class InternalFunctions {
 		
 		dictionary.put(key, value);
 		return dictionary;
+	}
+	
+	/**
+	 * Internal implementation of dictionarySize
+	 *
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return size of list
+	 */
+	private Variable dictionarySize(HashMap<String, Variable> heap, String[] params) {
+		Variable var = heap.get(params[0]);
+
+		if (!(var instanceof VariableDictionary)) {
+			Error.printErrorVariableIsNotADictionary(params[0]);
+			return new Variable(NULL);
+		}
+
+		return new Variable(Integer.toString(((VariableDictionary)var).getSize()));
 	}
 
 	/**
