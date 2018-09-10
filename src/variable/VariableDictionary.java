@@ -1,5 +1,6 @@
 package variable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -89,6 +90,23 @@ public class VariableDictionary extends Variable {
 	 */
 	public int getSize() {
 		return this.dictionary.size();
+	}
+	
+	/**
+	 * Returns the keys of the dictionary
+	 * 
+	 * @return a new VariableList containing the keys of the dictionary
+	 */
+	public VariableList getKeys() {
+		List<Variable> keyEntries = new ArrayList<Variable>();
+		
+		for (String key : this.dictionary.keySet()) {
+			Variable var = new Variable();
+			var.setStringValue(key);
+			keyEntries.add(var);
+		}
+		
+		return new VariableList(keyEntries);
 	}
 	
 	/**
