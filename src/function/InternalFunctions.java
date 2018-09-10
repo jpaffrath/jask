@@ -65,11 +65,7 @@ public class InternalFunctions {
 		this.functions.put("list", new InternalFunction() {
 			@Override
 			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
-				if (!param.contains(":")) {
-					return new VariableList(param + ":");
-				}
-
-				return new VariableList(param);
+				return list(heap, params);
 			}
 		});
 		this.functions.put("listGet", new InternalFunction() {
@@ -319,6 +315,21 @@ public class InternalFunctions {
 		}
 
 		return new Variable("TRUE");
+	}
+	
+	/**
+	 * Internal implementation of list
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a new list
+	 */
+	private Variable list(HashMap<String, Variable> heap, String[] params) {
+		List<Variable> values = new ArrayList<Variable>();
+		for (String parameter : params) {
+			values.add(heap.get(parameter));
+		}
+		return new VariableList(values);
 	}
 
 	/**
