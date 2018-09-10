@@ -1,7 +1,5 @@
 package variable;
 
-import static jask.Constants.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +42,15 @@ public class VariableList extends Variable {
 		this.values = new ArrayList<Variable>();
 
 		for (Variable v : var.values) {
-			this.values.add(new Variable(v));
+			if (v instanceof VariableList) {
+				this.values.add(new VariableList((VariableList)v));
+			}
+			else if (v instanceof VariableDictionary) {
+				this.values.add(new VariableDictionary((VariableDictionary)v));
+			}
+			else {
+				this.values.add(new Variable(v));
+			}
 		}
 	}
 	
@@ -61,7 +67,15 @@ public class VariableList extends Variable {
 		this.values = new ArrayList<Variable>();
 		
 		for (Variable v : values) {
-			this.values.add(new Variable(v));
+			if (v instanceof VariableList) {
+				this.values.add(new VariableList((VariableList)v));
+			}
+			else if (v instanceof VariableDictionary) {
+				this.values.add(new VariableDictionary((VariableDictionary)v));
+			}
+			else {
+				this.values.add(new Variable(v));
+			}
 		}
 	}
 
@@ -83,7 +97,16 @@ public class VariableList extends Variable {
 	 * @return true
 	 */
 	public boolean addElement(Variable toAdd) {
-		this.values.add(new Variable(toAdd));
+		if (toAdd instanceof VariableList) {
+			this.values.add(new VariableList((VariableList)toAdd));
+		}
+		else if (toAdd instanceof VariableDictionary) {
+			this.values.add(new VariableDictionary((VariableDictionary)toAdd));
+		}
+		else {
+			this.values.add(new Variable(toAdd));
+		}
+		
 		return true;
 	}
 
@@ -175,11 +198,17 @@ public class VariableList extends Variable {
 		StringBuilder builder = new StringBuilder("[");
 
 		for (int i = 0; i < this.values.size(); i++) {
-			if (i == this.values.size()-1) {
-				builder.append(this.values.get(i).toString());
+			Variable val = this.values.get(i);
+			
+			if (val instanceof VariableList) {
+				builder.append(((VariableList)val).getPrintString());
 			}
 			else {
-				builder.append(this.values.get(i).toString() + ", ");
+				builder.append(val.toString());
+			}
+			
+			if (i != this.values.size()-1) {
+				builder.append(", ");
 			}
 		}
 
@@ -194,16 +223,13 @@ public class VariableList extends Variable {
 	 * @param i index
 	 * @return element at given index as string or ""
 	 */
-	public String getElementAtIndex(int i) {
+	public Variable getElementAtIndex(int i) {
 		if (i > this.values.size()-1) {
 			Error.printErrorNoValueAtIndex(i);
-			return "";
+			return null;
 		}
 
-		Variable retVar = this.values.get(i);
-		if (retVar.getType() == VariableType.String) return "\"" + retVar.toString() + "\"";
-
-		return this.values.get(i).toString();
+		return this.values.get(i);
 	}
 
 	/**
@@ -272,10 +298,10 @@ public class VariableList extends Variable {
 	 * @param extender list with elements
 	 * @return jask string representing the list
 	 */
-	public String extend(VariableList extender) {
+	public VariableList extend(VariableList extender) {
 		VariableList newList = new VariableList(this);
 		newList.values.addAll(new VariableList(extender).values);
-		return newList.toString();
+		return newList;
 	}
 	
 	/**
@@ -285,15 +311,15 @@ public class VariableList extends Variable {
 	 * @param end included end index
 	 * @return jask string representing the list
 	 */
-	public String getRange(int start, int end) {
+	public VariableList getRange(int start, int end) {
 		if (start < 0 || start > this.values.size() - 1 || end < start || end > this.values.size() - 1) {
-			return NULL;
+			return null;
 		}
 		
 		List<Variable> values = this.values.subList(start, end + 1);
 		VariableList ret = new VariableList(values);
 		
-		return ret.toString();
+		return ret;
 	}
 	
 	/**
@@ -303,18 +329,18 @@ public class VariableList extends Variable {
 	 * @param end included end index
 	 * @return jask string representing the list
 	 */
-	public String removeRange(int start, int end) {
+	public VariableList removeRange(int start, int end) {
 		if (start < 0 || start > this.values.size() - 1 || end < start || end > this.values.size() - 1) {
-			return NULL;
+			return null;
 		}
 		
 		List<Variable> sub = new ArrayList<Variable>(this.values.subList(start, end + 1));
 		List<Variable> ret = new ArrayList<Variable>(this.values);
 		
 		if (!ret.removeAll(sub)) {
-			return NULL;
+			return null;
 		}
 		
-		return new VariableList(ret).toString();
+		return new VariableList(ret);
 	}
 }
