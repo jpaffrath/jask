@@ -348,21 +348,16 @@ public class InternalFunctions {
 		}
 
 		Variable index = heap.get(params[1]);
-		if (index == null) {
-			if (!Variable.isNumber(params[1])) {
-				Error.printErrorValueNotApplicable(params[1]);
-				return new Variable(NULL);
-			}
-
-			return new VariableList(((VariableList)var).getElementAtIndex(Integer.parseInt(params[1])));
+		Variable val = ((VariableList)var).getElementAtIndex((int)index.getDoubleValue());
+		
+		if (val instanceof VariableList) {
+			return new VariableList((VariableList)val);
 		}
-
-		if (index.getType() != VariableType.Number) {
-			Error.printErrorVariableIsNotANumber(params[1]);
-			return new Variable(NULL);
+		else if (val instanceof VariableDictionary) {
+			return new VariableDictionary((VariableDictionary)val);
 		}
-
-		return new Variable(((VariableList)var).getElementAtIndex((int)index.getDoubleValue()));
+		
+		return new Variable(val);
 	}
 
 	/**
@@ -391,7 +386,7 @@ public class InternalFunctions {
 	 * @return new list or NULL
 	 */
 	private Variable listAdd(HashMap<String, Variable> heap, String[] params) {
-		VariableList var = new VariableList((VariableList)heap.get(params[0]));
+		Variable var = new VariableList((VariableList)heap.get(params[0]));
 
 		if (!(var instanceof VariableList)) {
 			Error.printErrorVariableIsNotAList(params[0]);
@@ -399,17 +394,10 @@ public class InternalFunctions {
 		}
 
 		Variable toAdd = heap.get(params[1]);
-		if (toAdd == null) {
-			if (!((VariableList)var).addElement(params[1])) {
-				return new Variable(NULL);
-			}
+		if (!((VariableList)var).addElement(toAdd)) {
+			return new Variable(NULL);
 		}
-		else {
-			if (!((VariableList)var).addElement(toAdd)) {
-				return new Variable(NULL);
-			}
-		}
-
+		
 		return var;
 	}
 
@@ -429,22 +417,12 @@ public class InternalFunctions {
 		}
 
 		Variable index = heap.get(params[1]);
-		if (index == null) {
-			if (!Variable.isNumber(params[1])) {
-				return new Variable(NULL);
-			}
-
-			((VariableList)var).removeElement(Integer.parseInt(params[1]));
-		}
-		else {
-			if (index.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params[1]);
-				return new Variable(NULL);
-			}
-
-			((VariableList)var).removeElement((int)index.getDoubleValue());
+		if (index.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[1]);
+			return new Variable(NULL);
 		}
 
+		((VariableList)var).removeElement((int)index.getDoubleValue());
 		return var;
 	}
 
@@ -464,19 +442,9 @@ public class InternalFunctions {
 		}
 
 		Variable index = heap.get(params[1]);
-		if (index == null) {
-			if (!Variable.isNumber(params[1])) {
-				return new Variable(NULL);
-			}
-
-			((VariableList)var).removeElement(Integer.parseInt(params[1]));
-			return var;
-		}
-		else {
-			if (index.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params[1]);
-				return new Variable(NULL);
-			}
+		if (index.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[1]);
+			return new Variable(NULL);
 		}
 
 		((VariableList)var).setElement((int)index.getDoubleValue(), heap.get(params[2]));
@@ -610,36 +578,28 @@ public class InternalFunctions {
 		}
 		
 		Variable varStart = heap.get(params[1]);
+		if (varStart.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[1]);
+			return new Variable(NULL);
+		}
+		
+		int start = (int)varStart.getDoubleValue();
+		
 		Variable varEnd = heap.get(params[2]);
-		
-		int start = 0;
-		int end = 0;
-		
-		if (varStart == null) {
-			start = Integer.parseInt(params[1]);
-		}
-		else {
-			if (varStart.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params[1]);
-				return new Variable(NULL);
-			}
-			
-			start = (int)varStart.getDoubleValue();
+		if (varEnd.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[2]);
+			return new Variable(NULL);
 		}
 		
-		if (varEnd == null) {
-			end = Integer.parseInt(params[2]);
-		}
-		else {
-			if (varEnd.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params[2]);
-				return new Variable(NULL);
-			}
-			
-			end = (int)varEnd.getDoubleValue();
+		int end = (int)varEnd.getDoubleValue();
+		
+		VariableList newList = ((VariableList)list).getRange(start, end);
+		
+		if (newList == null) {
+			return new Variable(NULL);
 		}
 	
-		return new VariableList(((VariableList)list).getRange(start, end));
+		return new VariableList(newList);
 	}
 	
 	/**
@@ -658,36 +618,29 @@ public class InternalFunctions {
 		}
 		
 		Variable varStart = heap.get(params[1]);
-		Variable varEnd = heap.get(params[2]);
+		if (varStart.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[1]);
+			return new Variable(NULL);
+		}
 		
-		int start = 0;
+		int start = (int)varStart.getDoubleValue();
+		
 		int end = 0;
-		
-		if (varStart == null) {
-			start = Integer.parseInt(params[1]);
+		Variable varEnd = heap.get(params[2]);
+		if (varEnd.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[2]);
+			return new Variable(NULL);
 		}
-		else {
-			if (varStart.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params[1]);
-				return new Variable(NULL);
-			}
 			
-			start = (int)varStart.getDoubleValue();
-		}
+		end = (int)varEnd.getDoubleValue();
 		
-		if (varEnd == null) {
-			end = Integer.parseInt(params[2]);
-		}
-		else {
-			if (varEnd.getType() != VariableType.Number) {
-				Error.printErrorVariableIsNotANumber(params[2]);
-				return new Variable(NULL);
-			}
-			
-			end = (int)varEnd.getDoubleValue();
+		VariableList newList = ((VariableList)list).removeRange(start, end);
+		
+		if (newList == null) {
+			return new Variable(NULL);
 		}
 	
-		return new VariableList(((VariableList)list).removeRange(start, end));
+		return new VariableList(newList);
 	}
 	
 	/**
