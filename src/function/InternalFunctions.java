@@ -893,7 +893,7 @@ public class InternalFunctions {
 	 *
 	 * @param heap function heap
 	 * @param params function parameters
-	 * @return size of list
+	 * @return size of dictionary
 	 */
 	private Variable dictionarySize(HashMap<String, Variable> heap, String[] params) {
 		Variable var = heap.get(params[0]);
