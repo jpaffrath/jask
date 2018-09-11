@@ -343,4 +343,13 @@ public class VariableList extends Variable {
 		
 		return new VariableList(ret);
 	}
+	
+	/**
+	 * Returns the values from the VariableList
+	 *
+	 * @return the values as a list
+	 */
+	public List<Variable> getValues() {
+		return this.values;
+	}
 }
