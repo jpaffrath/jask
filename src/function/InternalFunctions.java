@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 import helper.Error;
 import helper.Helpers;
@@ -240,6 +241,12 @@ public class InternalFunctions {
 			@Override
 			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
 				return sleep(heap, params);
+			}
+		});
+		this.functions.put("random", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return random(heap, params);
 			}
 		});
 	}
@@ -935,6 +942,30 @@ public class InternalFunctions {
 		}
 		
 		return new Variable(TRUE);
+	}
+	
+	/**
+	 * Internal implementation of random
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a random number in a given range
+	 */
+	private Variable random(HashMap<String, Variable> heap, String[] params) {
+		Variable start = heap.get(params[0]);
+		Variable end = heap.get(params[1]);
+		
+		if (start.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[0]);
+			return new Variable(NULL);
+		}
+		
+		if (end.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[1]);
+			return new Variable(NULL);
+		}
+		
+		return new Variable(ThreadLocalRandom.current().nextDouble(start.getDoubleValue(), end.getDoubleValue()+1));
 	}
 
 	/**
