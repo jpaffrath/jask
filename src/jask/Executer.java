@@ -599,7 +599,7 @@ public class Executer {
 			
 			for (int i = 0; i < ((VariableList)runner).getSize(); i++) {
 				interpreter.getExecuter().heap.put(elementName, new Variable(elements.getElementAtIndex(i)));
-				ret = interpreter.interpret(tokens.subList(4, tokens.size()));
+				ret = interpreter.interpret(tokens.subList(4, tokens.size()-1));
 				if (ret != "") break;
 			}
 			
