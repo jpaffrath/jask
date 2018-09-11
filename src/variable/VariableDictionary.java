@@ -120,6 +120,21 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Returns the values of the dictionary
+	 * 
+	 * @return a new VariableList containing the values of the dictionary
+	 */
+	public VariableList getValues() {
+		List<Variable> valueEntries = new ArrayList<Variable>();
+		
+		for (Variable value : this.dictionary.values()) {
+			valueEntries.add(value);
+		}
+		
+		return new VariableList(valueEntries);
+	}
+	
+	/**
 	 * Returns a string representation based on the variables content
 	 */
 	@Override

@@ -230,6 +230,12 @@ public class InternalFunctions {
 				return dictionaryGetKeys(heap, params);
 			}
 		});
+		this.functions.put("dictionaryGetValues", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return dictionaryGetValues(heap, params);
+			}
+		});
 		this.functions.put("sleep", new InternalFunction() {
 			@Override
 			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
@@ -892,6 +898,24 @@ public class InternalFunctions {
 		}
 
 		return ((VariableDictionary)var).getKeys();
+	}
+	
+	/**
+	 * Internal implementation of dictionaryGetValues
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return values of the dictionary
+	 */
+	private Variable dictionaryGetValues(HashMap<String, Variable> heap, String[] params) {
+		Variable var = heap.get(params[0]);
+
+		if (!(var instanceof VariableDictionary)) {
+			Error.printErrorVariableIsNotADictionary(params[0]);
+			return new Variable(NULL);
+		}
+
+		return ((VariableDictionary)var).getValues();
 	}
 	
 	private Variable sleep(HashMap<String, Variable> heap, String[] params) {
