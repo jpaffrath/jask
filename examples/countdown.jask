@@ -1,0 +1,6 @@
+store 500 in sleepTime
+
+run i from 10 to -1 with i minus 1
+	printLine(i)
+	sleep(sleepTime)
+endrun
