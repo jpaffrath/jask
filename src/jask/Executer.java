@@ -533,16 +533,33 @@ public class Executer {
 
 			Interpreter interpreter = new Interpreter(this);
 			Variable runner = new Variable(runnerName);
-
+			
 			// perform actual loop
-			for (int i = (int)startVal.getDoubleValue(); i < (int)endVal.getDoubleValue();) {
-				runner.setDoubleValue(i);
-				interpreter.getExecuter().heap.put(runnerName, runner);
-				
-				ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
-				if (ret != "") break;
-				executeAssign(assignTokens);
-				i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
+			
+			int startValInteger = (int)startVal.getDoubleValue();
+			int endValInteger = (int)endVal.getDoubleValue();
+			
+			if (startValInteger <= endValInteger) {
+				for (int i = startValInteger; i < endValInteger;) {
+					runner.setDoubleValue(i);
+					interpreter.getExecuter().heap.put(runnerName, runner);
+					
+					ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
+					if (ret != "") break;
+					executeAssign(assignTokens);
+					i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
+				}
+			}
+			else {
+				for (int i = startValInteger; i > endValInteger;) {
+					runner.setDoubleValue(i);
+					interpreter.getExecuter().heap.put(runnerName, runner);
+					
+					ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
+					if (ret != "") break;
+					executeAssign(assignTokens);
+					i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
+				}
 			}
 			
 			// remove variable from heap, because it only exists in the context of the run loop
