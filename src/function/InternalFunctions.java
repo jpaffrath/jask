@@ -237,6 +237,12 @@ public class InternalFunctions {
 				return dictionaryGetValues(heap, params);
 			}
 		});
+		this.functions.put("dictionaryPutLists", new InternalFunction() {
+			@Override
+			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
+				return dictionaryPutLists(heap, params);
+			}
+		});
 		this.functions.put("sleep", new InternalFunction() {
 			@Override
 			public Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params) {
@@ -868,6 +874,49 @@ public class InternalFunctions {
 		}
 		
 		dictionary.put(key, value);
+		return dictionary;
+	}
+	
+	/**
+	 * Internal implementation of dictionaryPutLists
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return a new dictionary
+	 */
+	private Variable dictionaryPutLists(HashMap<String, Variable> heap, String[] params) {
+		Variable var = heap.get(params[0]);
+		VariableDictionary dictionary = null;
+		
+		if (!(var instanceof VariableDictionary)) {
+			Error.printErrorVariableIsNotADictionary(params[0]);
+			return new Variable(NULL);
+		}
+		else {
+			dictionary = new VariableDictionary((VariableDictionary)var);
+		}
+
+		Variable keys = heap.get(params[1]);
+		if (keys == null) {
+			Error.printErrorNoValueGiven();
+			return new Variable(NULL);
+		}
+		
+		Variable values = heap.get(params[2]);
+		if (values == null) {
+			Error.printErrorNoValueGiven();
+			return new Variable(NULL);
+		}
+		
+		if ((keys instanceof VariableList) == false) {
+			Error.printErrorVariableIsNotAList(params[1]);
+		}
+		
+		if ((values instanceof VariableList) == false) {
+			Error.printErrorVariableIsNotAList(params[2]);
+		}
+		
+		dictionary.putList((VariableList)keys, (VariableList)values);
 		return dictionary;
 	}
 	
