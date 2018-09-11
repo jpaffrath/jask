@@ -31,8 +31,7 @@ jask can interpret files:
 ```Assembly
 jask file.jask arg1 arg2 ...
 ```
-The arguments are stored in a global list variable called _ENV.  
-
+The arguments are stored in a global list variable called _ENV.
 To test your freshly compiled jask-version, just run the _test.jask_ file.
 
 # Examples
@@ -73,22 +72,6 @@ increment myNum ; same as assign myNum plus 1 to myNum
 decrement myNum ; same as assign myNum minus 1 to myNum
 ```
 
-### Printing and reading data
-```Assembly
-store read() in res
-print(res)
-
-print("I am a concatenated ":"string!")
-```
-
-### Convert variables
-```Assembly
-store "100" in num
-
-convert num to number
-convert num to string
-```
-
 ### Control flow
 if-else conditions:
 ```Assembly
@@ -116,66 +99,27 @@ endrun
 ```
 Want more examples? Visit [Control flow wiki](https://github.com/jpaffrath/jask/wiki/Control-flow)!
 
-### Calling functions
-```Assembly
-myFunc(parameter)
-```
-Multiple parameters are separated by colons:
-```Assembly
-myFunc(firstParameter:secondParameter)
-```
-You can easily call a function several times:
-```Assembly
-call printLine("Hello!") 10 times
-```
-Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
-
 ### Creating functions
-Functions in jask can return nothing, any type of data or calculations.
+Functions in jask can return nothing, any type of variables or data, calculations or other function calls.
 ```Assembly
-function myPrint(str)
-  print(str)
-end
-
-function func(param1:param2)
-  print(param1)
-  return TRUE
+function myFunction(param1:param2)
+  printLine("Function call with parameters":param1:param2)
 end
 
 function divide(num1:num2)
   return num1 divide num2
 end
 ```
-To access a variable which is stored outside a function, use the access operator "!":
-```Assembly
-store "Outside" in var
-
-function myFunc()
-    printLine(!var)
-end
-```
-This allows you to define variables with the same name:
-```Assembly
-store "Outside" in var
-
-function myFunc()
-    store "Inside" in var
-
-    printLine(!var) ; prints "Outside"
-    printLine(var)  ; prints "Inside"
-end
-```
-You find more information about the access operator in the [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
-Want to know more about functions in jask? Look at [Functions inside functions](https://github.com/jpaffrath/jask/wiki/Functions-inside-functions!) or [Modules inside functions](https://github.com/jpaffrath/jask/wiki/Modules-inside-functions!).
+Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
 
 ### Work with list variables
-A list in jask can store strings, numbers and boolean values.
+A list in jask can store strings, numbers, boolean values, other lists and dictionaries.
+In addition, a list can store different types at the same time.
 ```Assembly
 store list(1:2:3) in numbers
 print(numbers)
 
 store listGet(numbers:0) in item1
-print(item1)
 
 ; add value 4
 assign listAdd(numbers:4) to numbers
@@ -183,7 +127,7 @@ assign listAdd(numbers:4) to numbers
 ; remove value at index 2
 assign listRemove(numbers:2) to numbers
 
-store list(1:"String":TRUE) in myList
+store list(1:"String":TRUE:list():dictionary("key":"value")) in myList
 ```
 Want more examples? Visit [List variables Wiki](https://github.com/jpaffrath/jask/wiki/List-variables-in-jask)!
 
@@ -192,20 +136,30 @@ A dictionary in jask stores values with associated keys.
 ```Assembly
 store dictionary("myKey":"myValue") in dict
 print(dict)
+
+store dictionaryGet(dict:"myKey") in myValue
 ```
 Want more examples? Visit [Dictionary variables Wiki](https://github.com/jpaffrath/jask/wiki/Dictionary-variables-in-jask)!
 
+# Honorable mentions
+jask has some very interesting features! Visit the [jask Wiki](https://github.com/jpaffrath/jask/wiki) to find out more!
+
 ### Callbacks
-You can find more information in the [Callback wiki](https://github.com/jpaffrath/jask/wiki/Callbacks-in-jask)
+You can use callbacks in jask. [Callback wiki](https://github.com/jpaffrath/jask/wiki/Callbacks-in-jask)
 
 ### Modules
-You can import other jask files with the keyword 'use'.
-An imported file is called a _module_.
-If you import a module, jask searches for files in the directory where it has been executed.
-See the following example how to import a module:
-```Assembly
-function myModuleFunction()
-  print("Hello! I am a module!")
-end
-```
-Want more examples? Visit [Modules wiki](https://github.com/jpaffrath/jask/wiki/Modules)!
+Other jask files can be used as modules. Learn how to do it in the [Modules wiki](https://github.com/jpaffrath/jask/wiki/Modules)!
+
+### Converting variables
+Learn how to convert variables into different types in the [Convert Variables Wiki](https://github.com/jpaffrath/jask/wiki/Convert-variables)
+
+### Access Operator
+You want to know how to access variables inside a function which are defined outside?
+Visit [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
+
+### Functions inside functions
+You can define functions inside functions!
+Learn how to do it in the [Functions inside functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions-inside-functions!)
+
+### Modules inside functions
+In a function you can import modules. Visit [Modules inside functions Wiki](https://github.com/jpaffrath/jask/wiki/Modules-inside-functions!) to learn more.
