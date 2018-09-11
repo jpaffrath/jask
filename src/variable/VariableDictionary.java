@@ -162,9 +162,17 @@ public class VariableDictionary extends Variable {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder("[");
+		List<String> keys = new ArrayList<>(this.dictionary.keySet());
 		
-		for (String key : this.dictionary.keySet()) {
-			builder.append("(" + key + ", " + this.dictionary.get(key) + ")");
+		for (int i = 0; i < keys.size(); i++) {
+			String key = keys.get(i);
+			
+			if (i == keys.size()-1) {
+				builder.append("(" + key + ", " + this.dictionary.get(key) + ")");
+			}
+			else {
+				builder.append("(" + key + ", " + this.dictionary.get(key) + "), ");
+			}
 		}
 		
 		builder.append("]");
