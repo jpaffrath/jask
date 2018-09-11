@@ -814,7 +814,7 @@ public class InternalFunctions {
 			return new Variable(NULL);
 		}
 		
-		Variable value = (Variable)((VariableDictionary)var).get(key);
+		Variable value = ((VariableDictionary)var).get(key);
 		
 		if (value == null) {
 			return new Variable(NULL);

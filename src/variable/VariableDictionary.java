@@ -32,7 +32,17 @@ public class VariableDictionary extends Variable {
 		this.dictionary = new HashMap<>();
 		
 		for (int i = 0; i < keys.size(); i++) {
-			this.dictionary.put(keys.get(i).toString(), new Variable(values.get(i)));
+			Variable v = values.get(i);
+			
+			if (v instanceof VariableList) {
+				this.dictionary.put(keys.get(i).toString(), new VariableList((VariableList)v));
+			}
+			else if (v instanceof VariableDictionary) {
+				this.dictionary.put(keys.get(i).toString(), new VariableDictionary((VariableDictionary)v));
+			}
+			else {
+				this.dictionary.put(keys.get(i).toString(), new Variable(values.get(i)));
+			}
 		}
 	}
 
