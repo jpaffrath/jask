@@ -114,3 +114,32 @@ function factorial(n)
 	
 	return n
 end
+
+function round(base)
+	if isNumber(base)  equals FALSE return NULL else endif
+	if hasPlaces(base) equals FALSE return base else endif
+	
+	use jcore/jstring
+	
+	convert base to string
+	store split(base:".") in ele
+	
+	store listGet(ele:1) in digits
+	store listFromString(digits) in strDigits
+	
+	store listGet(strDigits:0) in firstDigit
+	convert firstDigit to number
+	
+	store listGet(ele:0) in result
+	convert result to number
+	
+	if firstDigit greaterequals 5
+		if result smaller 1
+			decrement result
+		else
+			increment result
+		endif
+	else endif
+	
+	return result
+end
