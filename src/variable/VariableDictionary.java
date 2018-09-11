@@ -74,6 +74,28 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Puts new entries to the dictionary based on given lists
+	 * 
+	 * @param keys list of keys
+	 * @param values list of values
+	 * @return a new dictionary containing the given keys and values
+	 */
+	public boolean putList(VariableList keys, VariableList values) {
+		List<Variable> listKeys = keys.getValues();
+		List<Variable> listValues = values.getValues();
+		
+		if (listKeys.size() != listValues.size()) {
+			return false;
+		}
+		
+		for (int i = 0; i < listKeys.size(); i++) {
+			this.put(listKeys.get(i), listValues.get(i));
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * Gets the value associated to the provided key
 	 * 
 	 * @param key key in the dictionary
