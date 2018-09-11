@@ -1025,14 +1025,13 @@ public class InternalFunctions {
 	 * @return NULL
 	 */
 	private Variable exit(HashMap<String, Variable> heap, String[] params) {
-		int code = -1;
-
 		Variable var = heap.get(params[0]);
-		if (var == null) {
-			code = Integer.parseInt(params[0]);
+		
+		if (var.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(params[0]);
 		}
 
-		System.exit(code);
+		System.exit((int)var.getDoubleValue());
 		return new Variable(NULL);
 	}
 }
