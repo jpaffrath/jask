@@ -197,6 +197,15 @@ public class Executer {
 
 		this.modules.add(module);
 	}
+	
+	/**
+	 * Adds a new internal module to executer
+	 * 
+	 * @param name name of the internal module
+	 */
+	public void addInternalModule(String name) {
+		this.internalFunctions.loadInternalModule(name);
+	}
 
 	/**
 	 * Removes a loaded module from the current context
