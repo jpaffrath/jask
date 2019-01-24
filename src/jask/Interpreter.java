@@ -10,6 +10,8 @@ import expression.Expression;
 import expression.ExpressionType;
 import function.Function;
 import function.FunctionExecuter;
+import function.InternalFunction;
+import function.InternalFunctions;
 import helper.Error;
 import helper.Helpers;
 import variable.Variable;
@@ -400,6 +402,13 @@ public class Interpreter {
 			// check use statement
 			else if (t.startsWith("use")) {
 				String moduleName = this.getTokenOrDie(tokens, ++i, 0);
+				
+				// checks if the use statements tries to load an internal module
+				if (InternalFunctions.isInternalModule(moduleName)) {
+					this.executer.addInternalModule(moduleName);
+					continue;
+				}
+				
 				String module = moduleName + ".jask";
 
 				if (!Helpers.checkFilename(module)) {
