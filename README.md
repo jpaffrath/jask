@@ -150,6 +150,9 @@ You can use callbacks in jask. [Callback wiki](https://github.com/jpaffrath/jask
 ### Modules
 Other jask files can be used as modules. Learn how to do it in the [Modules wiki](https://github.com/jpaffrath/jask/wiki/Modules)!
 
+### Internal Modules
+jask provides some internal modules for you to use. Learn more in the [Internal Modules wiki](https://github.com/jpaffrath/jask/wiki/Internal-Modules)!
+
 ### Converting variables
 Learn how to convert variables into different types in the [Convert Variables Wiki](https://github.com/jpaffrath/jask/wiki/Convert-variables)
 
