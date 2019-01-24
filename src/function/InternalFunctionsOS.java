@@ -6,7 +6,7 @@ import variable.Variable;
 /**
  * Implements the internal module jask.os
  * 
- * @author jpaffrath
+ * @author Julius Paffrath
  *
  */
 public class InternalFunctionsOS extends InternalFunctionsBase {
