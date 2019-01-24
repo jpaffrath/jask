@@ -49,11 +49,12 @@ public class Executer {
 	 * @param functionExecuter functionExecuter to be used
 	 * @param modules list of modules
 	 */
-	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules) {
+	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules, InternalFunctions internalFunctions) {
 		this();
 		this.heap = heap;
 		this.functionExecuter = functionExecuter;
 		this.modules = modules;
+		this.internalFunctions = internalFunctions;
 	}
 
 	/**
@@ -150,7 +151,7 @@ public class Executer {
 				this.functionExecuter.addFunction(((VariableFunction)this.getVariableFromHeap(functionName)).getFunction());
 			}
 			
-			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules);
+			varVal = this.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules, this.internalFunctions);
 			this.setLocalHeapFromFunction(this.functionExecuter.getFunction(functionName).getHeap());
 			this.functionExecuter.destroyFunctionHeap(functionName);
 			
@@ -164,7 +165,7 @@ public class Executer {
 
 			for (Executer module : this.modules) {
 				if (module.functionExecuter.hasFunction(functionName)) {
-					varVal = module.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules);
+					varVal = module.functionExecuter.executeFunction(functionName, functionHeap, getLocalHeapForFunction(), this.modules, this.internalFunctions);
 					module.functionExecuter.destroyFunctionHeap(functionName);
 					functionFound = true;
 					break;
@@ -232,6 +233,8 @@ public class Executer {
 		for (Executer module : this.modules) {
 			moduleNames.add(module.getName());
 		}
+		
+		moduleNames.addAll(this.internalFunctions.getLoadedModuleNames());
 
 		return moduleNames;
 	}

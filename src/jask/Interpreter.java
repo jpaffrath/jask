@@ -86,9 +86,9 @@ public class Interpreter {
 	 * @param functionExecuter the function executed to be used
 	 * @param modules list of modules
 	 */
-	public Interpreter(Function function, FunctionExecuter functionExecuter, List<Executer> modules) {
+	public Interpreter(Function function, FunctionExecuter functionExecuter, List<Executer> modules, InternalFunctions internalFunctions) {
 		this();
-		this.executer = new Executer(function.getHeap(), functionExecuter, modules);
+		this.executer = new Executer(function.getHeap(), functionExecuter, modules, internalFunctions);
 	}
 
 	/**

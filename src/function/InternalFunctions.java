@@ -27,12 +27,21 @@ import variable.VariableType;
  */
 public class InternalFunctions {
 	private HashMap<String, InternalFunction> functions;
+	private List<String> internalModules;
 
 	/**
 	 * General constructor
 	 */
 	public InternalFunctions() {
 		this.functions = new HashMap<String, InternalFunction>();
+		this.internalModules = new ArrayList<>();
+		this.setUpFunctions();
+	}
+	
+	public InternalFunctions(InternalFunctions internalFunctions) {
+		this.functions = new HashMap<String, InternalFunction>();
+		this.functions.putAll(internalFunctions.functions);
+		
 		this.setUpFunctions();
 	}
 
@@ -309,10 +318,20 @@ public class InternalFunctions {
 		switch (moduleName) {
 		case "jask.os":
 			module = new InternalFunctionsOS();
+			this.internalModules.add("jask.os");
 			break;
 		}
 		
 		this.functions.putAll(module.getFunctions());
+	}
+	
+	/**
+	 * Returns a list containing all loaded internal modules
+	 * 
+	 * @return
+	 */
+	public List<String> getLoadedModuleNames() {
+		return this.internalModules;
 	}
 
 	/**

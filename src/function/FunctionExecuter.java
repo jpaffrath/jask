@@ -34,16 +34,19 @@ public class FunctionExecuter {
 	 * @param heap local heap for the function
 	 * @return result of the function
 	 */
-	public String executeFunction(String name, List<Variable> heap, HashMap<String, Variable> localHeap, List<Executer> modules) {
+	public String executeFunction(String name, List<Variable> heap, HashMap<String, Variable> localHeap, List<Executer> modules, InternalFunctions internalFunctions) {
 		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
 			return NULL;
 		}
+		
+		// if the object isn't copied, an internal module added inside the function would live after the function execution
+		InternalFunctions internalFunctionsCopy = new InternalFunctions(internalFunctions);
 
 		Function function = this.functions.get(name);
 		function.setHeap(localHeap);
 		function.setParameterHeap(heap);
-		Interpreter interpreter = new Interpreter(function, this, new ArrayList<Executer>(modules));
+		Interpreter interpreter = new Interpreter(function, this, new ArrayList<Executer>(modules), internalFunctionsCopy);
 		return interpreter.interpret(function.getTokens());
 	}
 
