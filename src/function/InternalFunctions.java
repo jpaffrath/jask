@@ -282,6 +282,38 @@ public class InternalFunctions {
 	public boolean isInternalFunction(String functionName) {
 		return this.functions.containsKey(functionName);
 	}
+	
+	/**
+	 * Checks if a given module name is an internal module
+	 * 
+	 * @param moduleName name of the module
+	 * @return true if the given module name is an internal module
+	 */
+	public static boolean isInternalModule(String moduleName) {
+		switch (moduleName) {
+		case "jask.os":
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Loads an internal module
+	 * 
+	 * @param moduleName name of the module
+	 */
+	public void loadInternalModule(String moduleName) {
+		InternalFunctionsBase module = new InternalFunctionsBase();
+		
+		switch (moduleName) {
+		case "jask.os":
+			module = new InternalFunctionsOS();
+			break;
+		}
+		
+		this.functions.putAll(module.getFunctions());
+	}
 
 	/**
 	 * Converts given heap and parameter to usable internal heap
