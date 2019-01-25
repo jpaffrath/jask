@@ -46,7 +46,9 @@ public class InteractiveMode {
 			line = scanner.nextLine();
 
 			// stops the interactive mode
-			if (line.contentEquals("exit")) break;
+			if (line.contentEquals("exit")) {
+				break;
+			}
 
 			// prints the history
 			if (line.contentEquals("history")) {
@@ -163,11 +165,16 @@ public class InteractiveMode {
 				while (true) {
 					line = scanner.nextLine();
 
-					if (line.length() > 1 && line.substring(0, 2).contentEquals("if"))
+					if (line.length() > 1 && line.substring(0, 2).contentEquals("if")) {
 						ifCount++;
-					else if (line.contentEquals("endif")) exCount++;
+					}
+					else if (line.contentEquals("endif")) {
+						exCount++;
+					}
 
-					if (ifCount == exCount) break;
+					if (ifCount == exCount) {
+						break;
+					}
 
 					tempList.add(line);
 					this.printIfPrompt();
@@ -175,8 +182,8 @@ public class InteractiveMode {
 			}
 
 			// if a run statement is added, add lines to list until the statement ends
-			if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
-					(line.length() > 4 && line.substring(0, 5).contentEquals("while"))) {
+			if (line.length() > 2 && line.substring(0, 3).contentEquals("run") ||
+				line.length() > 4 && line.substring(0, 5).contentEquals("while")) {
 				if (tokenizer.parse(line).contains("endrun")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
@@ -193,12 +200,17 @@ public class InteractiveMode {
 				while (true) {
 					line = scanner.nextLine();
 
-					if ((line.length() > 2 && line.substring(0, 3).contentEquals("run")) ||
-							(line.length() > 4 && line.substring(0, 5).contentEquals("while")))
+					if (line.length() > 2 && line.substring(0, 3).contentEquals("run") ||
+							line.length() > 4 && line.substring(0, 5).contentEquals("while")) {
 						ruCount++;
-					else if (tokenizer.parse(line).contains("endrun")) exCount++;
+					}
+					else if (tokenizer.parse(line).contains("endrun")) {
+						exCount++;
+					}
 
-					if (ruCount == exCount) break;
+					if (ruCount == exCount) {
+						break;
+					}
 
 					tempList.add(line);
 					this.printRunPrompt();
