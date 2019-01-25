@@ -10,7 +10,6 @@ import expression.Expression;
 import expression.ExpressionType;
 import function.Function;
 import function.FunctionExecuter;
-import function.InternalFunction;
 import function.InternalFunctions;
 import helper.Error;
 import helper.Helpers;
@@ -156,7 +155,9 @@ public class Interpreter {
 		char toCheck = t.toCharArray()[0];
 		
 		for (char c : invalidChars) {
-			if (toCheck == c) return false;
+			if (toCheck == c) {
+				return false;
+			}
 		}
 		
 		return true;
@@ -169,8 +170,7 @@ public class Interpreter {
 	 * @return true if the given string is a jask function
 	 */
 	public static boolean isFunction(String t) {
-		if (t.lastIndexOf(')') == t.length() -1) return true;
-		return false;
+		return t.lastIndexOf(')') == t.length() -1;
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class Interpreter {
 			}
 
 			// checks store expressions
-			else if (t.contentEquals("store") && (tokens.size() > i +3 && tokens.get(i+2).contentEquals("in"))) {
+			else if (t.contentEquals("store") && tokens.size() > i +3 && tokens.get(i+2).contentEquals("in")) {
 				// check if the variable name is a keyword
 				if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
 					Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
@@ -319,10 +319,16 @@ public class Interpreter {
 				while (true) {
 					t = this.getTokenOrDie(tokens, i++, 0);
 
-					if (t.contentEquals("function")) funcCount++;
-					else if (t.contentEquals("end")) endCount++;
+					if (t.contentEquals("function")) {
+						funcCount++;
+					}
+					else if (t.contentEquals("end")) {
+						endCount++;
+					}
 
-					if (funcCount == endCount) break;
+					if (funcCount == endCount) {
+						break;
+					}
 				}
 
 				this.executer.addFunction(new Function(name, tokens.subList(start, --i)));
@@ -349,10 +355,16 @@ public class Interpreter {
 					while (true) {
 						t = this.getTokenOrDie(tokens, ++i, 0);
 
-						if (t.contentEquals("if")) ifCount++;
-						else if (t.contentEquals("else")) elCount++;
+						if (t.contentEquals("if")) {
+							ifCount++;
+						}
+						else if (t.contentEquals("else")) {
+							elCount++;
+						}
 
-						if (ifCount == elCount) break;
+						if (ifCount == elCount) {
+							break;
+						}
 					}
 				}
 
@@ -373,10 +385,16 @@ public class Interpreter {
 				while (true) {
 					t = this.getTokenOrDie(tokens, ++runner, 0);
 
-					if (t.contentEquals("run") || t.contentEquals("while")) runCount++;
-					else if (t.contentEquals("endrun")) endCount++;
+					if (t.contentEquals("run") || t.contentEquals("while")) {
+						runCount++;
+					}
+					else if (t.contentEquals("endrun")) {
+						endCount++;
+					}
 
-					if (runCount == endCount) break;
+					if (runCount == endCount) {
+						break;
+					}
 				}
 
 				exp = new Expression(ExpressionType.Runner, tokens.subList(i, runner+1));
@@ -443,7 +461,9 @@ public class Interpreter {
 			}
 
 			exp = null;
-			if (retVal != "") return retVal;
+			if (retVal.contentEquals("") == false) {
+				return retVal;
+			}
 		}
 
 		return "";
