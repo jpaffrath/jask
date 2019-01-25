@@ -179,8 +179,14 @@ public class Executer {
 		}
 
 		// create proper variable before returning it
-		if (varVal.isEmpty()) return new Variable(NULL);
-		if (varVal.contains(":") && !Variable.isString(varVal)) return new VariableList(varVal);
+		if (varVal.isEmpty()) {
+			return new Variable(NULL);
+		}
+		
+		if (varVal.contains(":") && !Variable.isString(varVal)) {
+			return new VariableList(varVal);
+		}
+		
 		return new Variable(varVal);
 	}
 
@@ -260,7 +266,7 @@ public class Executer {
 	 */
 	public Variable executeCalculation(Variable operand1, Variable operand2, CalculationType type) {
 		// number calculations
-		if ((operand1.getType() == VariableType.Number) && (operand2.getType() == VariableType.Number)) {
+		if (operand1.getType() == VariableType.Number && operand2.getType() == VariableType.Number) {
 			switch (type) {
 			case Plus:   return new Variable(operand1.getDoubleValue() + operand2.getDoubleValue());
 			case Minus:  return new Variable(operand1.getDoubleValue() - operand2.getDoubleValue());
@@ -273,14 +279,14 @@ public class Executer {
 		}
 
 		// string concatenation
-		if ((operand1.getType() == VariableType.String) && (operand2.getType() == VariableType.String)) {
+		if (operand1.getType() == VariableType.String && operand2.getType() == VariableType.String) {
 			switch (type) {
 			case Plus: return new Variable('"' + operand1.getStringValue() + operand2.getStringValue() + '"');
 			default:
 				return null;
 			}
 		}
-		if ((operand1.getType() == VariableType.String) && (operand2.getType() == VariableType.Number)) {
+		if (operand1.getType() == VariableType.String && operand2.getType() == VariableType.Number) {
 			switch (type) {
 			case Times:
 				StringBuffer buf = new StringBuffer();
@@ -479,7 +485,9 @@ public class Executer {
 
 			while (executeStatement(ifExp)) {
 				ret = interpreter.interpret(tokens.subList(4, tokens.size() - 1));
-				if (ret != "") break;
+				if (ret.contentEquals("") == false) {
+					break;
+				}
 			}
 
 			return ret;
@@ -558,7 +566,10 @@ public class Executer {
 					interpreter.getExecuter().heap.put(runnerName, runner);
 					
 					ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
-					if (ret != "") break;
+					if (ret.contentEquals("") == false) {
+						break;
+					}
+					
 					executeAssign(assignTokens);
 					i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
 				}
@@ -569,7 +580,10 @@ public class Executer {
 					interpreter.getExecuter().heap.put(runnerName, runner);
 					
 					ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
-					if (ret != "") break;
+					if (ret.contentEquals("") == false) {
+						break;
+					}
+					
 					executeAssign(assignTokens);
 					i = (int)getVariableFromHeap(tokens.get(1)).getDoubleValue();
 				}
@@ -613,7 +627,9 @@ public class Executer {
 			for (int i = 0; i < ((VariableList)runner).getSize(); i++) {
 				interpreter.getExecuter().heap.put(elementName, new Variable(elements.getElementAtIndex(i)));
 				ret = interpreter.interpret(tokens.subList(4, tokens.size()-1));
-				if (ret != "") break;
+				if (ret.contentEquals("") == false) {
+					break;
+				}
 			}
 			
 			// remove variable from heap, because it only exists in the context of the for loop
@@ -721,14 +737,14 @@ public class Executer {
 
 		if (operator.contentEquals("equals")) {
 			if (var1 instanceof VariableList && var2 instanceof VariableList) {
-				return ((VariableList)var1).equals(((VariableList)var2));
+				return ((VariableList)var1).equals((VariableList)var2);
 			}
 			return var1.equals(var2);
 		}
 
 		if (operator.contentEquals("unequals")) {
 			if (var1 instanceof VariableList && var2 instanceof VariableList) {
-				return !((VariableList)var1).equals(((VariableList)var2));
+				return !((VariableList)var1).equals((VariableList)var2);
 			}
 			return !var1.equals(var2);
 		}
@@ -799,7 +815,7 @@ public class Executer {
 			}
 
 			if (var3.getType() == VariableType.Number) {
-				return (var1.getDoubleValue() % var2.getDoubleValue() == var3.getDoubleValue());
+				return var1.getDoubleValue() % var2.getDoubleValue() == var3.getDoubleValue();
 			}
 		}
 
@@ -856,7 +872,10 @@ public class Executer {
 	 * @return result of expression
 	 */
 	public String execute(Expression exp) {
-		if (exp == null) return "";
+		if (exp == null) {
+			return "";
+		}
+		
 		String ret = "";
 
 		switch (exp.getType()) {
