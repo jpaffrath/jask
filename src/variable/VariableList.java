@@ -118,7 +118,10 @@ public class VariableList extends Variable {
 	 * @return true if success
 	 */
 	public boolean setElement(int index, Variable toSet) {
-		if (index >= this.values.size()) return false;
+		if (index >= this.values.size()) {
+			return false;
+		}
+		
 		this.values.set(index, new Variable(toSet));
 		return true;
 	}
@@ -255,7 +258,9 @@ public class VariableList extends Variable {
 	 */
 	public boolean contains(Variable var) {
 		for (Variable v : this.values) {
-			if (v.equals(var)) return true;
+			if (v.equals(var)) {
+				return true;
+			}
 		}
 
 		return false;
@@ -317,9 +322,7 @@ public class VariableList extends Variable {
 		}
 		
 		List<Variable> values = this.values.subList(start, end + 1);
-		VariableList ret = new VariableList(values);
-		
-		return ret;
+		return new VariableList(values);
 	}
 	
 	/**
