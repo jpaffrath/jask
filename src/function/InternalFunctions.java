@@ -377,10 +377,10 @@ public class InternalFunctions {
 			Variable var = heap.get(out);
 			
 			if (var instanceof VariableList) {
-				output += (((VariableList)var).getPrintString());
+				output += ((VariableList)var).getPrintString();
 			}
 			else {
-				output += (var.toString());
+				output += var.toString();
 			}
 		}
 
@@ -960,11 +960,11 @@ public class InternalFunctions {
 			return new Variable(NULL);
 		}
 		
-		if ((keys instanceof VariableList) == false) {
+		if (keys instanceof VariableList == false) {
 			Error.printErrorVariableIsNotAList(params[1]);
 		}
 		
-		if ((values instanceof VariableList) == false) {
+		if (values instanceof VariableList == false) {
 			Error.printErrorVariableIsNotAList(params[2]);
 		}
 		
