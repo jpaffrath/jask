@@ -3,6 +3,7 @@ package jask;
 import static jask.Constants.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +26,7 @@ import variable.VariableType;
  *
  */
 public class Executer {
-	private HashMap<String, Variable> heap;
+	private Map<String, Variable> heap;
 	private FunctionExecuter functionExecuter;
 	private InternalFunctions internalFunctions;
 	private List<Executer> modules;
@@ -49,7 +50,7 @@ public class Executer {
 	 * @param functionExecuter functionExecuter to be used
 	 * @param modules list of modules
 	 */
-	public Executer(HashMap<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules, InternalFunctions internalFunctions) {
+	public Executer(Map<String, Variable> heap, FunctionExecuter functionExecuter, List<Executer> modules, InternalFunctions internalFunctions) {
 		this();
 		this.heap = heap;
 		this.functionExecuter = functionExecuter;
@@ -821,8 +822,8 @@ public class Executer {
 	 * 
 	 * @return a copy of the local heap with access operators
 	 */
-	private HashMap<String, Variable> getLocalHeapForFunction() {
-		HashMap<String, Variable> functionHeap = new HashMap<>(this.heap.size());
+	private Map<String, Variable> getLocalHeapForFunction() {
+		Map<String, Variable> functionHeap = new HashMap<>(this.heap.size());
 
 		// copy local heap and add access operator to keys
 		for (String key : this.heap.keySet()) {
@@ -840,7 +841,7 @@ public class Executer {
 	 *
 	 * @param functionHeap heap of the function
 	 */
-	private void setLocalHeapFromFunction(HashMap<String, Variable> functionHeap) {
+	private void setLocalHeapFromFunction(Map<String, Variable> functionHeap) {
 		for (String key : functionHeap.keySet()) {
 			if (key.charAt(0) == '!') {
 				this.heap.put(key.substring(1), functionHeap.get(key));

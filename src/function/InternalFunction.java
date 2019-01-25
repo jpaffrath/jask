@@ -1,7 +1,6 @@
 package function;
 
-import java.util.HashMap;
-
+import java.util.Map;
 import variable.Variable;
 
 /**
@@ -11,5 +10,5 @@ import variable.Variable;
  *
  */
 public interface InternalFunction {
-	Variable execute(HashMap<String, Variable> heap, String functionName, String param, String[] params);
+	Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params);
 }

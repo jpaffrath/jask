@@ -3,6 +3,7 @@ package function;
 import static jask.Constants.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import variable.Variable;
  *
  */
 public class FunctionExecuter {
-	private HashMap<String, Function> functions;
+	private Map<String, Function> functions;
 
 	/**
 	 * Default constructor
@@ -34,7 +35,7 @@ public class FunctionExecuter {
 	 * @param heap local heap for the function
 	 * @return result of the function
 	 */
-	public String executeFunction(String name, List<Variable> heap, HashMap<String, Variable> localHeap, List<Executer> modules, InternalFunctions internalFunctions) {
+	public String executeFunction(String name, List<Variable> heap, Map<String, Variable> localHeap, List<Executer> modules, InternalFunctions internalFunctions) {
 		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
 			return NULL;

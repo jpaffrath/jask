@@ -1,5 +1,6 @@
 package function;
 
+import java.util.Map;
 import java.util.HashMap;
 
 /**
@@ -9,7 +10,7 @@ import java.util.HashMap;
  *
  */
 public class InternalFunctionsBase {
-	protected HashMap<String, InternalFunction> functions;
+	protected Map<String, InternalFunction> functions;
 	
 	/**
 	 * General constructor
@@ -34,7 +35,7 @@ public class InternalFunctionsBase {
 	 * 
 	 * @return the functions of the module
 	 */
-	public HashMap<String, InternalFunction> getFunctions() {
+	public Map<String, InternalFunction> getFunctions() {
 		return this.functions;
 	}
 	

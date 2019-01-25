@@ -1,5 +1,6 @@
 package function;
 
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import variable.VariableList;
 public class Function {
 	private String name;
 	private String params[];
-	private HashMap<String, Variable> heap;
+	private Map<String, Variable> heap;
 	private List<String> tokens;
 
 	/**
@@ -74,7 +75,7 @@ public class Function {
 	 *
 	 * @param heap heap for the function
 	 */
-	public void setHeap(HashMap<String, Variable> heap) {
+	public void setHeap(Map<String, Variable> heap) {
 		this.heap = heap;
 	}
 
@@ -83,7 +84,7 @@ public class Function {
 	 *
 	 * @return local heap
 	 */
-	public HashMap<String, Variable> getHeap() {
+	public Map<String, Variable> getHeap() {
 		return this.heap;
 	}
 
