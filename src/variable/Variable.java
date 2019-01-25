@@ -39,19 +39,17 @@ public class Variable {
 	 * @return true if the given string represents a valid jask string
 	 */
 	public static boolean isString(String value) {
-		if (Pattern.matches("^[\"]+([^\"]+[\"])?$", value)) return true;
-		return false;
+		return Pattern.matches("^[\"]+([^\"]+[\"])?$", value);
 	}
 
 	/**
-	 * Checks if a given string is a valid boolen value
+	 * Checks if a given string is a valid boolean value
 	 *
 	 * @param value string to be checked
 	 * @return true if the given string is a valid boolean value
 	 */
 	public static boolean isBoolean(String value) {
-		return (value.contentEquals(TRUE) ||
-				value.contentEquals(FALSE));
+		return value.contentEquals(TRUE) || value.contentEquals(FALSE);
 	}
 
 	/**
@@ -204,7 +202,10 @@ public class Variable {
 	 */
 	@Override
 	public String toString() {
-		if (this.type == VariableType.String) return this.stringValue;
+		if (this.type == VariableType.String) {
+			return this.stringValue;
+		}
+		
 		if (this.type == VariableType.Number) {
 			// if double has no decimal part...
 			if (this.doubleValue % 1 == 0) {
@@ -214,7 +215,9 @@ public class Variable {
 			}
 			return String.valueOf(this.doubleValue);
 		}
-		if (this.type == VariableType.Bool) return this.boolValue ? TRUE : FALSE;
+		if (this.type == VariableType.Bool) {
+			return this.boolValue ? TRUE : FALSE;
+		}
 
 		return NULL;
 	}
@@ -226,9 +229,13 @@ public class Variable {
 	 * @return true if the given variable equals the current object. False otherwise
 	 */
 	public boolean equals(Variable var) {
-		if (this.type != var.type) return false;
+		if (this.type != var.type) {
+			return false;
+		}
 
-		if (this.type == VariableType.NoType) return true;
+		if (this.type == VariableType.NoType) {
+			return true;
+		}
 
 		if (this.type == VariableType.Number) {
 			return this.doubleValue == var.doubleValue;
