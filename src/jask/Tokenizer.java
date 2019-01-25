@@ -35,9 +35,9 @@ public class Tokenizer {
 		case 0x20: // whitespace
 		case 0x9:  // tab
 			return true;
+		default:
+			return false;
 		}
-
-		return false;
 	}
 
 	/**
@@ -98,7 +98,9 @@ public class Tokenizer {
 					insideComment = false;
 				}
 
-				if (insideComment) continue;
+				if (insideComment) {
+					continue;
+				}
 
 				// toggle string parsing
 				if (curChar == '"') {
@@ -131,7 +133,9 @@ public class Tokenizer {
 	 * @return parsed list of tokens
 	 */
 	List<String> parse(File file) {
-		if (!Helpers.checkFile(file)) return null;
+		if (!Helpers.checkFile(file)) {
+			return null;
+		}
 
 		InputStream inputStream = null;
 
