@@ -1,6 +1,7 @@
 package variable;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  *
  */
 public class VariableDictionary extends Variable {
-	private HashMap<String, Variable> dictionary;
+	private Map<String, Variable> dictionary;
 	
 	/**
 	 * Default constructor
