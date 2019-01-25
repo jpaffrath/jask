@@ -6,7 +6,13 @@ package helper;
  * @author Julius Paffrath
  *
  */
-public class Error {
+public final class Error {
+	
+	/**
+	 * Private constructor to mark this class as an utility class
+	 */
+	private Error() { }
+	
 	private static final String prefix = "Error: ";
 
 	public static void printErrorVariableNotDefined(String var) {
