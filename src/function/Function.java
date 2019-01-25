@@ -41,7 +41,9 @@ public class Function {
 	 * @param parameterHeap list of variables
 	 */
 	public void setParameterHeap(List<Variable> parameterHeap) {
-		if (parameterHeap.isEmpty()) return;
+		if (parameterHeap.isEmpty()) {
+			return;
+		}
 
 		for (int i = 0; i < params.length; i++) {
 			Variable varOld = parameterHeap.get(i);
