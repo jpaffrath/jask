@@ -241,8 +241,12 @@ public class Executer {
 			moduleNames.add(module.getName());
 		}
 		
-		moduleNames.addAll(this.internalFunctions.getLoadedModuleNames());
-
+		List<String> loadedInternalModules = this.internalFunctions.getLoadedModuleNames();
+		
+		if (loadedInternalModules != null) {
+			moduleNames.addAll(loadedInternalModules);
+		}
+		
 		return moduleNames;
 	}
 
