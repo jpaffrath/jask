@@ -28,7 +28,9 @@ public class History {
 	 * @param line line of jask code
 	 */
 	public void addToHistory(String line) {
-		if (line.isEmpty()) return;
+		if (line.isEmpty()) {
+			return;
+		}
 
 		// if the history is full, clear it
 		if (this.historyIndex + 1 > this.historyMax) {
