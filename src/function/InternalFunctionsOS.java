@@ -10,14 +10,6 @@ import variable.Variable;
  *
  */
 public class InternalFunctionsOS extends InternalFunctionsBase {
-	
-	/**
-	 * General constructor
-	 */
-	public InternalFunctionsOS() {
-		super();
-	}
-	
 	/**
 	 * Sets up the functions of the module
 	 */
