@@ -10,8 +10,13 @@ import java.util.List;
  * @author Julius Paffrath
  *
  */
-public class Helpers {
+public final class Helpers {
 
+	/**
+	 * Private constructor to mark this class as an utility class
+	 */
+	private Helpers() { }
+	
 	/**
 	 * Checks if a given path points to a file
 	 *
