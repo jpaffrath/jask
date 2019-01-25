@@ -25,7 +25,7 @@ public final class Helpers {
 	 */
 	public static boolean checkFilename(String name) {
 		File f = new File(name);
-		return (f.exists() && !f.isDirectory());
+		return f.exists() && !f.isDirectory();
 	}
 
 	/**
@@ -35,7 +35,7 @@ public final class Helpers {
 	 * @return true if file exists, otherwise false
 	 */
 	public static boolean checkFile(File file) {
-		return (file.exists() && !file.isDirectory());
+		return file.exists() && !file.isDirectory();
 	}
 
 	/**
