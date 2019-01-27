@@ -104,6 +104,16 @@ public final class Error {
 		System.out.println(prefix + "no value given!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorProcessInterrupted(String processCall) {
+		System.out.println(prefix + "the process call '" + processCall + "' has been interrupted!");
+		System.exit(-1);
+	}
+	
+	public static void printErrorProcessIOException(String processCall) {
+		System.out.println(prefix + "IO Exception on process call '" + processCall + "'!");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
