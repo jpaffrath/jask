@@ -302,6 +302,7 @@ public class InternalFunctions {
 	public static boolean isInternalModule(String moduleName) {
 		switch (moduleName) {
 		case "jask.os":
+		case "jask.system":
 			return true;
 		default:
 			return false;
@@ -321,6 +322,12 @@ public class InternalFunctions {
 			module = new InternalFunctionsOS();
 			this.internalModules.add("jask.os");
 			break;
+		case "jask.system":
+			module = new InternalFunctionsSystem();
+			this.internalModules.add("jask.system");
+			break;
+		default:
+			return;
 		}
 		
 		this.functions.putAll(module.getFunctions());
