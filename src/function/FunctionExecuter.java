@@ -106,6 +106,9 @@ public class FunctionExecuter {
 	 * @return true if the executer holds a function with the given name
 	 */
 	public boolean hasFunction(String name) {
+		if (name.endsWith("()")) {
+			return this.functions.containsKey(name.substring(0, name.length()-2));
+		}
 		return this.functions.containsKey(name);
 	}
 }
