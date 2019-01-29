@@ -7,6 +7,7 @@ import java.util.List;
 import variable.Variable;
 import variable.VariableFunction;
 import variable.VariableList;
+import variable.VariableStruct;
 
 /**
  * Represents a jask function
@@ -52,6 +53,11 @@ public class Function {
 			// if variable is a list, add a new list variable
 			if (varOld instanceof VariableList) {
 				varNew = new VariableList(varOld.toString());
+			}
+			
+			// if variable is a struct, add a new struct variable
+			else if (varOld instanceof VariableStruct) {
+				varNew = new VariableStruct((VariableStruct)varOld);
 			}
 			
 			// if the variable is a function, add a new function variable with the corresponding parameter name
