@@ -141,6 +141,21 @@ store dictionaryGet(dict:"myKey") in myValue
 ```
 Want more examples? Visit [Dictionary variables Wiki](https://github.com/jpaffrath/jask/wiki/Dictionary-variables-in-jask)!
 
+### Structs in jask
+You can store several variables together in a c-like struct:
+```Assembly
+struct myStruct
+    store "Text" in str
+    store 100 in num
+endstruct
+
+printLine(myStruct->str)
+
+store myStruct in anotherStruct ;creates a copy of your struct
+printLine(myStruct->num)
+```
+Want more examples? Visit [Structs in jask](https://github.com/jpaffrath/jask/wiki/Structs-in-jask)
+
 # Honorable mentions
 jask has some very interesting features! Visit the [jask Wiki](https://github.com/jpaffrath/jask/wiki) to find out more!
 
