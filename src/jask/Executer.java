@@ -337,14 +337,23 @@ public class Executer {
 		// assign a to b
 		if (tokens.size() == 4) {
 			String varStr = tokens.get(1);
+			String destStr = tokens.get(3);
 
 			if (!Interpreter.isFunction(varStr)) {
+				// a new value is assigned to a struct member
+				if (destStr.contains("->")) {
+					VariableStruct struct = this.getStructFromHeap(destStr);
+					String variableName = destStr.substring(destStr.indexOf("->") + 2, destStr.length());
+					struct.setVariable(new Variable(varStr), variableName);
+					return;
+				}
+				
 				Variable var = getVariableFromHeap(varStr);
 				if (var == null) {
-					this.heap.put(tokens.get(3), new Variable(varStr));
+					this.heap.put(destStr, new Variable(varStr));
 				}
 				else if (var instanceof VariableList){
-					this.heap.put(tokens.get(3), new VariableList(var.toString()));
+					this.heap.put(destStr, new VariableList(var.toString()));
 				}
 				else {
 					this.heap.put(tokens.get(3), new Variable(var));
