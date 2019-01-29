@@ -17,6 +17,7 @@ import helper.Helpers;
 import variable.Variable;
 import variable.VariableFunction;
 import variable.VariableList;
+import variable.VariableStruct;
 import variable.VariableType;
 
 /**
@@ -83,9 +84,30 @@ public class Executer {
 	 * @return variable from the heap
 	 */
 	public Variable getVariableFromHeap(String var) {
+		// handle variable which are struct members
+		if (var.contains("->")) {
+			// cut name of struct
+			String structName = var.substring(0, var.indexOf("->"));
+			// cut name of variable
+			String variableName = var.substring(var.indexOf("->") + 2, var.length());
+			
+			VariableStruct struct = (VariableStruct)this.heap.get(structName);
+			return struct.getVariable(variableName);
+		}
 		return this.heap.get(var);
 	}
 	
+	/**
+	 * Returns struct variable from heap with given name
+	 * 
+	 * @param var name of the struct variable
+	 * @return variable from the heap
+	 */
+	public VariableStruct getStructFromHeap(String var) {
+		String structName = var.substring(0, var.indexOf("->"));
+		return (VariableStruct)this.heap.get(structName);
+	}
+
 	/**
 	 * Checks if the heap contains a variable with a given name
 	 * 
@@ -383,8 +405,18 @@ public class Executer {
 		if (varD == null) {
 			Error.printErrorOperatorNotApplicable(operator, var1.toString(), var2.toString());
 		}
+		
+		// check if variable is struct member
+		boolean varDIsStruct = varDStr.contains("->") ? true : false;
 
-		this.heap.put(tokens.get(5), varD);
+		if (varDIsStruct == false) {
+			this.heap.put(tokens.get(5), varD);
+		}
+		else {
+			VariableStruct struct = this.getStructFromHeap(varDStr);
+			String variableName = varDStr.substring(varDStr.indexOf("->") + 2, varDStr.length());
+			struct.setVariable(varD, variableName);
+		}
 	}
 
 	/**
@@ -431,29 +463,34 @@ public class Executer {
 
 	/**
 	 * Executes store
-	 *
-	 * @param tokens tokens of the store
+	 * 
+	 * @param tokens tokens of the store expression
+	 * @param storeHeap heap which will store the data
 	 */
-	private void executeStore(List<String> tokens) {
+	private void executeStore(List<String> tokens, Map<String, Variable> storeHeap) {
 		String variableValue = tokens.get(1);
 		String variableName = tokens.get(3);
 
-		if (this.heap.containsKey(variableName)) {
+		if (storeHeap.containsKey(variableName)) {
 			Error.printErrorVariableAlreadyDefined(variableName);
 			return;
 		}
 
 		if (Interpreter.isFunction(variableValue)) {
-			this.heap.put(variableName, executeFunction(variableValue));
+			storeHeap.put(variableName, executeFunction(variableValue));
+		}
+		else if (storeHeap.containsKey(variableValue) && storeHeap.get(variableValue) instanceof VariableStruct) {
+			VariableStruct structPattern = (VariableStruct)storeHeap.get(variableValue);
+			storeHeap.put(variableName, new VariableStruct(variableName, structPattern));
 		}
 		else {
-			if (this.heap.containsKey(variableValue)) {
+			if (this.getVariableFromHeap(variableValue) != null) {
 				Variable varOld = this.getVariableFromHeap(variableValue);
 				if (varOld instanceof VariableList) {
-					this.heap.put(variableName, new VariableList(varOld.toString()));
+					storeHeap.put(variableName, new VariableList(varOld.toString()));
 				}
 				else {
-					this.heap.put(variableName, new Variable(varOld));
+					storeHeap.put(variableName, new Variable(varOld));
 				}
 			}
 			else {
@@ -463,7 +500,7 @@ public class Executer {
 					return;
 				}
 
-				this.heap.put(variableName, var);
+				storeHeap.put(variableName, var);
 			}
 		}
 	}
@@ -827,6 +864,36 @@ public class Executer {
 
 		return false;
 	}
+	
+	/**
+	 * Executes struct expression
+	 * 
+	 * @param tokens tokens of the expression
+	 */
+	private void executeStruct(List<String> tokens) {
+		String structName = tokens.get(0);
+		String token = "";
+		Map<String, Variable> structHeap = new HashMap<String, Variable>();
+		
+		// remove empty tokens
+		tokens.removeIf(String::isEmpty);
+		
+		// iterate store expressions in struct and store new data on struct heap
+		for (int i = 1; i < tokens.size(); i++) {
+			if (i >= tokens.size()) {
+				break;
+			}
+			
+			token = tokens.get(i);
+			if (token.contentEquals("store")) {
+				this.executeStore(tokens.subList(i, i+4), structHeap);
+				i += 3;
+			}
+		}
+		
+		// add new struct variable to heap
+		this.heap.put(structName, new VariableStruct(structName, structHeap));
+	}
 
 	/**
 	 * Adds a function to the functionExecuter
@@ -885,12 +952,13 @@ public class Executer {
 		switch (exp.getType()) {
 		case Assign: executeAssign(exp.getTokens()); break;
 		case Function: executeFunction(exp.getTokens().get(0)); break;
-		case Store: executeStore(exp.getTokens()); break;
+		case Store: executeStore(exp.getTokens(), this.heap); break;
 		case Runner: ret = executeRun(exp.getTokens()); break;
 		case Convert: executeConvert(exp.getTokens()); break;
 		case Increment: executeIncrement(exp.getTokens().get(0)); break;
 		case Decrement: executeDecrement(exp.getTokens().get(0)); break;
 		case Call: executeCall(exp.getTokens()); break;
+		case Struct: executeStruct(exp.getTokens()); break;
 		default:
 			break;
 		}

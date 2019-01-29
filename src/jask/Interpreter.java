@@ -69,6 +69,8 @@ public class Interpreter {
 		this.keywords.add("while");
 		this.keywords.add("times");
 		this.keywords.add("for");
+		this.keywords.add("struct");
+		this.keywords.add("endstruct");
 
 		this.values = new ArrayList<String>();
 		this.values.add(TRUE);
@@ -451,6 +453,22 @@ public class Interpreter {
 			else if (t.contentEquals("call")) {
 				exp = new Expression(ExpressionType.Call, tokens.subList(++i, i+2));
 				i += 2;
+			}
+			
+			// check struct statement
+			else if (t.contentEquals("struct")) {
+				int runner = i;
+
+				while (true) {
+					t = this.getTokenOrDie(tokens, ++runner, 0);
+
+					if (t.contentEquals("endstruct")) {
+						break;
+					}
+				}
+
+				exp = new Expression(ExpressionType.Struct, tokens.subList(i+1, runner));
+				i = runner;
 			}
 
 			if (exp != null) {
