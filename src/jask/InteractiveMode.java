@@ -217,6 +217,33 @@ public class InteractiveMode {
 				}
 			}
 			
+			// if a struct is added, add lines to list until the statement ends
+			if (line.length() > 6 && line.substring(0, 6).contentEquals("struct")) {
+				List<String> tokens = tokenizer.parse(line);
+							
+				if (tokens.contains("endstruct")) {
+					this.history.addToHistory(line);
+					interpreter.interpret(tokenizer.parse(line));
+					this.printStructPrompt();
+					continue;
+				}
+
+				tempList.add(line);
+				this.printStructPrompt();
+							
+				while (true) {
+					line = scanner.nextLine();
+					tokens = tokenizer.parse(line);
+								
+					if (line.contentEquals("endstruct")) {
+						break;
+					}
+
+					tempList.add(line);
+					this.printStructPrompt();
+				}
+			}
+			
 			// if the current line is a variable, print its content
 			if (interpreter.getExecuter().hasVariable(line)) {
 				System.out.println("jask ~> " + interpreter.getExecuter().getVariableFromHeap(line).toString());
@@ -260,5 +287,9 @@ public class InteractiveMode {
 	 */
 	private void printFuncPrompt() {
 		System.out.print("func ~>     ");
+	}
+	
+	private void printStructPrompt() {
+		System.out.print("str ~>     ");
 	}
 }
