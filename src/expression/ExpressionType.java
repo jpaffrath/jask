@@ -15,5 +15,6 @@ public enum ExpressionType {
 	Convert,
 	Increment,
 	Decrement,
-	Call
+	Call,
+	Struct
 }
