@@ -1,0 +1,16 @@
+struct car
+	store "" in model
+	store 0 in hp
+endstruct
+
+store car in porsche
+store car in mercedes
+
+assign "911 Turbo S" to porsche->model
+assign "E Class 350 CDI" to mercedes->model
+
+assign 530 to porsche->hp
+assign 253 to mercedes->hp
+
+printLine("First car is a ":porsche->model:" with ":porsche->hp ":horsepower:")
+printLine("Second car is a ":mercedes->model:" with ":mercedes->hp ":horsepower:")
