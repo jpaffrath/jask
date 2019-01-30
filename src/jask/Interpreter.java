@@ -58,6 +58,7 @@ public class Interpreter {
 		this.keywords.add("end");
 		this.keywords.add("if");
 		this.keywords.add("else");
+		this.keywords.add("endif");
 		this.keywords.add("return");
 		this.keywords.add("convert");
 		this.keywords.add("to");
@@ -67,8 +68,8 @@ public class Interpreter {
 		this.keywords.add("run");
 		this.keywords.add("with");
 		this.keywords.add("while");
-		this.keywords.add("times");
 		this.keywords.add("for");
+		this.keywords.add("endrun");
 		this.keywords.add("struct");
 		this.keywords.add("endstruct");
 
