@@ -303,6 +303,7 @@ public class InternalFunctions {
 		switch (moduleName) {
 		case "jask.os":
 		case "jask.system":
+		case "jask.date":
 			return true;
 		default:
 			return false;
@@ -325,6 +326,10 @@ public class InternalFunctions {
 		case "jask.system":
 			module = new InternalFunctionsSystem();
 			this.internalModules.add("jask.system");
+			break;
+		case "jask.date":
+			module = new InternalFunctionDate();
+			this.internalModules.add("jask.date");
 			break;
 		default:
 			return;
