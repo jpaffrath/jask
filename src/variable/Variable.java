@@ -205,15 +205,16 @@ public class Variable {
 		if (this.type == VariableType.String) {
 			return this.stringValue;
 		}
-		
 		if (this.type == VariableType.Number) {
-			// if double has no decimal part...
-			if (this.doubleValue % 1 == 0) {
-				// ...trim values like 2.0 to 2
-				String temp = String.valueOf(this.doubleValue);
-				return temp.substring(0, temp.indexOf('.'));
+			String doubleStr = String.valueOf(this.doubleValue);
+			int index = doubleStr.indexOf('.');
+			
+			// if double has no decimal part trim values like 2.0 to 2
+			if (index != -1 && index == doubleStr.length() - 2) {
+				doubleStr = doubleStr.substring(0, index);
 			}
-			return String.valueOf(this.doubleValue);
+			
+			return doubleStr;
 		}
 		if (this.type == VariableType.Bool) {
 			return this.boolValue ? TRUE : FALSE;
