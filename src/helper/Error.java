@@ -114,6 +114,11 @@ public final class Error {
 		System.out.println(prefix + "IO Exception on process call '" + processCall + "'!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorDateFormatIllegal(String dateFormat) {
+		System.out.println(prefix + "Date format '" + dateFormat + "' is illegal!");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
