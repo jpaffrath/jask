@@ -249,6 +249,11 @@ public class Executer {
 				return;
 			}
 		}
+		
+		List<String> loadedInternalModules = this.internalFunctions.getLoadedModuleNames();
+		if (loadedInternalModules.contains(module)) {
+			Error.printErrorRemoveInternalModule();
+		}
 	}
 
 	/**
