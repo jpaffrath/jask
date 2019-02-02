@@ -30,6 +30,12 @@ public class InternalFunctionDate extends InternalFunctionsBase {
 				return getFormatDate(heap, params);
 			}
 		});
+		this.functions.put("getCurrentDate", new InternalFunction() {
+			@Override
+			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				return getCurrentDate(heap, params);
+			}
+		});
 	}
 	
 	/**
@@ -78,5 +84,18 @@ public class InternalFunctionDate extends InternalFunctionsBase {
 		}
 		
 		return date;
+	}
+	
+	/**
+	 * Internal implementation of getCurrentDate
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return new Variable containing the current date
+	 */
+	private Variable getCurrentDate(Map<String, Variable> heap, String[] params) {
+		Variable currentDate = new Variable();
+		currentDate.setStringValue(new Date().toString());
+		return currentDate;
 	}
 }
