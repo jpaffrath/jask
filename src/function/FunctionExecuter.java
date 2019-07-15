@@ -1,7 +1,5 @@
 package function;
 
-import static jask.Constants.*;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
@@ -55,6 +53,9 @@ public class FunctionExecuter {
 		
 		if (varVal.contains(":") && !Variable.isString(varVal)) {
 			return new VariableList(varVal);
+		}
+		if (varVal.startsWith("Struct [")) {
+			return new VariableStruct("", varVal);
 		}
 		
 		return new Variable(varVal);

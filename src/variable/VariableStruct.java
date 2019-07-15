@@ -48,6 +48,40 @@ public class VariableStruct extends Variable {
 	}
 	
 	/**
+	 * Initializes a new struct based on a given init string
+	 * 
+	 * @param name
+	 * @param initString
+	 */
+	public VariableStruct(String name, String initString) {
+		this.name = name;
+		this.heap = new HashMap<String, Variable>();
+		
+		initString = initString.substring("Struct [".length());
+		initString = initString.substring(0, initString.length()-1);
+		
+		for (String val : initString.split("\\), \\(")) {
+			
+			if (val.startsWith("(")) {
+				val = val.substring(1);
+			}
+			if (val.endsWith(")")) {
+				val = val.substring(0, val.length()-1);
+			}
+			
+			name = val.substring(0, val.indexOf(","));
+			val = val.substring(val.indexOf(",") + 2);
+			
+			if (Variable.isBoolean(val) == false && Variable.isNumber(val) == false) {
+				this.setVariable(new Variable('"' + val + '"'), name);
+			}
+			else {
+				this.setVariable(new Variable(val), name);
+			}
+		}
+	}
+	
+	/**
 	 * Sets a struct member
 	 * 
 	 * @param var variable to set
