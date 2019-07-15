@@ -253,12 +253,6 @@ public class InternalFunctions {
 				return dictionaryPutLists(heap, params);
 			}
 		});
-		this.functions.put("sleep", new InternalFunction() {
-			@Override
-			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
-				return sleep(heap, params);
-			}
-		});
 		this.functions.put("random", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
@@ -1036,25 +1030,6 @@ public class InternalFunctions {
 		}
 
 		return ((VariableDictionary)var).getValues();
-	}
-	
-	private Variable sleep(Map<String, Variable> heap, String[] params) {
-		Variable sleepTime = heap.get(params[0]);
-		
-		if (sleepTime.getType() != VariableType.Number) {
-			Error.printErrorVariableIsNotANumber(params[0]);
-			return new Variable(FALSE);
-		}
-		
-		try {
-			Thread.sleep((long)sleepTime.getDoubleValue());
-		}
-		catch (InterruptedException e) {
-			Error.terminateInterpret("Execution of sleep() failed!");
-			e.printStackTrace();
-		}
-		
-		return new Variable(TRUE);
 	}
 	
 	/**
