@@ -166,7 +166,7 @@ public class Executer {
 			return this.internalFunctions.executeFunction(functionHeap, functionName, parameterList);
 		}
 
-		String varVal = "";
+		Variable varVal = new Variable();
 
 		// check if the call is a local implemented function or if the call was passed as a parameter variable
 		if (this.functionExecuter.hasFunction(functionName) || this.hasVariable(functionName)) {
@@ -199,17 +199,8 @@ public class Executer {
 				Error.terminateInterpret("The function '" + functionName + "' is not defined!");
 			}
 		}
-
-		// create proper variable before returning it
-		if (varVal.isEmpty()) {
-			return new Variable(NULL);
-		}
 		
-		if (varVal.contains(":") && !Variable.isString(varVal)) {
-			return new VariableList(varVal);
-		}
-		
-		return new Variable(varVal);
+		return varVal;
 	}
 
 	/**

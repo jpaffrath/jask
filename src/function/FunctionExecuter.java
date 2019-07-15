@@ -11,6 +11,8 @@ import helper.Error;
 import jask.Executer;
 import jask.Interpreter;
 import variable.Variable;
+import variable.VariableList;
+import variable.VariableStruct;
 
 /**
  * Executer for functions
@@ -35,10 +37,10 @@ public class FunctionExecuter {
 	 * @param heap local heap for the function
 	 * @return result of the function
 	 */
-	public String executeFunction(String name, List<Variable> heap, Map<String, Variable> localHeap, List<Executer> modules, InternalFunctions internalFunctions) {
+	public Variable executeFunction(String name, List<Variable> heap, Map<String, Variable> localHeap, List<Executer> modules, InternalFunctions internalFunctions) {
 		if (!this.hasFunction(name)) {
 			Error.printErrorFunctionNotDefined(name);
-			return NULL;
+			return new Variable();
 		}
 		
 		// if the object isn't copied, an internal module added inside the function would live after the function execution
@@ -48,7 +50,14 @@ public class FunctionExecuter {
 		function.setHeap(localHeap);
 		function.setParameterHeap(heap);
 		Interpreter interpreter = new Interpreter(function, this, new ArrayList<Executer>(modules), internalFunctionsCopy);
-		return interpreter.interpret(function.getTokens());
+		
+		String varVal = interpreter.interpret(function.getTokens());
+		
+		if (varVal.contains(":") && !Variable.isString(varVal)) {
+			return new VariableList(varVal);
+		}
+		
+		return new Variable(varVal);
 	}
 
 	/**
