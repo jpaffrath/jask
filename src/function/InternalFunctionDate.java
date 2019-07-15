@@ -36,6 +36,12 @@ public class InternalFunctionDate extends InternalFunctionsBase {
 				return getCurrentDate(heap, params);
 			}
 		});
+		this.functions.put("getDateFromUnix", new InternalFunction() {
+			@Override
+			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				return getDateFromUnix(heap, params);
+			}
+		});
 	}
 	
 	/**
@@ -97,5 +103,25 @@ public class InternalFunctionDate extends InternalFunctionsBase {
 		Variable currentDate = new Variable();
 		currentDate.setStringValue(new Date().toString());
 		return currentDate;
+	}
+	
+	/**
+	 * Internal implementation of getDateFromUnix
+	 * 
+	 * @param heap function heap
+	 * @param params function parameters
+	 * @return new Variable containing the date
+	 */
+	private Variable getDateFromUnix(Map<String, Variable> heap, String[] params) {
+		Variable seconds = heap.get(params[0]);
+		if (seconds == null) {
+			seconds = new Variable(heap.get(params[0]));
+		}
+		
+		long elapsedTime = (long)seconds.getDoubleValue() * 1000L;
+		Variable date = new Variable();
+		date.setStringValue(new Date(elapsedTime).toString());
+		
+		return date;
 	}
 }
