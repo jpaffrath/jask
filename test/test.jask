@@ -779,6 +779,21 @@ else
 	printLine("FAILED: myStruct->myString equals 'Another string'")
 endif
 
+function getStruct()
+	struct mockup
+		store "Test" in str
+	endstruct
+	return mockup
+end
+
+assign getStruct() to myStruct
+if myStruct->str equals "Test"
+	increment testPassed
+else
+	increment testFailed
+	printLine("FAILED: myStruct->str equals 'Test'")
+endif
+
 ; finish tests
 
 printLine("Finish tests with ":testPassed:" passed and ":testFailed:" failed tests!")
