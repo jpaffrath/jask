@@ -124,6 +124,11 @@ public final class Error {
 		System.out.println(prefix + "Internal modules can not be removed!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorInvalidTokenInStruct(String token) {
+		System.out.println(prefix + "Invalid token '" + token + "' in struct declaration!");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
