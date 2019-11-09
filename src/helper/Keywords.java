@@ -19,13 +19,23 @@ public class Keywords {
 			                                                                    "endstruct"));
 
 	/**
+	 * Checks if a given string is a jask calculation
+	 * 
+	 * @param t string to check
+	 * @return true if the given string is a jask calculation
+	 */
+	public static boolean isCalculation(String t) {
+		return calculations.contains(t);
+	}
+	
+	/**
 	 * Checks if a given string is a jask operator
 	 *
 	 * @param t string to check
 	 * @return true if the given string is a jask operator
 	 */
 	public static boolean isOperator(String t) {
-		return operators.contains(t);
+		return operators.contains(t) || Keywords.isCalculation(t);
 	}
 
 	/**
@@ -35,16 +45,6 @@ public class Keywords {
 	 * @return true if the given string is a jask keyword
 	 */
 	public static boolean isKeyword(String t) {
-		return keywords.contains(t);
-	}
-	
-	/**
-	 * Checks if a given string is a jask calculation
-	 * 
-	 * @param t string to check
-	 * @return true if the given string is a jask calculation
-	 */
-	public static boolean isCalculation(String t) {
-		return calculations.contains(t);
+		return keywords.contains(t) || Keywords.isOperator(t);
 	}
 }
