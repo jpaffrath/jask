@@ -13,6 +13,7 @@ import function.FunctionExecuter;
 import function.InternalFunctions;
 import helper.Error;
 import helper.Helpers;
+import helper.Keywords;
 import variable.Variable;
 import variable.VariableType;
 
@@ -23,9 +24,6 @@ import variable.VariableType;
  *
  */
 public class Interpreter {
-	private List<String> calculations;
-	private List<String> operators;
-	private List<String> keywords;
 	private List<String> values;
 	private Executer executer;
 
@@ -33,46 +31,6 @@ public class Interpreter {
 	 * General constructor
 	 */
 	public Interpreter() {
-		this.calculations = new ArrayList<String>();
-		this.calculations.add("plus");
-		this.calculations.add("minus");
-		this.calculations.add("times");
-		this.calculations.add("divide");
-
-		this.operators = new ArrayList<String>(this.calculations);
-		this.operators.add("store");
-		this.operators.add("assign");
-		this.operators.add("mod");
-		this.operators.add("equals");
-		this.operators.add("unequals");
-		this.operators.add("greater");
-		this.operators.add("smaller");
-		this.operators.add("greaterequals");
-		this.operators.add("smallerequals");
-		this.operators.add("increment");
-		this.operators.add("decrement");
-		this.operators.add("call");
-
-		this.keywords = new ArrayList<String>(this.operators);
-		this.keywords.add("function");
-		this.keywords.add("end");
-		this.keywords.add("if");
-		this.keywords.add("else");
-		this.keywords.add("endif");
-		this.keywords.add("return");
-		this.keywords.add("convert");
-		this.keywords.add("to");
-		this.keywords.add("number");
-		this.keywords.add("string");
-		this.keywords.add("in");
-		this.keywords.add("run");
-		this.keywords.add("with");
-		this.keywords.add("while");
-		this.keywords.add("for");
-		this.keywords.add("endrun");
-		this.keywords.add("struct");
-		this.keywords.add("endstruct");
-
 		this.values = new ArrayList<String>();
 		this.values.add(TRUE);
 		this.values.add(FALSE);
@@ -104,36 +62,6 @@ public class Interpreter {
 	}
 
 	/**
-	 * Checks if a given string is a jask calculation
-	 * 
-	 * @param t string to check
-	 * @return true if the given string is a jask calculation
-	 */
-	private boolean isCalculation(String t) {
-		return this.calculations.contains(t);
-	}
-
-	/**
-	 * Checks if a given string is a jask operator
-	 *
-	 * @param t string to check
-	 * @return true if the given string is a jask operator
-	 */
-	private boolean isOperator(String t) {
-		return this.operators.contains(t);
-	}
-
-	/**
-	 * Checks if a given string is a jask keyword
-	 *
-	 * @param t string to check
-	 * @return true if the given string is a jask keyword
-	 */
-	private boolean isKeyword(String t) {
-		return this.keywords.contains(t);
-	}
-
-	/**
 	 * Checks if a given string is a jask value
 	 *
 	 * @param t string to check
@@ -150,7 +78,7 @@ public class Interpreter {
 	 * @return true if the given string is a valid jask variable name
 	 */
 	private boolean isValidVariableName(String t) {
-		if (this.isKeyword(t) || this.isOperator(t) || this.isValue(t)) {
+		if (Keywords.isKeyword(t) || Keywords.isOperator(t) || this.isValue(t)) {
 			return false;
 		}
 		
@@ -235,7 +163,7 @@ public class Interpreter {
 				}
 				else {
 					// check if the return statement is a calculation
-					if (tokens.size() > i+2 && isCalculation(this.getTokenOrDie(tokens, i, 2))) {
+					if (tokens.size() > i+2 && Keywords.isCalculation(this.getTokenOrDie(tokens, i, 2))) {
 						final String operandName1 = this.getTokenOrDie(tokens, i, 1);
 						final String operandName2 = this.getTokenOrDie(tokens, i, 3);
 
@@ -266,7 +194,7 @@ public class Interpreter {
 			// checks store expressions
 			else if (t.contentEquals("store") && tokens.size() > i +3 && tokens.get(i+2).contentEquals("in")) {
 				// check if the variable name is a keyword
-				if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
+				if (Keywords.isKeyword(this.getTokenOrDie(tokens, i, 1))) {
 					Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
 				}
 				
@@ -279,16 +207,16 @@ public class Interpreter {
 			}
 			// checks assign expressions
 			else if (t.contentEquals("assign")) {
-				if (isOperator(this.getTokenOrDie(tokens, i, 2)) && this.getTokenOrDie(tokens, i, 4).contentEquals("to")) {
-					if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
+				if (Keywords.isOperator(this.getTokenOrDie(tokens, i, 2)) && this.getTokenOrDie(tokens, i, 4).contentEquals("to")) {
+					if (Keywords.isKeyword(this.getTokenOrDie(tokens, i, 1))) {
 						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
 					}
 
-					if (isKeyword(this.getTokenOrDie(tokens, i, 3))) {
+					if (Keywords.isKeyword(this.getTokenOrDie(tokens, i, 3))) {
 						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 3) + " is a keyword!");
 					}
 
-					if (isKeyword(this.getTokenOrDie(tokens, i, 5)) || isValue(this.getTokenOrDie(tokens, i, 5))) {
+					if (Keywords.isKeyword(this.getTokenOrDie(tokens, i, 5)) || isValue(this.getTokenOrDie(tokens, i, 5))) {
 						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 5) + " is a keyword!");
 					}
 
@@ -296,11 +224,11 @@ public class Interpreter {
 					i += 5;
 				}
 				else {
-					if (isKeyword(this.getTokenOrDie(tokens, i, 1))) {
+					if (Keywords.isKeyword(this.getTokenOrDie(tokens, i, 1))) {
 						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 1) + " is a keyword!");
 					}
 
-					if (isKeyword(this.getTokenOrDie(tokens, i, 3)) || isValue(this.getTokenOrDie(tokens, i, 3))) {
+					if (Keywords.isKeyword(this.getTokenOrDie(tokens, i, 3)) || isValue(this.getTokenOrDie(tokens, i, 3))) {
 						Error.terminateInterpret(this.getTokenOrDie(tokens, i, 3) + " is a keyword!");
 					}
 
