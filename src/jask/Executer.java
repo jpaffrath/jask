@@ -14,6 +14,7 @@ import function.FunctionExecuter;
 import function.InternalFunctions;
 import helper.Error;
 import helper.Helpers;
+import helper.Keywords;
 import variable.Variable;
 import variable.VariableFunction;
 import variable.VariableList;
@@ -893,6 +894,9 @@ public class Executer {
 			if (token.contentEquals("store")) {
 				this.executeStore(tokens.subList(i, i+4), structHeap);
 				i += 3;
+			}
+			else if (Keywords.isKeyword(token)) {
+				Error.printErrorInvalidTokenInStruct(token);
 			}
 		}
 		
