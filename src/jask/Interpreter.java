@@ -26,6 +26,8 @@ import variable.VariableType;
 public class Interpreter {
 	private List<String> values;
 	private Executer executer;
+	
+	private char[] invalidChars = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '\'', ';', '/', '\\', '!'};
 
 	/**
 	 * General constructor
@@ -82,7 +84,6 @@ public class Interpreter {
 			return false;
 		}
 		
-		char[] invalidChars = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '\'', ';', '/', '\\'};
 		char toCheck = t.toCharArray()[0];
 		
 		for (char c : invalidChars) {
