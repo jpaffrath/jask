@@ -131,8 +131,12 @@ public final class Error {
 	}
 	
 	public static void printErrorFunctionExpectingParameters(String function, String parameters) {
-		System.out.println(prefix + "Expecting parameters: " + function + "(" + parameters + ")");
+		System.out.println(prefix + "Expecting parameters: " + function + "(" + parameters + ")!");
 		System.exit(-1);
+	}
+	
+	public static void printErrorFunctionIsNotExpectingParameters(String function) {
+		System.out.println(prefix + "Function " + function + " is not expecting any parameters!");
 	}
 
 	public static void terminateInterpret(String reason) {
