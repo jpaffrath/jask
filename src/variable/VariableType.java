@@ -12,5 +12,6 @@ public enum VariableType {
 	Bool,
 	Struct,
 	Dictionary,
+	List,
 	NoType
 }
