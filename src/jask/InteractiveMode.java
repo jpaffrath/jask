@@ -81,6 +81,13 @@ public class InteractiveMode {
 				this.printJaskPrompt();
 				continue;
 			}
+			
+			//prints the variables in the current context
+			if (line.contentEquals("variables")) {
+				interpreter.getExecuter().printVariables();
+				this.printJaskPrompt();
+				continue;
+			}
 
 			// wraps the internal implementation of read()
 			if (line.contains("read()")) {
