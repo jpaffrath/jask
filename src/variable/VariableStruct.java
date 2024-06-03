@@ -115,7 +115,7 @@ public class VariableStruct extends Variable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("Struct [");
+		StringBuilder builder = new StringBuilder("[");
 		List<String> keys = new ArrayList<>(this.heap.keySet());
 		
 		for (int i = 0; i < keys.size(); i++) {
