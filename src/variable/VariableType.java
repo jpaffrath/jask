@@ -10,5 +10,7 @@ public enum VariableType {
 	String,
 	Number,
 	Bool,
+	Struct,
+	Dictionary,
 	NoType
 }
