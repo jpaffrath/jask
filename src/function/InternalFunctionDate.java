@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 import variable.Variable;
+import variable.VariableType;
 import helper.Error;
 
 /**
@@ -21,24 +22,36 @@ public class InternalFunctionDate extends InternalFunctionsBase {
 		this.functions.put("getUnixTime", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				if (heap.size() != 0) {
+					Error.printErrorFunctionIsNotExpectingParameters(functionName);
+				}
 				return getUnixTime(heap, params);
 			}
 		});
 		this.functions.put("getFormatDate", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				if (heap.size() != 1) {
+					Error.printErrorFunctionExpectingParameters(functionName, "dateFormat[String]");
+				}
 				return getFormatDate(heap, params);
 			}
 		});
 		this.functions.put("getCurrentDate", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				if (heap.size() != 0) {
+					Error.printErrorFunctionIsNotExpectingParameters(functionName);
+				}
 				return getCurrentDate(heap, params);
 			}
 		});
 		this.functions.put("getDateFromUnix", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				if (heap.size() != 1) {
+					Error.printErrorFunctionExpectingParameters(functionName, "seconds[Number]");
+				}
 				return getDateFromUnix(heap, params);
 			}
 		});
@@ -116,6 +129,10 @@ public class InternalFunctionDate extends InternalFunctionsBase {
 		Variable seconds = heap.get(params[0]);
 		if (seconds == null) {
 			seconds = new Variable(heap.get(params[0]));
+		}
+		
+		if (seconds.getType() != VariableType.Number) {
+			Error.printErrorVariableIsNotANumber(seconds.toString());
 		}
 		
 		long elapsedTime = (long)seconds.getDoubleValue() * 1000L;
