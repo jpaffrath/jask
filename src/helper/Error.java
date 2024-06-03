@@ -129,6 +129,11 @@ public final class Error {
 		System.out.println(prefix + "Invalid token '" + token + "' in struct declaration!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorFunctionExpectingParameters(String function, String parameters) {
+		System.out.println(prefix + "Expecting parameters: " + function + "(" + parameters + ")");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
