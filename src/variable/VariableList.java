@@ -14,6 +14,11 @@ import helper.Error;
  */
 public class VariableList extends Variable {
 	private List<Variable> values;
+	
+	public VariableList() {
+		super();
+		this.setType(VariableType.List);
+	}
 
 	/**
 	 * Initializes a new list variable based on a generic value
@@ -21,7 +26,7 @@ public class VariableList extends Variable {
 	 * @param genericValue value as string
 	 */
 	public VariableList(String genericValue) {
-		super();
+		this();
 		this.values = new ArrayList<Variable>();
 
 		for (String curVal : genericValue.split(":")) {
@@ -37,7 +42,7 @@ public class VariableList extends Variable {
 	 * @param var list variable to be used
 	 */
 	public VariableList(VariableList var) {
-		super();
+		this();
 
 		this.values = new ArrayList<Variable>();
 
@@ -62,7 +67,7 @@ public class VariableList extends Variable {
 	 * @param values values for the new list variable
 	 */
 	public VariableList(List<Variable> values) {
-		super();
+		this();
 		
 		this.values = new ArrayList<Variable>();
 		

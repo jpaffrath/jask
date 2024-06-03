@@ -20,6 +20,7 @@ public class VariableDictionary extends Variable {
 	public VariableDictionary() {
 		super();
 		this.dictionary = new HashMap<>();
+		this.setType(VariableType.Dictionary);
 	}
 	
 	/**
@@ -29,7 +30,7 @@ public class VariableDictionary extends Variable {
 	 * @param values list of values
 	 */
 	public VariableDictionary(List<Variable> keys, List<Variable> values) {
-		super();
+		this();
 		this.dictionary = new HashMap<>();
 		
 		for (int i = 0; i < keys.size(); i++) {
@@ -55,7 +56,7 @@ public class VariableDictionary extends Variable {
 	 * @param dictionary dictionary variable to be used
 	 */
 	public VariableDictionary(VariableDictionary dictionary) {
-		super();
+		this();
 		
 		this.dictionary = new HashMap<>();
 		

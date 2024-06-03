@@ -15,6 +15,11 @@ public class VariableStruct extends Variable {
 	private String name;
 	private Map<String, Variable> heap;
 	
+	public VariableStruct() {
+		super();
+		this.setType(VariableType.Struct);
+	}
+	
 	/**
 	 * Initializes a new struct with a given name and heap
 	 * 
@@ -22,6 +27,7 @@ public class VariableStruct extends Variable {
 	 * @param heap heap of the new struct
 	 */
 	public VariableStruct(String name, Map<String, Variable> heap) {
+		this();
 		this.name = name;
 		this.heap = heap;
 	}
@@ -33,6 +39,7 @@ public class VariableStruct extends Variable {
 	 * @param variable struct variable
 	 */
 	public VariableStruct(String name, VariableStruct variable) {
+		this();
 		this.name = name;
 		this.heap = new HashMap<String, Variable>(variable.heap);
 	}
@@ -43,6 +50,7 @@ public class VariableStruct extends Variable {
 	 * @param variable struct variable
 	 */
 	public VariableStruct(VariableStruct variable) {
+		this();
 		this.name = variable.name;
 		this.heap = variable.heap;
 	}
@@ -54,6 +62,7 @@ public class VariableStruct extends Variable {
 	 * @param initString
 	 */
 	public VariableStruct(String name, String initString) {
+		this();
 		this.name = name;
 		this.heap = new HashMap<String, Variable>();
 		
