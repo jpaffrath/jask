@@ -118,6 +118,23 @@ public class Executer {
 	public boolean hasVariable(String variableName) {
 		return this.heap.containsKey(variableName);
 	}
+	
+	/**
+	 * Prints a list of all variables including types and values to standard out
+	 */
+	public void printVariables() {
+		if (this.heap.size()<= 0) {
+			System.out.println("No variables in current context");
+			return;
+		}
+		
+		System.out.println("     TYPE | NAME | VALUE");
+		
+		for (String variableName : this.heap.keySet()) {
+			Variable var = this.getVariableFromHeap(variableName);
+			System.out.println("     " + var.getType() + " " + variableName + " " + var.toString());
+		}
+	}
 
 	/**
 	 * Executes a function
