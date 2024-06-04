@@ -26,6 +26,9 @@ public class InternalFunctionsSystem extends InternalFunctionsBase {
 		this.functions.put("sleep", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				if (heap.size() != 1) {
+					Error.printErrorFunctionExpectingParameters(functionName, "milliseconds[Number]");
+				}
 				return sleep(heap, params);
 			}
 		});
