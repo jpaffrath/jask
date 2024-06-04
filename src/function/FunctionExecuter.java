@@ -45,6 +45,27 @@ public class FunctionExecuter {
 		InternalFunctions internalFunctionsCopy = new InternalFunctions(internalFunctions);
 
 		Function function = this.functions.get(name);
+		String[] funcParams = function.getParameter();
+		
+		// check if passed parameters for call matches functions signature
+		if (funcParams[0].equals("") && heap.size() >= 1) {
+			Error.printErrorFunctionIsNotExpectingParameters(name);
+		}
+		if (funcParams[0].equals("") == false && funcParams.length != heap.size()) {
+			
+			StringBuilder builder = new StringBuilder();
+			
+			for (int i = 0; i < funcParams.length; i++) {
+				builder.append(funcParams[i]);
+				
+				if (i != funcParams.length-1) {
+					builder.append(":");
+				}
+			}
+			
+			Error.printErrorFunctionExpectingParameters(name, builder.toString());
+		}
+		
 		function.setHeap(localHeap);
 		function.setParameterHeap(heap);
 		Interpreter interpreter = new Interpreter(function, this, new ArrayList<Executer>(modules), internalFunctionsCopy);
