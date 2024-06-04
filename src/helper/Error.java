@@ -137,6 +137,7 @@ public final class Error {
 	
 	public static void printErrorFunctionIsNotExpectingParameters(String function) {
 		System.out.println(prefix + "Function " + function + " is not expecting any parameters!");
+		System.exit(-1);
 	}
 
 	public static void terminateInterpret(String reason) {
