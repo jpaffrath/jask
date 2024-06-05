@@ -169,7 +169,7 @@ function strRepeat(str:num)
 	if isNumber(num) equals FALSE return NULL else endif
 	if num smallerequals 0 return NULL else endif
 
-	assign str to s
+	store str in s
 
 	store 1 in i
 	while i smaller num
