@@ -113,7 +113,7 @@ end
 Want more examples? Visit [Functions Wiki](https://github.com/jpaffrath/jask/wiki/Functions)!
 
 ### Work with list variables
-A list in jask can store strings, numbers, boolean values, other lists and dictionaries.
+A list in jask can store strings, numbers, boolean values, other lists, dictionaries and structs.
 In addition, a list can store different types at the same time.
 ```Assembly
 store list(1:2:3) in numbers
