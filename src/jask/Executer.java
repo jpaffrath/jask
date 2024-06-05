@@ -366,11 +366,20 @@ public class Executer {
 				// a new value is assigned to a struct member
 				if (destStr.contains("->")) {
 					VariableStruct struct = this.getStructFromHeap(destStr);
+					
+					if (struct == null) {
+						Error.printErrorVariableNotDefined(destStr.substring(0, destStr.indexOf("->")));
+					}
+					
 					String variableName = destStr.substring(destStr.indexOf("->") + 2, destStr.length());
 					struct.setVariable(new Variable(varStr), variableName);
 					return;
 				}
 				
+				if (this.hasVariable(destStr) == false) {
+					Error.printErrorVariableNotDefined(destStr);
+				}
+
 				Variable var = getVariableFromHeap(varStr);
 				if (var == null) {
 					this.heap.put(destStr, new Variable(varStr));
