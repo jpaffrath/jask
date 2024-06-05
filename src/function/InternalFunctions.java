@@ -18,6 +18,7 @@ import helper.Helpers;
 import variable.Variable;
 import variable.VariableDictionary;
 import variable.VariableList;
+import variable.VariableStruct;
 import variable.VariableType;
 
 /**
@@ -448,6 +449,9 @@ public class InternalFunctions {
 		}
 		else if (val instanceof VariableDictionary) {
 			return new VariableDictionary((VariableDictionary)val);
+		}
+		else if (val instanceof VariableStruct) {
+			return new VariableStruct((VariableStruct)val);
 		}
 		
 		return new Variable(val);
