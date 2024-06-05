@@ -148,7 +148,7 @@ public class Executer {
 		
 		List<String> params = null;
 		
-		if (Interpreter.isFunction(parameterList)) {
+		if (Helpers.isFunction(parameterList)) {
 			params = new ArrayList<String>();
 			params.add(parameterList);
 		}
@@ -167,7 +167,7 @@ public class Executer {
 					functionHeap.add(new Variable(var));
 				}
 				// if the parameter is a function call, execute the function and push its return value on the heap
-				else if (Interpreter.isFunction(var)) {
+				else if (Helpers.isFunction(var)) {
 					functionHeap.add(executeFunction(var));
 				}
 				// if parameter is a function, create a new function variable on the heap
@@ -362,7 +362,7 @@ public class Executer {
 			String varStr = tokens.get(1);
 			String destStr = tokens.get(3);
 
-			if (!Interpreter.isFunction(varStr)) {
+			if (!Helpers.isFunction(varStr)) {
 				// a new value is assigned to a struct member
 				if (destStr.contains("->")) {
 					VariableStruct struct = this.getStructFromHeap(destStr);
@@ -402,14 +402,14 @@ public class Executer {
 		Variable var1 = null;
 		Variable var2 = null;
 
-		if (Interpreter.isFunction(var1Str)) {
+		if (Helpers.isFunction(var1Str)) {
 			var1 = executeFunction(var1Str);
 		}
 		else {
 			var1 = getVariableFromHeap(var1Str);
 		}
 
-		if (Interpreter.isFunction(var2Str)) {
+		if (Helpers.isFunction(var2Str)) {
 			var2 = executeFunction(var2Str);
 		}
 		else {
@@ -508,7 +508,7 @@ public class Executer {
 			return;
 		}
 
-		if (Interpreter.isFunction(variableValue)) {
+		if (Helpers.isFunction(variableValue)) {
 			storeHeap.put(variableName, executeFunction(variableValue));
 		}
 		else if (storeHeap.containsKey(variableValue) && storeHeap.get(variableValue) instanceof VariableStruct) {
@@ -585,7 +585,7 @@ public class Executer {
 				if (Variable.isNumber(tokens.get(3))) {
 					startVal = new Variable(tokens.get(3));
 				}
-				else if (Interpreter.isFunction(tokens.get(3))) {
+				else if (Helpers.isFunction(tokens.get(3))) {
 					startVal = new Variable(executeFunction(tokens.get(3)));
 				}
 				else {
@@ -603,7 +603,7 @@ public class Executer {
 				if (Variable.isNumber(tokens.get(5))) {
 					endVal = new Variable(tokens.get(5));
 				}
-				else if (Interpreter.isFunction(tokens.get(5))) {
+				else if (Helpers.isFunction(tokens.get(5))) {
 					endVal = new Variable(executeFunction(tokens.get(5)));
 				}
 				else {
@@ -675,7 +675,7 @@ public class Executer {
 			// if the list does not exists, it is probably a list() function call
 			if (runner == null) {
 				// if if is a list() call, execute it so we have a temporarily runner variable
-				if (Interpreter.isFunction(tokens.get(3))) {
+				if (Helpers.isFunction(tokens.get(3))) {
 					runner =  executeFunction(tokens.get(3));
 				}
 			}
@@ -785,14 +785,14 @@ public class Executer {
 		Variable var1 = null;
 		Variable var2 = null;
 
-		if (Interpreter.isFunction(tokens.get(1))) {
+		if (Helpers.isFunction(tokens.get(1))) {
 			var1 = executeFunction(tokens.get(1));
 		}
 		else {
 			var1 = getVariableFromHeap(tokens.get(1));
 		}
 
-		if (Interpreter.isFunction(tokens.get(3))) {
+		if (Helpers.isFunction(tokens.get(3))) {
 			var2 = executeFunction(tokens.get(3));
 		}
 		else {

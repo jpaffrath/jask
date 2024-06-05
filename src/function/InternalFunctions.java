@@ -15,7 +15,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import helper.Error;
 import helper.Helpers;
-import jask.Interpreter;
 import variable.Variable;
 import variable.VariableDictionary;
 import variable.VariableList;
@@ -273,7 +272,7 @@ public class InternalFunctions {
 	public Variable executeFunction(List<Variable> _heap, String functionName, String param) {
 		List<String> n = null;
 		
-		if (Interpreter.isFunction(param)) {
+		if (Helpers.isFunction(param)) {
 			n = new ArrayList<String>();
 			n.add(param);
 		}

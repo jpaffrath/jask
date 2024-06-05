@@ -3,6 +3,7 @@ package helper;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Provides small helper functions
@@ -82,4 +83,42 @@ public final class Helpers {
 
 		return params;
 	}
+	
+	/**
+	 * Checks if a given string is a jask function
+	 *
+	 * @param input string to check
+	 * @return true if the given string is a jask function
+	 */
+	public static boolean isFunction(String input) {
+		if (input.contains("(") == false) return false;
+		if (input.contains(")") == false) return false;
+
+		Stack<Character> stack = new Stack<>();
+        boolean functionNameFound = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+
+            if (Character.isLetter(currentChar)) {
+                functionNameFound = true;
+            } else if (currentChar == '(') {
+                if (!functionNameFound) {
+                    return false;
+                }
+                stack.push(currentChar);
+            } else if (currentChar == ')') {
+                if (stack.isEmpty() || stack.peek() != '(') {
+                    return false;
+                }
+                stack.pop();
+            } else if (currentChar == ',' || currentChar == ':' || currentChar == '"') {
+                if (stack.isEmpty() || stack.peek() != '(') {
+                    return false;
+                }
+            }
+        }
+
+        return functionNameFound && stack.isEmpty();
+    }
 }
