@@ -5,6 +5,9 @@ import static jask.Constants.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import expression.Expression;
 import expression.ExpressionType;
@@ -94,15 +97,47 @@ public class Interpreter {
 		
 		return true;
 	}
+	
+	private static boolean isValidFunctionCall(String input) {
+		Stack<Character> stack = new Stack<>();
+        boolean functionNameFound = false;
 
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+
+            if (Character.isLetter(currentChar)) {
+                functionNameFound = true; // Funktionenamen gefunden
+            } else if (currentChar == '(') {
+                if (!functionNameFound) {
+                    return false; // Öffnende Klammer ohne Funktion
+                }
+                stack.push(currentChar);
+            } else if (currentChar == ')') {
+                if (stack.isEmpty() || stack.peek() != '(') {
+                    return false; // Schließende Klammer ohne öffnende Klammer
+                }
+                stack.pop();
+            } else if (currentChar == ',' || currentChar == ':' || currentChar == '"') {
+                if (stack.isEmpty() || stack.peek() != '(') {
+                    return false; // Trennzeichen außerhalb von Parametern
+                }
+            }
+        }
+
+        return functionNameFound && stack.isEmpty();
+    }
+	
 	/**
 	 * Checks if a given string is a jask function
 	 *
 	 * @param t string to check
 	 * @return true if the given string is a jask function
 	 */
-	public static boolean isFunction(String t) {
-		return t.lastIndexOf(')') == t.length() -1;
+	public static boolean isFunction(String s) {
+		if (s.contains("(") == false) return false;
+		if (s.contains(")") == false) return false;
+
+		return isValidFunctionCall(s);
 	}
 
 	/**
