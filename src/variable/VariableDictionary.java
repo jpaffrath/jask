@@ -66,6 +66,46 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Initializes a new dictionary based on a given init string
+	 * 
+	 * @param name
+	 * @param initString
+	 */
+	public VariableDictionary(String name, String initString) {
+		this();
+		
+		//(1, 2), (3, 4)
+		
+		initString = initString.substring("Dictionary [".length());
+		initString = initString.substring(0, initString.length()-1);
+		
+		for (String val : initString.split("\\), \\(")) {
+			
+			if (val.startsWith("(")) {
+				val = val.substring(1);
+			}
+			if (val.endsWith(")")) {
+				val = val.substring(0, val.length()-1);
+			}
+			
+			String key = val.substring(0, val.indexOf(","));
+			String value = val.substring(val.indexOf(",") + 2);
+			
+			Variable valueVariable = new Variable();
+			
+			
+			if (Variable.isBoolean(val) == false && Variable.isNumber(val) == false) {
+				valueVariable = new Variable('"' + value + '"');
+			}
+			else {
+				valueVariable = new Variable(value);
+			}
+			
+			this.dictionary.put(key, valueVariable);
+		}
+	}
+	
+	/**
 	 * Puts a new entry to the dictionary
 	 * 
 	 * @param key the new key
@@ -163,7 +203,7 @@ public class VariableDictionary extends Variable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("[");
+		StringBuilder builder = new StringBuilder("Dictionary [");
 		List<String> keys = new ArrayList<>(this.dictionary.keySet());
 		
 		for (int i = 0; i < keys.size(); i++) {
