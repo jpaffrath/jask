@@ -9,6 +9,7 @@ import helper.Error;
 import jask.Executer;
 import jask.Interpreter;
 import variable.Variable;
+import variable.VariableDictionary;
 import variable.VariableList;
 import variable.VariableStruct;
 
@@ -77,6 +78,9 @@ public class FunctionExecuter {
 		}
 		if (varVal.startsWith("Struct [")) {
 			return new VariableStruct("", varVal);
+		}
+		if (varVal.startsWith("Dictionary [")) {
+			return new VariableDictionary("", varVal);
 		}
 		
 		return new Variable(varVal);
