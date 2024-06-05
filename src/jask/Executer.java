@@ -146,7 +146,16 @@ public class Executer {
 		String functionName = token.substring(0, token.indexOf('('));
 		String parameterList = token.substring(token.indexOf('(')+1, token.lastIndexOf(')'));
 		
-		List<String> params = Helpers.splitParams(parameterList);
+		List<String> params = null;
+		
+		if (Interpreter.isFunction(parameterList)) {
+			params = new ArrayList<String>();
+			params.add(parameterList);
+		}
+		else {
+			params = Helpers.splitParams(parameterList);
+		}
+		
 		List<Variable> functionHeap = new ArrayList<Variable>();
 		
 		// if the function call contains parameters, parse them and add the variables to the function heap
