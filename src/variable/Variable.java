@@ -253,6 +253,10 @@ public class Variable {
 		if (this.type == VariableType.Struct) {
 			return VariableStruct.equals((VariableStruct)this, (VariableStruct)var);
 		}
+		
+		if (this.type == VariableType.Dictionary) {
+			return VariableDictionary.equals((VariableDictionary)this, (VariableDictionary)var);
+		}
 
 		return false;
 	}

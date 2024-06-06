@@ -199,6 +199,17 @@ public class VariableDictionary extends Variable {
 	}
 	
 	/**
+	 * Static equals to compare two dictionaries
+	 * 
+	 * @param var1 first dictionary
+	 * @param var2 second dictionary
+	 * @return true if both dictionaries are equal
+	 */
+	public static boolean equals(VariableDictionary var1, VariableDictionary var2) {
+		return var1.dictionary.equals(var2.dictionary);
+	}
+	
+	/**
 	 * Returns a string representation based on the variables content
 	 */
 	@Override
