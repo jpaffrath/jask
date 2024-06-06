@@ -41,6 +41,9 @@ public class VariableDictionary extends Variable {
 			else if (v instanceof VariableDictionary) {
 				this.dictionary.put(keys.get(i).toString(), new VariableDictionary((VariableDictionary)v));
 			}
+			else if (v instanceof VariableStruct) {
+				this.dictionary.put(keys.get(i).toString(), new VariableStruct((VariableStruct)v));
+			}
 			else {
 				this.dictionary.put(keys.get(i).toString(), new Variable(values.get(i)));
 			}
