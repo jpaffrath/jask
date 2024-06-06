@@ -384,8 +384,11 @@ public class Executer {
 				if (var == null) {
 					this.heap.put(destStr, new Variable(varStr));
 				}
-				else if (var instanceof VariableList){
+				else if (var instanceof VariableList) {
 					this.heap.put(destStr, new VariableList(var.toString()));
+				}
+				else if (var instanceof VariableStruct) {
+					this.heap.put(destStr, new VariableStruct(destStr, (VariableStruct)var));
 				}
 				else {
 					this.heap.put(tokens.get(3), new Variable(var));
