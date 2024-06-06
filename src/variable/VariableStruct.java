@@ -111,6 +111,17 @@ public class VariableStruct extends Variable {
 	}
 	
 	/**
+	 * Static equals to compare two structs
+	 * 
+	 * @param var1 first struct
+	 * @param var2 second struct
+	 * @return true if both structs are equal
+	 */
+	public static boolean equals(VariableStruct var1, VariableStruct var2) {
+		return var1.heap.equals(var2.heap);
+	}
+	
+	/**
 	 * Override of toString
 	 */
 	@Override
