@@ -12,7 +12,6 @@ import java.util.Map;
  *
  */
 public class VariableStruct extends Variable {
-	private String name;
 	private Map<String, Variable> heap;
 	
 	public VariableStruct() {
@@ -28,7 +27,6 @@ public class VariableStruct extends Variable {
 	 */
 	public VariableStruct(String name, Map<String, Variable> heap) {
 		this();
-		this.name = name;
 		this.heap = heap;
 	}
 	
@@ -40,7 +38,6 @@ public class VariableStruct extends Variable {
 	 */
 	public VariableStruct(String name, VariableStruct variable) {
 		this();
-		this.name = name;
 		this.heap = new HashMap<String, Variable>(variable.heap);
 	}
 	
@@ -51,7 +48,6 @@ public class VariableStruct extends Variable {
 	 */
 	public VariableStruct(VariableStruct variable) {
 		this();
-		this.name = variable.name;
 		this.heap = variable.heap;
 	}
 	
@@ -63,7 +59,6 @@ public class VariableStruct extends Variable {
 	 */
 	public VariableStruct(String name, String initString) {
 		this();
-		this.name = name;
 		this.heap = new HashMap<String, Variable>();
 		
 		initString = initString.substring("Struct [".length());

@@ -65,7 +65,7 @@ public class VariableDictionary extends Variable {
 	 * @param name
 	 * @param initString
 	 */
-	public VariableDictionary(String name, String initString) {
+	public VariableDictionary(String initString) {
 		this();
 		
 		//(1, 2), (3, 4)

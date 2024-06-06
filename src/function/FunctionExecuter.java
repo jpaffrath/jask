@@ -80,7 +80,7 @@ public class FunctionExecuter {
 			return new VariableStruct("", varVal);
 		}
 		if (varVal.startsWith("Dictionary [")) {
-			return new VariableDictionary("", varVal);
+			return new VariableDictionary(varVal);
 		}
 		
 		return new Variable(varVal);
