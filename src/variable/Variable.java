@@ -249,6 +249,10 @@ public class Variable {
 		if (this.type == VariableType.Bool) {
 			return this.boolValue == var.boolValue;
 		}
+		
+		if (this.type == VariableType.Struct) {
+			return VariableStruct.equals((VariableStruct)this, (VariableStruct)var);
+		}
 
 		return false;
 	}
