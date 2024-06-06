@@ -16,6 +16,7 @@ import helper.Error;
 import helper.Helpers;
 import helper.Keywords;
 import variable.Variable;
+import variable.VariableDictionary;
 import variable.VariableFunction;
 import variable.VariableList;
 import variable.VariableStruct;
@@ -532,6 +533,9 @@ public class Executer {
 				Variable varOld = this.getVariableFromHeap(variableValue);
 				if (varOld instanceof VariableList) {
 					storeHeap.put(variableName, new VariableList(varOld.toString()));
+				}
+				else if (varOld instanceof VariableDictionary) {
+					storeHeap.put(variableName, new VariableDictionary((VariableDictionary)varOld));
 				}
 				else {
 					storeHeap.put(variableName, new Variable(varOld));

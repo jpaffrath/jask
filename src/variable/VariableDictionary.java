@@ -56,10 +56,7 @@ public class VariableDictionary extends Variable {
 	 */
 	public VariableDictionary(VariableDictionary dictionary) {
 		this();
-		
-		for (String key : dictionary.dictionary.keySet()) {
-			this.dictionary.put(key, new Variable(dictionary.dictionary.get(key)));
-		}
+		this.dictionary = dictionary.dictionary;
 	}
 	
 	/**
