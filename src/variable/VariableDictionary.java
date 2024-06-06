@@ -31,7 +31,6 @@ public class VariableDictionary extends Variable {
 	 */
 	public VariableDictionary(List<Variable> keys, List<Variable> values) {
 		this();
-		this.dictionary = new HashMap<>();
 		
 		for (int i = 0; i < keys.size(); i++) {
 			Variable v = values.get(i);
@@ -57,8 +56,6 @@ public class VariableDictionary extends Variable {
 	 */
 	public VariableDictionary(VariableDictionary dictionary) {
 		this();
-		
-		this.dictionary = new HashMap<>();
 		
 		for (String key : dictionary.dictionary.keySet()) {
 			this.dictionary.put(key, new Variable(dictionary.dictionary.get(key)));
