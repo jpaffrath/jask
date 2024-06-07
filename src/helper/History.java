@@ -1,5 +1,8 @@
 package helper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Manages input history
  *
@@ -7,19 +10,17 @@ package helper;
  *
  */
 public class History {
-	private int historyMax;
-	private String history[];
-	private int historyIndex;
+	private final List<String> history;
+	private final int historyMax;
 
 	/**
 	 * Standard constructor
 	 *
-	 * @param historyMax maximum number of stored history lines
+	 * @param max maximum number of stored history lines
 	 */
-	public History(int historyMax) {
-		this.historyMax = historyMax;
-		this.history = new String[this.historyMax];
-		this.historyIndex = 0;
+	public History(int max) {
+		this.historyMax = max;
+		this.history = new ArrayList<>(max);
 	}
 
 	/**
@@ -32,30 +33,37 @@ public class History {
 			return;
 		}
 
-		// if the history is full, clear it
-		if (this.historyIndex + 1 > this.historyMax) {
-			this.history = new String[this.historyMax];
-			this.historyIndex = 0;
+		if (history.size() >= historyMax) {
+			history.remove(0);
 		}
 
-		this.history[this.historyIndex++] = line;
+		history.add(line);
 	}
 
 	/**
 	 * Prints the history to the standard out
 	 */
 	public void printHistory() {
-		for (int i = 0; i < this.historyIndex; i++) {
-			System.out.println("[" + (i + 1) +"]" + " " + this.history[i]);
-		}
+		printHistory(false);
 	}
 
 	/**
-	 * Prints the history descending
+	 * Prints the history descending to the standard out
 	 */
 	public void printHistoryDESC() {
-		for (int i = this.historyIndex-1; i >= 0; i--) {
-			System.out.println("[" + (i + 1) +"]" + " " + this.history[i]);
+		printHistory(true);
+	}
+	
+	private void printHistory(boolean descending) {
+		if (descending) {
+			for (int i = history.size() -1; i >= 0; i--) {
+				System.out.println("[" + (i + 1) + "] " + history.get(i));
+			}
+		}
+		else {
+			for (int i = 0; i < history.size(); i++) {
+                System.out.println("[" + (i + 1) + "] " + history.get(i));
+            }
 		}
 	}
 }
