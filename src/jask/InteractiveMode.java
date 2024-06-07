@@ -36,7 +36,7 @@ public class InteractiveMode {
 		Interpreter interpreter = new Interpreter();
 
 		Scanner scanner = new Scanner(System.in);
-		List<String> tempList = new ArrayList<String>();
+		List<String> tempList = new ArrayList<>();
 		String line = "";
 
 		System.out.println("jask interpreter version " + this.version);

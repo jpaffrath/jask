@@ -15,13 +15,13 @@ import helper.Helpers;
  *
  */
 public class Main {
-	private static final String version = "0.0.1";
+	private static final String VERSION = "0.0.1";
 
 	/**
 	 * Creates jask code for the global argument list
 	 */
 	private static List<String> setUpEnv(String[] args) {
-		List<String> env = new ArrayList<String>(args.length);
+		List<String> env = new ArrayList<>(args.length);
 		env.add("store list(\"" + args[0] + "\") in _ENV");
 
 		for (int i = 1; i < args.length; i++) {
@@ -40,7 +40,7 @@ public class Main {
 	public static void main(String[] args) {
 		// if no arguments are provided, enter the jask interactive mode
 		if (args.length == 0) {
-			new InteractiveMode(version).execute();
+			new InteractiveMode(VERSION).execute();
 			return;
 		}
 		

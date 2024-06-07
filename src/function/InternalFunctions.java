@@ -274,7 +274,7 @@ public class InternalFunctions {
 		List<String> n = null;
 		
 		if (Helpers.isFunction(param)) {
-			n = new ArrayList<String>();
+			n = new ArrayList<>();
 			n.add(param);
 		}
 		else {
@@ -419,7 +419,7 @@ public class InternalFunctions {
 	 * @return a new list
 	 */
 	private Variable list(Map<String, Variable> heap, String[] params) {
-		List<Variable> values = new ArrayList<Variable>();
+		List<Variable> values = new ArrayList<>();
 		for (String parameter : params) {
 			values.add(heap.get(parameter));
 		}

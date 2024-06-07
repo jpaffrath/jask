@@ -33,7 +33,7 @@ public class Interpreter {
 	 * General constructor
 	 */
 	public Interpreter() {
-		this.values = new ArrayList<String>();
+		this.values = new ArrayList<>();
 		this.values.add(TRUE);
 		this.values.add(FALSE);
 		this.values.add(NULL);

@@ -69,7 +69,7 @@ public class FunctionExecuter {
 		
 		function.setHeap(localHeap);
 		function.setParameterHeap(heap);
-		Interpreter interpreter = new Interpreter(function, this, new ArrayList<Executer>(modules), internalFunctionsCopy);
+		Interpreter interpreter = new Interpreter(function, this, new ArrayList<>(modules), internalFunctionsCopy);
 		
 		String varVal = interpreter.interpret(function.getTokens());
 		

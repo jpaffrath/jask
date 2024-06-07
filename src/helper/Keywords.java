@@ -11,10 +11,10 @@ import java.util.List;
  *
  */
 public class Keywords {
-	private static List<String> calculations = new ArrayList<String>(Arrays.asList("plus", "minus", "times", "divide"));
-	private static List<String> operators  = new ArrayList<String>(Arrays.asList("store", "assign", "mod", "equals", "unequals", "greater", "smaller",
+	private static List<String> calculations = new ArrayList<>(Arrays.asList("plus", "minus", "times", "divide"));
+	private static List<String> operators  = new ArrayList<>(Arrays.asList("store", "assign", "mod", "equals", "unequals", "greater", "smaller",
 			                                                                     "greaterequals", "smallerequals", "increment", "decrement", "call"));
-	private static List<String> keywords  = new ArrayList<String>(Arrays.asList("function", "end", "if", "else", "endif", "return", "convert", "to",
+	private static List<String> keywords  = new ArrayList<>(Arrays.asList("function", "end", "if", "else", "endif", "return", "convert", "to",
 			                                                                    "number", "string", "in", "run", "with", "while", "for", "endrun", "struct",
 			                                                                    "endstruct"));
 

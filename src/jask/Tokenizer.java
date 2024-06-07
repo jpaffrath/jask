@@ -47,7 +47,7 @@ public class Tokenizer {
 	 * @return list of string tokens
 	 */
 	private List<String> parseInput(Reader reader) {
-		List<String> tokens = new ArrayList<String>();
+		List<String> tokens = new ArrayList<>();
 		StringBuilder tokenBuffer = new StringBuilder();
 
 		Reader buffer = new BufferedReader(reader);
@@ -166,7 +166,7 @@ public class Tokenizer {
 	 * @return parsed list of tokens
 	 */
 	List<String> parse(List<String> inputList) {
-		List<String> tokens = new ArrayList<String>();
+		List<String> tokens = new ArrayList<>();
 
 		for (String line : inputList) {
 			tokens.addAll(this.parse(line));

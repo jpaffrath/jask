@@ -42,7 +42,7 @@ public class Executer {
 		this.heap = new HashMap<>();
 		this.functionExecuter = new FunctionExecuter();
 		this.internalFunctions = new InternalFunctions();
-		this.modules = new ArrayList<Executer>();
+		this.modules = new ArrayList<>();
 		this.name = "Main";
 	}
 
@@ -150,14 +150,14 @@ public class Executer {
 		List<String> params = null;
 		
 		if (Helpers.isFunction(parameterList)) {
-			params = new ArrayList<String>();
+			params = new ArrayList<>();
 			params.add(parameterList);
 		}
 		else {
 			params = Helpers.splitParams(parameterList);
 		}
 		
-		List<Variable> functionHeap = new ArrayList<Variable>();
+		List<Variable> functionHeap = new ArrayList<>();
 		
 		// if the function call contains parameters, parse them and add the variables to the function heap
 		if (parameterList.isEmpty() == false) {
@@ -281,7 +281,7 @@ public class Executer {
 	 * @return list of strings containing the names of the loaded modules
 	 */
 	public List<String> getModuleNames() {
-		List<String> moduleNames = new ArrayList<String>(this.modules.size());
+		List<String> moduleNames = new ArrayList<>(this.modules.size());
 
 		for (Executer module : this.modules) {
 			moduleNames.add(module.getName());
@@ -563,7 +563,7 @@ public class Executer {
 		String ret = "";
 
 		if (tokens.get(0).contentEquals("while")) {
-			List<String> whileTokens = new ArrayList<String>();
+			List<String> whileTokens = new ArrayList<>();
 			whileTokens.add("if");
 			whileTokens.add(tokens.get(1));
 			whileTokens.add(tokens.get(2));
@@ -633,7 +633,7 @@ public class Executer {
 			}
 
 			// jask code for performing the assign at each iteration
-			List<String> assignTokens = new ArrayList<String>();
+			List<String> assignTokens = new ArrayList<>();
 			assignTokens.add("assign");
 			assignTokens.add(tokens.get(1));
 			assignTokens.add(tokens.get(8));

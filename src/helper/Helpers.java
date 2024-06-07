@@ -46,7 +46,7 @@ public final class Helpers {
 	 * @return list of strings containing parameters
 	 */
 	public static List<String> splitParams(String param) {
-		List<String> params = new ArrayList<String>();
+		List<String> params = new ArrayList<>();
 		String tempString = "";
 		boolean stringParsing = false;
 		boolean insideFunction = false;
