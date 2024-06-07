@@ -1,3 +1,7 @@
+; examples/countdown.jask
+;
+; this example shows how to implement a simple countdown in jask
+
 store 500 in sleepTime
 
 run i from 10 to -1 with i minus 1

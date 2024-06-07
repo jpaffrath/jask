@@ -1,4 +1,6 @@
-; store example
+; examples/store.jask
+;
+; this example shows how to create variables in jask
 
 store "This is a string" in str
 store 100.21 in num
@@ -7,3 +9,6 @@ store TRUE in b1
 store FALSE in b2
 
 store NULL in nulVal
+
+store list(1:2:3) in l
+store dictionary("key":"value") in d

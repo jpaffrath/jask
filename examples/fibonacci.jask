@@ -1,4 +1,6 @@
-; fibonacci example
+; examples/fibonacci.jask
+;
+; this example shows how to implement a fibonacci calculation in jask
 
 store 0 in first
 store 1 in second

@@ -1,4 +1,6 @@
-; list example
+; examples/list.jask
+;
+; this example shows how to use jask lists
 
 store list(1:2:3) in myList
 

@@ -1,9 +1,11 @@
-; functions example
+; examples/functions.jask
+;
+; this example shows how to use jask functions
 
 function strCat(str1:str2)
-	store 0 in str
-	assign str1 plus str2 to str
-	return str
+	store NULL in result
+	assign str1 plus str2 to result
+	return result
 end
 
 function getString()
@@ -14,4 +16,4 @@ store getString() in str1
 store "World!" in str2
 assign strCat(str1:str2) to str1
 
-print(str1)
+printLine(str1)

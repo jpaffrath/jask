@@ -1,4 +1,6 @@
-; calculator example
+; examples/calculator.jask
+;
+; this example shows how to implement a very basic calculator in jask
 
 store 0 in num1
 store 0 in num2

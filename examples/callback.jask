@@ -1,3 +1,7 @@
+; examples/callback.jask
+;
+; this example shows how to use callbacks in jask
+
 ; define the callback function with an event parameter
 function myCallback(event)
 	printLine("This is the callback with event ":event)

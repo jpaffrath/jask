@@ -1,4 +1,6 @@
-; run loop example
+; examples/run.jask
+;
+; this example shows how to use different loop approaches in jask
 
 run i from 0 to 10 with i plus 1
 	print(i)

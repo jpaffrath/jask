@@ -1,3 +1,7 @@
+; examples/factorial.jask
+;
+; this example shows how to use the jcore/jnumber module
+
 use jcore/jnumber
 
 run i from 1 to 10 with i plus 1

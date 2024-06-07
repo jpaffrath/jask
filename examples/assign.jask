@@ -1,4 +1,6 @@
-; assign examples
+; examples/assign.jask
+;
+; this example shows how to use assign in jask
 
 store 100 in z1
 store NULL in value

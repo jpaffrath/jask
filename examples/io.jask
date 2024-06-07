@@ -1,4 +1,6 @@
-; in-output example
+; examples/io.jask
+;
+; this example shows how to use basic input-output operations in jask
 
 store 100 in num
 print(num)

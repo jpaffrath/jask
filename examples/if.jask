@@ -1,4 +1,6 @@
-; if-else example
+; examples/if.jask
+;
+; this example shows how to use if-else-statements in jask
 
 store 1 in a
 store 2 in b

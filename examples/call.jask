@@ -1,4 +1,6 @@
-; call example
+; examples/call.jask
+;
+; this example shows how to use the call operator in jask
 
 call printLine("Test") 5 times
 
