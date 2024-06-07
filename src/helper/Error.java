@@ -20,8 +20,8 @@ public final class Error {
 		System.exit(-1);
 	}
 
-	public static void printErrorVariableAlreadyDefined(String var) {
-		System.out.println(prefix + "variable '" + var + "' already defined in this context!");
+	public static void printErrorNameAlreadyDefined(String var) {
+		System.out.println(prefix + "name '" + var + "' already defined in this context!");
 		System.exit(-1);
 	}
 
@@ -137,6 +137,11 @@ public final class Error {
 	
 	public static void printErrorFunctionIsNotExpectingParameters(String function) {
 		System.out.println(prefix + "Function " + function + " is not expecting any parameters!");
+		System.exit(-1);
+	}
+	
+	public static void printErrorNameIsAKeyword(String name) {
+		System.out.println(prefix + "Name " + name + " is a keyword!");
 		System.exit(-1);
 	}
 

@@ -517,7 +517,12 @@ public class Executer {
 		String variableName = tokens.get(3);
 
 		if (storeHeap.containsKey(variableName)) {
-			Error.printErrorVariableAlreadyDefined(variableName);
+			Error.printErrorNameAlreadyDefined(variableName);
+			return;
+		}
+		
+		if (functionExecuter.hasFunction(variableName)) {
+			Error.printErrorNameAlreadyDefined(variableName);
 			return;
 		}
 
@@ -592,7 +597,7 @@ public class Executer {
 			
 			// error if it already exists as a variable
 			if (this.hasVariable(runnerName)) {
-				Error.printErrorVariableAlreadyDefined(runnerName);
+				Error.printErrorNameAlreadyDefined(runnerName);
 				return "";
 			}
 
@@ -706,7 +711,7 @@ public class Executer {
 			
 			// error if it already exists as a variable
 			if (this.hasVariable(elementName)) {
-				Error.printErrorVariableAlreadyDefined(elementName);
+				Error.printErrorNameAlreadyDefined(elementName);
 				return "";
 			}
 			

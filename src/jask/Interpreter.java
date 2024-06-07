@@ -234,6 +234,16 @@ public class Interpreter {
 			// checks function define
 			else if (t.contentEquals("function") && Helpers.isFunction(this.getTokenOrDie(tokens, i, 1))) {
 				String name = this.getTokenOrDie(tokens, ++i, 0);
+				String strippedName = name.substring(0, name.indexOf('('));
+				
+				// check if function name is a keyword or an already defined variable
+				if (Keywords.isKeyword(strippedName)) {
+					Error.printErrorNameIsAKeyword(strippedName);
+				}
+				if (executer.hasVariable(strippedName)) {
+					Error.printErrorNameAlreadyDefined(strippedName);
+				}
+				
 				int start = i+1;
 				int funcCount = 1;
 				int endCount = 0;
