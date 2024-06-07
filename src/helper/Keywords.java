@@ -11,12 +11,45 @@ import java.util.List;
  *
  */
 public class Keywords {
-	private static List<String> calculations = new ArrayList<>(Arrays.asList("plus", "minus", "times", "divide"));
-	private static List<String> operators  = new ArrayList<>(Arrays.asList("store", "assign", "mod", "equals", "unequals", "greater", "smaller",
-			                                                                     "greaterequals", "smallerequals", "increment", "decrement", "call"));
-	private static List<String> keywords  = new ArrayList<>(Arrays.asList("function", "end", "if", "else", "endif", "return", "convert", "to",
-			                                                                    "number", "string", "in", "run", "with", "while", "for", "endrun", "struct",
-			                                                                    "endstruct"));
+	private static List<String> calculations = new ArrayList<>(Arrays.asList(
+			"plus",
+			"minus",
+			"times",
+			"divide"));
+
+	private static List<String> operators  = new ArrayList<>(Arrays.asList(
+			"store",
+			"assign",
+			"mod",
+			"equals",
+			"unequals",
+			"greater",
+			"smaller",
+			"greaterequals",
+			"smallerequals",
+			"increment",
+			"decrement",
+			"call"));
+
+	private static List<String> keywords  = new ArrayList<>(Arrays.asList(
+			"function",
+			"end",
+			"if",
+			"else",
+			"endif",
+			"return",
+			"convert",
+			"to",
+			"number",
+			"string",
+			"in",
+			"run",
+			"with",
+			"while",
+			"for",
+			"endrun",
+			"struct",
+			"endstruct"));
 
 	/**
 	 * Checks if a given string is a jask calculation
