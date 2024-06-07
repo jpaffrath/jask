@@ -102,17 +102,20 @@ public final class Helpers {
 
             if (Character.isLetter(currentChar)) {
                 functionNameFound = true;
-            } else if (currentChar == '(') {
+            }
+            else if (currentChar == '(') {
                 if (!functionNameFound) {
                     return false;
                 }
                 stack.push(currentChar);
-            } else if (currentChar == ')') {
+            }
+            else if (currentChar == ')') {
                 if (stack.isEmpty() || stack.peek() != '(') {
                     return false;
                 }
                 stack.pop();
-            } else if (currentChar == ',' || currentChar == ':' || currentChar == '"') {
+            }
+            else if (currentChar == ',' || currentChar == ':' || currentChar == '"') {
                 if (stack.isEmpty() || stack.peek() != '(') {
                     return false;
                 }
