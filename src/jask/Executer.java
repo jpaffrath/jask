@@ -172,7 +172,7 @@ public class Executer {
 					functionHeap.add(executeFunction(var));
 				}
 				// if parameter is a function, create a new function variable on the heap
-				else if (this.functionExecuter.hasFunction(var)) {
+				else if (this.functionExecuter.hasFunction(var) && var.endsWith(")")) {
 					Function func = this.functionExecuter.getFunction(var);
 					functionHeap.add(new VariableFunction(func));
 				}
