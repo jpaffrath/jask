@@ -391,6 +391,10 @@ public class Interpreter {
 
 				while (true) {
 					t = this.getTokenOrDie(tokens, ++runner, 0);
+					
+					if (t.contentEquals("struct")) {
+						Error.printErrorStructInStruct();
+					}
 
 					if (t.contentEquals("endstruct")) {
 						break;

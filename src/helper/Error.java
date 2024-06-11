@@ -144,6 +144,11 @@ public final class Error {
 		System.out.println(prefix + "Name " + name + " is a keyword!");
 		System.exit(-1);
 	}
+	
+	public static void printErrorStructInStruct() {
+		System.out.println(prefix + "No structs in structs allowed!");
+		System.exit(-1);
+	}
 
 	public static void terminateInterpret(String reason) {
 		System.out.println(prefix + reason);
