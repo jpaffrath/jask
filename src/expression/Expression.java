@@ -48,10 +48,13 @@ public class Expression {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 
-		for (String token : this.tokens) {
-			builder.append(token + " ");
-		}
+	    for (int i = 0; i < this.tokens.size(); i++) {
+	        builder.append(this.tokens.get(i));
+	        if (i < this.tokens.size() - 1) {
+	            builder.append(" ");
+	        }
+	    }
 
-		return builder.toString().trim();
+	    return builder.toString();
 	}
 }
