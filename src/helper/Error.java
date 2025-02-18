@@ -140,6 +140,11 @@ public final class Error {
 		System.exit(-1);
 	}
 	
+	public static void printErrorAccessToStructMemberAsResultNotAllowed(String function) {
+		System.out.println(prefix + function + ": Accessing a struct member as a function result is not allowed!");
+		System.exit(-1);
+	}
+	
 	public static void printErrorNameIsAKeyword(String name) {
 		System.out.println(prefix + "Name " + name + " is a keyword!");
 		System.exit(-1);

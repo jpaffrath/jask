@@ -121,6 +121,23 @@ public class Executer {
 	}
 	
 	/**
+	 * Checks if a struct member is accessed from a resulting function call
+	 * 
+	 * This behavior is not allowed in jask:
+	 * myFuncReturningAStruct()->myStructMember
+	 * 
+	 * @param function function call as a jask token
+	 * @return true if the call accesses the struct member from the result
+	 */
+	private boolean isStructMemberAccessedFromFunction(String function) {
+		if (function.charAt(function.length()-1) != ')' && function.substring(function.lastIndexOf(')')).contains("->")) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Prints a list of all variables including types and values to standard out
 	 */
 	public void printVariables() {
@@ -169,6 +186,9 @@ public class Executer {
 				}
 				// if the parameter is a function call, execute the function and push its return value on the heap
 				else if (Helpers.isFunction(var)) {
+					if (this.isStructMemberAccessedFromFunction(var)) {
+						Error.printErrorAccessToStructMemberAsResultNotAllowed(var);
+					}
 					functionHeap.add(executeFunction(var));
 				}
 				// if parameter is a function, create a new function variable on the heap
@@ -399,6 +419,9 @@ public class Executer {
 				}
 			}
 			else {
+				if (this.isStructMemberAccessedFromFunction(varStr)) {
+					Error.printErrorAccessToStructMemberAsResultNotAllowed(varStr);
+				}
 				Variable gen = executeFunction(varStr);
 				this.heap.put(tokens.get(3), gen);
 			}
@@ -525,6 +548,9 @@ public class Executer {
 		}
 
 		if (Helpers.isFunction(variableValue)) {
+			if (this.isStructMemberAccessedFromFunction(variableValue)) {
+				Error.printErrorAccessToStructMemberAsResultNotAllowed(variableValue);
+			}
 			storeHeap.put(variableName, executeFunction(variableValue));
 		}
 		else if (storeHeap.containsKey(variableValue) && storeHeap.get(variableValue) instanceof VariableStruct) {
