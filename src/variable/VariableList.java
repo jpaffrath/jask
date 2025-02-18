@@ -53,6 +53,7 @@ public class VariableList extends Variable {
 			else if (v instanceof VariableDictionary) {
 				this.values.add(new VariableDictionary((VariableDictionary)v));
 			}
+			// implement structs
 			else {
 				this.values.add(new Variable(v));
 			}

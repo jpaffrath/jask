@@ -52,7 +52,8 @@ public class Function {
 
 			// if variable is a list, add a new list variable
 			if (varOld instanceof VariableList) {
-				varNew = new VariableList(varOld.toString());
+				varNew = new VariableList((VariableList)varOld);
+			}
 			}
 			
 			// if variable is a struct, add a new struct variable
