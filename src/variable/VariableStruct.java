@@ -44,11 +44,13 @@ public class VariableStruct extends Variable {
 	/**
 	 * Initializes a new struct based on a given struct
 	 * 
+	 * This constructor deep copies the given values
+	 * 
 	 * @param variable struct variable
 	 */
 	public VariableStruct(VariableStruct variable) {
 		this();
-		this.heap = variable.heap;
+		this.heap = new HashMap<String, Variable>(variable.heap);
 	}
 	
 	/**
