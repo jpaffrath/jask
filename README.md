@@ -171,6 +171,10 @@ jask provides some internal modules for you to use. Learn more in the [Internal 
 ### Converting variables
 Learn how to convert variables into different types in the [Convert Variables Wiki](https://github.com/jpaffrath/jask/wiki/Convert-variables)
 
+### Passing by value
+Jask uses passing by value and not by reference.
+You can read more about this topic in the [Passing by value wiki!](https://github.com/jpaffrath/jask/wiki/Passing-by-value)
+
 ### Access Operator
 You want to know how to access variables inside a function which are defined outside?
 Visit [Access operator wiki!](https://github.com/jpaffrath/jask/wiki/The-access-operator)
