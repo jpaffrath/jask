@@ -389,7 +389,7 @@ public class Executer {
 					this.heap.put(destStr, new VariableList(var.toString()));
 				}
 				else if (var instanceof VariableStruct) {
-					this.heap.put(destStr, new VariableStruct(destStr, (VariableStruct)var));
+					this.heap.put(destStr, new VariableStruct((VariableStruct)var));
 				}
 				else {
 					this.heap.put(tokens.get(3), new Variable(var));
@@ -531,7 +531,7 @@ public class Executer {
 		}
 		else if (storeHeap.containsKey(variableValue) && storeHeap.get(variableValue) instanceof VariableStruct) {
 			VariableStruct structPattern = (VariableStruct)storeHeap.get(variableValue);
-			storeHeap.put(variableName, new VariableStruct(variableName, structPattern));
+			storeHeap.put(variableName, new VariableStruct(structPattern));
 		}
 		else {
 			if (this.getVariableFromHeap(variableValue) != null) {

@@ -29,18 +29,7 @@ public class VariableStruct extends Variable {
 		this();
 		this.heap = heap;
 	}
-	
-	/**
-	 * Initializes a new struct based on a given struct and a given name 
-	 * 
-	 * @param name name of the new struct
-	 * @param variable struct variable
-	 */
-	public VariableStruct(String name, VariableStruct variable) {
-		this();
-		this.heap = new HashMap<String, Variable>(variable.heap);
-	}
-	
+
 	/**
 	 * Initializes a new struct based on a given struct
 	 * 
