@@ -400,12 +400,7 @@ public class Executer {
 			}
 			else {
 				Variable gen = executeFunction(varStr);
-				if (gen instanceof VariableList) {
-					this.heap.put(tokens.get(3), new VariableList((VariableList)gen));
-				}
-				else {
-					this.heap.put(tokens.get(3), gen);
-				}
+				this.heap.put(tokens.get(3), gen);
 			}
 			return;
 		}
