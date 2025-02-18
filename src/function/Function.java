@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import variable.Variable;
+import variable.VariableDictionary;
 import variable.VariableFunction;
 import variable.VariableList;
 import variable.VariableStruct;
@@ -54,6 +55,10 @@ public class Function {
 			if (varOld instanceof VariableList) {
 				varNew = new VariableList((VariableList)varOld);
 			}
+			
+			// if variable is a dictionary, add a new dictionary variable
+			else if (varOld instanceof VariableDictionary) {
+				varNew = new VariableDictionary((VariableDictionary)varOld);
 			}
 			
 			// if variable is a struct, add a new struct variable
