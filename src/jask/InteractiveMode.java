@@ -119,6 +119,7 @@ public class InteractiveMode {
 			if (line.length() > 8 && line.substring(0, 8).contentEquals("function")) {
 				List<String> tokens = tokenizer.parse(line);
 				
+				// if a function is written in one line, add it immediately
 				if (tokens.contains("end")) {
 					this.history.addToHistory(line);
 					interpreter.interpret(tokenizer.parse(line));
@@ -258,7 +259,18 @@ public class InteractiveMode {
 			}
 
 			tempList.add(line);
-			this.history.addToHistory(line);
+			
+			StringBuilder builder = new StringBuilder();
+			
+			for (int i = 0; i < tempList.size(); i++) {
+				builder.append(tempList.get(i));
+				
+				if (i != tempList.size()-1) {
+					builder.append(" ");
+				}
+			}
+			
+			this.history.addToHistory(builder.toString());
 			this.printJaskPrompt();
 
 			interpreter.interpret(tokenizer.parse(tempList));
