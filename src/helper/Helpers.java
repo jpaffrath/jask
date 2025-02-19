@@ -46,43 +46,42 @@ public final class Helpers {
 	 * @return list of strings containing parameters
 	 */
 	public static List<String> splitParams(String param) {
-		List<String> params = new ArrayList<>();
-		String tempString = "";
-		boolean stringParsing = false;
-		boolean insideFunction = false;
+	    if (param == null || param.isEmpty()) return List.of();
 
-		for (char c : param.toCharArray()) {
-			if (c == '"' && !stringParsing) {
-				stringParsing = true;
-			}
-			else if (c == '"' && stringParsing) {
-				stringParsing = false;
-			}
+	    List<String> params = new ArrayList<>();
+	    StringBuilder tempString = new StringBuilder();
+	    boolean stringParsing = false;
+	    boolean insideFunction = false;
 
-			if (c == '(' && !stringParsing && !insideFunction) {
-				insideFunction = true;
-			}
-			else if (c == ')' && !stringParsing && insideFunction) {
-				insideFunction = false;
-			}
+	    for (int i = 0, len = param.length(); i < len; i++) {
+	        char c = param.charAt(i);
 
-			if (c == ':' && !stringParsing && !insideFunction) {
-				params.add(tempString);
-				tempString = "";
-				continue;
-			}
+	        switch (c) {
+	            case '"':
+	                stringParsing = !stringParsing;
+	                break;
+	            case '(':
+	                if (!stringParsing) insideFunction = true;
+	                break;
+	            case ')':
+	                if (!stringParsing) insideFunction = false;
+	                break;
+	            case ':':
+	                if (!stringParsing && !insideFunction) {
+	                    params.add(tempString.toString());
+	                    tempString.setLength(0);
+	                    continue;
+	                }
+	                break;
+	        }
 
-			tempString += c;
-		}
+	        tempString.append(c);
+	    }
 
-		// adds the temp string to the parameter list
-		// if only one parameter is present
-		if (!tempString.contentEquals("")) {
-			params.add(tempString);
-		}
-
-		return params;
+	    if (tempString.length() > 0) params.add(tempString.toString());
+	    return params;
 	}
+
 	
 	/**
 	 * Checks if a given string is a jask function
