@@ -106,16 +106,7 @@ public class VariableList extends Variable {
 	 * @return true
 	 */
 	public boolean addElement(Variable toAdd) {
-		if (toAdd instanceof VariableList) {
-			this.values.add(new VariableList((VariableList)toAdd));
-		}
-		else if (toAdd instanceof VariableDictionary) {
-			this.values.add(new VariableDictionary((VariableDictionary)toAdd));
-		}
-		else {
-			this.values.add(new Variable(toAdd));
-		}
-		
+		this.values.add(toAdd);
 		return true;
 	}
 
