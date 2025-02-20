@@ -200,6 +200,12 @@ public class InternalFunctions {
 				return new Variable(heap.get(params[0]) instanceof VariableDictionary ? TRUE : FALSE);
 			}
 		});
+		this.functions.put("isStruct", new InternalFunction() {	
+			@Override
+			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
+				return new Variable(heap.get(params[0]) instanceof VariableStruct ? TRUE : FALSE);
+			}
+		});
 		this.functions.put("exit", new InternalFunction() {
 			@Override
 			public Variable execute(Map<String, Variable> heap, String functionName, String param, String[] params) {
