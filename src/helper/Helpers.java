@@ -90,37 +90,31 @@ public final class Helpers {
 	 * @return true if the given string is a jask function
 	 */
 	public static boolean isFunction(String input) {
-		if (input.contains("(") == false) return false;
-		if (input.contains(")") == false) return false;
+	    int len = input.length();
+	    if (len < 3 || input.indexOf('(') == -1 || input.indexOf(')') == -1) return false;
 
-		Stack<Character> stack = new Stack<>();
-        boolean functionNameFound = false;
+	    char[] chars = input.toCharArray();
+	    int openParen = 0;
+	    boolean functionNameFound = false;
 
-        for (int i = 0; i < input.length(); i++) {
-            char currentChar = input.charAt(i);
+	    for (char c : chars) {
+	        if (Character.isLetter(c)) {
+	            functionNameFound = true;
+	        }
+	        else if (c == '(') {
+	            if (!functionNameFound) return false;
+	            openParen++;
+	        }
+	        else if (c == ')') {
+	            if (openParen == 0) return false;
+	            openParen--;
+	        }
+	        else if ((c == ',' || c == ':' || c == '"') && openParen == 0) {
+	            return false;
+	        }
+	    }
 
-            if (Character.isLetter(currentChar)) {
-                functionNameFound = true;
-            }
-            else if (currentChar == '(') {
-                if (!functionNameFound) {
-                    return false;
-                }
-                stack.push(currentChar);
-            }
-            else if (currentChar == ')') {
-                if (stack.isEmpty() || stack.peek() != '(') {
-                    return false;
-                }
-                stack.pop();
-            }
-            else if (currentChar == ',' || currentChar == ':' || currentChar == '"') {
-                if (stack.isEmpty() || stack.peek() != '(') {
-                    return false;
-                }
-            }
-        }
+	    return functionNameFound && openParen == 0;
+	}
 
-        return functionNameFound && stack.isEmpty();
-    }
 }
