@@ -7,21 +7,42 @@ function PI() return 3.141592653589793 end
 function E() return 2.718281828459045 end
 
 function fibonacci(max)
-	store 0 in first
-	store 1 in second
-	store 0 in next
-	store list(0) in numbers
+	store list() in fib
+	
+	if max smallerequals 0 return fib else endif
+	
+	if max greaterequals 1
+		assign listAdd(fib:0) to fib
+		
+		if max equals 1 return fib else endif
+		
+	else endif
+	
+	if max greaterequals 2
+		assign listAdd(fib:1) to fib
+	else endif
+	
+	store 0 in index
+	store 0 in firstElement
+	store 0 in secondElement
+	store 0 in result
+	
+	run i from 2 to max with i plus 1
 
-	decrement max
-
-	run i from 1 to max with i plus 1
-		if i smallerequals 1 assign i to c
-		else assign first plus second to next assign second to first assign next to second
-		endif
-		assign listAdd(numbers:next) to numbers
+		assign i minus 1 to index
+		
+		assign listGet(fib:index) to firstElement
+		
+		decrement index
+		assign listGet(fib:index) to secondElement
+		
+		assign firstElement plus secondElement to result
+		assign listAdd(fib:result) to fib
+	
 	endrun
+	
+	return fib
 
-	return numbers
 end
 
 function pow(a:x)
