@@ -598,7 +598,7 @@ public class Executer {
 
 			while (executeStatement(ifExp)) {
 				ret = interpreter.interpret(tokens.subList(4, tokens.size() - 1));
-				if (ret.contentEquals("") == false) {
+				if (!ret.isEmpty()) {
 					break;
 				}
 			}
@@ -679,7 +679,7 @@ public class Executer {
 					interpreter.getExecuter().heap.put(runnerName, runner);
 					
 					ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
-					if (ret.contentEquals("") == false) {
+					if (!ret.isEmpty()) {
 						break;
 					}
 					
@@ -693,7 +693,7 @@ public class Executer {
 					interpreter.getExecuter().heap.put(runnerName, runner);
 					
 					ret = interpreter.interpret(tokens.subList(10, tokens.size() - 1));
-					if (ret.contentEquals("") == false) {
+					if (!ret.isEmpty()) {
 						break;
 					}
 					
@@ -945,7 +945,7 @@ public class Executer {
 	private void executeStruct(List<String> tokens) {
 		String structName = tokens.get(0);
 		String token = "";
-		Map<String, Variable> structHeap = new HashMap<String, Variable>();
+		Map<String, Variable> structHeap = new HashMap<>();
 		
 		// remove empty tokens
 		tokens.removeIf(String::isEmpty);
@@ -989,7 +989,7 @@ public class Executer {
 
 		// copy local heap and add access operator to keys
 		for (String key : this.heap.keySet()) {
-			functionHeap.put('!' + key, this.heap.get(key));
+			functionHeap.put("!" + key, this.heap.get(key));
 		}
 		
 		return functionHeap;
