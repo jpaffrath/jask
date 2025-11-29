@@ -75,6 +75,8 @@ public class Variable {
 		// matches strings
 		else if (isString(genericValue)) {
 			this.stringValue = genericValue.substring(1, genericValue.length()-1);
+			
+			this.stringValue = stringValue.replace("\\n", "\n");
 			this.type = VariableType.String;
 		}
 		// matches boolean values
