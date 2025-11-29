@@ -8,7 +8,7 @@
              alt="License Badge">
     </a>
     <a href="https://java.com/">
-        <img src="https://img.shields.io/badge/required java version-1.7-green.svg"
+        <img src="https://img.shields.io/badge/required java version-21-green.svg"
              alt="Java Badge">
     </a>
 </p>
