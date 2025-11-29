@@ -94,6 +94,9 @@ public class Executer {
 			String variableName = var.substring(var.indexOf("->") + 2, var.length());
 			
 			VariableStruct struct = (VariableStruct)this.heap.get(structName);
+			if (struct == null) {
+				return null;
+			}
 			return struct.getVariable(variableName);
 		}
 		return this.heap.get(var);
